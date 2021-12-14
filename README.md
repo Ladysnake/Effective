@@ -18,4 +18,3 @@ https://www.curseforge.com/minecraft/mc-mods/effective
 
 
 ###### Copyright (C) 2021 Ladysnake
-
