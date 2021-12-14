@@ -1,0 +1,15 @@
+{
+  "ambience.waterfall": {
+    "sounds": [
+      "ambient/weather/rain1",
+      "ambient/weather/rain2",
+      "ambient/weather/rain3",
+      "ambient/weather/rain4",
+      "ambient/weather/rain5",
+      "ambient/weather/rain6",
+      "ambient/weather/rain7",
+      "ambient/weather/rain8"
+    ],
+    "subtitle": "effective.subtitles.ambience.waterfall"
+  }
+}

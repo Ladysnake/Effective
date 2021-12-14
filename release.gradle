@@ -1,0 +1,112 @@
+task checkGitStatus() {
+    group = 'publishing'
+    description = 'Checks that the git repository is in a state suitable for release'
+    doLast {
+        if (grgit == null) throw new RuntimeException('No git repository')
+        if (!grgit.status().isClean()) {
+            throw new RuntimeException("Git repository not ready for release (${grgit.status()})")
+        }
+        def currentBranch = grgit.branch.current().getName()
+        if (currentBranch != 'master' && !currentBranch.matches(/\d+\.\d+(?>\.\d+)?/)) {
+            throw new RuntimeException("Need to be on master or a snapshot branch to release (currently on ${currentBranch})")
+        }
+        grgit.fetch()
+        if (grgit.tag.list().any { it.name == project.version }) {
+            throw new RuntimeException("A tag already exists for ${project.version}")
+        }
+        def status = grgit.branch.status(name: currentBranch)
+        if (status.aheadCount != 0) {
+            throw new RuntimeException('Some commits have not been pushed')
+        }
+        if (status.behindCount != 0) {
+            throw new RuntimeException('Some commits have not been pulled')
+        }
+    }
+}
+
+githubRelease {
+    token "${findProperty('github_releases_token')}"
+    // default owner: last component of maven group
+    // default repo: name of the project
+    tagName = project.version
+    targetCommitish = { grgit.branch.current().name }
+    body = { project.getChangelogText() }
+
+    FilenameFilter filter = { dir, filename -> filename.contains(project.version) && !filename.contains('-dev.jar') }
+    releaseAssets = { jar.destinationDirectory.asFile.get().listFiles filter }
+}
+tasks.githubRelease.dependsOn(checkGitStatus)
+
+curseforge {
+    apiKey = project.findProperty('curse_key') ?: ""
+
+    if (project.hasProperty('curseforge_id')) {
+        project {
+            id = findProperty('curseforge_id')
+
+            releaseType = project.release_type
+
+            //usually automatically determined by the CurseGradle plugin, but won't work with fabric
+            "${project.curseforge_versions}".split('; ').each {
+                addGameVersion it
+            }
+            addGameVersion 'Fabric'
+
+            mainArtifact(remapJar) {
+                displayName = "${project.name}-${project.version}.jar"
+
+                if (project.hasProperty('cf_requirements') || project.hasProperty('cf_optionals') || project.hasProperty('cf_embeddeds') || project.hasProperty('cf_tools') || project.hasProperty('cf_incompatibles') || project.hasProperty('cf_includes')) {
+                    relations {
+                        if (project.hasProperty('cf_requirements')) {
+                            "${project.cf_requirements}".split('; ').each {
+                                requiredDependency "${it}"
+                            }
+                        }
+                        if (project.hasProperty('cf_optionals')) {
+                            "${project.cf_optionals}".split('; ').each {
+                                optionalDependency "${it}"
+                            }
+                        }
+                        if (project.hasProperty('cf_embeddeds')) {
+                            "${project.cf_embeddeds}".split('; ').each {
+                                embeddedLibrary "${it}"
+                            }
+                        }
+                        if (project.hasProperty('cf_tools')) {
+                            "${project.cf_tools}".split('; ').each {
+                                tool "${it}"
+                            }
+                        }
+                        if (project.hasProperty('cf_incompatibles')) {
+                            "${project.cf_incompatibles}".split('; ').each {
+                                incompatible "${it}"
+                            }
+                        }
+                        if (project.hasProperty('cf_includes')) {
+                            "${project.cf_includes}".split('; ').each {
+                                include "${it}"
+                            }
+                        }
+                    }
+                }
+            }
+
+            changelogType = 'markdown'
+            changelog = project.getChangelogText()
+
+            afterEvaluate {
+                uploadTask.dependsOn remapSourcesJar
+            }
+        }
+        options {
+            forgeGradleIntegration = false
+        }
+    }
+}
+
+tasks.curseforge.dependsOn(checkGitStatus)
+
+task release(dependsOn: [tasks.publish, tasks.githubRelease, tasks.curseforge]) {
+    group = 'publishing'
+    description = 'Releases a new version to Github and Curseforge'
+}

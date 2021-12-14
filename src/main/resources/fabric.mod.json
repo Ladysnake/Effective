@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "effective",
+  "version": "${version}",
+  "name": "Effective",
+  "description": "A client-side mod adding ambient and environmental interaction effects to enhance immersion.",
+  "authors": [
+    "doctor4t"
+  ],
+  "contact": {
+    "homepage": "https://illuminations.uuid.gg/",
+    "sources": "https://github.com/Ladysnake/Effective",
+    "issues": "https://github.com/Ladysnake/Effective/issues"
+  },
+  "license": "ARR",
+  "icon": "assets/effective/effective.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ladysnake.effective.client.Effective"
+    ]
+  },
+  "mixins": [
+    "effective.mixins.json"
+  ],
+  "accessWidener": "effective.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
+}

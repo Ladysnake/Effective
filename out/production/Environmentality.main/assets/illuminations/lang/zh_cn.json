@@ -1,0 +1,18 @@
+{
+  "title.illuminations.config": "Illuminations 配置",
+  "category.illuminations.general": "通用",
+  "option.illuminations.eyesInTheDark": "暗处的眼睛",
+  "option.tooltip.illuminations.eyesInTheDark": "光照强度较低的环境中出现的可怖眼睛",
+  "option.tooltip.illuminations.eyesInTheDark.default": "默认为 ENABLE。",
+  "option.tooltip.illuminations.eyesInTheDark.enable": "ENABLE：仅在十月出现。",
+  "option.tooltip.illuminations.eyesInTheDark.disable": "DISABLE：从不出现。",
+  "option.tooltip.illuminations.eyesInTheDark.always": "ALWAYS：全年出现。",
+  "option.illuminations.density": "生成密度",
+  "option.tooltip.illuminations.density": "在等体积下的生成率（百分比）。不影响暗处的眼睛。",
+  "option.tooltip.illuminations.density.lowest": "0%：禁用。",
+  "option.tooltip.illuminations.density.highest": "1000%：十倍于默认值。",
+  "option.illuminations.autoUpdate": "自动更新",
+  "option.tooltip.illuminations.autoUpdate": "自动下载及安装新版本。",
+  "option.illuminations.fireflyWhiteAlpha": "萤火虫透明度",
+  "option.tooltip.illuminations.fireflyWhiteAlpha": "萤火虫中心的透明度（百分比）。"
+}

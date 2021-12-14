@@ -1,0 +1,124 @@
+{
+  "map": [
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/frost_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/solar_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/chorus_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/bloodfiend_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/dreadlich_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/mooncult_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/glowsquid_cult_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/timeaspect_cult_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/voidheart_tiara.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/summerbreeze_wreath.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/springfae_horns.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/deepsculk_horns.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/worldweaver_halo.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/drip_color.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/pyro_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    }
+  ]
+}
