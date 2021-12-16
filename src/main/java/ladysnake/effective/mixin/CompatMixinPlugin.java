@@ -1,5 +1,6 @@
-package ladysnake.effective.compat.mixin;
+package ladysnake.effective.mixin;
 
+import ladysnake.effective.client.Effective;
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -21,8 +22,24 @@ public class CompatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("ladysnake.effective.compat.mixin.CanvasRenderRegionMixin")) {
-            return FabricLoader.getInstance().isModLoaded("canvas");
+        if (mixinClassName.equals("ladysnake.effective.mixin.compat.CanvasTerrainRenderContextMixin")) {
+            final boolean canvasIsLoaded = FabricLoader.getInstance().isModLoaded("canvas");
+
+            if (canvasIsLoaded) {
+                Effective.logger.info("Canvas found. Applying compatibility mixin...");
+            }
+
+            return canvasIsLoaded;
+        }
+
+        if (mixinClassName.equals("ladysnake.effective.mixin.compat.SodiumFluidRendererMixin")) {
+            final boolean sodiumIsLoaded = FabricLoader.getInstance().isModLoaded("sodium");
+
+            if (sodiumIsLoaded) {
+                Effective.logger.info("Sodium found. Applying compatibility mixin...");
+            }
+
+            return sodiumIsLoaded;
         }
 
         return true;

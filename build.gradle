@@ -68,6 +68,14 @@ repositories {
         name = 'VRAM'
         url = 'https://maven.vram.io/'
     }
+
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
@@ -83,7 +91,7 @@ dependencies {
 //	}
 
     // Sodium
-    // modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
+    modCompileOnly "maven.modrinth:sodium:mc1.18-0.4.+"
 
     // cloth config
     modApi("me.shedaniel.cloth:cloth-config-fabric:5.+") {
@@ -96,15 +104,15 @@ dependencies {
         exclude module: "fabric-api"
     }
 
-    modRuntime("com.terraformersmc:modmenu:2.0.5") {
+    modRuntimeOnly("com.terraformersmc:modmenu:2.0.5") {
         exclude module: "fabric-api"
     }
 
     // canvas renderer
     modCompileOnly "io.vram:canvas-fabric-mc118:1.0.+"
 
-	// satin
-	modCompileOnly "io.github.ladysnake:satin:${satin_version}"
+    // satin
+    modCompileOnly "io.github.ladysnake:satin:${satin_version}"
 }
 
 processResources {

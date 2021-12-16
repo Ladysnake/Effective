@@ -17,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BlockRenderManagerMixin {
     @Inject(method = "renderFluid", at = @At("TAIL"))
     public void renderFluid(BlockPos pos, BlockRenderView world, VertexConsumer vertexConsumer, FluidState state, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (world.getBlockState(pos).getBlock() == Blocks.WATER && world.getBlockState(pos).getFluidState().isStill() && world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER && !world.getBlockState(pos.add(0, 1, 0)).getFluidState().isStill() && world.getBlockState(pos.add(0, 1, 0)).getFluidState().getHeight() >= 0.77f) {
-            WaterfallCloudGenerators.addGenerator(MinecraftClient.getInstance().world, new BlockPos(pos.getX() + .5f, pos.getY() + .5f, pos.getZ() + .5f));
-        }
+        WaterfallCloudGenerators.tryAddGenerator(world, pos);
     }
 }
