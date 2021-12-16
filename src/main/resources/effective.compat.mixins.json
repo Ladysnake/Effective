@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "ladysnake.effective.compat.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "plugin": "ladysnake.effective.compat.mixin.CompatMixinPlugin",
+  "client": [
+    "CanvasRenderRegionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+  ]
+}

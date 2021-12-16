@@ -21,7 +21,8 @@
     ]
   },
   "mixins": [
-    "effective.mixins.json"
+    "effective.mixins.json",
+    "effective.compat.mixins.json"
   ],
   "accessWidener": "effective.accesswidener",
   "depends": {

@@ -63,6 +63,11 @@ repositories {
         name = 'TerraformersMC'
         url = 'https://maven.terraformersmc.com/'
     }
+
+    maven {
+        name = 'VRAM'
+        url = 'https://maven.vram.io/'
+    }
 }
 
 dependencies {
@@ -96,7 +101,7 @@ dependencies {
     }
 
     // canvas renderer
-//    modImplementation "grondag:canvas-mc117-1.17:1.0.2033"
+    modCompileOnly "io.vram:canvas-fabric-mc118:1.0.+"
 
 	// satin
 	modCompileOnly "io.github.ladysnake:satin:${satin_version}"
