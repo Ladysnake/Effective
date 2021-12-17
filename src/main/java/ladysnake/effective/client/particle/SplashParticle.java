@@ -1,7 +1,7 @@
 package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.render.NoShadingRenderLayer;
+import ladysnake.effective.client.render.EffectiveRenderLayers;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import net.fabricmc.api.EnvType;
@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SplashParticle extends Particle {
-    public Identifier texture1;
-    public Identifier texture2;
     public float widthMultiplier;
     public float heightMultiplier;
     public int wave1End;
@@ -35,17 +33,11 @@ public class SplashParticle extends Particle {
     public int wave2End;
     Model waveModel;
     Model waveBottomModel;
-    RenderLayer layer1;
-    RenderLayer layer2;
 
     protected SplashParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
         super(world, x, y, z);
-        this.texture1 = texture;
-        this.texture2 = texture;
         this.waveModel = new SplashModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashModel.MODEL_LAYER));
         this.waveBottomModel = new SplashBottomModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomModel.MODEL_LAYER));
-        this.layer1 = NoShadingRenderLayer.get(texture);
-        this.layer2 = NoShadingRenderLayer.get(texture);
         this.gravityStrength = 0.0F;
         this.widthMultiplier = 0f;
         this.heightMultiplier = 0f;
@@ -66,8 +58,8 @@ public class SplashParticle extends Particle {
         if (age <= this.wave1End) {
             int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
 
-            this.texture1 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png");
-            this.layer1 = NoShadingRenderLayer.get(texture1);
+            Identifier texture1 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png");
+            RenderLayer layer1 = EffectiveRenderLayers.noShading(texture1);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -89,8 +81,8 @@ public class SplashParticle extends Particle {
         if (age <= this.wave1End) {
             int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
 
-            this.texture1 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png");
-            this.layer1 = NoShadingRenderLayer.get(texture1);
+            Identifier texture1 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png");
+            RenderLayer layer1 = EffectiveRenderLayers.noShading(texture1);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -114,8 +106,8 @@ public class SplashParticle extends Particle {
         if (age >= this.wave2Start) {
             int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
 
-            this.texture2 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame2 + ".png");
-            this.layer2 = NoShadingRenderLayer.get(texture2);
+            Identifier texture2 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame2 + ".png");
+            RenderLayer layer2 = EffectiveRenderLayers.noShading(texture2);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -137,8 +129,8 @@ public class SplashParticle extends Particle {
         if (age >= this.wave2Start) {
             int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
 
-            this.texture2 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame2 + ".png");
-            this.layer2 = NoShadingRenderLayer.get(texture2);
+            Identifier texture2 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame2 + ".png");
+            RenderLayer layer2 = EffectiveRenderLayers.noShading(texture2);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
