@@ -1,7 +1,8 @@
 package ladysnake.effective.mixin;
 
-import ladysnake.effective.client.Effective;
 import net.fabricmc.loader.api.FabricLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 public class CompatMixinPlugin implements IMixinConfigPlugin {
+    private static final Logger logger = LogManager.getLogger("Effective");
+
     @Override
     public void onLoad(String mixinPackage) {
         // NOOP
@@ -26,7 +29,7 @@ public class CompatMixinPlugin implements IMixinConfigPlugin {
             final boolean canvasIsLoaded = FabricLoader.getInstance().isModLoaded("canvas");
 
             if (canvasIsLoaded) {
-                Effective.logger.info("Canvas found. Applying compatibility mixin...");
+                logger.info("Canvas found. Applying compatibility mixin...");
             }
 
             return canvasIsLoaded;
@@ -36,7 +39,7 @@ public class CompatMixinPlugin implements IMixinConfigPlugin {
             final boolean sodiumIsLoaded = FabricLoader.getInstance().isModLoaded("sodium");
 
             if (sodiumIsLoaded) {
-                Effective.logger.info("Sodium found. Applying compatibility mixin...");
+                logger.info("Sodium found. Applying compatibility mixin...");
             }
 
             return sodiumIsLoaded;
