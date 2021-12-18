@@ -25,6 +25,8 @@ public class WaterfallCloudGenerators {
     }
 
     public static void tick() {
+        if (generators.isEmpty()) return; //If the generators list is empty there is no need to do anything
+
         List<WaterfallCloudGenerator> generatorsToRemove = new ArrayList<>();
 
         List<WaterfallCloudGenerator> generatorsInDistance = generators.stream().filter(waterfallCloudGenerator -> waterfallCloudGenerator.world == MinecraftClient.getInstance().player.world && Math.sqrt(waterfallCloudGenerator.blockPos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.viewDistance * 8f).collect(Collectors.toUnmodifiableList());
