@@ -6,7 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
@@ -20,8 +22,6 @@ public class WaterfallCloudGenerators {
     public static final Set<WaterfallCloudGenerator> generators = new HashSet<>();
 
     public static void tryAddGenerator(BlockPos pos, BlockRenderView world) {
-        if (!Config.enableWaterfallParticles) return;
-
         if (isInRange(pos) && isPositionValid(world, pos)) {
             generators.add(new WaterfallCloudGenerator(MinecraftClient.getInstance().world, pos));
         }
@@ -44,11 +44,17 @@ public class WaterfallCloudGenerators {
         BlockState state = world.getBlockState(pos);
         BlockState above = world.getBlockState(pos.up());
 
-        return state.isOf(Blocks.WATER) && state.getFluidState().isStill()
-            && above.isOf(Blocks.WATER) && !above.getFluidState().isStill()
-            && above.getFluidState().contains(FlowableFluid.FALLING)
-            && above.getFluidState().get(FlowableFluid.FALLING)
-            && above.getFluidState().getHeight() >= 0.77f;
+        return state.isOf(Blocks.WATER)
+            && state.getFluidState().isStill()
+            && isFlowingAndFalling(above.getFluidState());
+    }
+
+    public static boolean isFlowingAndFalling(FluidState state) {
+        return state.isIn(FluidTags.WATER)
+                && !state.isStill()
+                && state.getHeight() >= 0.77f
+                && state.contains(FlowableFluid.FALLING)
+                && state.get(FlowableFluid.FALLING);
     }
 
     public static final class WaterfallCloudGenerator {
@@ -65,6 +71,10 @@ public class WaterfallCloudGenerators {
         }
 
         public boolean tick() {
+            if (Config.enableWaterfallParticles) {
+                return true;
+            }
+
             if (isOutofRange() || !isPositionValid(world, blockPos)) {
                 return true;
             }
