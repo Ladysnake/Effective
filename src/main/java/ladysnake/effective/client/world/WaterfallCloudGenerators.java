@@ -1,10 +1,12 @@
 package ladysnake.effective.client.world;
 
+import ladysnake.effective.client.Config;
 import ladysnake.effective.client.Effective;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -13,6 +15,16 @@ import java.util.stream.Collectors;
 
 public class WaterfallCloudGenerators {
     public static final List<WaterfallCloudGenerator> generators = new ArrayList<>();
+
+    public static void tryAddGenerator(BlockRenderView world, BlockPos pos) {
+        if (!Config.enableWaterfallParticles) return;
+
+        final BlockPos abovePos = pos.up();
+
+        if (world.getBlockState(pos).getBlock() == Blocks.WATER && world.getBlockState(pos).getFluidState().isStill() && world.getBlockState(abovePos).getBlock() == Blocks.WATER && !world.getBlockState(abovePos).getFluidState().isStill() && world.getBlockState(abovePos).getFluidState().getHeight() >= 0.77f) {
+            addGenerator(MinecraftClient.getInstance().world, new BlockPos(pos.getX() + .5f, pos.getY() + .5f, pos.getZ() + .5f));
+        }
+    }
 
     public static void addGenerator(World world, BlockPos blockPos) {
         if (!generators.contains(new WaterfallCloudGenerator(world, blockPos))) {
