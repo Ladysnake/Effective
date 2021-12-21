@@ -95,7 +95,7 @@ public class Effective implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // load config
-//        Config.load();
+        Config.load();
 
         // get illuminations player cosmetics
 //        loadPlayerCosmetics();

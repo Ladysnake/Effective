@@ -1,5 +1,6 @@
 package ladysnake.effective.client.world;
 
+import ladysnake.effective.client.Config;
 import ladysnake.effective.client.Effective;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -16,6 +17,8 @@ public class WaterfallCloudGenerators {
     public static final List<WaterfallCloudGenerator> generators = new ArrayList<>();
 
     public static void tryAddGenerator(BlockRenderView world, BlockPos pos) {
+        if (!Config.enableWaterfallParticles) return;
+
         final BlockPos abovePos = pos.up();
 
         if (world.getBlockState(pos).getBlock() == Blocks.WATER && world.getBlockState(pos).getFluidState().isStill() && world.getBlockState(abovePos).getBlock() == Blocks.WATER && !world.getBlockState(abovePos).getFluidState().isStill() && world.getBlockState(abovePos).getFluidState().getHeight() >= 0.77f) {
@@ -34,6 +37,8 @@ public class WaterfallCloudGenerators {
     }
 
     public static void tick() {
+        if (generators.isEmpty()) return; //If the generators list is empty there is no need to do anything
+
         List<WaterfallCloudGenerator> generatorsToRemove = new ArrayList<>();
 
         List<WaterfallCloudGenerator> generatorsInDistance = generators.stream().filter(waterfallCloudGenerator -> waterfallCloudGenerator.world == MinecraftClient.getInstance().player.world && Math.sqrt(waterfallCloudGenerator.blockPos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.viewDistance * 8f).collect(Collectors.toUnmodifiableList());
