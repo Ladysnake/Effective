@@ -1,8 +1,6 @@
 package ladysnake.effective.mixin;
 
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.fluid.FluidState;
