@@ -71,7 +71,7 @@ public class WaterfallCloudGenerators {
         }
 
         public boolean tick() {
-            if (Config.enableWaterfallParticles) {
+            if (!Config.enableWaterfallParticles) {
                 return true;
             }
 
