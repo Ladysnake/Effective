@@ -2,10 +2,14 @@
   "required": true,
   "package": "ladysnake.effective.mixin",
   "compatibilityLevel": "JAVA_8",
+  "plugin": "ladysnake.effective.mixin.CompatMixinPlugin",
   "client": [
-    "WaterFluidMixin",
+    "BlockMixin",
     "EntityMixin",
-    "RenderLayerAccessor"
+    "RenderLayerAccessor",
+    "BlockRenderManagerMixin",
+    "compat.CanvasTerrainRenderContextMixin",
+    "compat.SodiumFluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
