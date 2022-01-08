@@ -18,6 +18,10 @@ public class Config {
     private static final String ENABLE_WATERFALL_PARTICLES = "enable-waterfall-particles";
     public static boolean enableWaterfallParticles = true;
 
+    private static final String WATERFALL_VOLUME = "waterfall-volume";
+    public static float waterfallVolume = 2.5f;
+
+
     public static void save() {
         Properties props = new Properties();
         read(props);
@@ -62,15 +66,22 @@ public class Config {
     public static void read(@NotNull Properties props) {
         props.setProperty(ENABLE_SPLASH_PARTICLES, String.valueOf(enableSplashParticles));
         props.setProperty(ENABLE_WATERFALL_PARTICLES, String.valueOf(enableWaterfallParticles));
+        props.setProperty(WATERFALL_VOLUME, String.valueOf(waterfallVolume));
     }
 
     public static void assign(@NotNull Properties props) {
         enableSplashParticles = defaultBoolean(props.getProperty(ENABLE_SPLASH_PARTICLES), true);
         enableWaterfallParticles = defaultBoolean(props.getProperty(ENABLE_WATERFALL_PARTICLES), true);
+        waterfallVolume = defaultFloat(props.getProperty(WATERFALL_VOLUME), waterfallVolume);
     }
 
     @SuppressWarnings("SameParameterValue")
     private static boolean defaultBoolean(String bool, boolean defaultOption) {
         return bool == null ? defaultOption : Boolean.parseBoolean(bool);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static float defaultFloat(String amount, float defaultOption) {
+        return amount == null ? defaultOption : Float.parseFloat(amount);
     }
 }
