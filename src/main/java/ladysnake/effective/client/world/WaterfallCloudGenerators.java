@@ -53,7 +53,7 @@ public class WaterfallCloudGenerators {
         BlockState south = world.getBlockState(pos.south());
         BlockState east = world.getBlockState(pos.east());
         BlockState west = world.getBlockState(pos.west());*/
-        boolean hasAir = (world.getBlockState(pos.add(2 , 1 , 0)).isAir() || world.getBlockState(pos.add(-2 , 1 , 0)).isAir()) | (world.getBlockState(pos.add(2 , 1 , 2)).isAir() | world.getBlockState(pos.add(-2 , 1 , -2)).isAir()) | (world.getBlockState(pos.add(0 , 1 , 2)).isAir() || world.getBlockState(pos.add(0 , 1 , -2)).isAir());
+        boolean hasAir = (world.getBlockState(pos.add(1 , 1 , 0)).isAir() || world.getBlockState(pos.add(-1 , 1 , 0)).isAir()) || (world.getBlockState(pos.add(1 , 1 , 1)).isAir() | world.getBlockState(pos.add(-1 , 1 , -1)).isAir()) || (world.getBlockState(pos.add(0 , 1 , 1)).isAir() || world.getBlockState(pos.add(0 , 1 , -1)).isAir());
 
         return (state.isOf(Blocks.WATER) && state.getFluidState().isStill())
                 //&& ((north.isOf(Blocks.WATER) && north.getFluidState().isStill()) || (east.isOf(Blocks.WATER) && east.getFluidState().isStill()) || (west.isOf(Blocks.WATER) && west.getFluidState().isStill()) || (south.isOf(Blocks.WATER) && south.getFluidState().isStill())) //checks for any block next to base of waterfall for more still water
