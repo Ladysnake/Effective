@@ -6,17 +6,20 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import org.spongepowered.include.com.google.common.base.Objects;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
+import static ladysnake.effective.client.Config.waterfallVolume;
 
 public class WaterfallCloudGenerators {
-    public static final Set<WaterfallCloudGenerator> generators = new HashSet<>();
+    public static final Set<WaterfallCloudGenerator> generators = new CopyOnWriteArraySet<>();
 
     public static void tryAddGenerator(BlockRenderView world, BlockPos pos) {
         if (!Config.enableWaterfallParticles) return;
@@ -43,15 +46,22 @@ public class WaterfallCloudGenerators {
         return client.player != null && Math.sqrt(pos.getSquaredDistance(client.player.getBlockPos())) < client.options.viewDistance * 16f;
     }
 
-    private static boolean isPositionValid(BlockRenderView world, BlockPos pos) {
+    public static boolean isPositionValid(BlockRenderView world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         BlockState above = world.getBlockState(pos.up());
+        /*BlockState north = world.getBlockState(pos.north()); 
+        BlockState south = world.getBlockState(pos.south());
+        BlockState east = world.getBlockState(pos.east());
+        BlockState west = world.getBlockState(pos.west());*/
+        boolean hasAir = (world.getBlockState(pos.add(2 , 1 , 0)).isAir() || world.getBlockState(pos.add(-2 , 1 , 0)).isAir()) | (world.getBlockState(pos.add(2 , 1 , 2)).isAir() | world.getBlockState(pos.add(-2 , 1 , -2)).isAir()) | (world.getBlockState(pos.add(0 , 1 , 2)).isAir() || world.getBlockState(pos.add(0 , 1 , -2)).isAir());
 
-        return state.isOf(Blocks.WATER) && state.getFluidState().isStill()
-                && above.isOf(Blocks.WATER) && !above.getFluidState().isStill()
+        return (state.isOf(Blocks.WATER) && state.getFluidState().isStill())
+                //&& ((north.isOf(Blocks.WATER) && north.getFluidState().isStill()) || (east.isOf(Blocks.WATER) && east.getFluidState().isStill()) || (west.isOf(Blocks.WATER) && west.getFluidState().isStill()) || (south.isOf(Blocks.WATER) && south.getFluidState().isStill())) //checks for any block next to base of waterfall for more still water
+                && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
                 && above.getFluidState().contains(FlowableFluid.FALLING)
                 && above.getFluidState().get(FlowableFluid.FALLING)
-                && above.getFluidState().getHeight() >= 0.77f;
+                && above.getFluidState().getHeight() >= 0.77f
+                && hasAir;
     }
 
     public static final class WaterfallCloudGenerator {
@@ -72,7 +82,7 @@ public class WaterfallCloudGenerators {
                 if (world.getTime() % 11 == 0) {
                     world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(),
                             Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT,
-                            2.5f,
+                            waterfallVolume,
                             1f + world.random.nextFloat() / 10f, false);
                 }
 
