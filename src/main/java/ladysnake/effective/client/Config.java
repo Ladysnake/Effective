@@ -21,6 +21,9 @@ public class Config {
     private static final String WATERFALL_VOLUME = "waterfall-volume";
     public static float waterfallVolume = 2.5f;
 
+    private static final String MIN_WATERFALL_HEIGHT = "minimum_waterfall-height";
+    public static float waterfallHeight = 5.0f;
+
 
     public static void save() {
         Properties props = new Properties();
@@ -67,12 +70,14 @@ public class Config {
         props.setProperty(ENABLE_SPLASH_PARTICLES, String.valueOf(enableSplashParticles));
         props.setProperty(ENABLE_WATERFALL_PARTICLES, String.valueOf(enableWaterfallParticles));
         props.setProperty(WATERFALL_VOLUME, String.valueOf(waterfallVolume));
+        props.setProperty(MIN_WATERFALL_HEIGHT, String.valueOf(waterfallHeight));
     }
 
     public static void assign(@NotNull Properties props) {
         enableSplashParticles = defaultBoolean(props.getProperty(ENABLE_SPLASH_PARTICLES), true);
         enableWaterfallParticles = defaultBoolean(props.getProperty(ENABLE_WATERFALL_PARTICLES), true);
         waterfallVolume = defaultFloat(props.getProperty(WATERFALL_VOLUME), waterfallVolume);
+        waterfallHeight = defaultFloat(props.getProperty(MIN_WATERFALL_HEIGHT), waterfallHeight);
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -83,5 +88,10 @@ public class Config {
     @SuppressWarnings("SameParameterValue")
     private static float defaultFloat(String amount, float defaultOption) {
         return amount == null ? defaultOption : Float.parseFloat(amount);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static int defaultInt(String amount, int defaultOption) {
+        return amount == null ? defaultOption : Integer.parseInt(amount);
     }
 }
