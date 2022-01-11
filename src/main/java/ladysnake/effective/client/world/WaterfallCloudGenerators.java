@@ -16,7 +16,7 @@ import org.spongepowered.include.com.google.common.base.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import static ladysnake.effective.client.Config.waterfallVolume;
+import static ladysnake.effective.client.Config.*;
 
 public class WaterfallCloudGenerators {
     public static final Set<WaterfallCloudGenerator> generators = new CopyOnWriteArraySet<>();
@@ -49,11 +49,12 @@ public class WaterfallCloudGenerators {
     public static boolean isPositionValid(BlockRenderView world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         BlockState above = world.getBlockState(pos.up());
-        /*BlockState north = world.getBlockState(pos.north()); 
-        BlockState south = world.getBlockState(pos.south());
-        BlockState east = world.getBlockState(pos.east());
-        BlockState west = world.getBlockState(pos.west());*/
-        boolean hasAir = (world.getBlockState(pos.add(1 , 1 , 0)).isAir() || world.getBlockState(pos.add(-1 , 1 , 0)).isAir()) || (world.getBlockState(pos.add(1 , 1 , 1)).isAir() | world.getBlockState(pos.add(-1 , 1 , -1)).isAir()) || (world.getBlockState(pos.add(0 , 1 , 1)).isAir() || world.getBlockState(pos.add(0 , 1 , -1)).isAir());
+        /*BlockState north = world.getBlockState(pos.north()); //these commented out lines were to implement a 
+        BlockState south = world.getBlockState(pos.south());   //"there is still water next to the still water at the base of waterfall" logic.
+        BlockState east = world.getBlockState(pos.east());     //this was to fix a specific case wallamide found when mining straight down,
+        BlockState west = world.getBlockState(pos.west());*/   //water follows behing you, and you find an air pocket, a waterfall could generate. this isn't common 
+        boolean hasAir = (world.getBlockState(pos.add(1 , 1 , 0)).isAir() || world.getBlockState(pos.add(-1 , 1 , 0)).isAir()) | (world.getBlockState(pos.add(1 , 1 , 1)).isAir() | world.getBlockState(pos.add(-1 , 1 , -1)).isAir()) | (world.getBlockState(pos.add(0 , 1 , 1)).isAir() || world.getBlockState(pos.add(0 , 1 , -1)).isAir());
+        boolean height = (world.getBlockState(pos.add(-1, waterfallHeight, 0)).isOf(Blocks.WATER) || (world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER)) ||  (world.getBlockState(pos.add(-1, waterfallHeight,-1)).isOf(Blocks.WATER)) || (world.getBlockState(pos.add(-2, waterfallHeight, 0)).isOf(Blocks.WATER)) || (world.getBlockState(pos.add(-2, waterfallHeight, -2)).isOf(Blocks.WATER))); 
 
         return (state.isOf(Blocks.WATER) && state.getFluidState().isStill())
                 //&& ((north.isOf(Blocks.WATER) && north.getFluidState().isStill()) || (east.isOf(Blocks.WATER) && east.getFluidState().isStill()) || (west.isOf(Blocks.WATER) && west.getFluidState().isStill()) || (south.isOf(Blocks.WATER) && south.getFluidState().isStill())) //checks for any block next to base of waterfall for more still water
@@ -61,7 +62,8 @@ public class WaterfallCloudGenerators {
                 && above.getFluidState().contains(FlowableFluid.FALLING)
                 && above.getFluidState().get(FlowableFluid.FALLING)
                 && above.getFluidState().getHeight() >= 0.77f
-                && hasAir;
+                && hasAir
+                && height;
     }
 
     public static final class WaterfallCloudGenerator {
