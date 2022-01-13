@@ -90,8 +90,4 @@ public class Config {
         return amount == null ? defaultOption : Float.parseFloat(amount);
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private static int defaultInt(String amount, int defaultOption) {
-        return amount == null ? defaultOption : Integer.parseInt(amount);
-    }
 }
