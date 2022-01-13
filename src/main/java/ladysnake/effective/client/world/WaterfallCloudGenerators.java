@@ -13,6 +13,7 @@ import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import org.spongepowered.include.com.google.common.base.Objects;
 
+//import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -24,7 +25,7 @@ public class WaterfallCloudGenerators {
     public static void tryAddGenerator(BlockRenderView world, BlockPos pos) {
         if (!Config.enableWaterfallParticles) return;
 
-        if (isInRange(pos) && (isPositionValid(world, pos) != false)) {
+        if (isInRange(pos) && (isPositionValid(world, pos) == true)) {
             generators.add(new WaterfallCloudGenerator(MinecraftClient.getInstance().world, pos));
         }
     }
@@ -38,7 +39,7 @@ public class WaterfallCloudGenerators {
             generator.tick();
         }
 
-        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) == false);
+        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || (isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) == false));
     }
 
     private static boolean isInRange(BlockPos pos) {
@@ -59,6 +60,7 @@ public class WaterfallCloudGenerators {
             || world.getBlockState(pos.add(-1 , 1 , 1)).isAir() 
             || world.getBlockState(pos.add(0 , 1 , 1)).isAir() 
             || world.getBlockState(pos.add(0 , 1 , -1)).isAir();
+        
         boolean tallEnough = 
             (world.getBlockState(pos.add(-1, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER) 
@@ -73,15 +75,21 @@ public class WaterfallCloudGenerators {
             || world.getBlockState(pos.add(0, waterfallHeight, 2)).isOf(Blocks.WATER)
             || world.getBlockState(pos.add(2, waterfallHeight, 2)).isOf(Blocks.WATER)); 
 
-        if (tallEnough && hasAir && //
-            (state.isOf(Blocks.WATER) && state.getFluidState().isStill())
-                //&& ((north.isOf(Blocks.WATER) && north.getFluidState().isStill()) || (east.isOf(Blocks.WATER) && east.getFluidState().isStill()) || (west.isOf(Blocks.WATER) && west.getFluidState().isStill()) || (south.isOf(Blocks.WATER) && south.getFluidState().isStill())) //checks for any block next to base of waterfall for more still water
+        if ((state.isOf(Blocks.WATER) && state.getFluidState().isStill())    
             && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
             && above.getFluidState().contains(FlowableFluid.FALLING)
             && above.getFluidState().get(FlowableFluid.FALLING)
-            && above.getFluidState().getHeight() >= 0.77f){
-                return true;
-        } else {return false;}     
+            && above.getFluidState().getHeight() >= 0.77f
+            && hasAir 
+            && tallEnough ){
+                return 
+                /*state.isOf(Blocks.WATER) && state.getFluidState().isStill()
+                && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
+                && above.getFluidState().contains(FlowableFluid.FALLING)
+                && above.getFluidState().get(FlowableFluid.FALLING)
+                && above.getFluidState().getHeight() >= 0.77f*/
+                true;
+        }   return false;
     }
 
     public static final class WaterfallCloudGenerator {
@@ -98,7 +106,7 @@ public class WaterfallCloudGenerators {
         }
 
         public void tick() {
-            if (isPositionValid(world, blockPos) == true && world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 100f)) {
+            if (world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 100f) && isPositionValid(world, blockPos) == true) {
                 if (world.getTime() % 11 == 0) {
                     world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(),
                             Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT,
