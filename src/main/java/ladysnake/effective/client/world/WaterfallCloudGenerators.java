@@ -53,23 +53,25 @@ public class WaterfallCloudGenerators {
         boolean hasAir = 
             (world.getBlockState(pos.add(1 , 1 , 0)).isAir() 
             || world.getBlockState(pos.add(-1 , 1 , 0)).isAir()) 
-            || (world.getBlockState(pos.add(1 , 1 , 1)).isAir() 
-            || world.getBlockState(pos.add(-1 , 1 , -1)).isAir()) 
-            || (world.getBlockState(pos.add(0 , 1 , 1)).isAir() 
-            || world.getBlockState(pos.add(0 , 1 , -1)).isAir());
+            || world.getBlockState(pos.add(1 , 1 , 1)).isAir()
+            || world.getBlockState(pos.add(1 , 1 , -1)).isAir() 
+            || world.getBlockState(pos.add(-1 , 1 , -1)).isAir()
+            || world.getBlockState(pos.add(-1 , 1 , 1)).isAir() 
+            || world.getBlockState(pos.add(0 , 1 , 1)).isAir() 
+            || world.getBlockState(pos.add(0 , 1 , -1)).isAir();
         boolean tallEnough = 
             (world.getBlockState(pos.add(-1, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(-1, waterfallHeight,-1)).isOf(Blocks.WATER)
             || world.getBlockState(pos.add(1, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, 1)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(1, waterfallHeight,1)).isOf(Blocks.WATER)) 
+            || world.getBlockState(pos.add(1, waterfallHeight, 1)).isOf(Blocks.WATER)) 
             || (world.getBlockState(pos.add(-2, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, -2)).isOf(Blocks.WATER)
             || world.getBlockState(pos.add(-2, waterfallHeight, -2)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(-2, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, -2)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(-2, waterfallHeight, -2)).isOf(Blocks.WATER)); 
+            || world.getBlockState(pos.add(2, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(0, waterfallHeight, 2)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(2, waterfallHeight, 2)).isOf(Blocks.WATER)); 
 
         if (tallEnough && hasAir && //
             (state.isOf(Blocks.WATER) && state.getFluidState().isStill())
