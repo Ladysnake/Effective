@@ -112,7 +112,7 @@ dependencies {
     modCompileOnly "io.vram:canvas-fabric-mc118:1.0.+"
 
     // satin
-    modCompileOnly "io.github.ladysnake:satin:${satin_version}"
+    modImplementation "io.github.ladysnake:satin:${satin_version}"
 }
 
 processResources {
