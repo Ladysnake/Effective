@@ -5,17 +5,28 @@ import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
+import ladysnake.satin.api.event.ShaderEffectRenderCallback;
+import ladysnake.satin.api.experimental.ReadableDepthFramebuffer;
+import ladysnake.satin.api.managed.ManagedShaderEffect;
+import ladysnake.satin.api.managed.ShaderEffectManager;
+import ladysnake.satin.api.managed.uniform.SamplerUniform;
+import ladysnake.satin.api.managed.uniform.UniformMat4;
+import ladysnake.satin.api.util.GlMatrices;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,6 +70,17 @@ public class Effective implements ClientModInitializer {
     public static @Nullable PlayerCosmeticData getCosmeticData(UUID uuid) {
         return PLAYER_COSMETICS.get(uuid);
     }
+
+    // satin
+    private static final ManagedShaderEffect FOAM_SHADER = ShaderEffectManager.getInstance()
+            .manage(new Identifier("effective", "shaders/post/foam.json"), managedShaderEffect -> {
+                managedShaderEffect.setUniformValue("Viewport", 0, 0, MinecraftClient.getInstance().getWindow().getFramebufferWidth(), MinecraftClient.getInstance().getWindow().getFramebufferHeight());
+                managedShaderEffect.setSamplerUniform("DepthSampler", ((ReadableDepthFramebuffer) MinecraftClient.getInstance().getFramebuffer()).getStillDepthMap());
+            });
+    private static final SamplerUniform transparencyDepthSampler = FOAM_SHADER.findSampler("TransparencyDepthSampler");
+    private static final SamplerUniform entityDepthSampler = FOAM_SHADER.findSampler("EntityDepthSampler");
+    private static final UniformMat4 inverseTransformMatrix = FOAM_SHADER.findUniformMat4("InverseTransformMatrix");
+    private static final Matrix4f MATRIX4F = new Matrix4f();
 
 //    public static void loadPlayerCosmetics() {
 //        // get illuminations player cosmetics
@@ -123,6 +145,28 @@ public class Effective implements ClientModInitializer {
 
         // sound events
         AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
+
+        ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
+            Framebuffer translucentFramebuffer = MinecraftClient.getInstance().worldRenderer.getTranslucentFramebuffer();
+            Framebuffer entityFramebuffer = MinecraftClient.getInstance().worldRenderer.getEntityFramebuffer();
+
+            if (translucentFramebuffer != null && entityFramebuffer != null) {
+                transparencyDepthSampler.set(((ReadableDepthFramebuffer) translucentFramebuffer).getStillDepthMap());
+                entityDepthSampler.set(((ReadableDepthFramebuffer) entityFramebuffer).getStillDepthMap());
+
+                FOAM_SHADER.render(tickDelta);
+            }
+        });
+
+        WorldRenderEvents.LAST.register(context -> {
+            Framebuffer translucentFramebuffer = MinecraftClient.getInstance().worldRenderer.getTranslucentFramebuffer();
+            Framebuffer entityFramebuffer = MinecraftClient.getInstance().worldRenderer.getEntityFramebuffer();
+            if (translucentFramebuffer != null && entityFramebuffer != null) {
+                ((ReadableDepthFramebuffer) translucentFramebuffer).freezeDepthMap();
+                ((ReadableDepthFramebuffer) entityFramebuffer).freezeDepthMap();
+                inverseTransformMatrix.set(GlMatrices.getInverseTransformMatrix(MATRIX4F));
+            }
+        });
     }
 
 //    private static class PlayerCosmeticDataParser implements JsonDeserializer<PlayerCosmeticData> {
