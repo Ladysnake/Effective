@@ -87,8 +87,8 @@ public class WaterfallCloudGenerators {
                 && above.getFluidState().get(FlowableFluid.FALLING)
                 && above.getFluidState().getHeight() >= 0.77f
                 true*/
-                hasAir && tallEnough && true;
-        }else  {return !hasAir && !tallEnough && false;} 
+                /*hasAir && */tallEnough && true;
+        }else  {return /*!hasAir && */!tallEnough && false;} 
     }
 
     public static final class WaterfallCloudGenerator {
