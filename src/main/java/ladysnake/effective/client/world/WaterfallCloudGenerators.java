@@ -39,7 +39,7 @@ public class WaterfallCloudGenerators {
             generator.tick();
         }
 
-        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || (isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) == false));
+        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) == false);
     }
 
     private static boolean isInRange(BlockPos pos) {
@@ -50,7 +50,6 @@ public class WaterfallCloudGenerators {
     public static boolean isPositionValid(BlockRenderView world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         BlockState above = world.getBlockState(pos.up());
-
         boolean hasAir = 
             (world.getBlockState(pos.add(1 , 1 , 0)).isAir() 
             || world.getBlockState(pos.add(-1 , 1 , 0)).isAir()) 
@@ -60,7 +59,6 @@ public class WaterfallCloudGenerators {
             || world.getBlockState(pos.add(-1 , 1 , 1)).isAir() 
             || world.getBlockState(pos.add(0 , 1 , 1)).isAir() 
             || world.getBlockState(pos.add(0 , 1 , -1)).isAir();
-        
         boolean tallEnough = 
             (world.getBlockState(pos.add(-1, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER) 
@@ -87,9 +85,10 @@ public class WaterfallCloudGenerators {
                 && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
                 && above.getFluidState().contains(FlowableFluid.FALLING)
                 && above.getFluidState().get(FlowableFluid.FALLING)
-                && above.getFluidState().getHeight() >= 0.77f*/
-                true;
-        }   return false;
+                && above.getFluidState().getHeight() >= 0.77f
+                true*/
+                hasAir && tallEnough && true;
+        }else  {return !hasAir && !tallEnough && false;} 
     }
 
     public static final class WaterfallCloudGenerator {
