@@ -154,7 +154,7 @@ public class Effective implements ClientModInitializer {
                 transparencyDepthSampler.set(((ReadableDepthFramebuffer) translucentFramebuffer).getStillDepthMap());
                 entityDepthSampler.set(((ReadableDepthFramebuffer) entityFramebuffer).getStillDepthMap());
 
-                FOAM_SHADER.render(tickDelta);
+//                FOAM_SHADER.render(tickDelta);
             }
         });
 

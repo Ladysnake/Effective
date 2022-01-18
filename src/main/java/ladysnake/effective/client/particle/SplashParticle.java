@@ -79,7 +79,7 @@ public class SplashParticle extends Particle {
 
             RenderLayer layer1 = EffectiveRenderLayers.noShading(new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png"));
 
-            matrixStack.scale(widthMultiplier, heightMultiplier, widthMultiplier);
+            matrixStack.scale(widthMultiplier, -heightMultiplier, widthMultiplier);
 
             VertexConsumer vertexConsumer2 = immediate.getBuffer(layer1);
 
