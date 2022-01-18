@@ -83,7 +83,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo callbackInfo) {
-        if (Config.enableSplashParticles && !this.onGround && !this.touchingWater && !this.isInLava() && world.getBlockState(this.getBlockPos().add(this.getVelocity().x, this.getVelocity().y, this.getVelocity().z)).getBlock() == Blocks.LAVA) {
+        if (Config.enableSplashParticles && !this.onGround && !this.touchingWater && !this.isInLava() && world.getBlockState(this.getBlockPos().add(this.getVelocity().x, this.getVelocity().y+1, this.getVelocity().z)).getBlock() == Blocks.LAVA) {
             if (this.world.isClient) {
                 Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
                 float f = entity == (Object) this ? 0.2f : 0.9f;
