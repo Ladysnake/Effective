@@ -39,7 +39,7 @@ public class WaterfallCloudGenerators {
             generator.tick();
         }
 
-        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) == false);
+        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) != true );
     }
 
     private static boolean isInRange(BlockPos pos) {
@@ -48,8 +48,10 @@ public class WaterfallCloudGenerators {
     }
 
     public static boolean isPositionValid(BlockRenderView world, BlockPos pos) {
+        final int tallWater = (int) waterfallHeight;
         BlockState state = world.getBlockState(pos);
         BlockState above = world.getBlockState(pos.up());
+        BlockState height = world.getBlockState(pos.up(tallWater));
         boolean hasAir = 
             (world.getBlockState(pos.add(1 , 1 , 0)).isAir() 
             || world.getBlockState(pos.add(-1 , 1 , 0)).isAir()) 
@@ -79,7 +81,7 @@ public class WaterfallCloudGenerators {
             && above.getFluidState().get(FlowableFluid.FALLING)
             && above.getFluidState().getHeight() >= 0.77f
             && hasAir 
-            && tallEnough ){
+            && (tallEnough || height.isOf(Blocks.WATER))){
                 return 
                 /*state.isOf(Blocks.WATER) && state.getFluidState().isStill()
                 && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
@@ -87,8 +89,9 @@ public class WaterfallCloudGenerators {
                 && above.getFluidState().get(FlowableFluid.FALLING)
                 && above.getFluidState().getHeight() >= 0.77f
                 true*/
-                /*hasAir && */tallEnough && true;
-        }else  {return /*!hasAir && */!tallEnough && false;} 
+                hasAir && tallEnough && true;
+        }
+       else  {return !hasAir && !tallEnough && !true;} 
     }
 
     public static final class WaterfallCloudGenerator {
