@@ -19,7 +19,7 @@ public class Config {
     public static boolean enableWaterfallParticles = true;
 
     private static final String WATERFALL_VOLUME = "waterfall-volume";
-    public static float waterfallVolume = 2.5f;
+    public static float waterfallVolume = 300f;
 
     private static final String MIN_WATERFALL_HEIGHT = "minimum_waterfall-height";
     public static float waterfallHeight = 5.0f;

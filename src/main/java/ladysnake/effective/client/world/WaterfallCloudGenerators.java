@@ -39,7 +39,7 @@ public class WaterfallCloudGenerators {
             generator.tick();
         }
 
-        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) != true );
+        generators.removeIf(waterfallCloudGenerator -> waterfallCloudGenerator.isOutofRange() || isPositionValid(waterfallCloudGenerator.world, waterfallCloudGenerator.blockPos) ==!true);
     }
 
     private static boolean isInRange(BlockPos pos) {
@@ -48,6 +48,7 @@ public class WaterfallCloudGenerators {
     }
 
     public static boolean isPositionValid(BlockRenderView world, BlockPos pos) {
+        
         final int tallWater = (int) waterfallHeight;
         BlockState state = world.getBlockState(pos);
         BlockState above = world.getBlockState(pos.up());
@@ -63,17 +64,35 @@ public class WaterfallCloudGenerators {
             || world.getBlockState(pos.add(0 , 1 , -1)).isAir();
         boolean tallEnough = 
             (world.getBlockState(pos.add(-1, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(-1, waterfallHeight,-1)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(0, waterfallHeight, 1)).isOf(Blocks.WATER)
             || world.getBlockState(pos.add(1, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, 1)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(1, waterfallHeight, 1)).isOf(Blocks.WATER)) 
             || (world.getBlockState(pos.add(-2, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, -2)).isOf(Blocks.WATER)
             || world.getBlockState(pos.add(-2, waterfallHeight, -2)).isOf(Blocks.WATER)
             || world.getBlockState(pos.add(2, waterfallHeight, 0)).isOf(Blocks.WATER) 
             || world.getBlockState(pos.add(0, waterfallHeight, 2)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(2, waterfallHeight, 2)).isOf(Blocks.WATER)); 
+            || world.getBlockState(pos.add(2, waterfallHeight, 2)).isOf(Blocks.WATER))
+            || (world.getBlockState(pos.add(-3, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(-3, waterfallHeight,-3)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(0, waterfallHeight, -3)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(0, waterfallHeight, 3)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(3, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(3, waterfallHeight, 3)).isOf(Blocks.WATER))
+            || (world.getBlockState(pos.add(-4, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(-4, waterfallHeight,-4)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(0, waterfallHeight, -4)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(0, waterfallHeight, 4)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(4, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(4, waterfallHeight, 4)).isOf(Blocks.WATER))
+            || (world.getBlockState(pos.add(-5, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(-5, waterfallHeight,-5)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(0, waterfallHeight, -5)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(0, waterfallHeight, 5)).isOf(Blocks.WATER)
+            || world.getBlockState(pos.add(5, waterfallHeight, 0)).isOf(Blocks.WATER) 
+            || world.getBlockState(pos.add(5, waterfallHeight, 5)).isOf(Blocks.WATER)); 
 
         if ((state.isOf(Blocks.WATER) && state.getFluidState().isStill())    
             && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
@@ -83,15 +102,14 @@ public class WaterfallCloudGenerators {
             && hasAir 
             && (tallEnough || height.isOf(Blocks.WATER))){
                 return 
-                /*state.isOf(Blocks.WATER) && state.getFluidState().isStill()
+                state.isOf(Blocks.WATER) && state.getFluidState().isStill()
                 && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
                 && above.getFluidState().contains(FlowableFluid.FALLING)
                 && above.getFluidState().get(FlowableFluid.FALLING)
                 && above.getFluidState().getHeight() >= 0.77f
-                true*/
-                hasAir && tallEnough && true;
+                && hasAir && tallEnough && true;
         }
-       else  {return !hasAir && !tallEnough && !true;} 
+       else  {return !true;}
     }
 
     public static final class WaterfallCloudGenerator {
