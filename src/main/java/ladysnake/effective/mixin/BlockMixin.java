@@ -23,10 +23,10 @@ public abstract class BlockMixin {
 
     @Inject(method = "randomDisplayTick", at = @At("RETURN"))
     protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (Config.enableWaterfallParticles && state.getBlock() == Blocks.WATER && !world.getBlockState(pos.add(0, 1, 0)).getFluidState().isStill() && world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER && !world.getBlockState(pos.add(0, 1, 0)).getFluidState().isStill() && world.getBlockState(pos.add(0, 1, 0)).getFluidState().getHeight() >= 0.77f) {
+        if (Config.enableWaterfallParticles && state.getBlock() == Blocks.WATER && world.getBlockState(pos.add(0, 1, 0)).isAir() && !state.getFluidState().isStill() && state.getFluidState().getHeight() >= 0.77f) {
             Vec3d vec3d = state.getFluidState().getVelocity(world, pos);
             for (int i = 0; i < random.nextInt(50); i++) {
-                world.addParticle(ParticleTypes.SPLASH, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 1 + random.nextFloat(), pos.getZ() + .5 + random.nextGaussian() / 2f, vec3d.getX() * random.nextFloat(), random.nextFloat() / 10f, vec3d.getZ() * random.nextFloat());
+                world.addParticle(ParticleTypes.SPLASH, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + random.nextFloat(), pos.getZ() + .5 + random.nextGaussian() / 2f, vec3d.getX() * random.nextFloat(), random.nextFloat() / 10f, vec3d.getZ() * random.nextFloat());
             }
         }
     }

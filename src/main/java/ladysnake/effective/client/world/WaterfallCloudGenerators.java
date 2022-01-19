@@ -108,7 +108,7 @@ public class WaterfallCloudGenerators {
         }
 
         public void tick() {
-            if (world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 100f) && isPositionValid(world, blockPos) == true) {
+            if (world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 300f) && isPositionValid(world, blockPos) == true) {
                 if (world.getTime() % 11 == 0) {
                     world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(),
                             Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT,
