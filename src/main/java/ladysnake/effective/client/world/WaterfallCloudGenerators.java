@@ -62,61 +62,17 @@ public class WaterfallCloudGenerators {
             || world.getBlockState(pos.add(-1 , 1 , 1)).isAir() 
             || world.getBlockState(pos.add(0 , 1 , 1)).isAir() 
             || world.getBlockState(pos.add(0 , 1 , -1)).isAir();
-         /*boolean tallEnough = 
-           (world.getBlockState(pos.add(-1, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(-1, waterfallHeight,-1)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(0, waterfallHeight, -1)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, 1)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(1, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(1, waterfallHeight, 1)).isOf(Blocks.WATER)) 
-            || (world.getBlockState(pos.add(-2, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, -2)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(-2, waterfallHeight, -2)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(2, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, 2)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(2, waterfallHeight, 2)).isOf(Blocks.WATER))
-            || (world.getBlockState(pos.add(-3, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(-3, waterfallHeight,-3)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(0, waterfallHeight, -3)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, 3)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(3, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(3, waterfallHeight, 3)).isOf(Blocks.WATER))
-            || (world.getBlockState(pos.add(-4, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(-4, waterfallHeight,-4)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(0, waterfallHeight, -4)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, 4)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(4, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(4, waterfallHeight, 4)).isOf(Blocks.WATER))
-            || (world.getBlockState(pos.add(-5, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(-5, waterfallHeight,-5)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(0, waterfallHeight, -5)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(0, waterfallHeight, 5)).isOf(Blocks.WATER)
-            || world.getBlockState(pos.add(5, waterfallHeight, 0)).isOf(Blocks.WATER) 
-            || world.getBlockState(pos.add(5, waterfallHeight, 5)).isOf(Blocks.WATER));
 
-        if ((state.isOf(Blocks.WATER) && state.getFluidState().isStill())    
-            && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
-            && above.getFluidState().contains(FlowableFluid.FALLING)
-            && above.getFluidState().get(FlowableFluid.FALLING)
-            && above.getFluidState().getHeight() >= 0.77f
-            && hasAir 
-            && (tallEnough || height.isOf(Blocks.WATER))){
-                return 
-                state.isOf(Blocks.WATER) && state.getFluidState().isStill()
+       for(int i = -tallWater; i < tallWater; i++) {
+        for(int k = -tallWater; k < tallWater; k++) {
+         for(int j = tallWater; j < (2*tallWater); j++){
+            if ((state.isOf(Blocks.WATER) && state.getFluidState().isStill())    
                 && (above.isOf(Blocks.WATER) && !above.getFluidState().isStill())
                 && above.getFluidState().contains(FlowableFluid.FALLING)
                 && above.getFluidState().get(FlowableFluid.FALLING)
                 && above.getFluidState().getHeight() >= 0.77f
-                && hasAir && tallEnough && true;
-        }
-       else  {return !true;}*/
-
-       for(int i = -5; i < 5; i++) {
-        for(int k = -5; k < 5; k++) {
-         for(int j = tallWater; j <= (2*tallWater); j++){
-          if(world.getBlockState(pos.add(i, j, k)).isOf(Blocks.WATER) 
-            && hasAir
-            ) {
+                && world.getBlockState(pos.add(i, j, k)).isOf(Blocks.WATER)
+                && hasAir){
             return true;
             }
           }
