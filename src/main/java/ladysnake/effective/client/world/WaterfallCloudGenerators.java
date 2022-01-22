@@ -69,25 +69,35 @@ public class WaterfallCloudGenerators {
 
         public void tick() {
             if (world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 100f)) {
+                int height = 1;
+
+                while (world.getBlockState(blockPos.add(0, height, 0)).getBlock() == Blocks.WATER && !world.getBlockState(blockPos.add(0, height, 0)).getFluidState().isStill() && world.getBlockState(blockPos.add(0, 1, 0)).getFluidState().getHeight() >= 0.77f){
+                    height ++;
+                }
+                float volume = 2.5f;
+                if (height < 13){
+                    volume = 2.5f - (13 - height) * 0.25f;
+                }
                 if (world.getTime() % 11 == 0) {
                     world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(),
                             Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT,
-                            2.5f,
+                            volume,
                             1f + world.random.nextFloat() / 10f, false);
                 }
+                if ((height - 3) >= world.random.nextFloat() * 10f){
+                    for (int i = 0; i < 1; i++) {
+                        double offsetX = world.random.nextGaussian() / 5f;
+                        double offsetZ = world.random.nextGaussian() / 5f;
 
-                for (int i = 0; i < 1; i++) {
-                    double offsetX = world.random.nextGaussian() / 5f;
-                    double offsetZ = world.random.nextGaussian() / 5f;
-
-                    world.addParticle(Effective.WATERFALL_CLOUD,
-                            blockPos.getX() + .5 + offsetX,
-                            blockPos.getY() + 1 + world.random.nextFloat(),
-                            blockPos.getZ() + .5 + offsetZ,
-                            world.random.nextFloat() / 5f * Math.signum(offsetX),
-                            world.random.nextFloat() / 5f,
-                            world.random.nextFloat() / 5f * Math.signum(offsetZ)
-                    );
+                        world.addParticle(Effective.WATERFALL_CLOUD,
+                                blockPos.getX() + .5 + offsetX,
+                                blockPos.getY() + 1 + world.random.nextFloat(),
+                                blockPos.getZ() + .5 + offsetZ,
+                                world.random.nextFloat() / 5f * Math.signum(offsetX),
+                                world.random.nextFloat() / 5f,
+                                world.random.nextFloat() / 5f * Math.signum(offsetZ)
+                        );
+                    }
                 }
             }
         }
