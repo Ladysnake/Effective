@@ -75,8 +75,8 @@ public class WaterfallCloudGenerators {
                     height ++;
                 }
                 float volume = 2.5f;
-                if (height < 13){
-                    volume = 2.5f - (13 - height) * 0.25f;
+                if (height < Config.waterfallHeightUpperLimit){
+                    volume = 2.5f - (Config.waterfallHeightUpperLimit - height) * 2.5f / (Config.waterfallHeightUpperLimit - Config.waterfallHeightLowerLimit);
                 }
                 if (world.getTime() % 11 == 0) {
                     world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(),
@@ -84,7 +84,7 @@ public class WaterfallCloudGenerators {
                             volume,
                             1f + world.random.nextFloat() / 10f, false);
                 }
-                if ((height - 3) >= world.random.nextFloat() * 10f){
+                if ((height - Config.waterfallHeightLowerLimit) >= world.random.nextFloat() * (Config.waterfallHeightUpperLimit - Config.waterfallHeightLowerLimit)){
                     for (int i = 0; i < 1; i++) {
                         double offsetX = world.random.nextGaussian() / 5f;
                         double offsetZ = world.random.nextGaussian() / 5f;

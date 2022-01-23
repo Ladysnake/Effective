@@ -18,6 +18,12 @@ public class Config {
     private static final String ENABLE_WATERFALL_PARTICLES = "enable-waterfall-particles";
     public static boolean enableWaterfallParticles = true;
 
+    private static final String WATERFALL_HEIGHT_LOWER_LIMIT = "waterfall-height-lower-limit";
+    public static int waterfallHeightLowerLimit = 3;
+
+    private static final String WATERFALL_HEIGHT_UPPER_LIMIT = "waterfall-height-upper-limit";
+    public static int waterfallHeightUpperLimit = 13;
+
     public static void save() {
         Properties props = new Properties();
         read(props);
@@ -62,15 +68,23 @@ public class Config {
     public static void read(@NotNull Properties props) {
         props.setProperty(ENABLE_SPLASH_PARTICLES, String.valueOf(enableSplashParticles));
         props.setProperty(ENABLE_WATERFALL_PARTICLES, String.valueOf(enableWaterfallParticles));
+        props.setProperty(WATERFALL_HEIGHT_LOWER_LIMIT, String.valueOf(waterfallHeightLowerLimit));
+        props.setProperty(WATERFALL_HEIGHT_UPPER_LIMIT, String.valueOf(waterfallHeightUpperLimit));
     }
 
     public static void assign(@NotNull Properties props) {
         enableSplashParticles = defaultBoolean(props.getProperty(ENABLE_SPLASH_PARTICLES), true);
         enableWaterfallParticles = defaultBoolean(props.getProperty(ENABLE_WATERFALL_PARTICLES), true);
+        waterfallHeightLowerLimit = defaultInt(props.getProperty(WATERFALL_HEIGHT_LOWER_LIMIT), 3);
+        waterfallHeightUpperLimit = defaultInt(props.getProperty(WATERFALL_HEIGHT_UPPER_LIMIT), 3);
     }
 
     @SuppressWarnings("SameParameterValue")
     private static boolean defaultBoolean(String bool, boolean defaultOption) {
         return bool == null ? defaultOption : Boolean.parseBoolean(bool);
+    }
+
+    private static int defaultInt(String integer, int defaultOption){
+        return integer == null ? defaultOption : Integer.parseInt(integer);
     }
 }
