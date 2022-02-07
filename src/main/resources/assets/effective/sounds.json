@@ -3,35 +3,35 @@
     "sounds": [
       {
         "name": "ambient/weather/rain1",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain2",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain3",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain4",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain5",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain6",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain7",
-        "volume": 0.01
+        "volume": 0.0002
       },
       {
         "name": "ambient/weather/rain8",
-        "volume": 0.01
+        "volume": 0.0002
       }
     ],
     "subtitle": "effective.subtitles.ambience.waterfall"
