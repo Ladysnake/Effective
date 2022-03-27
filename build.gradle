@@ -48,16 +48,6 @@ repositories {
     // cloth config
     maven { url "https://maven.shedaniel.me/" }
 
-    // satin
-    maven {
-        name = 'Ladysnake Mods'
-        url = 'https://ladysnake.jfrog.io/artifactory/mods'
-        content {
-            includeGroup 'io.github.ladysnake'
-            includeGroupByRegex 'io\\.github\\.onyxstudios.*'
-        }
-    }
-
     // mod menu
     maven {
         name = 'TerraformersMC'
@@ -111,8 +101,6 @@ dependencies {
     // canvas renderer
     modCompileOnly "io.vram:canvas-fabric-mc118:1.0.+"
 
-    // satin
-    modCompileOnly "io.github.ladysnake:satin:${satin_version}"
 }
 
 processResources {
