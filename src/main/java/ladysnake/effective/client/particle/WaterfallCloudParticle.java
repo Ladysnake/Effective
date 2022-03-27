@@ -26,7 +26,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
         this.scale *= 3.0f + random.nextFloat();
         this.setSpriteForAge(spriteProvider);
 
-        this.colorAlpha = 0f;
+        this.alpha = 0f;
 
         this.invisibleTimer = 1;
         this.setSprite(this.spriteProvider.getSprite(world.random));
@@ -41,7 +41,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
         this.invisibleTimer--;
 
         if (this.invisibleTimer == 0) {
-            this.colorAlpha = 0.5f + random.nextFloat() * 0.25f;
+            this.alpha = 0.5f + random.nextFloat() * 0.25f;
         }
 
         if (this.invisibleTimer <= 0) {
@@ -50,20 +50,20 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
             this.prevPosZ = this.z;
 
             if (this.age++ >= this.maxAge) {
-                this.colorAlpha -= 0.1f;
+                this.alpha -= 0.1f;
                 this.velocityX *= 0.5f;
                 this.velocityY *= 0.5f;
                 this.velocityZ *= 0.5f;
             }
 
             if (this.onGround || (this.age > 10 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
-                this.colorAlpha -= 0.1f;
+                this.alpha -= 0.1f;
                 this.velocityX *= 0.5f;
                 this.velocityY *= 0.5f;
                 this.velocityZ *= 0.5f;
             }
 
-            if (this.colorAlpha <= 0) {
+            if (this.alpha <= 0) {
                 this.markDead();
             }
 
@@ -79,7 +79,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 
             this.move(velocityX, velocityY, velocityZ);
         } else {
-            this.colorAlpha = 0;
+            this.alpha = 0;
         }
     }
 
@@ -116,10 +116,11 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = this.getBrightness(tickDelta);
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
+
     }
 
     @Environment(EnvType.CLIENT)

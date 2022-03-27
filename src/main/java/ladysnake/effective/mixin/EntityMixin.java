@@ -1,5 +1,6 @@
 package ladysnake.effective.mixin;
 
+import ladysnake.effective.client.Config;
 import ladysnake.effective.client.Effective;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -59,7 +60,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "onSwimmingStart", at = @At("TAIL"))
     protected void onSwimmingStart(CallbackInfo callbackInfo) {
-        if (this.world.isClient) {
+        if (Config.enableSplashParticles && this.world.isClient) {
             Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
             float f = entity == (Object) this ? 0.2f : 0.9f;
             Vec3d vec3d = entity.getVelocity();
@@ -82,7 +83,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo callbackInfo) {
-        if (!this.onGround && !this.touchingWater && !this.isInLava() && world.getBlockState(this.getBlockPos().add(this.getVelocity().x, this.getVelocity().y, this.getVelocity().z)).getBlock() == Blocks.LAVA) {
+        if (Config.enableSplashParticles && !this.onGround && !this.touchingWater && !this.isInLava() && world.getBlockState(this.getBlockPos().add(this.getVelocity().x, this.getVelocity().y, this.getVelocity().z)).getBlock() == Blocks.LAVA) {
             if (this.world.isClient) {
                 Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
                 float f = entity == (Object) this ? 0.2f : 0.9f;

@@ -95,7 +95,7 @@ public class Effective implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // load config
-//        Config.load();
+        Config.load();
 
         // get illuminations player cosmetics
 //        loadPlayerCosmetics();
@@ -118,7 +118,7 @@ public class Effective implements ClientModInitializer {
 
         // ticking generators
         ClientTickEvents.END_WORLD_TICK.register(world -> {
-            WaterfallCloudGenerators.tick();
+            if (Config.enableWaterfallParticles) WaterfallCloudGenerators.tick();
         });
 
         // sound events
