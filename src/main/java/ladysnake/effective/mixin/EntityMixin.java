@@ -80,25 +80,25 @@ public abstract class EntityMixin {
         }
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
-    public void tick(CallbackInfo callbackInfo) {
-        if (!this.onGround && !this.touchingWater && !this.isInLava() && world.getBlockState(this.getBlockPos().add(this.getVelocity().x, this.getVelocity().y, this.getVelocity().z)).getBlock() == Blocks.LAVA) {
-            if (this.world.isClient) {
-                Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
-                float f = entity == (Object) this ? 0.2f : 0.9f;
-                Vec3d vec3d = entity.getVelocity();
-                float g = Math.min(1.0f, (float) Math.sqrt(vec3d.x * vec3d.x * (double) 0.2f + vec3d.y * vec3d.y + vec3d.z * vec3d.z * (double) 0.2f) * f);
-                System.out.println(g);
-                if (g > 0.05f) {
-                    for (int i = -10; i < 10; i++) {
-                        if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getBlock() == Blocks.LAVA && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
-                            this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ITEM_BUCKET_FILL_LAVA, SoundCategory.AMBIENT, 1.0f, 0.8f, true);
-                            this.world.addParticle(Effective.LAVA_SPLASH, this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    @Inject(method = "tick", at = @At("TAIL"))
+//    public void tick(CallbackInfo callbackInfo) {
+//        if (!this.onGround && !this.touchingWater && !this.isInLava() && world.getBlockState(this.getBlockPos().add(this.getVelocity().x, this.getVelocity().y, this.getVelocity().z)).getBlock() == Blocks.LAVA) {
+//            if (this.world.isClient) {
+//                Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
+//                float f = entity == (Object) this ? 0.2f : 0.9f;
+//                Vec3d vec3d = entity.getVelocity();
+//                float g = Math.min(1.0f, (float) Math.sqrt(vec3d.x * vec3d.x * (double) 0.2f + vec3d.y * vec3d.y + vec3d.z * vec3d.z * (double) 0.2f) * f);
+//                System.out.println(g);
+//                if (g > 0.05f) {
+//                    for (int i = -10; i < 10; i++) {
+//                        if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getBlock() == Blocks.LAVA && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
+//                            this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ITEM_BUCKET_FILL_LAVA, SoundCategory.AMBIENT, 1.0f, 0.8f, true);
+//                            this.world.addParticle(Effective.LAVA_SPLASH, this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

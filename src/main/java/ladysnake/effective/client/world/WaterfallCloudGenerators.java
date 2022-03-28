@@ -44,14 +44,12 @@ public class WaterfallCloudGenerators {
                 double offsetZ = world.random.nextGaussian() / 5f;
 
                 if (world.random.nextInt(5) == 0) {
-                    Entity camera = MinecraftClient.getInstance().getCameraEntity();
-                    double distance = Math.sqrt(camera.getBlockPos().getSquaredDistance(blockPos));
-                    if (distance <= 80) {
-                        world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, (float) MathHelper.lerp(distance / 80F, .05, 6), 1.2f + world.random.nextFloat() / 10f, true);
-                    }
+                    world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
                 }
 
-                world.addParticle(Effective.WATERFALL_CLOUD, blockPos.getX() + .5 + offsetX, blockPos.getY() + 1 + world.random.nextFloat(), blockPos.getZ() + .5 + offsetZ, world.random.nextFloat() / 5f * Math.signum(offsetX), world.random.nextFloat() / 5f, world.random.nextFloat() / 5f * Math.signum(offsetZ));
+                if (world.random.nextInt(3) == 0) {
+                    world.addParticle(Effective.WATERFALL_CLOUD, blockPos.getX() + .5 + offsetX, blockPos.getY() + 1 + world.random.nextFloat(), blockPos.getZ() + .5 + offsetZ, world.random.nextFloat() / 5f * Math.signum(offsetX), world.random.nextFloat() / 5f, world.random.nextFloat() / 5f * Math.signum(offsetZ));
+                }
             }
         }
 

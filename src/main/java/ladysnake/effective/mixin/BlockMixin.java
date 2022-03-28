@@ -21,7 +21,7 @@ public abstract class BlockMixin {
     public abstract BlockState getDefaultState();
 
     @Inject(method = "randomDisplayTick", at = @At("RETURN"))
-    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
+    protected void effective$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
         if (state.getBlock() == Blocks.WATER && !world.getBlockState(pos.add(0, 1, 0)).getFluidState().isStill() && world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER && !world.getBlockState(pos.add(0, 1, 0)).getFluidState().isStill() && world.getBlockState(pos.add(0, 1, 0)).getFluidState().getHeight() >= 0.77f) {
             Vec3d vec3d = state.getFluidState().getVelocity(world, pos);
             for (int i = 0; i < random.nextInt(50); i++) {

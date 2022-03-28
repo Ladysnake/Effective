@@ -42,7 +42,7 @@ public class Effective implements ClientModInitializer {
 
     // particle types
     public static DefaultParticleType SPLASH;
-    public static DefaultParticleType LAVA_SPLASH;
+//    public static DefaultParticleType LAVA_SPLASH;
     public static DefaultParticleType DROPLET;
     public static DefaultParticleType RIPPLE;
     public static DefaultParticleType WATERFALL_CLOUD;
@@ -113,8 +113,8 @@ public class Effective implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Effective.RIPPLE, RippleParticle.DefaultFactory::new);
         WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:waterfall_cloud", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.WATERFALL_CLOUD, WaterfallCloudParticle.DefaultFactory::new);
-        LAVA_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:lava_splash", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Effective.LAVA_SPLASH, fabricSpriteProvider -> new LavaSplashParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_0.png")));
+//        LAVA_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:lava_splash", FabricParticleTypes.simple(true));
+//        ParticleFactoryRegistry.getInstance().register(Effective.LAVA_SPLASH, fabricSpriteProvider -> new LavaSplashParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_0.png")));
 
         // ticking generators
         ClientTickEvents.END_WORLD_TICK.register(world -> {
