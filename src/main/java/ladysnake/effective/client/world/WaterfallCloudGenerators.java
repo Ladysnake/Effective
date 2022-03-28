@@ -19,7 +19,7 @@ public class WaterfallCloudGenerators {
 
     public static void addGenerator(World world, BlockPos blockPos) {
         if (generators.stream().noneMatch(generator -> generator.world == world && generator.blockPos.equals(blockPos))) {
-            generators.add(new WaterfallCloudGenerator(world, blockPos));
+            generators.add(new WaterfallCloudGenerator(world, blockPos.toImmutable()));
         }
     }
 
