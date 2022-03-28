@@ -4,13 +4,11 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "BlockMixin",
+    "BlockRenderManagerMixin",
     "EntityMixin",
-    "RenderLayerAccessor",
-    "BlockRenderManagerMixin"
+    "RenderLayerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-  ]
+  }
 }
