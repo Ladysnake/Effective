@@ -9,6 +9,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -116,13 +117,12 @@ public class Effective implements ClientModInitializer {
 //        LAVA_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:lava_splash", FabricParticleTypes.simple(true));
 //        ParticleFactoryRegistry.getInstance().register(Effective.LAVA_SPLASH, fabricSpriteProvider -> new LavaSplashParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_0.png")));
 
-        // ticking generators
-        ClientTickEvents.END_WORLD_TICK.register(world -> {
-            WaterfallCloudGenerators.tick();
-        });
-
         // sound events
         AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
+
+        // events
+        ClientTickEvents.END_WORLD_TICK.register(world -> WaterfallCloudGenerators.tick());
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> WaterfallCloudGenerators.generators.clear());
     }
 
 //    private static class PlayerCosmeticDataParser implements JsonDeserializer<PlayerCosmeticData> {
