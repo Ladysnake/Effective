@@ -1,14 +1,7 @@
 {
   "ambience.waterfall": {
     "sounds": [
-      "effective:ambient/waterfall1",
-      "effective:ambient/waterfall2",
-      "effective:ambient/waterfall3",
-      "effective:ambient/waterfall4",
-      "effective:ambient/waterfall5",
-      "effective:ambient/waterfall6",
-      "effective:ambient/waterfall7",
-      "effective:ambient/waterfall8"
+      "effective:ambient/waterfall"
     ],
     "subtitle": "effective.subtitles.ambience.waterfall"
   }
