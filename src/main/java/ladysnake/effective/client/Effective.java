@@ -65,6 +65,9 @@ public class Effective implements ClientModInitializer {
 
         // events
         ClientTickEvents.END_CLIENT_TICK.register(client -> WaterfallCloudGenerators.tick());
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> WaterfallCloudGenerators.generators.clear());
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            WaterfallCloudGenerators.generators.clear();
+            WaterfallCloudGenerators.particlesToSpawn.clear();
+        });
     }
 }

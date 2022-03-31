@@ -1,5 +1,7 @@
 package ladysnake.effective.client.world;
 
+import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import ladysnake.effective.client.Effective;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -16,6 +18,7 @@ import java.util.List;
 
 public class WaterfallCloudGenerators {
     public static List<BlockPos> generators = new ArrayList<>();
+    public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntArrayMap<>();
     private static volatile boolean adding = false;
     private static World lastWorld = null;
 
@@ -29,7 +32,7 @@ public class WaterfallCloudGenerators {
     public static void tick() {
         MinecraftClient client = MinecraftClient.getInstance();
         World world = client.world;
-        if (client.isPaused() || world == null || world.getTime() % 3 != 0 || adding) {
+        if (client.isPaused() || world == null || adding) {
             if (adding) {
                 adding = false;
             }
@@ -37,22 +40,35 @@ public class WaterfallCloudGenerators {
         }
         if (lastWorld != null && world != lastWorld) {
             generators.clear();
+            particlesToSpawn.clear();
         }
-        for (int i = generators.size() - 1; i >= 0; i--) {
-            BlockPos pos = generators.get(i);
-            if (shouldCauseWaterfall(world, pos, world.getFluidState(pos))) {
-                if (world.random.nextBoolean()) {
-                    world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
+        tickParticles(world);
+        if (world.getTime() % 3 == 0) {
+            for (int i = generators.size() - 1; i >= 0; i--) {
+                BlockPos pos = generators.get(i);
+                if (shouldCauseWaterfall(world, pos, world.getFluidState(pos))) {
+                    if (world.random.nextInt(500) == 0) {
+                        world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
+                    }
+                    particlesToSpawn.put(pos, 3);
                 }
-                double offsetX = world.random.nextGaussian() / 5f;
-                double offsetZ = world.random.nextGaussian() / 5f;
-                world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.random.nextFloat(), pos.getZ() + .5 + offsetZ, world.random.nextFloat() / 5f * Math.signum(offsetX), world.random.nextFloat() / 5f, world.random.nextFloat() / 5f * Math.signum(offsetZ));
-            }
-            else {
-                generators.remove(i);
+                else {
+                    generators.remove(i);
+                }
             }
         }
         lastWorld = world;
+    }
+
+    private static void tickParticles(World world) {
+        for (BlockPos pos : particlesToSpawn.keySet()) {
+            if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
+                particlesToSpawn.removeInt(pos);
+            }
+            double offsetX = world.random.nextGaussian() / 5f;
+            double offsetZ = world.random.nextGaussian() / 5f;
+            world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.random.nextFloat(), pos.getZ() + .5 + offsetZ, world.random.nextFloat() / 5f * Math.signum(offsetX), world.random.nextFloat() / 5f, world.random.nextFloat() / 5f * Math.signum(offsetZ));
+        }
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
