@@ -20,26 +20,8 @@ loom {
     accessWidenerPath = file("src/main/resources/effective.accesswidener")
 }
 
-//def apiModules = [
-//		"fabric-api-base",
-//		"fabric-resource-loader-v0",
-//		"fabric-particles-v1"
-//]
-
 repositories {
-    maven { url 'https://jitpack.io' }
-
-    // where grondag's mods live
-    maven {
-        name = "dblsaiko"
-        url = "https://maven.dblsaiko.net/"
-    }
-    maven {
-        name = "Cotton"
-        url = "http://server.bbkr.space:8081/artifactory/libs-release/"
-        allowInsecureProtocol = true
-    }
-    // REI, odds and ends
+    // publishing
     maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven"
@@ -63,6 +45,8 @@ repositories {
         name = 'TerraformersMC'
         url = 'https://maven.terraformersmc.com/'
     }
+
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -73,12 +57,6 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-//	apiModules.each {
-//		modImplementation include(fabricApi.module(it, project.fabric_version))
-//	}
-
-    // Sodium
-    // modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
 
     // cloth config
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
@@ -90,8 +68,8 @@ dependencies {
     modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
     modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
 
-    // canvas renderer
-//    modImplementation "grondag:canvas-mc117-1.17:1.0.2033"
+    // Sodium Compat
+    modCompileOnly "com.github.CaffeineMC:sodium-fabric:${sodium_version}"
 
 	// satin
 	modCompileOnly "io.github.ladysnake:satin:${satin_version}"

@@ -1,3 +1,5 @@
 {
-  "effective.subtitles.ambience.waterfall": "Water falls"
+  "effective.subtitles.ambience.waterfall": "Water falls",
+  "text.autoconfig.effective.option.generateCascades": "Generate Cascades",
+  "text.autoconfig.effective.option.generateSplashes": "Generate Splashes"
 }

@@ -1,12 +1,14 @@
 {
   "required": true,
   "package": "ladysnake.effective.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "plugin": "ladysnake.effective.client.ModMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
   "client": [
     "BlockMixin",
-    "FluidRendererMixin",
     "EntityMixin",
-    "RenderLayerAccessor"
+    "FluidRendererMixin",
+    "RenderLayerAccessor",
+    "integration.sodium.FluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

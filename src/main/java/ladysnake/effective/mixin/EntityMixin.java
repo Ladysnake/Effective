@@ -4,7 +4,6 @@ import ladysnake.effective.client.Effective;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -47,19 +46,9 @@ public abstract class EntityMixin {
     @Final
     protected Random random;
 
-    @Shadow public abstract BlockPos getBlockPos();
-
-    @Shadow public abstract Vec3d getVelocity();
-
-    @Shadow protected boolean onGround;
-
-    @Shadow protected boolean touchingWater;
-
-    @Shadow public abstract boolean isInLava();
-
     @Inject(method = "onSwimmingStart", at = @At("TAIL"))
     protected void onSwimmingStart(CallbackInfo callbackInfo) {
-        if (this.world.isClient) {
+        if (this.world.isClient && Effective.config.generateSplashes) {
             Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
             float f = entity == (Object) this ? 0.2f : 0.9f;
             Vec3d vec3d = entity.getVelocity();

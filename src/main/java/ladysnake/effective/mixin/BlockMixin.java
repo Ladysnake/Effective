@@ -1,5 +1,6 @@
 package ladysnake.effective.mixin;
 
+import ladysnake.effective.client.Effective;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -32,12 +33,14 @@ public class BlockMixin {
 
     @Unique
     private static boolean shouldSplash(World world, BlockPos pos) {
-        FluidState fluidState = world.getFluidState(pos);
-        if (!fluidState.isStill() & fluidState.getHeight() >= 0.77) {
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
-            for (Direction direction : Direction.values()) {
-                if (direction != Direction.DOWN && world.getBlockState(mutable.set(pos, direction)).isAir()) {
-                    return true;
+        if (Effective.config.generateCascades) {
+            FluidState fluidState = world.getFluidState(pos);
+            if (!fluidState.isStill() & fluidState.getHeight() >= 0.77) {
+                BlockPos.Mutable mutable = new BlockPos.Mutable();
+                for (Direction direction : Direction.values()) {
+                    if (direction != Direction.DOWN && world.getBlockState(mutable.set(pos, direction)).isAir()) {
+                        return true;
+                    }
                 }
             }
         }

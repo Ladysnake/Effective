@@ -18,6 +18,9 @@
   "entrypoints": {
     "client": [
       "ladysnake.effective.client.Effective"
+    ],
+    "modmenu": [
+      "ladysnake.effective.client.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -25,7 +28,9 @@
   ],
   "accessWidener": "effective.accesswidener",
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabricloader": ">=0.13.3",
+    "minecraft": "~1.18.2",
+    "java": ">=17",
+    "fabric": ">=0.46.6"
   }
 }
