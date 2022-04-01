@@ -23,14 +23,21 @@ import java.util.Set;
 public class AbstractBlockMixin {
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
     protected void effective$forceParticles(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
-        if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER && Effective.config.canLapisBlocksForceWaterfallClouds) {
-            gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> WaterfallCloudGenerators.addWaterfallCloud(world, waterPos));
+        if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER) {
+            float chance = Effective.config.lapisBlockUpdateParticleChance;
+            if (chance > 0) {
+                gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> {
+                    if (world.getRandom().nextFloat() < chance) {
+                        WaterfallCloudGenerators.scheduleParticleTick(waterPos, 1);
+                    }
+                });
+            }
         }
     }
 
     @Unique
     private Set<BlockPos> gatherWater(Set<BlockPos> flowingWater, WorldAccess world, BlockPos.Mutable pos) {
-        if (flowingWater.size() < 256) {
+        if (flowingWater.size() < 1024) {
             int originalX = pos.getX(), originalY = pos.getY(), originalZ = pos.getZ();
             for (Direction direction : Direction.values()) {
                 FluidState state = world.getFluidState(pos.set(originalX + direction.getOffsetX(), originalY + direction.getOffsetY(), originalZ + direction.getOffsetZ()));

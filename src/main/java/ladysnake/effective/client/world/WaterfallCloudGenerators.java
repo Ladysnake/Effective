@@ -47,14 +47,16 @@ public class WaterfallCloudGenerators {
         if (world.getTime() % 3 == 0) {
             for (int i = generators.size() - 1; i >= 0; i--) {
                 BlockPos pos = generators.get(i);
-                if (shouldCauseWaterfall(world, pos, world.getFluidState(pos))) {
-                    if (world.random.nextInt(500) == 0) {
-                        world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
+                if (pos != null) {
+                    if (shouldCauseWaterfall(world, pos, world.getFluidState(pos))) {
+                        if (world.random.nextInt(500) == 0) {
+                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
+                        }
+                        scheduleParticleTick(pos, 6);
                     }
-                    particlesToSpawn.put(pos, 6);
-                }
-                else {
-                    generators.remove(i);
+                    else {
+                        generators.remove(i);
+                    }
                 }
             }
         }
@@ -63,10 +65,12 @@ public class WaterfallCloudGenerators {
 
     private static void tickParticles(World world) {
         for (BlockPos pos : particlesToSpawn.keySet()) {
-            if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
-                particlesToSpawn.removeInt(pos);
+            if (pos != null) {
+                if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
+                    particlesToSpawn.removeInt(pos);
+                }
+                addWaterfallCloud(world, pos);
             }
-            addWaterfallCloud(world, pos);
         }
     }
 
@@ -101,8 +105,16 @@ public class WaterfallCloudGenerators {
     }
 
     public static void addWaterfallCloud(WorldAccess world, BlockPos pos) {
-        double offsetX = world.getRandom().nextGaussian() / 5f;
-        double offsetZ = world.getRandom().nextGaussian() / 5f;
-        world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
+        if (pos != null) {
+            double offsetX = world.getRandom().nextGaussian() / 5f;
+            double offsetZ = world.getRandom().nextGaussian() / 5f;
+            world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
+        }
+    }
+
+    public static void scheduleParticleTick(BlockPos pos, int ticks) {
+        if (pos != null) {
+            particlesToSpawn.put(pos, ticks);
+        }
     }
 }
