@@ -51,7 +51,7 @@ public class WaterfallCloudGenerators {
                     if (world.random.nextInt(500) == 0) {
                         world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
                     }
-                    particlesToSpawn.put(pos, 3);
+                    particlesToSpawn.put(pos, 6);
                 }
                 else {
                     generators.remove(i);
