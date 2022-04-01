@@ -4,16 +4,15 @@
   "plugin": "ladysnake.effective.client.ModMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "BlockMixin",
+    "AbstractBlockMixin",
     "EntityMixin",
     "FluidRendererMixin",
+    "WaterFluidMixin",
+    "WorldMixin",
     "RenderLayerAccessor",
     "integration.sodium.FluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "AbstractBlockMixin"
-  ]
+  }
 }

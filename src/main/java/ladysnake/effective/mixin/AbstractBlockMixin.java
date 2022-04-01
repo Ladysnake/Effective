@@ -21,7 +21,7 @@ import java.util.Set;
 
 @Mixin(AbstractBlock.class)
 public class AbstractBlockMixin {
-    @Inject(method = "getStateForNeighborUpdate", at = @At("RETURN"))
+    @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
     protected void effective$forceParticles(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
         if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER && Effective.config.canLapisBlocksForceWaterfallClouds) {
             gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> WaterfallCloudGenerators.addWaterfallCloud(world, waterPos));

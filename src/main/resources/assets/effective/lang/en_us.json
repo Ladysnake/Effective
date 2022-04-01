@@ -2,5 +2,6 @@
   "effective.subtitles.ambience.waterfall": "Water falls",
   "text.autoconfig.effective.option.generateCascades": "Generate Cascades",
   "text.autoconfig.effective.option.generateSplashes": "Generate Splashes",
+  "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should Flowing Water Spawn Particles On First Tick",
   "text.autoconfig.effective.option.canLapisBlocksForceWaterfallClouds": "Can Lapis Block Force Waterfall Clouds"
 }

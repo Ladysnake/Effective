@@ -7,5 +7,6 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class ModConfig implements ConfigData {
 	public boolean generateCascades = true;
 	public boolean generateSplashes = true;
+	public boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 	public boolean canLapisBlocksForceWaterfallClouds = true;
 }
