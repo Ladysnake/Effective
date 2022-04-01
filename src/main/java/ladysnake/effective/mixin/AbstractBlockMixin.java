@@ -24,10 +24,10 @@ public class AbstractBlockMixin {
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
     protected void effective$forceParticles(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
         if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER) {
-            float chance = Effective.config.lapisBlockUpdateParticleChance;
+            long chance = Effective.config.lapisBlockUpdateParticleChance;
             if (chance > 0) {
                 gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> {
-                    if (world.getRandom().nextFloat() < chance) {
+                    if (world.getRandom().nextInt(100) < chance) {
                         WaterfallCloudGenerators.scheduleParticleTick(waterPos, 1);
                     }
                 });
