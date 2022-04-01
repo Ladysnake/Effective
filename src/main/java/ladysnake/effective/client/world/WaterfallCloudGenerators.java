@@ -24,7 +24,7 @@ public class WaterfallCloudGenerators {
     private static World lastWorld = null;
 
     public static void addGenerator(FluidState state, BlockPos pos) {
-        if (Effective.config.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
+        if (pos != null && Effective.config.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
             adding = true;
             generators.add(new BlockPos(pos));
         }
