@@ -10,5 +10,5 @@ public class ModConfig implements ConfigData {
 	public boolean generateSplashes = true;
 	public boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 	@ConfigEntry.BoundedDiscrete(max = 100)
-	public long lapisBlockUpdateParticleChance = 20;
+	public long lapisBlockUpdateParticleChance = 10;
 }
