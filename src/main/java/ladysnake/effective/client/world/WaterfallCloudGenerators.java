@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +66,7 @@ public class WaterfallCloudGenerators {
             if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
                 particlesToSpawn.removeInt(pos);
             }
-            double offsetX = world.random.nextGaussian() / 5f;
-            double offsetZ = world.random.nextGaussian() / 5f;
-            world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.random.nextFloat(), pos.getZ() + .5 + offsetZ, world.random.nextFloat() / 5f * Math.signum(offsetX), world.random.nextFloat() / 5f, world.random.nextFloat() / 5f * Math.signum(offsetZ));
+            addWaterfallCloud(world, pos);
         }
     }
 
@@ -99,5 +98,11 @@ public class WaterfallCloudGenerators {
             }
         }
         return false;
+    }
+
+    public static void addWaterfallCloud(WorldAccess world, BlockPos pos) {
+        double offsetX = world.getRandom().nextGaussian() / 5f;
+        double offsetZ = world.getRandom().nextGaussian() / 5f;
+        world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
     }
 }
