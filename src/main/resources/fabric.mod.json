@@ -29,8 +29,8 @@
   "accessWidener": "effective.accesswidener",
   "depends": {
     "fabricloader": ">=0.13.3",
-    "minecraft": "1.18.x <1.18.2",
+    "minecraft": "~1.18.2",
     "java": ">=17",
-    "fabric": ">=0.46.6"
+    "fabric": ">=0.48.0"
   }
 }
