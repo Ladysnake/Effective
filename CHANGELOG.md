@@ -1,5 +1,8 @@
 # Effective - Changelog:
 
+## Effective 1.2.1 - 1.18.2
+- Updated to Minecraft 1.18.2
+
 ## Effective 1.2 - 1.18.1
 Massive thanks to MoriyaShiine for most of these additions and changes!
 - Lapis lazuli block updates (piston moved, placed, broken...) connected to a flowing water block now cause connected flowing water blocks to spawn waterfall particles
