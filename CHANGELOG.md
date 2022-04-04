@@ -1,5 +1,16 @@
 # Effective - Changelog:
 
+## Effective 1.2 - 1.18.1
+Massive thanks to MoriyaShiine for most of these additions and changes!
+- Lapis lazuli block updates (piston moved, placed, broken...) connected to a flowing water block now cause connected flowing water blocks to spawn waterfall particles
+- Updating flowing water blocks now spawns waterfall particles
+- Completely remade waterfall sounds to be more distinct from rain sound effects and improve background ambience in areas with cascades
+- Added different configuration options and mod menu compatibility to easily access these options
+- Increased cascade particle generation distance
+- Massively improved performance and waterfall calculations
+- Massively improved performance with dynamic audio mods such as Sound Physics Remastered
+- Fixed concurrent modification crashes
+
 ## Effective 1.1.1 - 1.18.1
 - Fixed the first wave of splash particles being inverted
 - Made waterfall sound effects quieter yet still present far away from them
