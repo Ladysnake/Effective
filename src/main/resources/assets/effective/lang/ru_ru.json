@@ -1,0 +1,7 @@
+{
+  "effective.subtitles.ambience.waterfall": "Водопад шумит",
+  "text.autoconfig.effective.option.generateCascades": "Генерация водопадов",
+  "text.autoconfig.effective.option.generateSplashes": "Генерация всплесков",
+  "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Моментальне отображение частиц водопада",
+  "text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "Вероятность частиц при обновлении лазуритовым блоком"
+}
