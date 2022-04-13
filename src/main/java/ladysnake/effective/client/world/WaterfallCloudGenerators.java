@@ -1,7 +1,7 @@
 package ladysnake.effective.client.world;
 
-import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class WaterfallCloudGenerators {
     public static List<BlockPos> generators = new ArrayList<>();
-    public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntArrayMap<>();
+    public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntOpenHashMap<>();
     private static volatile boolean adding = false;
     private static World lastWorld = null;
 
