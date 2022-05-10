@@ -15,15 +15,11 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class SplashParticle extends Particle {
     public Identifier texture1;
@@ -162,19 +158,7 @@ public class SplashParticle extends Particle {
     @Override
     public void tick() {
         if (this.widthMultiplier == 0f) {
-            List<Entity> closeEntities = world.getOtherEntities(null, this.getBoundingBox().expand(5.0f)).stream().filter(Entity::isTouchingWater).collect(Collectors.toList());
-            closeEntities.sort((o1, o2) -> (int) (o1.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z)) - o2.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z))));
-
-            if (!closeEntities.isEmpty()) {
-                this.widthMultiplier = closeEntities.get(0).getWidth() * 2f;
-                this.heightMultiplier = (float) Math.max(-closeEntities.get(0).getVelocity().getY() * this.widthMultiplier, 0f);
-
-                this.wave1End = 10 + Math.round(widthMultiplier * 1.2f);
-                this.wave2Start = 6 + Math.round(widthMultiplier * 0.7f);
-                this.wave2End = 20 + Math.round(widthMultiplier * 2.4f);
-            } else {
-                this.markDead();
-            }
+            this.markDead();
         }
 
         this.prevPosX = this.x;
@@ -209,7 +193,16 @@ public class SplashParticle extends Particle {
         @Nullable
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new SplashParticle(world, x, y, z, this.texture);
+            SplashParticle instance = new SplashParticle(world, x, y, z, this.texture);
+            if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
+                final float width = (float) splashParameters.initialData.width * 2;
+                instance.widthMultiplier = width;
+                instance.heightMultiplier = (float) splashParameters.initialData.velocityY * width;
+                instance.wave1End = 10 + Math.round(width * 1.2f);
+                instance.wave2Start = 6 + Math.round(width * 0.7f);
+                instance.wave2End = 20 + Math.round(width * 2.4f);
+            }
+            return instance;
         }
     }
 }
