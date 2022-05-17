@@ -1,6 +1,7 @@
 package ladysnake.effective.mixin;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.contracts.SplashParticleInitialData;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundCategory;
@@ -57,7 +58,8 @@ public abstract class EntityMixin {
                 for (int i = -10; i < 10; i++) {
                     if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
                         this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g*10f, 0.8f, true);
-                        this.world.addParticle(Effective.SPLASH, this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
+                        SplashParticleInitialData data = new SplashParticleInitialData(entity.getWidth(), vec3d.getY());
+                        this.world.addParticle(Effective.SPLASH.setData(data), this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
                         break;
                     }
                 }
