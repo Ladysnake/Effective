@@ -1,7 +1,7 @@
 {
-"effective.subtitles.ambience.waterfall": "Вода падает",
-"text.autoconfig.effective.option.generateCascades": "Генерировать брызги",
-"text.autoconfig.effective.option.generateSplashes": "Генерировать всплески",
-"text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Текущая вода создаёт частицы при первом тике",
-"text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "Вероятность появления частиц лазурита при обновлении"
+  "effective.subtitles.ambience.waterfall": "Вода падает",
+  "text.autoconfig.effective.option.generateCascades": "Генерировать брызги",
+  "text.autoconfig.effective.option.generateSplashes": "Генерировать всплески",
+  "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Текущая вода создаёт частицы при первом тике",
+  "text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "Вероятность появления частиц лазурита при обновлении"
 }
