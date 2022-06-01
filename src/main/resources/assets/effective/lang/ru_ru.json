@@ -1,0 +1,7 @@
+{
+  "effective.subtitles.ambience.waterfall": "Вода падает",
+  "text.autoconfig.effective.option.generateCascades": "Генерировать Брызги",
+  "text.autoconfig.effective.option.generateSplashes": "Генерировать Всплески",
+  "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Текущая Вода Создаёт Састицы При Первом Тике",
+  "text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "Вероятность Появления Частиц Лазурита При Обновлении"
+}
