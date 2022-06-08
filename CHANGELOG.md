@@ -1,5 +1,8 @@
 # Effective - Changelog:
 
+## Effective 1.2.2 - 1.19
+- Updated to Minecraft 1.19
+
 ## Effective 1.2.1 - 1.18.2
 - Updated to Minecraft 1.18.2
 

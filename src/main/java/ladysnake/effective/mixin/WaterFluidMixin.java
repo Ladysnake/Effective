@@ -19,7 +19,7 @@ import java.util.Random;
 @Mixin(WaterFluid.class)
 public class WaterFluidMixin {
     @Inject(method = "randomDisplayTick", at = @At("HEAD"))
-    protected void effective$splash(World world, BlockPos pos, FluidState state, Random random, CallbackInfo ci) {
+    protected void effective$splash(World world, BlockPos pos, FluidState state, net.minecraft.util.math.random.Random random, CallbackInfo ci) {
         if (shouldSplash(world, pos.up())) {
             Vec3d vec3d = state.getVelocity(world, pos);
             for (int i = 0; i < random.nextInt(50); i++) {

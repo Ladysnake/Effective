@@ -75,7 +75,7 @@ public class WaterfallCloudGenerators {
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
-        if (Effective.config.generateCascades && fluidState.getFluid() == Fluids.FLOWING_WATER && Math.sqrt(pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.viewDistance * 32) {
+        if (Effective.config.generateCascades && fluidState.getFluid() == Fluids.FLOWING_WATER && Math.sqrt(pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.getViewDistance().getValue() * 32) {
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             if (world.getFluidState(mutable.set(pos, Direction.DOWN)).getFluid() == Fluids.WATER) {
                 boolean foundAir = false;

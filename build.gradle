@@ -66,7 +66,7 @@ dependencies {
 
     // mod menu
     modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
-    modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
+//    modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
 
     // Sodium Compat
     modCompileOnly "com.github.CaffeineMC:sodium-fabric:${sodium_version}"
