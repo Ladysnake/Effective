@@ -64,15 +64,13 @@ public class WaterfallCloudGenerators {
     }
 
     private static void tickParticles(World world) {
-        synchronized (particlesToSpawn) {
-            for (BlockPos pos : particlesToSpawn.keySet()) {
-                if (pos != null) {
-                    particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1);
-                    addWaterfallCloud(world, pos);
-                }
+        for (BlockPos pos : particlesToSpawn.keySet()) {
+            if (pos != null) {
+                particlesToSpawn.computeInt(pos, (blockPos, integer) -> integer - 1);
+                addWaterfallCloud(world, pos);
             }
-            particlesToSpawn.object2IntEntrySet().removeIf(blockPosEntry -> blockPosEntry.getIntValue() < 0);
         }
+        particlesToSpawn.values().removeIf(integer -> integer <= 0);
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
