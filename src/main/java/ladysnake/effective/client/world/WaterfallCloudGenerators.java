@@ -70,7 +70,7 @@ public class WaterfallCloudGenerators {
                 addWaterfallCloud(world, pos);
             }
         }
-        particlesToSpawn.values().removeIf(integer -> integer <= 0);
+        particlesToSpawn.values().removeIf(integer -> integer < 0);
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
