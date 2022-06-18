@@ -3,13 +3,14 @@ package ladysnake.effective.client.world;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.sound.DistancedSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -22,6 +23,7 @@ public class WaterfallCloudGenerators {
     public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntOpenHashMap<>();
     private static volatile boolean adding = false;
     private static World lastWorld = null;
+    private static final float SOUND_MAX_DISTANCE = 64f;  // blocks in euclidean distance
 
     public static void addGenerator(FluidState state, BlockPos pos) {
         if (pos != null && Effective.config.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
@@ -45,20 +47,20 @@ public class WaterfallCloudGenerators {
         }
         tickParticles(world);
         if (world.getTime() % 3 == 0) {
-            for (int i = generators.size() - 1; i >= 0; i--) {
-                BlockPos pos = generators.get(i);
-                if (pos != null) {
-                    if (shouldCauseWaterfall(world, pos, world.getFluidState(pos))) {
-                        if (world.random.nextInt(200) == 0) {
-                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
-                        }
-                        scheduleParticleTick(pos, 6);
-                    }
-                    else {
-                        generators.remove(i);
-                    }
+            generators.forEach(blockPos -> {
+                if (blockPos == null) {
+                    return;
                 }
-            }
+                scheduleParticleTick(blockPos, 6);
+                float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(blockPos));
+                if (distance > SOUND_MAX_DISTANCE) {
+                    return;
+                }
+                if (world.random.nextInt(200) == 0) {
+                    client.getSoundManager().play(DistancedSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, SOUND_MAX_DISTANCE), (int) (distance / 2));
+                }
+            });
+            generators.removeIf(blockPos -> blockPos == null || !shouldCauseWaterfall(world, blockPos, world.getFluidState(blockPos)));
         }
         lastWorld = world;
     }
