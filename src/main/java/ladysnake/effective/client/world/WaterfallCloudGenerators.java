@@ -3,7 +3,7 @@ package ladysnake.effective.client.world;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.sound.DistancedSoundInstance;
+import ladysnake.effective.client.sound.WaterfallSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
@@ -23,7 +23,6 @@ public class WaterfallCloudGenerators {
     public static final List<BlockPos> generators = new ArrayList<>();
     public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntOpenHashMap<>();
     private static World lastWorld = null;
-    private static final float SOUND_MAX_DISTANCE = 64f;  // blocks in euclidean distance
 
     public static void addGenerator(FluidState state, BlockPos pos) {
         if (pos == null || !Effective.config.generateCascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
@@ -58,11 +57,11 @@ public class WaterfallCloudGenerators {
                 }
                 scheduleParticleTick(blockPos, 6);
                 float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(blockPos));
-                if (distance > SOUND_MAX_DISTANCE) {
+                if (distance > Effective.config.waterfallSoundDistanceBlocks || Effective.config.waterfallSoundVolume == 0 || Effective.config.waterfallSoundDistanceBlocks == 0) {
                     return;
                 }
                 if (world.random.nextInt(200) == 0) {
-                    client.getSoundManager().play(DistancedSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, SOUND_MAX_DISTANCE), (int) (distance / 2));
+                    client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, Effective.config.waterfallSoundDistanceBlocks), (int) (distance / 2));
                 }
             });
             generators.removeIf(blockPos -> blockPos == null || !shouldCauseWaterfall(world, blockPos, world.getFluidState(blockPos)));

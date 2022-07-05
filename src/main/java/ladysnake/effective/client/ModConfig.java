@@ -11,4 +11,8 @@ public class ModConfig implements ConfigData {
 	public boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 	@ConfigEntry.BoundedDiscrete(max = 100)
 	public long lapisBlockUpdateParticleChance = 10;
+	@ConfigEntry.BoundedDiscrete(max = 150)
+	public int waterfallSoundDistanceBlocks = 36;
+	@ConfigEntry.BoundedDiscrete(max = 100)
+	public int waterfallSoundVolume = 100;
 }
