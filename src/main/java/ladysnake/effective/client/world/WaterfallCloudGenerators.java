@@ -42,7 +42,7 @@ public class WaterfallCloudGenerators {
             return;
         }
         synchronized (generators) {
-            if (lastWorld != null && world != lastWorld) {
+            if (world != lastWorld) {
                 generators.clear();
                 particlesToSpawn.clear();
                 lastWorld = world;
