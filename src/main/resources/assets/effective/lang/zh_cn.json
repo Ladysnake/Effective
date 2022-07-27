@@ -1,0 +1,7 @@
+{
+  "effective.subtitles.ambience.waterfall": "瀑布",
+  "text.autoconfig.effective.option.generateCascades": "联锁生成",
+  "text.autoconfig.effective.option.generateSplashes": "生成飞溅物",
+  "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "流动的水是否在第一刻产生粒子",
+  "text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "青金石块更新颗粒概率"
+}
