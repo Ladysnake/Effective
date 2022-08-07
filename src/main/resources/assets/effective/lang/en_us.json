@@ -3,5 +3,6 @@
   "text.autoconfig.effective.option.generateCascades": "Generate Cascades",
   "text.autoconfig.effective.option.generateSplashes": "Generate Splashes",
   "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should Flowing Water Spawn Particles On First Tick",
+  "text.autoconfig.effective.option.muteWaterfalls": "Mute Waterfalls",
   "text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "Lapis Block Update Particle Chance"
 }
