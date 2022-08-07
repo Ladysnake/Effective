@@ -49,10 +49,8 @@ public class WaterfallCloudGenerators {
                 BlockPos pos = generators.get(i);
                 if (pos != null) {
                     if (shouldCauseWaterfall(world, pos, world.getFluidState(pos))) {
-                        if (Effective.config.muteWaterfalls) {
-                            if (world.random.nextInt(200) == 0) {
-                                world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
-                            }
+                        if (world.random.nextInt(200) == 0) {
+                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
                         }
                         
                         scheduleParticleTick(pos, 6);
