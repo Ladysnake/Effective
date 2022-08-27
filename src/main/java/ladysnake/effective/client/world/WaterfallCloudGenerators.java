@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WaterfallCloudGenerators {
-    public static List<BlockPos> generators = new ArrayList<>();
     public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntArrayMap<>();
+    public static List<BlockPos> generators = new ArrayList<>();
     private static volatile boolean adding = false;
     private static World lastWorld = null;
 
@@ -53,8 +53,7 @@ public class WaterfallCloudGenerators {
                             world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
                         }
                         scheduleParticleTick(pos, 6);
-                    }
-                    else {
+                    } else {
                         generators.remove(i);
                     }
                 }

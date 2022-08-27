@@ -30,7 +30,7 @@ public class Effective implements ClientModInitializer {
 
     // particle types
     public static DefaultParticleType SPLASH;
-//    public static DefaultParticleType LAVA_SPLASH;
+    //    public static DefaultParticleType LAVA_SPLASH;
     public static DefaultParticleType DROPLET;
     public static DefaultParticleType RIPPLE;
     public static DefaultParticleType WATERFALL_CLOUD;
