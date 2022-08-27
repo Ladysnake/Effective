@@ -21,9 +21,6 @@
   "entrypoints": {
     "client": [
       "ladysnake.effective.client.Effective"
-    ],
-    "modmenu": [
-      "ladysnake.effective.client.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
