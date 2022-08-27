@@ -1,7 +1,7 @@
 package ladysnake.effective.client.world;
 
-import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WaterfallCloudGenerators {
-    public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntArrayMap<>();
     public static List<BlockPos> generators = new ArrayList<>();
+    public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntOpenHashMap<>();
     private static volatile boolean adding = false;
     private static World lastWorld = null;
 
@@ -65,12 +65,11 @@ public class WaterfallCloudGenerators {
     private static void tickParticles(World world) {
         for (BlockPos pos : particlesToSpawn.keySet()) {
             if (pos != null) {
-                if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
-                    particlesToSpawn.removeInt(pos);
-                }
+                particlesToSpawn.computeInt(pos, (blockPos, integer) -> integer - 1);
                 addWaterfallCloud(world, pos);
             }
         }
+        particlesToSpawn.values().removeIf(integer -> integer < 0);
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
