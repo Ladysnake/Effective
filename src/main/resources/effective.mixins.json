@@ -7,9 +7,9 @@
     "AbstractBlockMixin",
     "EntityMixin",
     "FluidRendererMixin",
+    "RenderLayerAccessor",
     "WaterFluidMixin",
     "WorldMixin",
-    "RenderLayerAccessor",
     "integration.sodium.FluidRendererMixin"
   ],
   "injectors": {
