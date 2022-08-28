@@ -14,7 +14,7 @@ public class WaterfallSoundInstance extends DistancedSoundInstance {
     @Override
     public void tick() {
         super.tick();
-        final float volumeAdjustor = EffectiveConfig.cascadeSoundsVolumeMultiplier / 100.f;
+        final float volumeAdjustor = (EffectiveConfig.cascadeSoundsVolumeMultiplier / 100.f) * 2.5f;
         this.volume = MathHelper.clampedLerp(0f, volumeAdjustor, this.volume);
     }
 
