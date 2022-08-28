@@ -1,12 +1,14 @@
 package ladysnake.effective.mixin;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -16,12 +18,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Random;
-
 @Mixin(Entity.class)
 public abstract class EntityMixin {
     @Shadow
     public World world;
+    @Shadow
+    @Final
+    protected Random random;
 
     @Shadow
     public abstract double getX();
@@ -42,13 +45,9 @@ public abstract class EntityMixin {
     @Shadow
     public abstract float getWidth();
 
-    @Shadow
-    @Final
-    protected Random random;
-
     @Inject(method = "onSwimmingStart", at = @At("TAIL"))
     protected void onSwimmingStart(CallbackInfo callbackInfo) {
-        if (this.world.isClient && Effective.config.generateSplashes) {
+        if (this.world.isClient && EffectiveConfig.generateSplashes) {
             Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
             float f = entity == (Object) this ? 0.2f : 0.9f;
             Vec3d vec3d = entity.getVelocity();
@@ -56,7 +55,7 @@ public abstract class EntityMixin {
             if (g > 0.1f) {
                 for (int i = -10; i < 10; i++) {
                     if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
-                        this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g*10f, 0.8f, true);
+                        this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g * 10f, 0.8f, true);
                         this.world.addParticle(Effective.SPLASH, this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
                         break;
                     }

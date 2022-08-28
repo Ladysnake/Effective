@@ -1,6 +1,7 @@
 package ladysnake.effective.client.sound;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +15,7 @@ public class WaterfallSoundInstance extends DistancedSoundInstance {
     @Override
     public void tick() {
         super.tick();
-        final float volumeAdjustor = Effective.config.waterfallSoundVolume / 100.f;
+        final float volumeAdjustor = EffectiveConfig.waterfallSoundVolume / 100.f;
         this.volume = MathHelper.clampedLerp(0f, volumeAdjustor, this.volume);
     }
 

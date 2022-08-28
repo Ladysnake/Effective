@@ -7,6 +7,9 @@
   "authors": [
     "doctor4t"
   ],
+  "contributors": [
+    "lonefelidae16"
+  ],
   "contact": {
     "homepage": "https://illuminations.uuid.gg/",
     "sources": "https://github.com/Ladysnake/Effective",
@@ -18,9 +21,6 @@
   "entrypoints": {
     "client": [
       "ladysnake.effective.client.Effective"
-    ],
-    "modmenu": [
-      "ladysnake.effective.client.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -29,7 +29,6 @@
   "accessWidener": "effective.accesswidener",
   "depends": {
     "fabricloader": ">=0.13.3",
-    "minecraft": "~1.18.2",
     "java": ">=17",
     "fabric": ">=0.48.0"
   }

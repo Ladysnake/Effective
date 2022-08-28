@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.sound.WaterfallSoundInstance;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
@@ -25,7 +26,7 @@ public class WaterfallCloudGenerators {
     private static World lastWorld = null;
 
     public static void addGenerator(FluidState state, BlockPos pos) {
-        if (pos == null || !Effective.config.generateCascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
+        if (pos == null || !EffectiveConfig.generateCascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
             return;
         }
         if (shouldCauseWaterfall(MinecraftClient.getInstance().world, pos, state)) {
@@ -57,11 +58,11 @@ public class WaterfallCloudGenerators {
                 }
                 scheduleParticleTick(blockPos, 6);
                 float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(blockPos));
-                if (distance > Effective.config.waterfallSoundDistanceBlocks || Effective.config.waterfallSoundVolume == 0 || Effective.config.waterfallSoundDistanceBlocks == 0) {
+                if (distance > EffectiveConfig.waterfallSoundDistanceBlocks || EffectiveConfig.waterfallSoundVolume == 0 || EffectiveConfig.waterfallSoundDistanceBlocks == 0) {
                     return;
                 }
                 if (world.random.nextInt(200) == 0) {
-                    client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, Effective.config.waterfallSoundDistanceBlocks), (int) (distance / 2));
+                    client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.waterfallSoundDistanceBlocks), (int) (distance / 2));
                 }
             });
             generators.removeIf(blockPos -> blockPos == null || !shouldCauseWaterfall(world, blockPos, world.getFluidState(blockPos)));
@@ -71,20 +72,19 @@ public class WaterfallCloudGenerators {
     private static void tickParticles(World world) {
         for (BlockPos pos : particlesToSpawn.keySet()) {
             if (pos != null) {
-                if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
-                    particlesToSpawn.removeInt(pos);
-                }
+                particlesToSpawn.computeInt(pos, (blockPos, integer) -> integer - 1);
                 addWaterfallCloud(world, pos);
             }
         }
+        particlesToSpawn.values().removeIf(integer -> integer < 0);
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
-        if (!Effective.config.generateCascades || fluidState.getFluid() != Fluids.FLOWING_WATER) {
+        if (!EffectiveConfig.generateCascades || fluidState.getFluid() != Fluids.FLOWING_WATER) {
             return false;
         }
         MinecraftClient client = MinecraftClient.getInstance();
-        if (Math.sqrt(pos.getSquaredDistance(client.player.getBlockPos())) > client.options.viewDistance * 32) {
+        if (Math.sqrt(pos.getSquaredDistance(client.player.getBlockPos())) > client.options.getViewDistance().getValue() * 32) {
             return false;
         }
         BlockPos.Mutable mutable = new BlockPos.Mutable();
