@@ -3,6 +3,7 @@ package ladysnake.effective.client.world;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
@@ -24,7 +25,7 @@ public class WaterfallCloudGenerators {
     private static World lastWorld = null;
 
     public static void addGenerator(FluidState state, BlockPos pos) {
-        if (pos != null && Effective.config.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
+        if (pos != null && EffectiveConfig.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
             adding = true;
             generators.add(new BlockPos(pos));
         }
@@ -73,7 +74,7 @@ public class WaterfallCloudGenerators {
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
-        if (Effective.config.generateCascades && fluidState.getFluid() == Fluids.FLOWING_WATER && Math.sqrt(pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.getViewDistance().getValue() * 32) {
+        if (EffectiveConfig.generateCascades && fluidState.getFluid() == Fluids.FLOWING_WATER && Math.sqrt(pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.getViewDistance().getValue() * 32) {
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             if (world.getFluidState(mutable.set(pos, Direction.DOWN)).getFluid() == Fluids.WATER) {
                 boolean foundAir = false;

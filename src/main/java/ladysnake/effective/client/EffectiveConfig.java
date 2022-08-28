@@ -13,5 +13,5 @@ public class EffectiveConfig extends MidnightConfig {
     public static boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 
     @Entry(min = 0, max = 100)
-    public long lapisBlockUpdateParticleChance = 10;
+    public static long lapisBlockUpdateParticleChance = 10;
 }

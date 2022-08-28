@@ -24,8 +24,6 @@ import net.minecraft.util.registry.Registry;
 public class Effective implements ClientModInitializer {
     public static final String MODID = "effective";
 
-    public static EffectiveConfig config;
-
     // particle types
     public static DefaultParticleType SPLASH;
     //    public static DefaultParticleType LAVA_SPLASH;

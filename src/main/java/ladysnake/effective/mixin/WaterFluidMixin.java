@@ -1,6 +1,7 @@
 package ladysnake.effective.mixin;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.WaterFluid;
 import net.minecraft.particle.ParticleTypes;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WaterFluidMixin {
     @Unique
     private static boolean shouldSplash(World world, BlockPos pos) {
-        if (Effective.config.generateCascades) {
+        if (EffectiveConfig.generateCascades) {
             FluidState fluidState = world.getFluidState(pos);
             if (!fluidState.isStill() & fluidState.getHeight() >= 0.77) {
                 BlockPos.Mutable mutable = new BlockPos.Mutable();
