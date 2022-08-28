@@ -3,7 +3,7 @@
 ## Effective 1.3 - 1.19.2
 - Added a new config option to adjust cascade sounds volume
 - Fixed splashes sometimes being completely black (thanks to lonefelidae16)
-- Fixed occasional crashes that could happen randomly with cascades (thanks to lonefelidae16)
+- Fixed occasional crashes that could happen randomly (thanks to lonefelidae16)
 - Changed config library from Cloth Config to MidnightLib
 - Updated to Minecraft 1.19.2
 
