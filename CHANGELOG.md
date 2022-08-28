@@ -2,7 +2,8 @@
 
 ## Effective 1.2.3 - 1.19.2
 - Fixed splashes sometimes being completely black (thanks to lonefelidae16)
-- Fixed occasional crashes that could happen randomly with cascades
+- Fixed occasional crashes that could happen randomly with cascades (thanks to lonefelidae16)
+- Changed config library from Cloth Config to MidnightLib
 - Updated to Minecraft 1.19.2
 
 ## Effective 1.2.2 - 1.19
