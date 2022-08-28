@@ -58,7 +58,7 @@ public class WaterfallCloudGenerators {
                 }
                 scheduleParticleTick(blockPos, 6);
                 float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(blockPos));
-                if (distance > EffectiveConfig.waterfallSoundDistanceBlocks || EffectiveConfig.waterfallSoundVolume == 0 || EffectiveConfig.waterfallSoundDistanceBlocks == 0) {
+                if (distance > EffectiveConfig.waterfallSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.waterfallSoundDistanceBlocks == 0) {
                     return;
                 }
                 if (world.random.nextInt(200) == 0) {
