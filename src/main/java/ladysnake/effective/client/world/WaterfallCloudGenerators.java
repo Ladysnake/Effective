@@ -3,6 +3,7 @@ package ladysnake.effective.client.world;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
@@ -24,7 +25,7 @@ public class WaterfallCloudGenerators {
     private static World lastWorld = null;
 
     public static void addGenerator(FluidState state, BlockPos pos) {
-        if (pos != null && Effective.config.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
+        if (pos != null && EffectiveConfig.generateCascades && state.getFluid() == Fluids.FLOWING_WATER && !generators.contains(pos)) {
             adding = true;
             generators.add(new BlockPos(pos));
         }
@@ -53,8 +54,7 @@ public class WaterfallCloudGenerators {
                             world.playSound(pos.getX(), pos.getY(), pos.getZ(), Effective.AMBIENCE_WATERFALL, SoundCategory.AMBIENT, 10f, 1.2f + world.random.nextFloat() / 10f, true);
                         }
                         scheduleParticleTick(pos, 6);
-                    }
-                    else {
+                    } else {
                         generators.remove(i);
                     }
                 }
@@ -66,16 +66,15 @@ public class WaterfallCloudGenerators {
     private static void tickParticles(World world) {
         for (BlockPos pos : particlesToSpawn.keySet()) {
             if (pos != null) {
-                if (particlesToSpawn.put(pos, particlesToSpawn.getInt(pos) - 1) <= 0) {
-                    particlesToSpawn.removeInt(pos);
-                }
+                particlesToSpawn.computeInt(pos, (blockPos, integer) -> integer - 1);
                 addWaterfallCloud(world, pos);
             }
         }
+        particlesToSpawn.values().removeIf(integer -> integer < 0);
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
-        if (Effective.config.generateCascades && fluidState.getFluid() == Fluids.FLOWING_WATER && Math.sqrt(pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.viewDistance * 32) {
+        if (EffectiveConfig.generateCascades && fluidState.getFluid() == Fluids.FLOWING_WATER && Math.sqrt(pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) <= MinecraftClient.getInstance().options.getViewDistance().getValue() * 32) {
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             if (world.getFluidState(mutable.set(pos, Direction.DOWN)).getFluid() == Fluids.WATER) {
                 boolean foundAir = false;

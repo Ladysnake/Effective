@@ -1,5 +1,13 @@
 # Effective - Changelog:
 
+## Effective 1.2.3 - 1.19.2
+- Fixed splashes sometimes being completely black (thanks to lonefelidae16)
+- Fixed occasional crashes that could happen randomly with cascades
+- Updated to Minecraft 1.19.2
+
+## Effective 1.2.2 - 1.19
+- Updated to Minecraft 1.19
+
 ## Effective 1.2.1 - 1.18.2
 - Updated to Minecraft 1.18.2
 

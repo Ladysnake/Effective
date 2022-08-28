@@ -1,7 +1,6 @@
 package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.render.NoShadingRenderLayer;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import net.fabricmc.api.EnvType;
@@ -65,7 +64,7 @@ public class SplashParticle extends Particle {
 
     private void drawSplash(int frame, Camera camera, float tickDelta, Vec3f multiplier) {
         Identifier texture = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
-        RenderLayer layer = NoShadingRenderLayer.get(texture);
+        RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
 
         MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
         modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
