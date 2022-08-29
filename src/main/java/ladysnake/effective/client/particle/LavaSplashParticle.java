@@ -1,7 +1,7 @@
 package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.render.GlowwyRenderLayer;
+import ladysnake.effective.client.render.GlowyRenderLayer;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import net.fabricmc.api.EnvType;
@@ -46,8 +46,8 @@ public class LavaSplashParticle extends Particle {
         this.texture2 = texture;
         this.waveModel = new SplashModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashModel.MODEL_LAYER));
         this.waveBottomModel = new SplashBottomModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomModel.MODEL_LAYER));
-        this.layer1 = GlowwyRenderLayer.get(texture);
-        this.layer2 = GlowwyRenderLayer.get(texture);
+        this.layer1 = GlowyRenderLayer.get(texture);
+        this.layer2 = GlowyRenderLayer.get(texture);
         this.gravityStrength = 0.0F;
         this.widthMultiplier = 0f;
         this.heightMultiplier = 0f;
@@ -69,7 +69,7 @@ public class LavaSplashParticle extends Particle {
             int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
 
             this.texture1 = new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_" + frame1 + ".png");
-            this.layer1 = GlowwyRenderLayer.get(texture1);
+            this.layer1 = GlowyRenderLayer.get(texture1);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -92,7 +92,7 @@ public class LavaSplashParticle extends Particle {
             int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
 
             this.texture1 = new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_" + frame1 + ".png");
-            this.layer1 = GlowwyRenderLayer.get(texture1);
+            this.layer1 = GlowyRenderLayer.get(texture1);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -117,7 +117,7 @@ public class LavaSplashParticle extends Particle {
             int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
 
             this.texture2 = new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_" + frame2 + ".png");
-            this.layer2 = GlowwyRenderLayer.get(texture2);
+            this.layer2 = GlowyRenderLayer.get(texture2);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -140,7 +140,7 @@ public class LavaSplashParticle extends Particle {
             int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
 
             this.texture2 = new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_" + frame2 + ".png");
-            this.layer2 = GlowwyRenderLayer.get(texture2);
+            this.layer2 = GlowyRenderLayer.get(texture2);
 
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
