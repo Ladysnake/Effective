@@ -4,5 +4,6 @@
   "effective.midnightconfig.generateSplashes": "Generate Splashes",
   "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should Flowing Water Spawn Particles On First Tick",
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis Block Update Particle Chance",
+  "effective.midnightconfig.waterfallSoundDistanceBlocks": "Distance To Hear Of Waterfalls [block(s)]",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade Sound Volume Multiplier"
 }
