@@ -5,6 +5,7 @@
 - Fixed splashes sometimes being completely black (thanks to lonefelidae16)
 - Fixed occasional crashes that could happen randomly (thanks to lonefelidae16)
 - Widened the logic to fix splashes sometimes not appearing as well as now taking into account waterlogged blocks (like kelp or seagrass) and not just water source blocks
+- Fishing bobbers no longer produce splashes or droplet particles
 - Changed config library from Cloth Config to MidnightLib
 - Updated to Minecraft 1.19.2
 
