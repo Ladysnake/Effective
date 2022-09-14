@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WaterFluidMixin {
     @Unique
     private static boolean shouldSplash(World world, BlockPos pos) {
-        if (EffectiveConfig.generateCascades) {
+        if (EffectiveConfig.flowingWaterSplashingDesity > 0) {
             FluidState fluidState = world.getFluidState(pos);
             if (!fluidState.isStill() & fluidState.getHeight() >= 0.77) {
                 BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -49,7 +49,7 @@ public class WaterFluidMixin {
         // flowing water splashes
         if (shouldSplash(world, pos.up())) {
             Vec3d vec3d = state.getVelocity(world, pos);
-            for (int i = 0; i < random.nextInt(50); i++) {
+            for (int i = 0; i <= random.nextInt(EffectiveConfig.flowingWaterSplashingDesity); i++) {
                 world.addParticle(ParticleTypes.SPLASH, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 1 + random.nextFloat(), pos.getZ() + .5 + random.nextGaussian() / 2f, vec3d.getX() * random.nextFloat(), random.nextFloat() / 10f, vec3d.getZ() * random.nextFloat());
             }
         }

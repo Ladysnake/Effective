@@ -8,5 +8,6 @@
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis block update particle chance",
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
-  "effective.midnightconfig.rainRippleDensity": "Rain ripples density"
+  "effective.midnightconfig.rainRippleDensity": "Rain ripples density",
+  "effective.midnightconfig.flowingWaterSplashingDesity": "Flowing water splashing density"
 }

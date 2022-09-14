@@ -24,6 +24,9 @@ public class EffectiveConfig extends MidnightConfig {
     @Entry(min = 0, max = 100)
     public static int lapisBlockUpdateParticleChance = 10;
 
+    @Entry(min = 0, max = 200)
+    public static int flowingWaterSplashingDesity = 50;
+
     @Entry(min = 0, max = 10)
     public static int rainRippleDensity = 1;
 }
