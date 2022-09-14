@@ -37,9 +37,7 @@ public class WaterFluidMixin {
     private static boolean shouldRipple(World world, BlockPos pos) {
         if (EffectiveConfig.rainRippleDensity > 0) {
             FluidState fluidState = world.getFluidState(pos);
-            if (fluidState.isStill() && world.isRaining() && world.getBlockState(pos.add(0, 1, 0)).isAir()) {
-                return true;
-            }
+            return fluidState.isStill() && world.isRaining() && world.getBlockState(pos.add(0, 1, 0)).isAir();
         }
         return false;
     }
