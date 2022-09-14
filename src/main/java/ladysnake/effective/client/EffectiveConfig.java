@@ -16,11 +16,14 @@ public class EffectiveConfig extends MidnightConfig {
     public static int cascadeSoundsVolumeMultiplier = 100;
 
     @Entry(min = 0, max = 400)
-    public static int waterfallSoundDistanceBlocks = 150;
+    public static int cascadeSoundDistanceBlocks = 150;
 
     @Entry
     public static boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 
     @Entry(min = 0, max = 100)
     public static int lapisBlockUpdateParticleChance = 10;
+
+    @Entry(min = 0, max = 10)
+    public static int rainRippleDensity = 1;
 }

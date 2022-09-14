@@ -6,6 +6,7 @@
   "effective.midnightconfig.generateCascades": "Generate cascades",
   "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should flowing water spawn particles on first tick",
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis block update particle chance",
-  "effective.midnightconfig.waterfallSoundDistanceBlocks": "Distance to hear waterfalls [block(s)]",
-  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier"
+  "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
+  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
+  "effective.midnightconfig.rainRippleDensity": "Rain ripples density"
 }

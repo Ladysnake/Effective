@@ -5,6 +5,8 @@
   - Splashes will now be colored depending on the water they originate from
   - Reworked the splash texture to be more fitting with the vanilla Minecraft aesthetic
   - Added a config option to adjust the transparency of the splashes' white rim
+- Added ripples on water when it's raining
+  - Ripple density can be adjusted or disabled in the config
 - Added two new config options to adjust cascade sounds volume and distance
 - Fixed splashes sometimes being completely black (thanks to lonefelidae16)
 - Fixed occasional crashes that could happen randomly (thanks to lonefelidae16)

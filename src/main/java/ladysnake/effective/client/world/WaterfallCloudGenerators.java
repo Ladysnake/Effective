@@ -58,11 +58,11 @@ public class WaterfallCloudGenerators {
                 }
                 scheduleParticleTick(blockPos, 6);
                 float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(blockPos));
-                if (distance > EffectiveConfig.waterfallSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.waterfallSoundDistanceBlocks == 0) {
+                if (distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
                     return;
                 }
                 if (world.random.nextInt(200) == 0) {
-                    client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.waterfallSoundDistanceBlocks), (int) (distance / 2));
+                    client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
                 }
             });
             generators.removeIf(blockPos -> blockPos == null || !shouldCauseWaterfall(world, blockPos, world.getFluidState(blockPos)));
