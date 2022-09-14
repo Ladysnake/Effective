@@ -9,19 +9,19 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
-public class SplashModel<T extends Entity> extends EntityModel<T> {
-    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Effective.MODID, "splash"), "main");
+public class SplashBottomRimModel<T extends Entity> extends EntityModel<T> {
+    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Effective.MODID, "splash_bottom_rim"), "main");
     private final ModelPart splash;
 
-    public SplashModel(ModelPart root) {
-        this.splash = root.getChild("splash");
+    public SplashBottomRimModel(ModelPart root) {
+        this.splash = root.getChild("splash_rim");
     }
 
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
 
-        modelPartData.addChild("splash", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, -16.0F, -6.0F, 12.0F, 16.0F, 12.0F), ModelTransform.pivot(0.0F, 16.0F, 0.0F));
+        modelPartData.addChild("splash_rim", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F), ModelTransform.pivot(0.0F, 0.0f, 0.0F));
 
         return TexturedModelData.of(modelData, 48, 28);
     }

@@ -1,11 +1,15 @@
 package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
+import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
+import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -16,6 +20,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
@@ -29,6 +34,9 @@ public class SplashParticle extends Particle {
     public int wave2End;
     Model waveModel;
     Model waveBottomModel;
+    Model waveRimModel;
+    Model waveBottomRimModel;
+    public int waterColor = -1;
 
     private static final int MAX_FRAME = 12;
 
@@ -36,6 +44,8 @@ public class SplashParticle extends Particle {
         super(world, x, y, z);
         this.waveModel = new SplashModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashModel.MODEL_LAYER));
         this.waveBottomModel = new SplashBottomModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomModel.MODEL_LAYER));
+        this.waveRimModel = new SplashRimModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashRimModel.MODEL_LAYER));
+        this.waveBottomRimModel = new SplashBottomRimModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomRimModel.MODEL_LAYER));
         this.gravityStrength = 0.0F;
         this.widthMultiplier = 0f;
         this.heightMultiplier = 0f;
@@ -63,8 +73,17 @@ public class SplashParticle extends Particle {
     }
 
     private void drawSplash(int frame, Camera camera, float tickDelta, Vec3f multiplier) {
+        if (waterColor == -1) {
+            waterColor = BiomeColors.getWaterColor(world, new BlockPos(this.x, this.y, this.z));
+        }
+        float r = (float) (waterColor >> 16 & 0xFF) / 255.0f;
+        float g = (float) (waterColor >> 8 & 0xFF) / 255.0f;
+        float b = (float) (waterColor & 0xFF) / 255.0f;
+
         Identifier texture = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
         RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
+        Identifier rimTexture = new Identifier(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+        RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
 
         MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
         modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
@@ -74,12 +93,17 @@ public class SplashParticle extends Particle {
         modelBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
         modelBottomMatrix.translate(0, 0.001, 0);
 
-        VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        VertexConsumer modelConsumer = immediate.getBuffer(layer);
-
         int light = this.getBrightness(tickDelta);
-        this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
-        this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
+
+        VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+
+        VertexConsumer modelConsumer = immediate.getBuffer(layer);
+        this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
+        this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
+
+        VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
+        this.waveRimModel.render(modelMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+        this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
 
         immediate.draw();
     }

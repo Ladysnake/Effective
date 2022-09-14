@@ -2,7 +2,9 @@ package ladysnake.effective.client;
 
 import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
+import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
+import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -39,6 +41,8 @@ public class Effective implements ClientModInitializer {
         // register model layers
         EntityModelLayerRegistry.registerModelLayer(SplashModel.MODEL_LAYER, SplashModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SplashBottomModel.MODEL_LAYER, SplashBottomModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SplashRimModel.MODEL_LAYER, SplashRimModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
         // particles
         SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:splash", new SplashParticleType(true));

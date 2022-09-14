@@ -6,6 +6,9 @@ public class EffectiveConfig extends MidnightConfig {
     @Entry
     public static boolean generateSplashes = true;
 
+    @Entry(min = 0f, max = 1.0f)
+    public static float splashRimAlpha = 0.8f;
+
     @Entry
     public static boolean generateCascades = true;
 
