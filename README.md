@@ -16,5 +16,9 @@ https://www.curseforge.com/minecraft/mc-mods/effective
 
 **Yes**: If you have installed this mod on your Minecraft client, you will  be able to connect to vanilla Minecraft servers and the ambient effects  will work as intended.
 
+#### Is there a config file?
+
+**Yes**: It's a file in your .minecraft/config folder called effective.json. You can change the settings by opening that file and modifing the values in it.
+
 
 ###### Copyright (C) 2021 Ladysnake
