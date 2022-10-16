@@ -1,7 +1,13 @@
 {
   "effective.subtitles.ambience.waterfall": "Water falls",
-  "text.autoconfig.effective.option.generateCascades": "Generate Cascades",
-  "text.autoconfig.effective.option.generateSplashes": "Generate Splashes",
-  "text.autoconfig.effective.option.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should Flowing Water Spawn Particles On First Tick",
-  "text.autoconfig.effective.option.lapisBlockUpdateParticleChance": "Lapis Block Update Particle Chance"
+
+  "effective.midnightconfig.generateSplashes": "Generate splashes",
+  "effective.midnightconfig.splashRimAlpha": "Splash rim alpha",
+  "effective.midnightconfig.generateCascades": "Generate cascades",
+  "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should flowing water spawn particles on first tick",
+  "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis block update particle chance",
+  "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
+  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
+  "effective.midnightconfig.rainRippleDensity": "Rain ripples density",
+  "effective.midnightconfig.flowingWaterSplashingDesity": "Flowing water splashing density"
 }

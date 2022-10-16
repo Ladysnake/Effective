@@ -1,12 +1,15 @@
 package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.render.NoShadingRenderLayer;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
+import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
+import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -15,19 +18,15 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class SplashParticle extends Particle {
-    public Identifier texture1;
-    public Identifier texture2;
     public float widthMultiplier;
     public float heightMultiplier;
     public int wave1End;
@@ -35,17 +34,18 @@ public class SplashParticle extends Particle {
     public int wave2End;
     Model waveModel;
     Model waveBottomModel;
-    RenderLayer layer1;
-    RenderLayer layer2;
+    Model waveRimModel;
+    Model waveBottomRimModel;
+    public int waterColor = -1;
 
-    protected SplashParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
+    private static final int MAX_FRAME = 12;
+
+    protected SplashParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
-        this.texture1 = texture;
-        this.texture2 = texture;
         this.waveModel = new SplashModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashModel.MODEL_LAYER));
         this.waveBottomModel = new SplashBottomModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomModel.MODEL_LAYER));
-        this.layer1 = NoShadingRenderLayer.get(texture);
-        this.layer2 = NoShadingRenderLayer.get(texture);
+        this.waveRimModel = new SplashRimModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashRimModel.MODEL_LAYER));
+        this.waveBottomRimModel = new SplashBottomRimModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomRimModel.MODEL_LAYER));
         this.gravityStrength = 0.0F;
         this.widthMultiplier = 0f;
         this.heightMultiplier = 0f;
@@ -64,117 +64,69 @@ public class SplashParticle extends Particle {
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         // first splash
         if (age <= this.wave1End) {
-            int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
-
-            this.texture1 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png");
-            this.layer1 = NoShadingRenderLayer.get(texture1);
-
-            Vec3d vec3d = camera.getPos();
-            float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
-            float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
-            float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-
-            MatrixStack matrixStack = new MatrixStack();
-            matrixStack.translate(f, g, h);
-            matrixStack.scale(widthMultiplier, -heightMultiplier, widthMultiplier);
-            matrixStack.translate(0, -1, 0);
-            VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-            VertexConsumer vertexConsumer2 = immediate.getBuffer(layer1);
-
-            int light = this.getBrightness(tickDelta);
-            this.waveModel.render(matrixStack, vertexConsumer2, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
-
-            immediate.draw();
+            drawSplash(Math.round((this.age / (float) this.wave1End) * MAX_FRAME), camera, tickDelta);
         }
-        if (age <= this.wave1End) {
-            int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
-
-            this.texture1 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame1 + ".png");
-            this.layer1 = NoShadingRenderLayer.get(texture1);
-
-            Vec3d vec3d = camera.getPos();
-            float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
-            float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
-            float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-
-            MatrixStack matrixStack = new MatrixStack();
-            matrixStack.translate(f, g, h);
-            matrixStack.scale(widthMultiplier, heightMultiplier, widthMultiplier);
-            matrixStack.translate(0, 0.001, 0);
-            VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-            VertexConsumer vertexConsumer2 = immediate.getBuffer(layer1);
-
-            int light = this.getBrightness(tickDelta);
-            this.waveBottomModel.render(matrixStack, vertexConsumer2, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
-
-            immediate.draw();
-        }
-
         // second splash
         if (age >= this.wave2Start) {
-            int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
-
-            this.texture2 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame2 + ".png");
-            this.layer2 = NoShadingRenderLayer.get(texture2);
-
-            Vec3d vec3d = camera.getPos();
-            float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
-            float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
-            float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-
-            MatrixStack matrixStack = new MatrixStack();
-            matrixStack.translate(f, g, h);
-            matrixStack.scale(widthMultiplier * 0.5f, -heightMultiplier * 2, widthMultiplier * 0.5f);
-            matrixStack.translate(0, -1, 0);
-            VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-            VertexConsumer vertexConsumer2 = immediate.getBuffer(layer2);
-
-            int light = this.getBrightness(tickDelta);
-            this.waveModel.render(matrixStack, vertexConsumer2, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
-
-            immediate.draw();
+            drawSplash(Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * MAX_FRAME), camera, tickDelta, new Vec3f(0.5f, 2, 0.5f));
         }
-        if (age >= this.wave2Start) {
-            int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
+    }
 
-            this.texture2 = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + frame2 + ".png");
-            this.layer2 = NoShadingRenderLayer.get(texture2);
-
-            Vec3d vec3d = camera.getPos();
-            float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
-            float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
-            float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-
-            MatrixStack matrixStack = new MatrixStack();
-            matrixStack.translate(f, g, h);
-            matrixStack.scale(widthMultiplier * 0.5f, heightMultiplier * 2, widthMultiplier * 0.5f);
-            matrixStack.translate(0, 0.001, 0);
-            VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-            VertexConsumer vertexConsumer2 = immediate.getBuffer(layer2);
-
-            int light = this.getBrightness(tickDelta);
-            this.waveBottomModel.render(matrixStack, vertexConsumer2, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
-
-            immediate.draw();
+    private void drawSplash(int frame, Camera camera, float tickDelta, Vec3f multiplier) {
+        if (waterColor == -1) {
+            waterColor = BiomeColors.getWaterColor(world, new BlockPos(this.x, this.y, this.z));
         }
+        float r = (float) (waterColor >> 16 & 0xFF) / 255.0f;
+        float g = (float) (waterColor >> 8 & 0xFF) / 255.0f;
+        float b = (float) (waterColor & 0xFF) / 255.0f;
+
+        Identifier texture = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+        RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
+        Identifier rimTexture = new Identifier(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+        RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
+
+        MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
+        modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+        modelMatrix.translate(0, -1, 0);
+
+        MatrixStack modelBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
+        modelBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+        modelBottomMatrix.translate(0, 0.001, 0);
+
+        int light = this.getBrightness(tickDelta);
+
+        VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+
+        VertexConsumer modelConsumer = immediate.getBuffer(layer);
+        this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
+        this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
+
+        VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
+        this.waveRimModel.render(modelMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+        this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+
+        immediate.draw();
+    }
+
+    private void drawSplash(int frame, Camera camera, float tickDelta) {
+        drawSplash(frame, camera, tickDelta, new Vec3f(1, 1, 1));
+    }
+
+    private MatrixStack getMatrixStackFromCamera(Camera camera, float tickDelta) {
+        Vec3d cameraPos = camera.getPos();
+        float x = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - cameraPos.getX());
+        float y = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - cameraPos.getY());
+        float z = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - cameraPos.getZ());
+
+        MatrixStack matrixStack = new MatrixStack();
+        matrixStack.translate(x, y, z);
+        return matrixStack;
     }
 
     @Override
     public void tick() {
         if (this.widthMultiplier == 0f) {
-            List<Entity> closeEntities = world.getOtherEntities(null, this.getBoundingBox().expand(5.0f)).stream().filter(Entity::isTouchingWater).collect(Collectors.toList());
-            closeEntities.sort((o1, o2) -> (int) (o1.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z)) - o2.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z))));
-
-            if (!closeEntities.isEmpty()) {
-                this.widthMultiplier = closeEntities.get(0).getWidth() * 2f;
-                this.heightMultiplier = (float) Math.max(-closeEntities.get(0).getVelocity().getY() * this.widthMultiplier, 0f);
-
-                this.wave1End = 10 + Math.round(widthMultiplier * 1.2f);
-                this.wave2Start = 6 + Math.round(widthMultiplier * 0.7f);
-                this.wave2End = 20 + Math.round(widthMultiplier * 2.4f);
-            } else {
-                this.markDead();
-            }
+            this.markDead();
         }
 
         this.prevPosX = this.x;
@@ -200,16 +152,22 @@ public class SplashParticle extends Particle {
 
     @Environment(EnvType.CLIENT)
     public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final Identifier texture;
-
-        public DefaultFactory(SpriteProvider spriteProvider, Identifier texture) {
-            this.texture = texture;
+        public DefaultFactory(SpriteProvider spriteProvider) {
         }
 
         @Nullable
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new SplashParticle(world, x, y, z, this.texture);
+            SplashParticle instance = new SplashParticle(world, x, y, z);
+            if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
+                final float width = (float) splashParameters.initialData.width * 2;
+                instance.widthMultiplier = width;
+                instance.heightMultiplier = (float) splashParameters.initialData.velocityY * width;
+                instance.wave1End = 10 + Math.round(width * 1.2f);
+                instance.wave2Start = 6 + Math.round(width * 0.7f);
+                instance.wave2End = 20 + Math.round(width * 2.4f);
+            }
+            return instance;
         }
     }
 }

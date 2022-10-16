@@ -1,6 +1,7 @@
 package ladysnake.effective.mixin;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -24,7 +25,7 @@ public class AbstractBlockMixin {
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
     protected void effective$forceParticles(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
         if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER) {
-            long chance = Effective.config.lapisBlockUpdateParticleChance;
+            long chance = EffectiveConfig.lapisBlockUpdateParticleChance;
             if (chance > 0) {
                 gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> {
                     if (world.getRandom().nextInt(100) < chance) {

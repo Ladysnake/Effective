@@ -7,6 +7,9 @@
   "authors": [
     "doctor4t"
   ],
+  "contributors": [
+    "lonefelidae16"
+  ],
   "contact": {
     "homepage": "https://illuminations.uuid.gg/",
     "sources": "https://github.com/Ladysnake/Effective",
@@ -18,9 +21,6 @@
   "entrypoints": {
     "client": [
       "ladysnake.effective.client.Effective"
-    ],
-    "modmenu": [
-      "ladysnake.effective.client.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
