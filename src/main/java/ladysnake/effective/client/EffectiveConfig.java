@@ -29,4 +29,10 @@ public class EffectiveConfig extends MidnightConfig {
 
     @Entry(min = 0, max = 10)
     public static int rainRippleDensity = 1;
+
+    @Entry
+    public static boolean glowsquidHypnotize = true;
+
+    @Entry
+    public static boolean glowsquidHypnotizeAttractCursor = true;
 }

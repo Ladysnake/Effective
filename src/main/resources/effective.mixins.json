@@ -10,6 +10,7 @@
     "RenderLayerAccessor",
     "WaterFluidMixin",
     "WorldMixin",
+    "GlowSquidEntityRendererHypnotizingMixin",
     "integration.sodium.FluidRendererMixin"
   ],
   "injectors": {

@@ -6,6 +6,10 @@ import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
+import ladysnake.satin.api.event.ShaderEffectRenderCallback;
+import ladysnake.satin.api.managed.ManagedShaderEffect;
+import ladysnake.satin.api.managed.ShaderEffectManager;
+import ladysnake.satin.api.managed.uniform.Uniform1f;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,9 +18,16 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 
 @Environment(EnvType.CLIENT)
@@ -32,6 +43,13 @@ public class Effective implements ClientModInitializer {
 
     // sound events
     public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
+
+    // squid hypno shader
+    private static final ManagedShaderEffect HYPNO_SHADER = ShaderEffectManager.getInstance()
+            .manage(new Identifier(MODID, "shaders/post/hypnotize.json"));
+    private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
+    private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
+    private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
 
     @Override
     public void onInitializeClient() {
@@ -64,6 +82,82 @@ public class Effective implements ClientModInitializer {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             WaterfallCloudGenerators.generators.clear();
             WaterfallCloudGenerators.particlesToSpawn.clear();
+        });
+
+        // hypnotizing glowsquids
+        ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
+            if (EffectiveConfig.glowsquidHypnotize && (!RenderedHypnoEntities.GLOWSQUIDS.isEmpty() || RenderedHypnoEntities.lockedIntensityTimer > 0 || RenderedHypnoEntities.lookIntensity > 0)) {
+                double bestLookIntensity = 0;
+                GlowSquidEntity bestSquid = null;
+
+                for (GlowSquidEntity glowsquid : RenderedHypnoEntities.GLOWSQUIDS) {
+                    Vec3d toSquid = glowsquid.getPos().subtract(MinecraftClient.getInstance().player.getPos()).normalize();
+                    double lookIntensity = toSquid.dotProduct(MinecraftClient.getInstance().player.getRotationVec(tickDelta)); // * 1 / Math.max(2, Math.sqrt(glowsquid.getPos().squaredDistanceTo(MinecraftClient.getInstance().player.getPos())) - 5f); // 1 = looking straight at squid
+                    if (lookIntensity > bestLookIntensity) {
+                        bestLookIntensity = lookIntensity;
+                        bestSquid = glowsquid;
+                    }
+                }
+
+                RenderedHypnoEntities.lookIntensityGoal = bestLookIntensity;
+
+                if (!MinecraftClient.getInstance().isPaused() && RenderedHypnoEntities.lockedIntensityTimer >= 0) {
+                    RenderedHypnoEntities.lookIntensityGoal = 1.0f;
+                    RenderedHypnoEntities.lookIntensity += 0.001f;
+                    RenderedHypnoEntities.lockedIntensityTimer--;
+                }
+
+                if (RenderedHypnoEntities.lookIntensity < RenderedHypnoEntities.lookIntensityGoal) {
+                    RenderedHypnoEntities.lookIntensity += 0.0005f;
+                } else {
+                    RenderedHypnoEntities.lookIntensity -= 0.001f;
+                }
+                RenderedHypnoEntities.lookIntensity = MathHelper.clamp(RenderedHypnoEntities.lookIntensity, 0, 0.5f);
+
+                if (bestSquid != null) {
+                    if (bestSquid.hasCustomName() && bestSquid.getCustomName().getString().equals("jeb_")) {
+                        rainbowHypno.set(1.0f);
+                    } else {
+                        rainbowHypno.set(0.0f);
+                    }
+                }
+                intensityHypno.set((float) Math.max(0, RenderedHypnoEntities.lookIntensity));
+                sTimeHypno.set((MinecraftClient.getInstance().world.getTime() + tickDelta) / 20);
+                HYPNO_SHADER.render(tickDelta);
+
+                if (MinecraftClient.getInstance().player.age % 20 == 0) {
+                    MinecraftClient.getInstance().player.playSound(SoundEvents.ENTITY_GLOW_SQUID_AMBIENT, (float) RenderedHypnoEntities.lookIntensity, (float) RenderedHypnoEntities.lookIntensity);
+                }
+
+                // look at squid
+                if (EffectiveConfig.glowsquidHypnotizeAttractCursor && bestSquid != null && !MinecraftClient.getInstance().isPaused()) {
+                    ClientPlayerEntity player = MinecraftClient.getInstance().player;
+
+                    Vec3d target = bestSquid.getPos();
+                    Vec3d vec3d = player.getPos();
+                    double d = target.x - vec3d.x;
+                    double e = target.y - vec3d.y - 1;
+                    double f = target.z - vec3d.z;
+                    double g = Math.sqrt(d * d + f * f);
+                    float currentPitch = MathHelper.wrapDegrees(player.getPitch(tickDelta));
+                    float currentYaw = MathHelper.wrapDegrees(player.getYaw(tickDelta));
+                    float desiredPitch = MathHelper.wrapDegrees((float) (-(MathHelper.atan2(e, g) * 57.2957763671875)));
+                    float desiredYaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(f, d) * 57.2957763671875) - 90.0f);
+
+                    Vec2f rotationChange = new Vec2f(
+                            MathHelper.wrapDegrees(desiredPitch - currentPitch),
+                            MathHelper.wrapDegrees(desiredYaw - currentYaw)
+                    );
+
+                    Vec2f rotationStep = rotationChange.normalize().multiply((float) ((float) RenderedHypnoEntities.lookIntensity * 10f * (MathHelper.clamp(rotationChange.length(), 0, 10) / 10f)));
+
+                    player.setPitch(player.getPitch(tickDelta) + rotationStep.x);
+                    player.setYaw(player.getYaw(tickDelta) + rotationStep.y);
+
+                }
+
+                RenderedHypnoEntities.GLOWSQUIDS.clear();
+            }
         });
     }
 }

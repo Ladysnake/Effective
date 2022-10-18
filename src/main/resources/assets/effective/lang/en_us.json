@@ -9,5 +9,7 @@
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
   "effective.midnightconfig.rainRippleDensity": "Rain ripples density",
-  "effective.midnightconfig.flowingWaterSplashingDesity": "Flowing water splashing density"
+  "effective.midnightconfig.flowingWaterSplashingDesity": "Flowing water splashing density",
+  "effective.midnightconfig.glowsquidHypnotize": "Should glow squids hypnotize you",
+  "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Should glow squids attract your cursor (requires glow squid hypnotizing)"
 }
