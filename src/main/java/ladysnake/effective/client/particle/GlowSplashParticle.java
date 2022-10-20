@@ -2,18 +2,12 @@ package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.render.entity.model.SplashBottomModel;
-import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
-import ladysnake.effective.client.render.entity.model.SplashModel;
-import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -24,40 +18,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.world.LightType;
 import org.jetbrains.annotations.Nullable;
 
-public class SplashParticle extends Particle {
-    public float widthMultiplier;
-    public float heightMultiplier;
-    public int wave1End;
-    public int wave2Start;
-    public int wave2End;
-    Model waveModel;
-    Model waveBottomModel;
-    Model waveRimModel;
-    Model waveBottomRimModel;
-    public int waterColor = -1;
+public class GlowSplashParticle extends SplashParticle {
+    public float redAndGreen = random.nextFloat() / 5f;
+    public float blue = 1.0f;
 
-    static final int MAX_FRAME = 12;
-
-    protected SplashParticle(ClientWorld world, double x, double y, double z) {
+    protected GlowSplashParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
-        this.waveModel = new SplashModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashModel.MODEL_LAYER));
-        this.waveBottomModel = new SplashBottomModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomModel.MODEL_LAYER));
-        this.waveRimModel = new SplashRimModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashRimModel.MODEL_LAYER));
-        this.waveBottomRimModel = new SplashBottomRimModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(SplashBottomRimModel.MODEL_LAYER));
-        this.gravityStrength = 0.0F;
-        this.widthMultiplier = 0f;
-        this.heightMultiplier = 0f;
-
-        this.wave1End = 12;
-        this.wave2Start = 7;
-        this.wave2End = 24;
-    }
-
-    @Override
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.CUSTOM;
     }
 
     @Override
@@ -83,7 +52,7 @@ public class SplashParticle extends Particle {
         Identifier texture = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
         RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
         Identifier rimTexture = new Identifier(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
-        RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
+        RenderLayer rimLayer = RenderLayer.getEntityCutoutNoCull(texture);
 
         MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
         modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
@@ -101,9 +70,11 @@ public class SplashParticle extends Particle {
         this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
         this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
 
+        int rimLight = 15728880;
+
         VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
-        this.waveRimModel.render(modelMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
-        this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+        this.waveRimModel.render(modelMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreen, redAndGreen, blue, EffectiveConfig.splashRimAlpha);
+        this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreen, redAndGreen, blue, EffectiveConfig.splashRimAlpha);
 
         immediate.draw();
     }
@@ -141,11 +112,11 @@ public class SplashParticle extends Particle {
 
         if (this.age == 1) {
             for (int i = 0; i < this.widthMultiplier * 10f; i++) {
-                this.world.addParticle(Effective.DROPLET, this.x + (this.random.nextGaussian() * this.widthMultiplier / 10f), this.y, this.z + (this.random.nextGaussian() * this.widthMultiplier / 10f), random.nextGaussian() / 10f * this.widthMultiplier / 2.5f, random.nextFloat() / 10f + this.heightMultiplier / 2.8f, random.nextGaussian() / 10f * this.widthMultiplier / 2.5f);
+                this.world.addParticle(Effective.GLOW_DROPLET, this.x + (this.random.nextGaussian() * this.widthMultiplier / 10f), this.y, this.z + (this.random.nextGaussian() * this.widthMultiplier / 10f), random.nextGaussian() / 10f * this.widthMultiplier / 2.5f, random.nextFloat() / 10f + this.heightMultiplier / 2.8f, random.nextGaussian() / 10f * this.widthMultiplier / 2.5f);
             }
         } else if (this.age == wave2Start) {
             for (int i = 0; i < this.widthMultiplier * 5f; i++) {
-                this.world.addParticle(Effective.DROPLET, this.x + (this.random.nextGaussian() * this.widthMultiplier / 10f * .5f), this.y, this.z + (this.random.nextGaussian() * this.widthMultiplier / 10f * .5f), random.nextGaussian() / 10f * this.widthMultiplier / 5f, random.nextFloat() / 10f + this.heightMultiplier / 2.2f, random.nextGaussian() / 10f * this.widthMultiplier / 5f);
+                this.world.addParticle(Effective.GLOW_DROPLET, this.x + (this.random.nextGaussian() * this.widthMultiplier / 10f * .5f), this.y, this.z + (this.random.nextGaussian() * this.widthMultiplier / 10f * .5f), random.nextGaussian() / 10f * this.widthMultiplier / 5f, random.nextFloat() / 10f + this.heightMultiplier / 2.2f, random.nextGaussian() / 10f * this.widthMultiplier / 5f);
             }
         }
     }
@@ -158,7 +129,7 @@ public class SplashParticle extends Particle {
         @Nullable
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            SplashParticle instance = new SplashParticle(world, x, y, z);
+            GlowSplashParticle instance = new GlowSplashParticle(world, x, y, z);
             if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
                 final float width = (float) splashParameters.initialData.width * 2;
                 instance.widthMultiplier = width;

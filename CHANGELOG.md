@@ -5,6 +5,8 @@
   - Glow squids can now hypnotize you, displaying a hypnotizing shader that gradually gets stronger the longer you look at them
   - Glow squids will attract your cursor if they appear on your screen, this attraction getting stronger with the shader
   - Both cursor attraction and hypnotizing can be disabled with two new configuration options
+- Splashes and ripples (from rain or splashes) in warm oceans at night will now glow from glowing plankton
+- 
 
 ## Effective 1.3 - 1.19.2
 - Overhauled splashes:

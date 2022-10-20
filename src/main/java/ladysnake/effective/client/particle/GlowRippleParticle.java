@@ -2,53 +2,30 @@ package ladysnake.effective.client.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.*;
+import net.minecraft.world.LightType;
 
-import java.util.Random;
+public class GlowRippleParticle extends RippleParticle {
+    public float redAndGreen = random.nextFloat() / 5f;
+    public float blue = 1.0f;
+    public BlockPos pos;
 
-public class RippleParticle extends SpriteBillboardParticle {
-    public final SpriteProvider spriteProvider;
+    private GlowRippleParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
-    public RippleParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, velocityX, velocityY, velocityZ);
-
-        this.velocityX = 0;
-        this.velocityY = 0;
-        this.velocityZ = 0;
-
-        this.spriteProvider = spriteProvider;
-
-        int scaleAgeModifier = 1 + new Random().nextInt(10);
-        this.scale *= 1.2f + random.nextFloat() / 10f * scaleAgeModifier;
-        this.maxAge = 10 + new Random().nextInt(scaleAgeModifier);
-    }
-
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
-    }
-
-    @Override
-    public void tick() {
-        this.prevPosX = this.x;
-        this.prevPosY = this.y;
-        this.prevPosZ = this.z;
-
-        if (this.age++ >= this.maxAge) {
-            this.markDead();
-        }
+        pos = new BlockPos(x, y, z);
     }
 
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        this.setSpriteForAge(spriteProvider);
+        this.setSpriteForAge(this.spriteProvider);
 
         Vec3d vec3d = camera.getPos();
         float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -79,12 +56,14 @@ public class RippleParticle extends SpriteBillboardParticle {
         float maxU = this.getMaxU();
         float minV = this.getMinV();
         float maxV = this.getMaxV();
-        int l = this.getBrightness(tickDelta);
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
+        int l = 15728880;
+        float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, pos) / 15f);
+
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
     }
 
     @Environment(EnvType.CLIENT)
@@ -97,7 +76,7 @@ public class RippleParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new RippleParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+            return new GlowRippleParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
         }
     }
 }

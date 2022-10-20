@@ -4,11 +4,15 @@ import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.WaterFluid;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -55,7 +59,14 @@ public class WaterFluidMixin {
         // still water rain ripples
         if (shouldRipple(world, pos)) {
             for (int i = 0; i <= random.nextInt(EffectiveConfig.rainRippleDensity); i++) {
-                world.addParticle(Effective.RIPPLE, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 0.9f, pos.getZ() + .5 + random.nextGaussian() / 2f, 0f, 0f, 0f);
+                if (world.getBiome(pos).value().getPrecipitation() == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
+                    DefaultParticleType ripple = Effective.RIPPLE;
+                    if (Effective.isNightTime(world) && world.getBiome(pos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                        ripple = Effective.GLOW_RIPPLE;
+                    }
+
+                    world.addParticle(ripple, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 0.9f, pos.getZ() + .5 + random.nextGaussian() / 2f, 0f, 0f, 0f);
+                }
             }
         }
     }

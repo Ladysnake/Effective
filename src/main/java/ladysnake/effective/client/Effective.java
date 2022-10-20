@@ -29,6 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 
 @Environment(EnvType.CLIENT)
 public class Effective implements ClientModInitializer {
@@ -40,6 +41,9 @@ public class Effective implements ClientModInitializer {
     public static DefaultParticleType DROPLET;
     public static DefaultParticleType RIPPLE;
     public static DefaultParticleType WATERFALL_CLOUD;
+    public static SplashParticleType GLOW_SPLASH;
+    public static DefaultParticleType GLOW_DROPLET;
+    public static DefaultParticleType GLOW_RIPPLE;
 
     // sound events
     public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -65,10 +69,16 @@ public class Effective implements ClientModInitializer {
         // particles
         SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:splash", new SplashParticleType(true));
         ParticleFactoryRegistry.getInstance().register(Effective.SPLASH, SplashParticle.DefaultFactory::new);
+        GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_splash", new SplashParticleType(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
         DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:droplet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.DROPLET, DropletParticle.DefaultFactory::new);
+        GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
         RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:ripple", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.RIPPLE, RippleParticle.DefaultFactory::new);
+        GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
         WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:waterfall_cloud", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.WATERFALL_CLOUD, WaterfallCloudParticle.DefaultFactory::new);
 //        LAVA_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:lava_splash", FabricParticleTypes.simple(true));
@@ -125,7 +135,7 @@ public class Effective implements ClientModInitializer {
                 sTimeHypno.set((MinecraftClient.getInstance().world.getTime() + tickDelta) / 20);
                 HYPNO_SHADER.render(tickDelta);
 
-                if (MinecraftClient.getInstance().player.age % 20 == 0) {
+                if (MinecraftClient.getInstance().player.age % 20 == 0 && !MinecraftClient.getInstance().isPaused()) {
                     MinecraftClient.getInstance().player.playSound(SoundEvents.ENTITY_GLOW_SQUID_AMBIENT, (float) RenderedHypnoEntities.lookIntensity, (float) RenderedHypnoEntities.lookIntensity);
                 }
 
@@ -159,5 +169,9 @@ public class Effective implements ClientModInitializer {
                 RenderedHypnoEntities.GLOWSQUIDS.clear();
             }
         });
+    }
+
+    public static boolean isNightTime(World world) {
+        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
     }
 }

@@ -13,20 +13,12 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.LightType;
 import net.minecraft.world.biome.BiomeKeys;
 
-public class DropletParticle extends SpriteBillboardParticle {
-    private final SpriteProvider spriteProvider;
+public class GlowDropletParticle extends DropletParticle {
+    public float redAndGreen = random.nextFloat() / 5f;
+    public float blue = 1.0f;
 
-    public DropletParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, velocityX, velocityY, velocityZ);
-
-        this.velocityX = velocityX;
-        this.velocityY = velocityY;
-        this.velocityZ = velocityZ;
-
-        this.spriteProvider = spriteProvider;
-        this.maxAge = 500;
-        this.scale = .05f;
-        this.setSpriteForAge(spriteProvider);
+    private GlowDropletParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
     }
 
     public ParticleTextureSheet getType() {
@@ -51,7 +43,7 @@ public class DropletParticle extends SpriteBillboardParticle {
             for (int i = 0; i > -10; i--) {
                 BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
                 if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
-                    this.world.addParticle(Effective.RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
+                    this.world.addParticle(Effective.GLOW_RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
                     break;
                 }
             }
@@ -97,12 +89,13 @@ public class DropletParticle extends SpriteBillboardParticle {
         float maxU = this.getMaxU();
         float minV = this.getMinV();
         float maxV = this.getMaxV();
-        int l = this.getBrightness(tickDelta);
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
+        int l = 15728880;
+
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
     }
 
     @Environment(EnvType.CLIENT)
@@ -115,7 +108,7 @@ public class DropletParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new DropletParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+            return new GlowDropletParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
         }
     }
 }
