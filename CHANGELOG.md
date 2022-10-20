@@ -7,7 +7,7 @@
   - Both cursor attraction and hypnotizing can be disabled with two new configuration options
 - Glow squids named "jeb_" now glow rainbow and have a rainbow hypnotizing pattern
 - Splashes and ripples (from rain or splashes) in warm oceans at night will now glow from glowing plankton
-- 
+  - Glowing plankton can be disabled with a new configuration option
 
 ## Effective 1.3 - 1.19.2
 - Overhauled splashes:

@@ -61,7 +61,7 @@ public class WaterFluidMixin {
             for (int i = 0; i <= random.nextInt(EffectiveConfig.rainRippleDensity); i++) {
                 if (world.getBiome(pos).value().getPrecipitation() == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
                     DefaultParticleType ripple = Effective.RIPPLE;
-                    if (Effective.isNightTime(world) && world.getBiome(pos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                    if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).matchesKey(BiomeKeys.WARM_OCEAN)) {
                         ripple = Effective.GLOW_RIPPLE;
                     }
 

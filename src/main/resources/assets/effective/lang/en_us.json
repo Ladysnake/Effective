@@ -1,15 +1,16 @@
 {
   "effective.subtitles.ambience.waterfall": "Water falls",
 
-  "effective.midnightconfig.generateSplashes": "Generate splashes",
+  "effective.midnightconfig.enableSplashes": "Enable splashes",
   "effective.midnightconfig.splashRimAlpha": "Splash rim alpha",
-  "effective.midnightconfig.generateCascades": "Generate cascades",
+  "effective.midnightconfig.enableCascades": "Enable cascades",
   "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should flowing water spawn particles on first tick",
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis block update particle chance",
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
   "effective.midnightconfig.rainRippleDensity": "Rain ripples density",
   "effective.midnightconfig.flowingWaterSplashingDesity": "Flowing water splashing density",
-  "effective.midnightconfig.glowsquidHypnotize": "Should glow squids hypnotize you",
-  "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Should glow squids attract your cursor (requires glow squid hypnotizing)"
+  "effective.midnightconfig.enableGlowingPlankton": "Enable glowing plankton splashes and ripples in warm oceans at night",
+  "effective.midnightconfig.glowsquidHypnotize": "Enable glow squid hypnotizing",
+  "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)"
 }

@@ -54,7 +54,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "onSwimmingStart", at = @At("TAIL"))
     protected void onSwimmingStart(CallbackInfo callbackInfo) {
-        if (this.world.isClient && EffectiveConfig.generateSplashes) {
+        if (this.world.isClient && EffectiveConfig.enableSplashes) {
             Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
             if (!(entity instanceof FishingBobberEntity)) {
                 float f = entity == (Object) this ? 0.2f : 0.9f;
@@ -66,7 +66,7 @@ public abstract class EntityMixin {
                         SplashParticleInitialData data = new SplashParticleInitialData(entity.getWidth(), vec3d.getY());
 
                         SplashParticleType splash = Effective.SPLASH;
-                        if (Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                        if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
                             splash = Effective.GLOW_SPLASH;
                         }
 
@@ -78,7 +78,7 @@ public abstract class EntityMixin {
 
                 for (int j = 0; j < this.getWidth() * 25f; j++) {
                     DefaultParticleType ripple = Effective.DROPLET;
-                    if (Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                    if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
                         ripple = Effective.GLOW_DROPLET;
                     }
 
