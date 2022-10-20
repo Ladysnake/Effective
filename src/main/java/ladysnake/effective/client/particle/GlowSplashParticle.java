@@ -24,9 +24,12 @@ import org.jetbrains.annotations.Nullable;
 public class GlowSplashParticle extends SplashParticle {
     public float redAndGreen = random.nextFloat() / 5f;
     public float blue = 1.0f;
+    public BlockPos pos;
 
     protected GlowSplashParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
+
+        pos = new BlockPos(x, y, z);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class GlowSplashParticle extends SplashParticle {
         Identifier texture = new Identifier(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
         RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
         Identifier rimTexture = new Identifier(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
-        RenderLayer rimLayer = RenderLayer.getEntityCutoutNoCull(texture);
+        RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
 
         MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
         modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
@@ -63,18 +66,18 @@ public class GlowSplashParticle extends SplashParticle {
         modelBottomMatrix.translate(0, 0.001, 0);
 
         int light = this.getBrightness(tickDelta);
+        int rimLight = 15728880;
+        float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, pos) / 15f);
 
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+
+        VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
+        this.waveRimModel.render(modelMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreenRender, redAndGreenRender, blue, 1.0f);
+        this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreenRender, redAndGreenRender, blue, 1.0f);
 
         VertexConsumer modelConsumer = immediate.getBuffer(layer);
         this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
         this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
-
-        int rimLight = 15728880;
-
-        VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
-        this.waveRimModel.render(modelMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreen, redAndGreen, blue, EffectiveConfig.splashRimAlpha);
-        this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreen, redAndGreen, blue, EffectiveConfig.splashRimAlpha);
 
         immediate.draw();
     }

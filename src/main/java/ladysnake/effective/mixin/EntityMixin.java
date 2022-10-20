@@ -77,7 +77,12 @@ public abstract class EntityMixin {
                 }
 
                 for (int j = 0; j < this.getWidth() * 25f; j++) {
-                    this.world.addParticle(Effective.DROPLET, this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth(), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f);
+                    DefaultParticleType ripple = Effective.DROPLET;
+                    if (Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                        ripple = Effective.GLOW_DROPLET;
+                    }
+
+                    this.world.addParticle(ripple, this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth(), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f);
                 }
             }
         }

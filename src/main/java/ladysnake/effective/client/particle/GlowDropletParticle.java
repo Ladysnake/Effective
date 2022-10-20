@@ -91,11 +91,12 @@ public class GlowDropletParticle extends DropletParticle {
         float maxV = this.getMaxV();
 
         int l = 15728880;
+        float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) / 15f);
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(redAndGreen, redAndGreen, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
     }
 
     @Environment(EnvType.CLIENT)

@@ -11,7 +11,9 @@
     "WaterFluidMixin",
     "WorldMixin",
     "GlowSquidEntityRendererHypnotizingMixin",
-    "integration.sodium.FluidRendererMixin"
+    "integration.sodium.FluidRendererMixin",
+    "jebglowsquid.FeatureRendererMixin",
+    "jebglowsquid.LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

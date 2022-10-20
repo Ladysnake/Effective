@@ -6,7 +6,9 @@ import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
+import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
+import ladysnake.satin.api.managed.ManagedCoreShader;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import ladysnake.satin.api.managed.uniform.Uniform1f;
@@ -54,6 +56,11 @@ public class Effective implements ClientModInitializer {
     private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
     private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
     private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
+
+    // rainbow shader for jeb glow squid
+    public static final ManagedCoreShader RAINBOW_SHADER = ShaderEffectManager.getInstance().manageCoreShader(new Identifier(MODID, "jeb"));
+    private static final Uniform1f uniformSTimeJeb = RAINBOW_SHADER.findUniform1f("Time");
+    private static int ticksJeb;
 
     @Override
     public void onInitializeClient() {
@@ -103,7 +110,7 @@ public class Effective implements ClientModInitializer {
                 for (GlowSquidEntity glowsquid : RenderedHypnoEntities.GLOWSQUIDS) {
                     Vec3d toSquid = glowsquid.getPos().subtract(MinecraftClient.getInstance().player.getPos()).normalize();
                     double lookIntensity = toSquid.dotProduct(MinecraftClient.getInstance().player.getRotationVec(tickDelta)); // * 1 / Math.max(2, Math.sqrt(glowsquid.getPos().squaredDistanceTo(MinecraftClient.getInstance().player.getPos())) - 5f); // 1 = looking straight at squid
-                    if (lookIntensity > bestLookIntensity) {
+                    if (lookIntensity > bestLookIntensity && MinecraftClient.getInstance().player.canSee(glowsquid)) {
                         bestLookIntensity = lookIntensity;
                         bestSquid = glowsquid;
                     }
@@ -159,7 +166,7 @@ public class Effective implements ClientModInitializer {
                             MathHelper.wrapDegrees(desiredYaw - currentYaw)
                     );
 
-                    Vec2f rotationStep = rotationChange.normalize().multiply((float) ((float) RenderedHypnoEntities.lookIntensity * 10f * (MathHelper.clamp(rotationChange.length(), 0, 10) / 10f)));
+                    Vec2f rotationStep = rotationChange.normalize().multiply((float) RenderedHypnoEntities.lookIntensity * 10f * (MathHelper.clamp(rotationChange.length(), 0, 10) / 10f));
 
                     player.setPitch(player.getPitch(tickDelta) + rotationStep.x);
                     player.setYaw(player.getYaw(tickDelta) + rotationStep.y);
@@ -169,6 +176,10 @@ public class Effective implements ClientModInitializer {
                 RenderedHypnoEntities.GLOWSQUIDS.clear();
             }
         });
+
+        // jeb glow squids
+        ClientTickEvents.END_CLIENT_TICK.register(client -> ticksJeb++);
+        EntitiesPreRenderCallback.EVENT.register((camera, frustum, tickDelta) -> uniformSTimeJeb.set((ticksJeb + tickDelta) * 0.05f));
     }
 
     public static boolean isNightTime(World world) {
