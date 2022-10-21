@@ -5,16 +5,17 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "AbstractBlockMixin",
+    "AllayEntityRendererMixin",
+    "AllayLivingEntityRendererMixin",
     "EntityMixin",
     "FluidRendererMixin",
+    "GlowSquidEntityRendererMixin",
     "RenderLayerAccessor",
     "WaterFluidMixin",
     "WorldMixin",
-    "GlowSquidEntityRendererMixin",
     "integration.sodium.FluidRendererMixin",
     "jebglowsquid.FeatureRendererMixin",
-    "jebglowsquid.LivingEntityRendererMixin",
-    "AllayLivingEntityRendererMixin"
+    "jebglowsquid.LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

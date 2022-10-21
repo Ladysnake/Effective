@@ -44,4 +44,7 @@ public class EffectiveConfig extends MidnightConfig {
 
     @Entry(min = 0, max = 100)
     public static int allayTwinkleDensity = 5;
+
+    @Entry
+    public static boolean goldenAllays = true;
 }

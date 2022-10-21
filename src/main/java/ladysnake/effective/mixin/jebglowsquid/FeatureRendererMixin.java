@@ -23,14 +23,12 @@ public abstract class FeatureRendererMixin {
 
     @Inject(method = "renderModel", at = @At("HEAD"))
     private static <T extends LivingEntity> void captureEntity(EntityModel<T> model, Identifier texture, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float red, float green, float blue, CallbackInfo ci) {
-        isRgb = (entity instanceof GlowSquidEntity) && entity.hasCustomName() && "jeb_".equals(entity.getName().getString());
+        isRgb = entity instanceof GlowSquidEntity && entity.hasCustomName() && "jeb_".equals(entity.getName().getString());
     }
 
     @ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/render/VertexConsumer;"))
     private static RenderLayer replaceRenderLayer(RenderLayer base) {
-        System.out.println(isRgb);
         if (isRgb) {
-            System.out.println("TEST");
             return Effective.RAINBOW_SHADER.getRenderLayer(base);
         }
 

@@ -1,6 +1,5 @@
 {
   "effective.subtitles.ambience.waterfall": "Water falls",
-
   "effective.midnightconfig.enableSplashes": "Enable splashes",
   "effective.midnightconfig.splashRimAlpha": "Splash rim alpha",
   "effective.midnightconfig.enableCascades": "Enable cascades",
@@ -14,5 +13,6 @@
   "effective.midnightconfig.glowsquidHypnotize": "Enable glow squid hypnotizing",
   "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)",
   "effective.midnightconfig.enableAllayTrails": "Enable Allay trails",
-  "effective.midnightconfig.allayTwinkleDensity": "Allay trail twinkle density (requires Allay trails)"
+  "effective.midnightconfig.allayTwinkleDensity": "Allay trail twinkle density (requires Allay trails)",
+  "effective.midnightconfig.goldenAllays": "Enable golden Allays"
 }

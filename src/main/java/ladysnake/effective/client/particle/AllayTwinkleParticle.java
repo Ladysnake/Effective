@@ -41,7 +41,7 @@ public class AllayTwinkleParticle extends SpriteBillboardParticle {
         }
 
         this.velocityX = 0f;
-        this.velocityY = 0.01f;
+        this.velocityY = 0.05f;
         this.velocityZ = 0f;
 
         this.move(velocityX, velocityY, velocityZ);
