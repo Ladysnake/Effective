@@ -10,10 +10,11 @@
     "RenderLayerAccessor",
     "WaterFluidMixin",
     "WorldMixin",
-    "GlowSquidEntityRendererHypnotizingMixin",
+    "GlowSquidEntityRendererMixin",
     "integration.sodium.FluidRendererMixin",
     "jebglowsquid.FeatureRendererMixin",
-    "jebglowsquid.LivingEntityRendererMixin"
+    "jebglowsquid.LivingEntityRendererMixin",
+    "AllayLivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

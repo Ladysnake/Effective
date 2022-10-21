@@ -9,8 +9,10 @@
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
   "effective.midnightconfig.rainRippleDensity": "Rain ripples density",
-  "effective.midnightconfig.flowingWaterSplashingDesity": "Flowing water splashing density",
+  "effective.midnightconfig.flowingWaterSplashingDensity": "Flowing water splashing density",
   "effective.midnightconfig.enableGlowingPlankton": "Enable glowing plankton splashes and ripples in warm oceans at night",
   "effective.midnightconfig.glowsquidHypnotize": "Enable glow squid hypnotizing",
-  "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)"
+  "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)",
+  "effective.midnightconfig.enableAllayTrails": "Enable Allay trails",
+  "effective.midnightconfig.allayTwinkleDensity": "Allay trail twinkle density (requires Allay trails)"
 }

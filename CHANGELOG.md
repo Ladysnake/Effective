@@ -1,5 +1,10 @@
 # Effective - Changelog:
 
+## Effective 1.5 - 1.19.2
+- Added Allay trails
+  - Allay will now leave a colored trail and twinkles when flying around
+  - Allay trails can be disabled and trail twinkle density can be configured
+
 ## Effective 1.4 - 1.19.2
 - Hypnotizing glow squids
   - Glow squids can now hypnotize you, displaying a hypnotizing shader that gradually gets stronger the longer you look at them

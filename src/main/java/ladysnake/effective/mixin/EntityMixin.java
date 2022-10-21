@@ -30,6 +30,8 @@ public abstract class EntityMixin {
     @Shadow
     @Final
     protected Random random;
+    @Shadow
+    private BlockPos blockPos;
 
     @Shadow
     public abstract double getX();
@@ -49,8 +51,6 @@ public abstract class EntityMixin {
 
     @Shadow
     public abstract float getWidth();
-
-    @Shadow private BlockPos blockPos;
 
     @Inject(method = "onSwimmingStart", at = @At("TAIL"))
     protected void onSwimmingStart(CallbackInfo callbackInfo) {

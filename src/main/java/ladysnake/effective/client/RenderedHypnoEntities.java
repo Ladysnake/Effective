@@ -1,6 +1,5 @@
 package ladysnake.effective.client;
 
-import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 
 import java.util.HashSet;

@@ -4,14 +4,16 @@ import ladysnake.effective.client.Effective;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.*;
 import net.minecraft.world.LightType;
-import net.minecraft.world.biome.BiomeKeys;
 
 public class GlowDropletParticle extends DropletParticle {
     public float redAndGreen = random.nextFloat() / 5f;

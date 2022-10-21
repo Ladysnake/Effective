@@ -1,30 +1,27 @@
 package ladysnake.effective.client.particle;
 
-import ladysnake.effective.client.Effective;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 
-public class DropletParticle extends SpriteBillboardParticle {
+public class AllayTrailParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
 
-    public DropletParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, velocityX, velocityY, velocityZ);
-
-        this.velocityX = velocityX;
-        this.velocityY = velocityY;
-        this.velocityZ = velocityZ;
+    public AllayTrailParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+        super(world, x, y, z, 0, 0, 0);
 
         this.spriteProvider = spriteProvider;
-        this.maxAge = 500;
-        this.scale = .05f;
         this.setSpriteForAge(spriteProvider);
+
+        this.scale = 0.06f;
     }
 
     public ParticleTextureSheet getType() {
@@ -37,31 +34,11 @@ public class DropletParticle extends SpriteBillboardParticle {
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        if (this.age++ >= this.maxAge) {
+        this.alpha -= 0.05f;
+
+        if (this.alpha <= 0f) {
             this.markDead();
         }
-
-        if (this.onGround || (this.age > 5 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
-            this.markDead();
-        }
-
-        if (this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
-            for (int i = 0; i > -10; i--) {
-                BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
-                if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
-                    this.world.addParticle(Effective.RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
-                    break;
-                }
-            }
-
-            this.markDead();
-        }
-
-        this.velocityX *= 0.99f;
-        this.velocityY -= 0.05f;
-        this.velocityZ *= 0.99f;
-
-        this.move(velocityX, velocityY, velocityZ);
     }
 
     @Override
@@ -95,7 +72,8 @@ public class DropletParticle extends SpriteBillboardParticle {
         float maxU = this.getMaxU();
         float minV = this.getMinV();
         float maxV = this.getMaxV();
-        int l = this.getBrightness(tickDelta);
+
+        int l = 15728880;
 
         vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
         vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
@@ -113,7 +91,13 @@ public class DropletParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new DropletParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+            AllayTrailParticle instance = new AllayTrailParticle(world, x, y, z, spriteProvider);
+            if (parameters instanceof AllayParticleType allayParticleParameters && allayParticleParameters.initialData != null) {
+                instance.red = (float) (allayParticleParameters.initialData.color >> 16 & 0xFF) / 255.0f;
+                instance.green = (float) (allayParticleParameters.initialData.color >> 8 & 0xFF) / 255.0f;
+                instance.blue = (float) (allayParticleParameters.initialData.color & 0xFF) / 255.0f;
+            }
+            return instance;
         }
     }
 }

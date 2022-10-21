@@ -1,7 +1,6 @@
 package ladysnake.effective.client.particle;
 
 import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.EffectiveConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

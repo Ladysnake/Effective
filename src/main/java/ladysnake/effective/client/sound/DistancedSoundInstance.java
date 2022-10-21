@@ -10,13 +10,17 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 
 public class DistancedSoundInstance extends PositionedSoundInstance implements TickableSoundInstance {
-    private final float maxDistance;
     private static final Random RANDOM = Random.create();
+    private final float maxDistance;
 
     public DistancedSoundInstance(SoundEvent soundEvent, SoundCategory soundCategory, float pitch, BlockPos blockPos, float maxDistance) {
         super(soundEvent, soundCategory, 0.0f, pitch, DistancedSoundInstance.RANDOM, blockPos);
         this.maxDistance = maxDistance;
         this.repeat = false;
+    }
+
+    public static DistancedSoundInstance ambient(SoundEvent soundEvent, float pitch, BlockPos blockPos, float maxDistance) {
+        return new DistancedSoundInstance(soundEvent, SoundCategory.AMBIENT, pitch, blockPos, maxDistance);
     }
 
     @Override
@@ -33,9 +37,5 @@ public class DistancedSoundInstance extends PositionedSoundInstance implements T
     public void tick() {
         float distance = MathHelper.sqrt((float) MinecraftClient.getInstance().player.getPos().squaredDistanceTo(this.x, this.y, this.z));
         this.volume = MathHelper.clampedLerp(0f, 1.0f, 1.0f - distance / this.maxDistance);
-    }
-
-    public static DistancedSoundInstance ambient(SoundEvent soundEvent, float pitch, BlockPos blockPos, float maxDistance) {
-        return new DistancedSoundInstance(soundEvent, SoundCategory.AMBIENT, pitch, blockPos, maxDistance);
     }
 }

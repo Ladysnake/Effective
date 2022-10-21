@@ -36,31 +36,32 @@ import net.minecraft.world.World;
 @Environment(EnvType.CLIENT)
 public class Effective implements ClientModInitializer {
     public static final String MODID = "effective";
-
-    // particle types
-    public static SplashParticleType SPLASH;
-    //    public static DefaultParticleType LAVA_SPLASH;
-    public static DefaultParticleType DROPLET;
-    public static DefaultParticleType RIPPLE;
-    public static DefaultParticleType WATERFALL_CLOUD;
-    public static SplashParticleType GLOW_SPLASH;
-    public static DefaultParticleType GLOW_DROPLET;
-    public static DefaultParticleType GLOW_RIPPLE;
-
-    // sound events
-    public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
-
+    // rainbow shader for jeb glow squid
+    public static final ManagedCoreShader RAINBOW_SHADER = ShaderEffectManager.getInstance().manageCoreShader(new Identifier(MODID, "jeb"));
+    private static final Uniform1f uniformSTimeJeb = RAINBOW_SHADER.findUniform1f("Time");
     // squid hypno shader
     private static final ManagedShaderEffect HYPNO_SHADER = ShaderEffectManager.getInstance()
             .manage(new Identifier(MODID, "shaders/post/hypnotize.json"));
     private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
     private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
     private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
-
-    // rainbow shader for jeb glow squid
-    public static final ManagedCoreShader RAINBOW_SHADER = ShaderEffectManager.getInstance().manageCoreShader(new Identifier(MODID, "jeb"));
-    private static final Uniform1f uniformSTimeJeb = RAINBOW_SHADER.findUniform1f("Time");
+    // particle types
+    public static SplashParticleType SPLASH;
+    public static DefaultParticleType DROPLET;
+    public static DefaultParticleType RIPPLE;
+    public static DefaultParticleType WATERFALL_CLOUD;
+    public static SplashParticleType GLOW_SPLASH;
+    public static DefaultParticleType GLOW_DROPLET;
+    public static DefaultParticleType GLOW_RIPPLE;
+    public static AllayParticleType ALLAY_TRAIL;
+    public static AllayParticleType ALLAY_TWINKLE;
+    // sound events
+    public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
     private static int ticksJeb;
+
+    public static boolean isNightTime(World world) {
+        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
+    }
 
     @Override
     public void onInitializeClient() {
@@ -76,20 +77,22 @@ public class Effective implements ClientModInitializer {
         // particles
         SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:splash", new SplashParticleType(true));
         ParticleFactoryRegistry.getInstance().register(Effective.SPLASH, SplashParticle.DefaultFactory::new);
-        GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_splash", new SplashParticleType(true));
-        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
         DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:droplet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.DROPLET, DropletParticle.DefaultFactory::new);
-        GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
         RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:ripple", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.RIPPLE, RippleParticle.DefaultFactory::new);
-        GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
         WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:waterfall_cloud", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.WATERFALL_CLOUD, WaterfallCloudParticle.DefaultFactory::new);
-//        LAVA_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:lava_splash", FabricParticleTypes.simple(true));
-//        ParticleFactoryRegistry.getInstance().register(Effective.LAVA_SPLASH, fabricSpriteProvider -> new LavaSplashParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Effective.MODID, "textures/entity/splash/lava_splash_0.png")));
+        GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_splash", new SplashParticleType(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
+        GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
+        GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
+        ALLAY_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_trail", new AllayParticleType(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TRAIL, AllayTrailParticle.DefaultFactory::new);
+        ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new AllayParticleType(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, AllayTwinkleParticle.DefaultFactory::new);
 
         // sound events
         AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
@@ -101,7 +104,7 @@ public class Effective implements ClientModInitializer {
             WaterfallCloudGenerators.particlesToSpawn.clear();
         });
 
-        // hypnotizing glowsquids
+        // hypnotizing glow squids
         ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
             if (EffectiveConfig.glowsquidHypnotize && (!RenderedHypnoEntities.GLOWSQUIDS.isEmpty() || RenderedHypnoEntities.lockedIntensityTimer > 0 || RenderedHypnoEntities.lookIntensity > 0)) {
                 double bestLookIntensity = 0;
@@ -177,12 +180,8 @@ public class Effective implements ClientModInitializer {
             }
         });
 
-        // jeb glow squids
+        // jeb rainbow glow squids
         ClientTickEvents.END_CLIENT_TICK.register(client -> ticksJeb++);
         EntitiesPreRenderCallback.EVENT.register((camera, frustum, tickDelta) -> uniformSTimeJeb.set((ticksJeb + tickDelta) * 0.05f));
-    }
-
-    public static boolean isNightTime(World world) {
-        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
     }
 }

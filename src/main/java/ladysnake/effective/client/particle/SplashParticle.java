@@ -27,18 +27,17 @@ import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
 
 public class SplashParticle extends Particle {
+    static final int MAX_FRAME = 12;
     public float widthMultiplier;
     public float heightMultiplier;
     public int wave1End;
     public int wave2Start;
     public int wave2End;
+    public int waterColor = -1;
     Model waveModel;
     Model waveBottomModel;
     Model waveRimModel;
     Model waveBottomRimModel;
-    public int waterColor = -1;
-
-    static final int MAX_FRAME = 12;
 
     protected SplashParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);

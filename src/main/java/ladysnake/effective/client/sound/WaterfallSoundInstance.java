@@ -11,14 +11,14 @@ public class WaterfallSoundInstance extends DistancedSoundInstance {
         super(soundEvent, soundCategory, pitch, blockPos, maxDistance);
     }
 
+    public static WaterfallSoundInstance ambient(SoundEvent soundEvent, float pitch, BlockPos blockPos, float maxDistance) {
+        return new WaterfallSoundInstance(soundEvent, SoundCategory.AMBIENT, pitch, blockPos, maxDistance);
+    }
+
     @Override
     public void tick() {
         super.tick();
         final float volumeAdjustor = (EffectiveConfig.cascadeSoundsVolumeMultiplier / 100.f) * 2.5f;
         this.volume = MathHelper.clampedLerp(0f, volumeAdjustor, this.volume);
-    }
-
-    public static WaterfallSoundInstance ambient(SoundEvent soundEvent, float pitch, BlockPos blockPos, float maxDistance) {
-        return new WaterfallSoundInstance(soundEvent, SoundCategory.AMBIENT, pitch, blockPos, maxDistance);
     }
 }
