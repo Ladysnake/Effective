@@ -18,20 +18,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FeatureRenderer.class)
 public abstract class FeatureRendererMixin {
-    @Unique
-    private static boolean isRgb;
+	@Unique
+	private static boolean isRgb;
 
-    @Inject(method = "renderModel", at = @At("HEAD"))
-    private static <T extends LivingEntity> void captureEntity(EntityModel<T> model, Identifier texture, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float red, float green, float blue, CallbackInfo ci) {
-        isRgb = entity instanceof GlowSquidEntity && entity.hasCustomName() && "jeb_".equals(entity.getName().getString());
-    }
+	@Inject(method = "renderModel", at = @At("HEAD"))
+	private static <T extends LivingEntity> void captureEntity(EntityModel<T> model, Identifier texture, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float red, float green, float blue, CallbackInfo ci) {
+		isRgb = entity instanceof GlowSquidEntity && entity.hasCustomName() && "jeb_".equals(entity.getName().getString());
+	}
 
-    @ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/render/VertexConsumer;"))
-    private static RenderLayer replaceRenderLayer(RenderLayer base) {
-        if (isRgb) {
-            return Effective.RAINBOW_SHADER.getRenderLayer(base);
-        }
+	@ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"))
+	private static RenderLayer replaceRenderLayer(RenderLayer base) {
+		if (isRgb) {
+			return Effective.RAINBOW_SHADER.getRenderLayer(base);
+		}
 
-        return base;
-    }
+		return base;
+	}
 }

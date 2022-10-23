@@ -8,14 +8,14 @@ import net.minecraft.particle.ParticleEffect;
 
 @Environment(EnvType.CLIENT)
 public class AllayParticleType extends DefaultParticleType {
-    public AllayParticleInitialData initialData;
+	public AllayParticleInitialData initialData;
 
-    public AllayParticleType(boolean alwaysShow) {
-        super(alwaysShow);
-    }
+	public AllayParticleType(boolean alwaysShow) {
+		super(alwaysShow);
+	}
 
-    public ParticleEffect setData(AllayParticleInitialData target) {
-        this.initialData = target;
-        return this;
-    }
+	public ParticleEffect setData(AllayParticleInitialData target) {
+		this.initialData = target;
+		return this;
+	}
 }

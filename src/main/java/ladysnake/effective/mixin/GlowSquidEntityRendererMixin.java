@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SquidEntityRenderer.class)
 public class GlowSquidEntityRendererMixin {
-    // add glow squid to entities hypnotizing the client
-    @Inject(method = "setupTransforms(Lnet/minecraft/entity/passive/SquidEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At("TAIL"))
-    protected void setupTransforms(SquidEntity squidEntity, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callbackInfo) {
-        if (squidEntity instanceof GlowSquidEntity glowSquid && glowSquid.getDarkTicksRemaining() <= 0f && Math.sqrt(MinecraftClient.getInstance().player.getPos().squaredDistanceTo(squidEntity.getPos())) < 20.0) {
-            RenderedHypnoEntities.GLOWSQUIDS.add(glowSquid);
-        }
-    }
+	// add glow squid to entities hypnotizing the client
+	@Inject(method = "setupTransforms(Lnet/minecraft/entity/passive/SquidEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At("TAIL"))
+	protected void setupTransforms(SquidEntity squidEntity, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callbackInfo) {
+		if (squidEntity instanceof GlowSquidEntity glowSquid && glowSquid.getDarkTicksRemaining() <= 0f && Math.sqrt(MinecraftClient.getInstance().player.getPos().squaredDistanceTo(squidEntity.getPos())) < 20.0) {
+			RenderedHypnoEntities.GLOWSQUIDS.add(glowSquid);
+		}
+	}
 }

@@ -13,14 +13,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererMixin {
-    @Nullable
-    @Inject(method = "getRenderLayer", at = @At("RETURN"), cancellable = true)
-    protected void getRenderLayer(LivingEntity entity, boolean showBody, boolean translucent, boolean showOutline, CallbackInfoReturnable<RenderLayer> cir) {
-        if (entity instanceof GlowSquidEntity) {
-            RenderLayer baseLayer = cir.getReturnValue();
-            if (entity.hasCustomName() && "jeb_".equals(entity.getName().getString())) {
-                cir.setReturnValue(baseLayer == null ? null : Effective.RAINBOW_SHADER.getRenderLayer(baseLayer));
-            }
-        }
-    }
+	@Nullable
+	@Inject(method = "getRenderLayer", at = @At("RETURN"), cancellable = true)
+	protected void getRenderLayer(LivingEntity entity, boolean showBody, boolean translucent, boolean showOutline, CallbackInfoReturnable<RenderLayer> cir) {
+		if (entity instanceof GlowSquidEntity) {
+			RenderLayer baseLayer = cir.getReturnValue();
+			if (entity.hasCustomName() && "jeb_".equals(entity.getName().getString())) {
+				cir.setReturnValue(baseLayer == null ? null : Effective.RAINBOW_SHADER.getRenderLayer(baseLayer));
+			}
+		}
+	}
 }
