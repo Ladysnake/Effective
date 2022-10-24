@@ -11,13 +11,14 @@
     "AllayLivingEntityRendererMixin",
     "EntityMixin",
     "FluidRendererMixin",
+    "GameRendererMixin",
     "GlowSquidEntityRendererMixin",
-    "RenderLayerAccessor",
     "WaterFluidMixin",
     "WorldMixin",
     "integration.sodium.FluidRendererMixin",
     "jebglowsquid.FeatureRendererMixin",
-    "jebglowsquid.LivingEntityRendererMixin"
+    "jebglowsquid.LivingEntityRendererMixin",
+    "AllayEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

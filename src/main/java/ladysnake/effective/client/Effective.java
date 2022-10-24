@@ -1,5 +1,6 @@
 package ladysnake.effective.client;
 
+import ca.rttv.malum.util.handler.RenderHandler;
 import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
@@ -67,6 +68,8 @@ public class Effective implements ClientModInitializer {
 	public void onInitializeClient() {
 		// load config
 		EffectiveConfig.init(MODID, EffectiveConfig.class);
+
+		RenderHandler.init();
 
 		// register model layers
 		EntityModelLayerRegistry.registerModelLayer(SplashModel.MODEL_LAYER, SplashModel::getTexturedModelData);

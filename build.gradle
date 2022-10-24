@@ -90,7 +90,7 @@ dependencies {
 	include "maven.modrinth:midnightlib:${midnightlib_version}"
 
 	// lodestone lib
-	modImplementation 'com.github.Arathain:LodestoneLib-Quilt:1acc3ae039'
+//	modImplementation 'com.github.Arathain:LodestoneLib-Quilt:1acc3ae039'
 }
 
 processResources {
