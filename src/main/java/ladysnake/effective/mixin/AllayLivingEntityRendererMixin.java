@@ -70,7 +70,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 								positions.stream()
 										.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
 										.toList(),
-								f -> (float) Math.cbrt(f) * size
+								f -> size
 						)
 						.renderTrail(
 								DELAYED_RENDER.getBuffer(LIGHT_TYPE),
@@ -78,7 +78,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 								positions.stream()
 										.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
 										.toList(),
-								f -> Easing.QUARTIC_IN_OUT.ease(f, 0, size, 1)
+								f -> size / 1.5f
 						);
 			}
 			matrixStack.pop();
