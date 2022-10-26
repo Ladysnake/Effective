@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin;
+package ladysnake.effective.mixin.allays;
 
 
 import com.sammy.ortus.systems.rendering.PositionTrackedEntity;
@@ -20,9 +20,6 @@ import java.util.ArrayList;
 @Mixin(AllayEntity.class)
 public abstract class AllayEntityMixin extends PathAwareEntity implements PositionTrackedEntity {
 	public final ArrayList<Vec3d> pastPositions = new ArrayList<>();
-
-	@Shadow
-	private @Nullable BlockPos pos;
 
 	protected AllayEntityMixin(EntityType<? extends PathAwareEntity> entityType, World world) {
 		super(entityType, world);

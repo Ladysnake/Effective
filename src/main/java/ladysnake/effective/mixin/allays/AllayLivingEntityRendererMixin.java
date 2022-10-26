@@ -1,12 +1,11 @@
-package ladysnake.effective.mixin;
+package ladysnake.effective.mixin.allays;
 
 import com.sammy.ortus.setup.LodestoneRenderLayers;
 import com.sammy.ortus.systems.rendering.PositionTrackedEntity;
 import com.sammy.ortus.systems.rendering.VFXBuilders;
-import com.sammy.ortus.systems.rendering.particle.Easing;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.contracts.AllayParticleInitialData;
+import ladysnake.effective.client.contracts.ColoredParticleInitialData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -36,8 +35,19 @@ import static com.sammy.ortus.handlers.RenderHandler.DELAYED_RENDER;
 public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
 	private static final Identifier LIGHT_TRAIL = new Identifier(Effective.MODID, "textures/vfx/light_trail.png");
 	private static final RenderLayer LIGHT_TYPE = LodestoneRenderLayers.ADDITIVE_TEXTURE_TRIANGLE.apply(LIGHT_TRAIL);
+
 	protected AllayLivingEntityRendererMixin(EntityRendererFactory.Context ctx) {
 		super(ctx);
+	}
+
+	@Unique
+	private static boolean isGoingFast(AllayEntity allayEntity) {
+		Vec3d velocity = allayEntity.getVelocity();
+		float speedRequired = 0.1f;
+
+		return (velocity.getX() >= speedRequired || velocity.getX() <= -speedRequired)
+				|| (velocity.getY() >= speedRequired || velocity.getY() <= -speedRequired)
+				|| (velocity.getZ() >= speedRequired || velocity.getZ() <= -speedRequired);
 	}
 
 	// allay trail and twinkle
@@ -45,7 +55,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 	public void render(T livingEntity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
 		// new render
 		if (EffectiveConfig.enableAllayTrails && livingEntity instanceof AllayEntity allayEntity) {
-			AllayParticleInitialData data = new AllayParticleInitialData(allayEntity.getUuid().hashCode() % 2 == 0 && EffectiveConfig.goldenAllays ? 0xFFC200 : 0x22CFFF);
+			ColoredParticleInitialData data = new ColoredParticleInitialData(allayEntity.getUuid().hashCode() % 2 == 0 && EffectiveConfig.goldenAllays ? 0xFFC200 : 0x22CFFF);
 
 			// trail
 			matrixStack.push();
@@ -92,15 +102,6 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 						0, 0, 0);
 			}
 		}
-	}
-	@Unique
-	private static boolean isGoingFast(AllayEntity allayEntity) {
-		Vec3d velocity = allayEntity.getVelocity();
-		float speedRequired = 0.1f;
-
-		return (velocity.getX() >= speedRequired || velocity.getX() <= -speedRequired)
-				|| (velocity.getY() >= speedRequired || velocity.getY() <= -speedRequired)
-				|| (velocity.getZ() >= speedRequired || velocity.getZ() <= -speedRequired);
 	}
 
 }

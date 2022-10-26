@@ -2,6 +2,7 @@ package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.particle.types.SplashParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

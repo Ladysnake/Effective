@@ -1,4 +1,4 @@
-package ladysnake.effective.client.particle;
+package ladysnake.effective.client.particle.types;
 
 import ladysnake.effective.client.contracts.SplashParticleInitialData;
 import net.fabricmc.api.EnvType;

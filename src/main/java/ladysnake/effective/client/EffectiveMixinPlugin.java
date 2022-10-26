@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public class ModMixinPlugin implements IMixinConfigPlugin {
+public class EffectiveMixinPlugin implements IMixinConfigPlugin {
 	@Override
 	public void onLoad(String mixinPackage) {
 	}

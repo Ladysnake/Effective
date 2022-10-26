@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin;
+package ladysnake.effective.mixin.water;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;

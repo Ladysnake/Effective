@@ -1,6 +1,6 @@
-package ladysnake.effective.mixin;
+package ladysnake.effective.mixin.glowsquids;
 
-import ladysnake.effective.client.RenderedHypnoEntities;
+import ladysnake.effective.client.world.RenderedHypnotizingEntities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.SquidEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,7 +17,7 @@ public class GlowSquidEntityRendererMixin {
 	@Inject(method = "setupTransforms(Lnet/minecraft/entity/passive/SquidEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At("TAIL"))
 	protected void setupTransforms(SquidEntity squidEntity, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callbackInfo) {
 		if (squidEntity instanceof GlowSquidEntity glowSquid && glowSquid.getDarkTicksRemaining() <= 0f && Math.sqrt(MinecraftClient.getInstance().player.getPos().squaredDistanceTo(squidEntity.getPos())) < 20.0) {
-			RenderedHypnoEntities.GLOWSQUIDS.add(glowSquid);
+			RenderedHypnotizingEntities.GLOWSQUIDS.add(glowSquid);
 		}
 	}
 }

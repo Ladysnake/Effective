@@ -1,6 +1,7 @@
 package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import ladysnake.effective.client.particle.types.ColoredParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
@@ -100,7 +101,7 @@ public class AllayTwinkleParticle extends SpriteBillboardParticle {
 		@Override
 		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			AllayTwinkleParticle instance = new AllayTwinkleParticle(world, x, y, z, spriteProvider);
-			if (parameters instanceof AllayParticleType allayParticleParameters && allayParticleParameters.initialData != null) {
+			if (parameters instanceof ColoredParticleType allayParticleParameters && allayParticleParameters.initialData != null) {
 				instance.colorRed = (float) (allayParticleParameters.initialData.color >> 16 & 0xFF) / 255.0f;
 				instance.colorGreen = (float) (allayParticleParameters.initialData.color >> 8 & 0xFF) / 255.0f;
 				instance.colorBlue = (float) (allayParticleParameters.initialData.color & 0xFF) / 255.0f;

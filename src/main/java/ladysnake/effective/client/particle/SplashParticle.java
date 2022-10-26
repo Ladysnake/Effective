@@ -3,6 +3,7 @@ package ladysnake.effective.client.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.client.particle.types.SplashParticleType;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;

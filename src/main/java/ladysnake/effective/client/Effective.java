@@ -1,10 +1,13 @@
 package ladysnake.effective.client;
 
 import ladysnake.effective.client.particle.*;
+import ladysnake.effective.client.particle.types.ColoredParticleType;
+import ladysnake.effective.client.particle.types.SplashParticleType;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
+import ladysnake.effective.client.world.RenderedHypnotizingEntities;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
 import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
@@ -53,8 +56,8 @@ public class Effective implements ClientModInitializer {
 	public static SplashParticleType GLOW_SPLASH;
 	public static DefaultParticleType GLOW_DROPLET;
 	public static DefaultParticleType GLOW_RIPPLE;
-	public static AllayParticleType ALLAY_TRAIL;
-	public static AllayParticleType ALLAY_TWINKLE;
+	public static ColoredParticleType ALLAY_TWINKLE;
+
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
 	private static int ticksJeb;
@@ -89,9 +92,7 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
 		GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
-		ALLAY_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_trail", new AllayParticleType(true));
-		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TRAIL, AllayTrailParticle.DefaultFactory::new);
-		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new AllayParticleType(true));
+		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new ColoredParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, AllayTwinkleParticle.DefaultFactory::new);
 
 		// sound events
@@ -106,11 +107,11 @@ public class Effective implements ClientModInitializer {
 
 		// hypnotizing glow squids
 		ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
-			if (EffectiveConfig.glowsquidHypnotize && (!RenderedHypnoEntities.GLOWSQUIDS.isEmpty() || RenderedHypnoEntities.lockedIntensityTimer > 0 || RenderedHypnoEntities.lookIntensity > 0)) {
+			if (EffectiveConfig.glowsquidHypnotize && (!RenderedHypnotizingEntities.GLOWSQUIDS.isEmpty() || RenderedHypnotizingEntities.lockedIntensityTimer > 0 || RenderedHypnotizingEntities.lookIntensity > 0)) {
 				double bestLookIntensity = 0;
 				GlowSquidEntity bestSquid = null;
 
-				for (GlowSquidEntity glowsquid : RenderedHypnoEntities.GLOWSQUIDS) {
+				for (GlowSquidEntity glowsquid : RenderedHypnotizingEntities.GLOWSQUIDS) {
 					Vec3d toSquid = glowsquid.getPos().subtract(MinecraftClient.getInstance().player.getPos()).normalize();
 					double lookIntensity = toSquid.dotProduct(MinecraftClient.getInstance().player.getRotationVec(tickDelta)); // * 1 / Math.max(2, Math.sqrt(glowsquid.getPos().squaredDistanceTo(MinecraftClient.getInstance().player.getPos())) - 5f); // 1 = looking straight at squid
 					if (lookIntensity > bestLookIntensity && MinecraftClient.getInstance().player.canSee(glowsquid)) {
@@ -119,20 +120,20 @@ public class Effective implements ClientModInitializer {
 					}
 				}
 
-				RenderedHypnoEntities.lookIntensityGoal = bestLookIntensity;
+				RenderedHypnotizingEntities.lookIntensityGoal = bestLookIntensity;
 
-				if (!MinecraftClient.getInstance().isPaused() && RenderedHypnoEntities.lockedIntensityTimer >= 0) {
-					RenderedHypnoEntities.lookIntensityGoal = 1.0f;
-					RenderedHypnoEntities.lookIntensity += 0.001f;
-					RenderedHypnoEntities.lockedIntensityTimer--;
+				if (!MinecraftClient.getInstance().isPaused() && RenderedHypnotizingEntities.lockedIntensityTimer >= 0) {
+					RenderedHypnotizingEntities.lookIntensityGoal = 1.0f;
+					RenderedHypnotizingEntities.lookIntensity += 0.001f;
+					RenderedHypnotizingEntities.lockedIntensityTimer--;
 				}
 
-				if (RenderedHypnoEntities.lookIntensity < RenderedHypnoEntities.lookIntensityGoal) {
-					RenderedHypnoEntities.lookIntensity += 0.0005f;
+				if (RenderedHypnotizingEntities.lookIntensity < RenderedHypnotizingEntities.lookIntensityGoal) {
+					RenderedHypnotizingEntities.lookIntensity += 0.0005f;
 				} else {
-					RenderedHypnoEntities.lookIntensity -= 0.001f;
+					RenderedHypnotizingEntities.lookIntensity -= 0.001f;
 				}
-				RenderedHypnoEntities.lookIntensity = MathHelper.clamp(RenderedHypnoEntities.lookIntensity, 0, 0.5f);
+				RenderedHypnotizingEntities.lookIntensity = MathHelper.clamp(RenderedHypnotizingEntities.lookIntensity, 0, 0.5f);
 
 				if (bestSquid != null) {
 					if (bestSquid.hasCustomName() && bestSquid.getCustomName().getString().equals("jeb_")) {
@@ -141,12 +142,12 @@ public class Effective implements ClientModInitializer {
 						rainbowHypno.set(0.0f);
 					}
 				}
-				intensityHypno.set((float) Math.max(0, RenderedHypnoEntities.lookIntensity));
+				intensityHypno.set((float) Math.max(0, RenderedHypnotizingEntities.lookIntensity));
 				sTimeHypno.set((MinecraftClient.getInstance().world.getTime() + tickDelta) / 20);
 				HYPNO_SHADER.render(tickDelta);
 
 				if (MinecraftClient.getInstance().player.age % 20 == 0 && !MinecraftClient.getInstance().isPaused()) {
-					MinecraftClient.getInstance().player.playSound(SoundEvents.ENTITY_GLOW_SQUID_AMBIENT, (float) RenderedHypnoEntities.lookIntensity, (float) RenderedHypnoEntities.lookIntensity);
+					MinecraftClient.getInstance().player.playSound(SoundEvents.ENTITY_GLOW_SQUID_AMBIENT, (float) RenderedHypnotizingEntities.lookIntensity, (float) RenderedHypnotizingEntities.lookIntensity);
 				}
 
 				// look at squid
@@ -169,14 +170,14 @@ public class Effective implements ClientModInitializer {
 							MathHelper.wrapDegrees(desiredYaw - currentYaw)
 					);
 
-					Vec2f rotationStep = rotationChange.normalize().multiply((float) RenderedHypnoEntities.lookIntensity * 10f * (MathHelper.clamp(rotationChange.length(), 0, 10) / 10f));
+					Vec2f rotationStep = rotationChange.normalize().multiply((float) RenderedHypnotizingEntities.lookIntensity * 10f * (MathHelper.clamp(rotationChange.length(), 0, 10) / 10f));
 
 					player.setPitch(player.getPitch(tickDelta) + rotationStep.x);
 					player.setYaw(player.getYaw(tickDelta) + rotationStep.y);
 
 				}
 
-				RenderedHypnoEntities.GLOWSQUIDS.clear();
+				RenderedHypnotizingEntities.GLOWSQUIDS.clear();
 			}
 		});
 

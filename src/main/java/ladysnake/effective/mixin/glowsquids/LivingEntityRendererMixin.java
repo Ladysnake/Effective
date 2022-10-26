@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin.jebglowsquid;
+package ladysnake.effective.mixin.glowsquids;
 
 import ladysnake.effective.client.Effective;
 import net.minecraft.client.render.RenderLayer;
