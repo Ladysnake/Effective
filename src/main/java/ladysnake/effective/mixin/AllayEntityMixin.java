@@ -1,23 +1,24 @@
 package ladysnake.effective.mixin;
 
-import ladysnake.effective.client.entity.PositionTracker;
+
+import com.sammy.ortus.systems.rendering.PositionTrackedEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 @Mixin(AllayEntity.class)
-public class AllayEntityMixin extends PathAwareEntity implements PositionTracker {
+public abstract class AllayEntityMixin extends PathAwareEntity implements PositionTrackedEntity {
 	public final ArrayList<Vec3d> pastPositions = new ArrayList<>();
 
 	@Shadow

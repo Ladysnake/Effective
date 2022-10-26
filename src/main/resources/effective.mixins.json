@@ -8,17 +8,17 @@
   "client": [
     "AbstractBlockMixin",
     "AllayEntityRendererMixin",
+    "AllayEntityMixin",
     "AllayLivingEntityRendererMixin",
     "EntityMixin",
     "FluidRendererMixin",
-    "GameRendererMixin",
     "GlowSquidEntityRendererMixin",
+    "RenderLayerAccessor",
     "WaterFluidMixin",
     "WorldMixin",
     "integration.sodium.FluidRendererMixin",
     "jebglowsquid.FeatureRendererMixin",
-    "jebglowsquid.LivingEntityRendererMixin",
-    "AllayEntityMixin"
+    "jebglowsquid.LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
