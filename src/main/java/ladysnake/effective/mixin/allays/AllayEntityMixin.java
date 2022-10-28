@@ -2,19 +2,18 @@ package ladysnake.effective.mixin.allays;
 
 
 import com.sammy.ortus.systems.rendering.PositionTrackedEntity;
+import ladysnake.effective.client.EffectiveUtils;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AllayEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 @Mixin(AllayEntity.class)
@@ -31,7 +30,7 @@ public abstract class AllayEntityMixin extends PathAwareEntity implements Positi
 	}
 
 	public void trackPastPositions() {
-		Vec3d position = getPos().add(0f, 0.2f, 0f);
+		Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()).add(0f, -.2f, 0f);
 		if (!pastPositions.isEmpty()) {
 			Vec3d latest = pastPositions.get(pastPositions.size() - 1);
 			float distance = (float) latest.distanceTo(position);
@@ -41,7 +40,7 @@ public abstract class AllayEntityMixin extends PathAwareEntity implements Positi
 			int excess = pastPositions.size() - 1;
 			ArrayList<Vec3d> toRemove = new ArrayList<>();
 			float efficiency = (float) (excess * 0.12f + Math.exp((Math.max(0, excess - 20)) * 0.2f));
-			float ratio = 0.3f;
+			float ratio = 0.1f;
 			if (efficiency > 0f) {
 				for (int i = 0; i < excess; i++) {
 					Vec3d excessPosition = pastPositions.get(i);

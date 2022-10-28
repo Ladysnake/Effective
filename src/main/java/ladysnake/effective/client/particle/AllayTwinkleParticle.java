@@ -1,6 +1,9 @@
 package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.sammy.ortus.systems.rendering.particle.ParticleTextureSheets;
+import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.particle.types.ColoredParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -28,7 +31,7 @@ public class AllayTwinkleParticle extends SpriteBillboardParticle {
 	}
 
 	public ParticleTextureSheet getType() {
-		return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+		return EffectiveConfig.additiveAllayTwinkle ? ParticleTextureSheets.ADDITIVE : ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package ladysnake.effective.client;
 
+import com.sammy.ortus.handlers.ScreenshakeHandler;
+import com.sammy.ortus.systems.rendering.particle.ParticleBuilders;
+import com.sammy.ortus.systems.screenshake.ScreenshakeInstance;
 import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.particle.types.ColoredParticleType;
 import ladysnake.effective.client.particle.types.SplashParticleType;
@@ -27,6 +30,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -99,7 +103,9 @@ public class Effective implements ClientModInitializer {
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
 
 		// events
-		ClientTickEvents.END_CLIENT_TICK.register(client -> WaterfallCloudGenerators.tick());
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			WaterfallCloudGenerators.tick();
+		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
 			WaterfallCloudGenerators.generators.clear();
 			WaterfallCloudGenerators.particlesToSpawn.clear();

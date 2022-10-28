@@ -14,5 +14,6 @@
   "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)",
   "effective.midnightconfig.enableAllayTrails": "Enable Allay trails",
   "effective.midnightconfig.allayTwinkleDensity": "Allay trail twinkle density (requires Allay trails)",
+  "effective.midnightconfig.additiveAllayTwinkle": "Enable additive Allay twinkles (improved looks but incompatible with shaders)",
   "effective.midnightconfig.goldenAllays": "Enable golden Allays"
 }
