@@ -1,7 +1,7 @@
 package ladysnake.effective.mixin.allays;
 
 
-import com.sammy.ortus.systems.rendering.PositionTrackedEntity;
+import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
 import ladysnake.effective.client.EffectiveUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;

@@ -4,17 +4,20 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.client.particle.types.SplashParticleType;
 import ladysnake.effective.client.sound.WaterfallSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.biome.BiomeKeys;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,11 +116,17 @@ public class WaterfallCloudGenerators {
 		);
 	}
 
-	public static void addWaterfallCloud(WorldAccess world, BlockPos pos) {
+	public static void addWaterfallCloud(World world, BlockPos pos) {
 		if (pos != null) {
 			double offsetX = world.getRandom().nextGaussian() / 5f;
 			double offsetZ = world.getRandom().nextGaussian() / 5f;
-			world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
+
+			DefaultParticleType waterfallCloud = Effective.WATERFALL_CLOUD;
+			if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
+				waterfallCloud = Effective.GLOW_WATERFALL_CLOUD;
+			}
+
+			world.addParticle(waterfallCloud, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
 		}
 	}
 

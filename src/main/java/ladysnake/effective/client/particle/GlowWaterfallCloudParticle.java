@@ -1,59 +1,25 @@
 package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.client.Effective;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.*;
 import net.minecraft.world.LightType;
 
-public class GlowDropletParticle extends DropletParticle {
+public class GlowWaterfallCloudParticle extends WaterfallCloudParticle {
 	public float redAndGreen = random.nextFloat() / 5f;
 	public float blue = 1.0f;
+	public BlockPos pos;
 
-	private GlowDropletParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+	private GlowWaterfallCloudParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
-	}
 
-	@Override
-	public void tick() {
-		this.prevPosX = this.x;
-		this.prevPosY = this.y;
-		this.prevPosZ = this.z;
-
-		if (this.age++ >= this.maxAge) {
-			this.markDead();
-		}
-
-		if (this.onGround || (this.age > 5 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
-			this.markDead();
-		}
-
-		if (this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
-			for (int i = 0; i > -10; i--) {
-				BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
-				if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
-					this.world.addParticle(Effective.GLOW_RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
-					break;
-				}
-			}
-
-			this.markDead();
-		}
-
-		this.velocityX *= 0.99f;
-		this.velocityY -= 0.05f;
-		this.velocityZ *= 0.99f;
-
-		this.move(velocityX, velocityY, velocityZ);
+		pos = new BlockPos(x, y, z);
 	}
 
 	@Override
@@ -89,7 +55,7 @@ public class GlowDropletParticle extends DropletParticle {
 		float maxV = this.getMaxV();
 
 		int l = 15728880;
-		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) / 15f);
+		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, pos) / 15f);
 
 		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, colorAlpha).light(l).next();
 		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, colorAlpha).light(l).next();
@@ -107,7 +73,7 @@ public class GlowDropletParticle extends DropletParticle {
 
 		@Override
 		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-			return new GlowDropletParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+			return new GlowWaterfallCloudParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
 		}
 	}
 }

@@ -37,7 +37,7 @@
 			},
 			{
 				"id": "lodestone",
-				"versions": "=bd65134fa2"
+				"versions": "*"
 			}
 		]
 	},

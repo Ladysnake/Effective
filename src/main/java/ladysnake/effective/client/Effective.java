@@ -1,8 +1,8 @@
 package ladysnake.effective.client;
 
-import com.sammy.ortus.handlers.ScreenshakeHandler;
-import com.sammy.ortus.systems.rendering.particle.ParticleBuilders;
-import com.sammy.ortus.systems.screenshake.ScreenshakeInstance;
+import com.sammy.lodestone.handlers.ScreenshakeHandler;
+import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
 import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.particle.types.ColoredParticleType;
 import ladysnake.effective.client.particle.types.SplashParticleType;
@@ -60,6 +60,7 @@ public class Effective implements ClientModInitializer {
 	public static SplashParticleType GLOW_SPLASH;
 	public static DefaultParticleType GLOW_DROPLET;
 	public static DefaultParticleType GLOW_RIPPLE;
+	public static DefaultParticleType GLOW_WATERFALL_CLOUD;
 	public static ColoredParticleType ALLAY_TWINKLE;
 
 	// sound events
@@ -92,10 +93,12 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(Effective.WATERFALL_CLOUD, WaterfallCloudParticle.DefaultFactory::new);
 		GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_splash", new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
-		GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
 		GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
+		GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
+		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
+		GLOW_WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_waterfall_cloud", FabricParticleTypes.simple(true));
+		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_WATERFALL_CLOUD, GlowWaterfallCloudParticle.DefaultFactory::new);
 		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new ColoredParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, AllayTwinkleParticle.DefaultFactory::new);
 
