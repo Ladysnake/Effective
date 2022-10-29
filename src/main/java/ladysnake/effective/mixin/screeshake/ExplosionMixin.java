@@ -1,12 +1,11 @@
 package ladysnake.effective.mixin.screeshake;
 
-import com.sammy.lodestone.handlers.ScreenshakeHandler;
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
-import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
+import com.sammy.ortus.handlers.ScreenshakeHandler;
+import com.sammy.ortus.systems.rendering.particle.Easing;
+import com.sammy.ortus.systems.screenshake.PositionedScreenshakeInstance;
+import com.sammy.ortus.systems.screenshake.ScreenshakeInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;

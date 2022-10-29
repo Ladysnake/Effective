@@ -1,8 +1,8 @@
 package ladysnake.effective.mixin.allays;
 
-import com.sammy.lodestone.setup.LodestoneRenderLayers;
-import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
-import com.sammy.lodestone.systems.rendering.VFXBuilders;
+import com.sammy.ortus.setup.LodestoneRenderLayers;
+import com.sammy.ortus.systems.rendering.PositionTrackedEntity;
+import com.sammy.ortus.systems.rendering.VFXBuilders;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.EffectiveUtils;
@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.sammy.lodestone.handlers.RenderHandler.DELAYED_RENDER;
+import static com.sammy.ortus.handlers.RenderHandler.DELAYED_RENDER;
 
 @Mixin(LivingEntityRenderer.class)
 public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {

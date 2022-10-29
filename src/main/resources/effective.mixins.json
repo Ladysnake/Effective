@@ -6,19 +6,20 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
+    "allays.AllayEntityMixin",
+    "allays.AllayEntityRendererMixin",
+    "allays.AllayLivingEntityRendererMixin",
+    "glowsquids.FeatureRendererMixin",
+    "glowsquids.GlowSquidEntityRendererMixin",
+    "glowsquids.LivingEntityRendererMixin",
+    "screeshake.RavagerEntityMixin",
+    "screeshake.WardenEntityMixin",
     "water.AbstractBlockMixin",
     "water.EntityMixin",
     "water.FluidRendererMixin",
     "water.WaterFluidMixin",
     "water.WorldMixin",
-    "water.integration.sodium.FluidRendererMixin",
-    "glowsquids.GlowSquidEntityRendererMixin",
-    "glowsquids.FeatureRendererMixin",
-    "glowsquids.LivingEntityRendererMixin",
-    "allays.AllayEntityMixin",
-    "allays.AllayEntityRendererMixin",
-    "allays.AllayLivingEntityRendererMixin",
-    "screeshake.ExplosionMixin"
+    "water.integration.sodium.FluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

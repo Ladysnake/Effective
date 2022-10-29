@@ -80,7 +80,7 @@ dependencies {
 	include "maven.modrinth:midnightlib:${midnightlib_version}"
 
 	// lodestone lib
-	modImplementation include('com.github.Arathain:LodestoneLib-Quilt:05d0bf75f3')
+	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:bd65134fa2")
 
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")

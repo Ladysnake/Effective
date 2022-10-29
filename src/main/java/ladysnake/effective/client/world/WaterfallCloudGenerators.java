@@ -1,6 +1,5 @@
 package ladysnake.effective.client.world;
 
-import carpet.script.language.Sys;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
