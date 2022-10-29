@@ -1,6 +1,5 @@
-package ladysnake.effective.mixin.screeshake;
+package ladysnake.effective.mixin.screenshake;
 
-import carpet.script.language.Sys;
 import com.sammy.ortus.handlers.ScreenshakeHandler;
 import com.sammy.ortus.systems.rendering.particle.Easing;
 import com.sammy.ortus.systems.screenshake.PositionedScreenshakeInstance;
