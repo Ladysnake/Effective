@@ -52,7 +52,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 			ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) allayEntity).getPastPositions());
 			VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setPosColorTexLightmapDefaultFormat();
 
-			float size = 0.4f;
+			float size = 0.3f;
 			float alpha = 1f;
 
 			float x = (float) MathHelper.lerp(tickDelta, allayEntity.prevX, allayEntity.getX());
@@ -68,7 +68,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 									.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
 									.toList(),
 							f -> MathHelper.sqrt(f) * size,
-							f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (alpha * f)-0.1f)))
+							f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (alpha * f) - 0.1f)))
 					)
 					.renderTrail(
 							DELAYED_RENDER.getBuffer(LIGHT_TYPE),
@@ -77,7 +77,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 									.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
 									.toList(),
 							f -> (MathHelper.sqrt(f) * size) / 1.5f,
-							f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (((alpha * f) / 1.5f)-0.1f))))
+							f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (((alpha * f) / 1.5f) - 0.1f))))
 					);
 
 			matrixStack.pop();

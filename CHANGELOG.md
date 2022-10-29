@@ -7,6 +7,8 @@
 - Added golden Allays
   - Allays now have a 50% chance of being a golden variant, also inspired from the Minecraft Legends announce trailer
   - Can be disabled in the configuration
+- Added glowing plankton waterfall clouds in warm oceans at night
+- Fixed splash rims looking incorrectly with Sodium
 - Migrated the mod to Quilt
 
 ## Effective 1.4 - 1.19.2

@@ -1,8 +1,5 @@
 package ladysnake.effective.client;
 
-import com.sammy.lodestone.handlers.ScreenshakeHandler;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
-import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
 import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.particle.types.ColoredParticleType;
 import ladysnake.effective.client.particle.types.SplashParticleType;
@@ -30,7 +27,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;

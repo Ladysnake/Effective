@@ -89,13 +89,22 @@ public class SplashParticle extends Particle {
 		Identifier rimTexture = new Identifier(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
 		RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
 
+		// splash matrices
 		MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
 		modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
 		modelMatrix.translate(0, -1, 0);
-
 		MatrixStack modelBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
 		modelBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
 		modelBottomMatrix.translate(0, 0.001, 0);
+
+		// splash bottom matrices
+		float splashRimScaleOffset = 0.0001f;
+		MatrixStack modelRimMatrix = getMatrixStackFromCamera(camera, tickDelta);
+		modelRimMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, -heightMultiplier * multiplier.getY() - splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
+		modelRimMatrix.translate(0, -1.001, 0);
+		MatrixStack modelRimBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
+		modelRimBottomMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, heightMultiplier * multiplier.getY() + splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
+		modelRimBottomMatrix.translate(0, 0.002, 0);
 
 		int light = this.getBrightness(tickDelta);
 
@@ -106,8 +115,8 @@ public class SplashParticle extends Particle {
 		this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
 
 		VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
-		this.waveRimModel.render(modelMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
-		this.waveBottomRimModel.render(modelBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
 
 		immediate.draw();
 	}

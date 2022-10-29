@@ -2,7 +2,6 @@ package ladysnake.effective.client;
 
 import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.util.math.Vec3d;
-import org.spongepowered.asm.mixin.Unique;
 
 public class EffectiveUtils {
 	public static boolean isGoingFast(AllayEntity allayEntity) {

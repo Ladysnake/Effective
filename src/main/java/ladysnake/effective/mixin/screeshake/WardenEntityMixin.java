@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin.roars;
+package ladysnake.effective.mixin.screeshake;
 
 import com.sammy.lodestone.handlers.ScreenshakeHandler;
 import com.sammy.lodestone.systems.rendering.particle.Easing;

@@ -7,17 +7,18 @@
   "mixins": [],
   "client": [
     "water.AbstractBlockMixin",
+    "water.EntityMixin",
+    "water.FluidRendererMixin",
+    "water.WaterFluidMixin",
+    "water.WorldMixin",
+    "water.integration.sodium.FluidRendererMixin",
+    "glowsquids.GlowSquidEntityRendererMixin",
+    "glowsquids.FeatureRendererMixin",
+    "glowsquids.LivingEntityRendererMixin",
     "allays.AllayEntityMixin",
     "allays.AllayEntityRendererMixin",
     "allays.AllayLivingEntityRendererMixin",
-    "water.EntityMixin",
-    "water.FluidRendererMixin",
-    "glowsquids.GlowSquidEntityRendererMixin",
-    "water.WaterFluidMixin",
-    "water.WorldMixin",
-    "integration.sodium.FluidRendererMixin",
-    "glowsquids.FeatureRendererMixin",
-    "glowsquids.LivingEntityRendererMixin"
+    "screeshake.ExplosionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

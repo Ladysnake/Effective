@@ -4,7 +4,6 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.particle.types.SplashParticleType;
 import ladysnake.effective.client.sound.WaterfallSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -16,7 +15,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeKeys;
 
 import java.util.ArrayList;

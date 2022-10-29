@@ -2,7 +2,6 @@ package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
-import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.particle.types.ColoredParticleType;
 import net.fabricmc.api.EnvType;

@@ -20,7 +20,7 @@ public class EffectiveMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		if (mixinClassName.startsWith("ladysnake.effective.mixin.integration.sodium")) {
+		if (mixinClassName.startsWith("ladysnake.effective.mixin.water.integration.sodium")) {
 			return FabricLoader.getInstance().isModLoaded("sodium");
 		}
 		return true;

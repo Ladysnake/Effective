@@ -2,7 +2,6 @@ package ladysnake.effective.mixin.allays;
 
 
 import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
-import ladysnake.effective.client.EffectiveUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.PathAwareEntity;
