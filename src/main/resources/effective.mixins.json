@@ -13,6 +13,7 @@
     "glowsquids.GlowSquidEntityRendererMixin",
     "glowsquids.LivingEntityRendererMixin",
     "screeshake.RavagerEntityMixin",
+    "screeshake.SonicBookTaskMixin",
     "screeshake.WardenEntityMixin",
     "water.AbstractBlockMixin",
     "water.EntityMixin",

@@ -38,4 +38,6 @@ public class WardenEntityMixin extends HostileEntity {
 			ticksSinceAnimationStart = 0;
 		}
 	}
+
+
 }
