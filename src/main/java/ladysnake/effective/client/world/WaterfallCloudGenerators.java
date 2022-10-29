@@ -1,5 +1,6 @@
 package ladysnake.effective.client.world;
 
+import carpet.script.language.Sys;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
@@ -7,13 +8,16 @@ import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.sound.WaterfallSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
 
@@ -62,7 +66,7 @@ public class WaterfallCloudGenerators {
 				if (distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
 					return;
 				}
-				if (world.random.nextInt(200) == 0) {
+				if (world.random.nextInt(200) == 0 && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
 					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});
@@ -132,5 +136,9 @@ public class WaterfallCloudGenerators {
 		if (pos != null) {
 			particlesToSpawn.put(pos, ticks);
 		}
+	}
+
+	public static boolean canSeeWaterfall(World world, BlockPos waterfallPos, PlayerEntity player) {
+		return world.raycast(new RaycastContext(new Vec3d(waterfallPos.getX(), waterfallPos.getY(), waterfallPos.getZ()), player.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player)).getBlockPos().equals(player.getBlockPos());
 	}
 }

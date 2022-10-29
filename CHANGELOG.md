@@ -9,6 +9,7 @@
   - Can be disabled in the configuration
 - Added glowing plankton waterfall clouds in warm oceans at night
 - Fixed splash rims looking incorrectly with Sodium
+- Waterfalls no longer play sound if the player cannot see them
 - Migrated the mod to Quilt
 
 ## Effective 1.4 - 1.19.2
