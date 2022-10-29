@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SittingAttackingPhase.class)
 public abstract class SittingAttackingPhaseMixin extends AbstractSittingPhase {
-	public ScreenshakeInstance roarScreenShake;
-
 	public SittingAttackingPhaseMixin(EnderDragonEntity enderDragonEntity) {
 		super(enderDragonEntity);
 	}
