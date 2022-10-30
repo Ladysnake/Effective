@@ -82,6 +82,10 @@ dependencies {
 	// lodestone lib
 	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:bd65134fa2")
 
+	// satin
+	modImplementation "io.github.ladysnake:satin:${satin_version}"
+	include "io.github.ladysnake:satin:${satin_version}"
+
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
 	modRuntimeOnly("maven.modrinth:sodium:${project.sodium_version}")
