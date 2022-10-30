@@ -1,15 +1,10 @@
 # Effective - Changelog:
 
-## Effective 1.5 - 1.19.2
-- Added Allay trails
-  - Allay will now leave a colored trail and twinkles when flying around, inspired from the Minecraft Legends announce trailer
-  - Allay trails can be disabled and trail twinkle density can be configured
-- Added golden Allays
-  - Allays now have a 50% chance of being a golden variant, also inspired from the Minecraft Legends announce trailer
-  - Can be disabled in the configuration
+## Effective 1.4.1 - 1.19.2
 - Added glowing plankton waterfall clouds in warm oceans at night
 - Fixed splash rims looking incorrectly with Sodium
 - Waterfalls no longer play sound if the player cannot see them
+- Now includes Satin API
 - Migrated the mod to Quilt
 
 ## Effective 1.4 - 1.19.2
