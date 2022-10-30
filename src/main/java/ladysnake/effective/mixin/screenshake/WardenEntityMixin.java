@@ -1,9 +1,9 @@
 package ladysnake.effective.mixin.screenshake;
 
-import com.sammy.ortus.handlers.ScreenshakeHandler;
-import com.sammy.ortus.systems.rendering.particle.Easing;
-import com.sammy.ortus.systems.screenshake.PositionedScreenshakeInstance;
-import com.sammy.ortus.systems.screenshake.ScreenshakeInstance;
+import com.sammy.lodestone.handlers.ScreenshakeHandler;
+import com.sammy.lodestone.systems.rendering.particle.Easing;
+import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
+import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
