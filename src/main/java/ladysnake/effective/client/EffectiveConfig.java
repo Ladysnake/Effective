@@ -39,15 +39,12 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean glowsquidHypnotizeAttractCursor = true;
 
-	@Hidden
 	@Entry
-	public static boolean enableAllayTrails = false;
+	public static boolean enableAllayTrails = true;
 
-	@Hidden
 	@Entry(min = 0, max = 100)
 	public static int allayTwinkleDensity = 5;
 
-	@Hidden
 	@Entry
-	public static boolean goldenAllays = false;
+	public static boolean goldenAllays = true;
 }
