@@ -29,7 +29,7 @@ public abstract class AllayEntityMixin extends PathAwareEntity implements Positi
 	}
 
 	public void trackPastPositions() {
-		Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()).add(0f, -.2f, 0f);
+		Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()).add(0f, -.1f, 0f);
 		if (!pastPositions.isEmpty()) {
 			Vec3d latest = pastPositions.get(pastPositions.size() - 1);
 			float distance = (float) latest.distanceTo(position);

@@ -53,7 +53,7 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 			ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) allayEntity).getPastPositions());
 			VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setPosColorTexLightmapDefaultFormat();
 
-			float size = 0.3f;
+			float size = 0.2f;
 			float alpha = 1f;
 
 			float x = (float) MathHelper.lerp(tickDelta, allayEntity.prevX, allayEntity.getX());
