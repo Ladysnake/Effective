@@ -58,7 +58,7 @@ public class Effective implements ClientModInitializer {
 	public static DefaultParticleType GLOW_DROPLET;
 	public static DefaultParticleType GLOW_RIPPLE;
 	public static DefaultParticleType GLOW_WATERFALL_CLOUD;
-	public static LodestoneParticleType ALLAY_TWINKLE;
+	public static AllayTwinkParticleType ALLAY_TWINKLE;
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -96,8 +96,8 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
 		GLOW_WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_waterfall_cloud", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_WATERFALL_CLOUD, GlowWaterfallCloudParticle.DefaultFactory::new);
-		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new LodestoneParticleType());
-		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, LodestoneParticleType.Factory::new);
+		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new AllayTwinkParticleType());
+		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, AllayTwinkParticleType.Factory::new);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
