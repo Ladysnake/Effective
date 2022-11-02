@@ -11,8 +11,8 @@ import net.minecraft.particle.ParticleType;
 
 import javax.annotation.Nullable;
 
-public class AllayTwinkParticleType extends ParticleType<WorldParticleEffect> {
-	public AllayTwinkParticleType() {
+public class AllayTwinkleParticleType extends ParticleType<WorldParticleEffect> {
+	public AllayTwinkleParticleType() {
 		super(false, WorldParticleEffect.DESERIALIZER);
 	}
 
@@ -32,7 +32,7 @@ public class AllayTwinkParticleType extends ParticleType<WorldParticleEffect> {
 		@Nullable
 		@Override
 		public Particle createParticle(WorldParticleEffect data, ClientWorld world, double x, double y, double z, double mx, double my, double mz) {
-			return new AllayTwinkParticle(world, data, (FabricSpriteProviderImpl) sprite, x, y, z, mx, my, mz);
+			return new AllayTwinkleParticle(world, data, (FabricSpriteProviderImpl) sprite, x, y, z, mx, my, mz);
 		}
 	}
 }
