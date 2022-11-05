@@ -17,4 +17,4 @@ https://www.curseforge.com/minecraft/mc-mods/effective
 **Yes**: If you have installed this mod on your Minecraft client, you will  be able to connect to vanilla Minecraft servers and the ambient effects  will work as intended.
 
 
-###### Copyright (C) 2021 Ladysnake
+###### Copyright (C) 2023 Ladysnake
