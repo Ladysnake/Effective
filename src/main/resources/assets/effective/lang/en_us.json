@@ -14,5 +14,9 @@
   "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)",
   "effective.midnightconfig.enableAllayTrails": "Enable Allay trails",
   "effective.midnightconfig.allayTwinkleDensity": "Allay trail twinkle density (requires Allay trails)",
-  "effective.midnightconfig.goldenAllays": "Enable golden Allays"
+  "effective.midnightconfig.goldenAllays": "Enable golden Allays",
+  "effective.midnightconfig.wardenScreenShake": "Enable Warden roar causing screen shake",
+  "effective.midnightconfig.sonicBoomScreenShake": "Enable Warden sonic booms causing screen shake",
+  "effective.midnightconfig.ravagerScreenShake": "Enable Ravager roar causing screen shake",
+  "effective.midnightconfig.dragonScreenShake": "Enable Ender Dragon perch roaring causing screen shake"
 }

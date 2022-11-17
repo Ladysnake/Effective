@@ -4,6 +4,7 @@ import com.sammy.lodestone.handlers.ScreenshakeHandler;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
 import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.RavagerEntity;
@@ -21,7 +22,9 @@ public class RavagerEntityMixin extends HostileEntity {
 
 	@Inject(method = "roar", at = @At("HEAD"))
 	public void roar(CallbackInfo ci) {
-		ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(10, this.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, 1.0f, 0.0f);
-		ScreenshakeHandler.addScreenshake(roarScreenShake);
+		if (EffectiveConfig.ravagerScreenShake) {
+			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(10, this.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, 1.0f, 0.0f);
+			ScreenshakeHandler.addScreenshake(roarScreenShake);
+		}
 	}
 }

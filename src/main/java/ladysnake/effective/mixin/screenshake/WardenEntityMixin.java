@@ -4,6 +4,7 @@ import com.sammy.lodestone.handlers.ScreenshakeHandler;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
 import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
@@ -25,7 +26,7 @@ public class WardenEntityMixin extends HostileEntity {
 
 	@Inject(method = "tick", at = @At("HEAD"))
 	public void tick(CallbackInfo ci) {
-		if (this.getPose().equals(EntityPose.ROARING)) {
+		if (EffectiveConfig.wardenScreenShake && this.getPose().equals(EntityPose.ROARING)) {
 			ticksSinceAnimationStart++;
 			if (roarScreenShake == null) {
 				if (ticksSinceAnimationStart >= 20) {

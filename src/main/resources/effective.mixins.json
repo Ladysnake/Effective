@@ -17,7 +17,11 @@
     "water.FluidRendererMixin",
     "water.WaterFluidMixin",
     "water.WorldMixin",
-    "water.integration.sodium.FluidRendererMixin"
+    "water.integration.sodium.FluidRendererMixin",
+    "screenshake.SittingAttackingPhaseMixin",
+    "screenshake.RavagerEntityMixin",
+    "screenshake.SonicBookTaskMixin",
+    "screenshake.WardenEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

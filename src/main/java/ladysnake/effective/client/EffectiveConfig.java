@@ -47,4 +47,13 @@ public class EffectiveConfig extends MidnightConfig {
 
 	@Entry
 	public static boolean goldenAllays = true;
+
+	@Entry
+	public static boolean wardenScreenShake = true;
+	@Entry
+	public static boolean sonicBoomScreenShake = true;
+	@Entry
+	public static boolean ravagerScreenShake = true;
+	@Entry
+	public static boolean dragonScreenShake = true;
 }

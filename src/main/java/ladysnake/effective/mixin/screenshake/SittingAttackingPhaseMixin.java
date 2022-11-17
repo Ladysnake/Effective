@@ -4,6 +4,7 @@ import com.sammy.lodestone.handlers.ScreenshakeHandler;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
 import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
+import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.phase.AbstractSittingPhase;
 import net.minecraft.entity.boss.dragon.phase.SittingAttackingPhase;
@@ -20,7 +21,9 @@ public abstract class SittingAttackingPhaseMixin extends AbstractSittingPhase {
 
 	@Inject(method = "clientTick", at = @At("HEAD"))
 	public void clientTick(CallbackInfo ci) {
-		ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(60, this.dragon.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, 1.0f, 0.0f);
-		ScreenshakeHandler.addScreenshake(roarScreenShake);
+		if (EffectiveConfig.dragonScreenShake) {
+			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(60, this.dragon.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, 1.0f, 0.0f);
+			ScreenshakeHandler.addScreenshake(roarScreenShake);
+		}
 	}
 }

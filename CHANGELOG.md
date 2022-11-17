@@ -1,5 +1,15 @@
 # Effective - Changelog:
 
+## Effective 1.6 - 1.19.2
+- Added a screen shake effect for:
+  - Wardens roaring
+  - Wardens using their sonic boom attack
+  - Ravagers roaring after being stunned
+  - The Ender Dragon's long roar when perched
+- Added four new config options to disable each screen shake trigger individually
+- Added Ukrainian translation, thanks to ttrafford7 and V972!
+- Added Portuguese (Brazil) translation, thanks to FITFC!
+
 ## Effective 1.5 - 1.19.2
 - Added Allay trails
   - Allay will now leave a colored trail and twinkles when flying around, inspired from the Minecraft Legends announce trailer
