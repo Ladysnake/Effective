@@ -65,7 +65,7 @@ public class WaterfallCloudGenerators {
 				if (distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
 					return;
 				}
-				if (world.random.nextInt(200) == 0 && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
+				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
 					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});

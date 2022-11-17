@@ -7,6 +7,7 @@
   - Ravagers roaring after being stunned
   - The Ender Dragon's long roar when perched
 - Added four new config options to disable each screen shake trigger individually
+- Removed the need for waterfalls to be visible by the player in order to play sound
 - Added Ukrainian translation, thanks to ttrafford7 and V972!
 - Added Portuguese (Brazil) translation, thanks to FITFC!
 
