@@ -1,0 +1,13 @@
+{
+  "effective.subtitles.ambience.waterfall": "Падіння води",
+
+  "effective.midnightconfig.generateSplashes": "Створювати сплески",
+  "effective.midnightconfig.splashRimAlpha": "Прозорість сплесків",
+  "effective.midnightconfig.generateCascades": "Створювати каскади",
+  "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Чи повинна текуча вода створювати частинки у перший такт",
+  "effective.midnightconfig.lapisBlockUpdateParticleChance": "Шанс оновлення частинок лазуритного блоку",
+  "effective.midnightconfig.cascadeSoundDistanceBlocks": "Відстань на якій чутно звуки каскадів (у блоках)",
+  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Гучність каскадів",
+  "effective.midnightconfig.rainRippleDensity": "Щільність бриж від дощу",
+  "effective.midnightconfig.flowingWaterSplashingDesity": "Щільність сплесків текучої води"
+}
