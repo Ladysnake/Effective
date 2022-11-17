@@ -47,6 +47,11 @@ repositories {
     }
 
     maven { url 'https://jitpack.io' }
+
+    maven {
+        name "modrinth"
+        url "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies {
@@ -58,12 +63,6 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    // cloth config
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    include "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
-
     // mod menu
     modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
     modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
@@ -73,6 +72,10 @@ dependencies {
 
 	// satin
 	modCompileOnly "io.github.ladysnake:satin:${satin_version}"
+
+    // midnightlib
+    modImplementation "maven.modrinth:midnightlib:${midnightlib_version}"
+    include "maven.modrinth:midnightlib:${midnightlib_version}"
 }
 
 processResources {
