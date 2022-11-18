@@ -8,14 +8,14 @@ import net.minecraft.particle.ParticleEffect;
 
 @Environment(EnvType.CLIENT)
 public class SplashParticleType extends DefaultParticleType {
-    public SplashParticleInitialData initialData;
+	public SplashParticleInitialData initialData;
 
-    public SplashParticleType(boolean alwaysShow) {
-        super(alwaysShow);
-    }
+	public SplashParticleType(boolean alwaysShow) {
+		super(alwaysShow);
+	}
 
-    public ParticleEffect setData(SplashParticleInitialData target) {
-        this.initialData = target;
-        return this;
-    }
+	public ParticleEffect setData(SplashParticleInitialData target) {
+		this.initialData = target;
+		return this;
+	}
 }

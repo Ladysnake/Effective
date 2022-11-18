@@ -4,15 +4,15 @@
   "plugin": "ladysnake.effective.client.EffectiveMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "glowsquid.FeatureRendererMixin",
+    "glowsquid.GlowSquidEntityRendererMixin",
+    "glowsquid.LivingEntityRendererMixin",
     "water.AbstractBlockMixin",
     "water.EntityMixin",
     "water.FluidRendererMixin",
     "water.WaterFluidMixin",
     "water.WorldMixin",
-    "glowsquid.GlowSquidEntityRendererMixin",
-    "water.sodium.FluidRendererMixin",
-    "glowsquid.FeatureRendererMixin",
-    "glowsquid.LivingEntityRendererMixin"
+    "water.sodium.FluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

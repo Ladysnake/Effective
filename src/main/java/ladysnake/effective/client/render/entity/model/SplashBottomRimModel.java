@@ -10,29 +10,29 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
 public class SplashBottomRimModel<T extends Entity> extends EntityModel<T> {
-    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Effective.MODID, "splash_bottom_rim"), "main");
-    private final ModelPart splash;
+	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Effective.MODID, "splash_bottom_rim"), "main");
+	private final ModelPart splash;
 
-    public SplashBottomRimModel(ModelPart root) {
-        this.splash = root.getChild("splash_rim");
-    }
+	public SplashBottomRimModel(ModelPart root) {
+		this.splash = root.getChild("splash_rim");
+	}
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
+	public static TexturedModelData getTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
 
-        modelPartData.addChild("splash_rim", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F), ModelTransform.pivot(0.0F, 0.0f, 0.0F));
+		modelPartData.addChild("splash_rim", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F), ModelTransform.pivot(0.0F, 0.0f, 0.0F));
 
-        return TexturedModelData.of(modelData, 48, 28);
-    }
+		return TexturedModelData.of(modelData, 48, 28);
+	}
 
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        splash.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-    }
+	@Override
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+		splash.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+	}
 
-    @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	@Override
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
-    }
+	}
 }

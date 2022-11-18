@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FluidRenderer.class)
 public class FluidRendererMixin {
-    @Inject(method = "render", at = @At("HEAD"))
-    public void effective$generateWaterfall(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
-        WaterfallCloudGenerators.addGenerator(fluidState, pos.toImmutable());
-    }
+	@Inject(method = "render", at = @At("HEAD"))
+	public void effective$generateWaterfall(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
+		WaterfallCloudGenerators.addGenerator(fluidState, pos.toImmutable());
+	}
 }

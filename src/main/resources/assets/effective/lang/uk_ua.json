@@ -1,6 +1,5 @@
 {
   "effective.subtitles.ambience.waterfall": "Падіння води",
-
   "effective.midnightconfig.enableSplashes": "Створювати сплески",
   "effective.midnightconfig.splashRimAlpha": "Прозорість сплесків",
   "effective.midnightconfig.enableCascades": "Створювати каскади",
@@ -9,5 +8,5 @@
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Відстань на якій чутно звуки каскадів (у блоках)",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Гучність каскадів",
   "effective.midnightconfig.rainRippleDensity": "Щільність бриж від дощу",
-  "effective.midnightconfig.flowingWaterSplashingDensity": "Щільність сплесків текучої води",
+  "effective.midnightconfig.flowingWaterSplashingDensity": "Щільність сплесків текучої води"
 }
