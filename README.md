@@ -1,14 +1,20 @@
-## Effective 1.3 - 1.18.2
-- Overhauled splashes:
-    - Splashes will now be colored depending on the water they originate from
-    - Reworked the splash texture to be more fitting with the vanilla Minecraft aesthetic
-    - Added a config option to adjust the transparency of the splashes' white rim
-- Added ripples on water when it's raining
-    - Ripple density can be adjusted or disabled in the config
-- Added a config option to control the density or remove flowing water splashing particles
-- Added two new config options to adjust cascade sounds volume and distance
-- Fixed splashes sometimes being completely black (thanks to lonefelidae16)
-- Fixed occasional crashes that could happen randomly (thanks to lonefelidae16)
-- Widened the logic to fix splashes sometimes not appearing as well as now taking into account waterlogged blocks (like kelp or seagrass) and not just water source blocks
-- Fishing bobbers no longer produce splashes or droplet particles
-- Changed config library from Cloth Config to MidnightLib
+# Effective
+
+**Effective**  is a client-side Fabric mod that adds  various visual and auditory effects lacking in Vanilla Minecraft to  improve overall ambience and feel of the game. Currently, it adds water  and lava splashes to entities falling in liquids, as well as cascade  visual and sound effects.
+
+https://www.curseforge.com/minecraft/mc-mods/effective
+
+![Image](https://pbs.twimg.com/media/FGf_2qOXsBcxsfs?format=jpg&name=large)
+
+## FAQ
+
+#### Can I include this mod in a modpack?
+
+**Yes**: You can. Go ahead, don't bother asking. Please however provide credit and a link to either the GitHub repository or Curse Forge project page.
+
+#### Can I use this mod on a vanilla server?
+
+**Yes**: If you have installed this mod on your Minecraft client, you will  be able to connect to vanilla Minecraft servers and the ambient effects  will work as intended.
+
+
+###### Copyright (C) 2023 Ladysnake
