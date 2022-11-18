@@ -3,8 +3,9 @@ package ladysnake.effective.client.particle;
 import net.minecraft.client.render.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
@@ -57,10 +58,10 @@ public class GlowWaterfallCloudParticle extends WaterfallCloudParticle {
 		int l = 15728880;
 		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, pos) / 15f);
 
-		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(redAndGreenRender, redAndGreenRender, blue, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
 	}
 
 	@Environment(EnvType.CLIENT)

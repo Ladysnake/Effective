@@ -66,8 +66,19 @@ dependencies {
 	modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
 	modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
 
-	// Sodium Compat
-	modCompileOnly "com.github.CaffeineMC:sodium-fabric:${sodium_version}"
+//	// Sodium Compat
+//	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
+//	modCompileOnly "com.github.CaffeineMC:sodium-fabric:${sodium_version}"
+
+
+	// iris and sodium
+	modCompileOnly("com.github.CaffeineMC:sodium-fabric:${sodium_version}")
+	modRuntimeOnly("com.github.CaffeineMC:sodium-fabric:${sodium_version}")
+	modRuntimeOnly("maven.modrinth:iris:${iris_version}")
+	runtimeOnly compileOnly("org.anarres:jcpp:1.4.14") // for iris
+	runtimeOnly('org.joml:joml:1.10.4') // for sodium
+
+
 
 //	// Sodium and Iris Compat
 //	modRuntimeOnly("maven.modrinth:sodium:${sodium_version}")
@@ -77,11 +88,10 @@ dependencies {
 	runtimeOnly('org.joml:joml:1.10.4') // for sodium
 
 	// satin
-	modImplementation "io.github.ladysnake:satin:${satin_version}"
+	modImplementation include("io.github.ladysnake:satin:${satin_version}")
 
 	// midnightlib
-	modImplementation "maven.modrinth:midnightlib:${midnightlib_version}"
-	include "maven.modrinth:midnightlib:${midnightlib_version}"
+	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}")
 }
 
 processResources {

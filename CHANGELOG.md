@@ -9,7 +9,7 @@
     - Glow squids will attract your cursor if they appear on your screen, this attraction getting stronger with the shader
     - Both cursor attraction and hypnotizing can be disabled with two new configuration options
 - Glow squids named "jeb_" now glow rainbow and have a rainbow hypnotizing pattern
-  - Incompatible with Iris shaders (the rainbow glow squid can turn invisible)
+  - Incompatible with some Iris shaders (the rainbow glow squid can turn invisible)
 - Splashes and ripples (from rain or splashes) in warm oceans at night will now glow from glowing plankton
     - Glowing plankton can be disabled with a new configuration option
 

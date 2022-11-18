@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin.integration.sodium;
+package ladysnake.effective.mixin.water.sodium;
 
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
 import me.jellysquid.mods.sodium.client.render.chunk.compile.buffers.ChunkModelBuilder;

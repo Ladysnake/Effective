@@ -10,7 +10,7 @@
     "water.WaterFluidMixin",
     "water.WorldMixin",
     "glowsquid.GlowSquidEntityRendererMixin",
-    "integration.sodium.FluidRendererMixin",
+    "water.sodium.FluidRendererMixin",
     "glowsquid.FeatureRendererMixin",
     "glowsquid.LivingEntityRendererMixin"
   ],
