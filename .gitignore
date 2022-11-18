@@ -1,21 +1,31 @@
-# gradle
-
+# Gradle
 .gradle/
 build/
 out/
+classes/
 
-# idea
+# Quilt Loom
+remappedSrc/
+run/
 
-bin/
+# Eclipse
+*.launch
+
+# IntelliJ Idea
 .idea/
-.settings/
-.project
-.classpath
 *.iml
 *.ipr
 *.iws
-*.launch
 
-# fabric
+# Visual Studio Code
+.settings/
+.vscode/
+bin/
+.classpath
+.project
 
-run/
+# Eclipse JDT LS
+workspace/
+
+# macOS
+*.DS_Store

@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin;
+package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
 import net.minecraft.block.BlockState;

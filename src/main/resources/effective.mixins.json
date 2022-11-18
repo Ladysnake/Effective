@@ -1,16 +1,18 @@
 {
   "required": true,
   "package": "ladysnake.effective.mixin",
-  "plugin": "ladysnake.effective.client.ModMixinPlugin",
+  "plugin": "ladysnake.effective.client.EffectiveMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "AbstractBlockMixin",
-    "EntityMixin",
-    "FluidRendererMixin",
-    "RenderLayerAccessor",
-    "WaterFluidMixin",
-    "WorldMixin",
-    "integration.sodium.FluidRendererMixin"
+    "water.AbstractBlockMixin",
+    "water.EntityMixin",
+    "water.FluidRendererMixin",
+    "water.WaterFluidMixin",
+    "water.WorldMixin",
+    "glowsquid.GlowSquidEntityRendererMixin",
+    "integration.sodium.FluidRendererMixin",
+    "glowsquid.FeatureRendererMixin",
+    "glowsquid.LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

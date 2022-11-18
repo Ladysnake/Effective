@@ -8,7 +8,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
-
 public class DistancedSoundInstance extends PositionedSoundInstance implements TickableSoundInstance {
     private final float maxDistance;
 
@@ -17,7 +16,9 @@ public class DistancedSoundInstance extends PositionedSoundInstance implements T
         this.maxDistance = maxDistance;
         this.repeat = false;
     }
-
+    public static DistancedSoundInstance ambient(SoundEvent soundEvent, float pitch, BlockPos blockPos, float maxDistance) {
+        return new DistancedSoundInstance(soundEvent, SoundCategory.AMBIENT, pitch, blockPos, maxDistance);
+    }
     @Override
     public AttenuationType getAttenuationType() {
         return AttenuationType.NONE;
@@ -34,7 +35,4 @@ public class DistancedSoundInstance extends PositionedSoundInstance implements T
         this.volume = MathHelper.clampedLerp(0f, 1.0f, 1.0f - distance / this.maxDistance);
     }
 
-    public static DistancedSoundInstance ambient(SoundEvent soundEvent, float pitch, BlockPos blockPos, float maxDistance) {
-        return new DistancedSoundInstance(soundEvent, SoundCategory.AMBIENT, pitch, blockPos, maxDistance);
-    }
 }

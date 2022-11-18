@@ -1,16 +1,19 @@
-package ladysnake.effective.mixin;
+package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.contracts.SplashParticleInitialData;
+import ladysnake.effective.client.particle.types.SplashParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +30,8 @@ public abstract class EntityMixin {
     @Shadow
     @Final
     protected Random random;
+    @Shadow
+    private BlockPos blockPos;
 
     @Shadow
     public abstract double getX();
@@ -49,7 +54,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "onSwimmingStart", at = @At("TAIL"))
     protected void onSwimmingStart(CallbackInfo callbackInfo) {
-        if (this.world.isClient && EffectiveConfig.generateSplashes) {
+        if (this.world.isClient && EffectiveConfig.enableSplashes) {
             Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
             if (!(entity instanceof FishingBobberEntity)) {
                 float f = entity == (Object) this ? 0.2f : 0.9f;
@@ -59,13 +64,25 @@ public abstract class EntityMixin {
                     if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().getFluid() == Fluids.WATER && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isStill() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
                         this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g * 10f, 0.8f, true);
                         SplashParticleInitialData data = new SplashParticleInitialData(entity.getWidth(), vec3d.getY());
-                        this.world.addParticle(Effective.SPLASH.setData(data), this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
+
+                        SplashParticleType splash = Effective.SPLASH;
+                        if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                            splash = Effective.GLOW_SPLASH;
+                        }
+
+                        this.world.addParticle(splash.setData(data), this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
+
                         break;
                     }
                 }
 
                 for (int j = 0; j < this.getWidth() * 25f; j++) {
-                    this.world.addParticle(Effective.DROPLET, this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth(), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f);
+                    DefaultParticleType ripple = Effective.DROPLET;
+                    if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(blockPos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+                        ripple = Effective.GLOW_DROPLET;
+                    }
+
+                    this.world.addParticle(ripple, this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth(), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f);
                 }
             }
         }

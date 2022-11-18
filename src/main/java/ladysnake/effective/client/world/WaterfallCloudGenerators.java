@@ -7,14 +7,18 @@ import ladysnake.effective.client.sound.WaterfallSoundInstance;
 import ladysnake.effective.client.EffectiveConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.biome.BiomeKeys;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +30,7 @@ public class WaterfallCloudGenerators {
     private static World lastWorld = null;
 
     public static void addGenerator(FluidState state, BlockPos pos) {
-        if (pos == null || !EffectiveConfig.generateCascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
+        if (pos == null || !EffectiveConfig.enableCascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
             return;
         }
         if (shouldCauseWaterfall(MinecraftClient.getInstance().world, pos, state)) {
@@ -61,7 +65,7 @@ public class WaterfallCloudGenerators {
                 if (distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
                     return;
                 }
-                if (world.random.nextInt(200) == 0) {
+				if (world.random.nextInt(200) == 0) {
                     client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
                 }
             });
@@ -80,7 +84,7 @@ public class WaterfallCloudGenerators {
     }
 
     private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
-        if (!EffectiveConfig.generateCascades || fluidState.getFluid() != Fluids.FLOWING_WATER) {
+        if (!EffectiveConfig.enableCascades || fluidState.getFluid() != Fluids.FLOWING_WATER) {
             return false;
         }
         MinecraftClient client = MinecraftClient.getInstance();
@@ -113,17 +117,25 @@ public class WaterfallCloudGenerators {
         );
     }
 
-    public static void addWaterfallCloud(WorldAccess world, BlockPos pos) {
-        if (pos != null) {
-            double offsetX = world.getRandom().nextGaussian() / 5f;
-            double offsetZ = world.getRandom().nextGaussian() / 5f;
-            world.addParticle(Effective.WATERFALL_CLOUD, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
-        }
-    }
+    public static void addWaterfallCloud(World world, BlockPos pos) {
+		if (pos != null) {
+			double offsetX = world.getRandom().nextGaussian() / 5f;
+			double offsetZ = world.getRandom().nextGaussian() / 5f;
+			DefaultParticleType waterfallCloud = Effective.WATERFALL_CLOUD;
+			if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).matchesKey(BiomeKeys.WARM_OCEAN)) {
+				waterfallCloud = Effective.GLOW_WATERFALL_CLOUD;
+			}
+			world.addParticle(waterfallCloud, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
+		}
+	}
 
     public static void scheduleParticleTick(BlockPos pos, int ticks) {
         if (pos != null) {
             particlesToSpawn.put(pos, ticks);
         }
     }
+
+	public static boolean canSeeWaterfall(World world, BlockPos waterfallPos, PlayerEntity player) {
+		return world.raycast(new RaycastContext(new Vec3d(waterfallPos.getX(), waterfallPos.getY(), waterfallPos.getZ()), player.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player)).getBlockPos().equals(player.getBlockPos());
+	}
 }

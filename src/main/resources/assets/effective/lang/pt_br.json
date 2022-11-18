@@ -1,0 +1,18 @@
+{
+  "effective.subtitles.ambience.waterfall": "Quedas de água",
+  "effective.midnightconfig.enableSplashes": "Ativar respingos",
+  "effective.midnightconfig.splashRimAlpha": "Respingos rim alpha",
+  "effective.midnightconfig.enableCascades": "Ativar cascatas",
+  "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "A água corrente deve gerar partículas no primeiro carrapato",
+  "effective.midnightconfig.lapisBlockUpdateParticleChance": "Chance de partícula de atualização do bloco Lapis",
+  "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distância para ouvir cascatas [bloco(s)]",
+  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Multiplicador de volume de som em cascata",
+  "effective.midnightconfig.rainRippleDensity": "Densidade de ondulações de chuva",
+  "effective.midnightconfig.flowingWaterSplashingDensity": "Densidade de respingos de água corrente",
+  "effective.midnightconfig.enableGlowingPlankton": "Permita respingos e ondulações de plâncton brilhantes em oceanos quentes à noite",
+  "effective.midnightconfig.glowsquidHypnotize": "Ativar a hipnotização da lula brilhante",
+  "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Ativar a atração do cursor de lula brilhante (requer a hipnotização da lula brilhante)",
+  "effective.midnightconfig.enableAllayTrails": "Ativar trilhas Allay",
+  "effective.midnightconfig.allayTwinkleDensity": "Densidade de cintilação da trilha Allay (requer trilhas Allay)",
+  "effective.midnightconfig.goldenAllays": "Ativar Allays dourados"
+}

@@ -14,7 +14,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
     private int invisibleTimer;
 
-    private WaterfallCloudParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    public WaterfallCloudParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
 
         this.velocityX = velocityX;
