@@ -1,14 +1,11 @@
 package ladysnake.effective.client;
 
-import ladysnake.effective.client.particle.DropletParticle;
-import ladysnake.effective.client.particle.RippleParticle;
-import ladysnake.effective.client.particle.SplashParticle;
-import ladysnake.effective.client.particle.WaterfallCloudParticle;
+import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
+import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.client.render.entity.model.SplashModel;
+import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,11 +23,9 @@ import net.minecraft.util.registry.Registry;
 public class Effective implements ClientModInitializer {
     public static final String MODID = "effective";
 
-    public static ModConfig config;
-
     // particle types
-    public static DefaultParticleType SPLASH;
-//    public static DefaultParticleType LAVA_SPLASH;
+    public static SplashParticleType SPLASH;
+    //    public static DefaultParticleType LAVA_SPLASH;
     public static DefaultParticleType DROPLET;
     public static DefaultParticleType RIPPLE;
     public static DefaultParticleType WATERFALL_CLOUD;
@@ -41,16 +36,17 @@ public class Effective implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // load config
-        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+        EffectiveConfig.init(MODID, EffectiveConfig.class);
 
         // register model layers
         EntityModelLayerRegistry.registerModelLayer(SplashModel.MODEL_LAYER, SplashModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SplashBottomModel.MODEL_LAYER, SplashBottomModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SplashRimModel.MODEL_LAYER, SplashRimModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
         // particles
-        SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:splash", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Effective.SPLASH, fabricSpriteProvider -> new SplashParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Effective.MODID, "textures/entity/splash/splash_0.png")));
+        SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:splash", new SplashParticleType(true));
+        ParticleFactoryRegistry.getInstance().register(Effective.SPLASH, SplashParticle.DefaultFactory::new);
         DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:droplet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Effective.DROPLET, DropletParticle.DefaultFactory::new);
         RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:ripple", FabricParticleTypes.simple(true));
