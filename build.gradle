@@ -76,10 +76,10 @@ dependencies {
 	modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
 
 	// midnightlib
-	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}")
+	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-fabric")
 
 	// lodestone lib
-	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:413d9b4712")
+	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:1.19.3-SNAPSHOT")
 
 	// satin
 	modImplementation include("io.github.ladysnake:satin:${satin_version}")

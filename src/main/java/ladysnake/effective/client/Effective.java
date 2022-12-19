@@ -14,7 +14,6 @@ import ladysnake.satin.api.managed.ManagedCoreShader;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import ladysnake.satin.api.managed.uniform.Uniform1f;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -26,14 +25,18 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.joml.Quaternionf;
+import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 
 @Environment(EnvType.CLIENT)
 public class Effective implements ClientModInitializer {
@@ -59,15 +62,26 @@ public class Effective implements ClientModInitializer {
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
 
 	// sound events
-	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
+	public static SoundEvent AMBIENCE_WATERFALL =  SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
 	private static int ticksJeb;
 
 	public static boolean isNightTime(World world) {
 		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
 	}
+	public static void idkWhatJOMLIsDoing(Quaternionf one, Quaternionf two) {
+		float f = one.x;
+		float g = one.y;
+		float h = one.z;
+		float i = one.w;
+		float j = two.x;
+		float k = two.y;
+		float l = two.z;
+		float m = two.w;
+		one.set(i * j + f * m + g * l - h * k, i * k - f * l + g * m + h * j, i * l + f * k - g * j + h * m, i * m - f * j - g * k - h * l);
+	}
 
 	@Override
-	public void onInitializeClient() {
+	public void onInitializeClient(ModContainer container) {
 		// load config
 		EffectiveConfig.init(MODID, EffectiveConfig.class);
 
@@ -78,27 +92,27 @@ public class Effective implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
 		// particles
-		SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:splash", new SplashParticleType(true));
+		SPLASH = Registry.register(Registries.PARTICLE_TYPE, "effective:splash", new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.SPLASH, SplashParticle.DefaultFactory::new);
-		DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:droplet", FabricParticleTypes.simple(true));
+		DROPLET = Registry.register(Registries.PARTICLE_TYPE, "effective:droplet", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.DROPLET, DropletParticle.DefaultFactory::new);
-		RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:ripple", FabricParticleTypes.simple(true));
+		RIPPLE = Registry.register(Registries.PARTICLE_TYPE, "effective:ripple", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.RIPPLE, RippleParticle.DefaultFactory::new);
-		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:waterfall_cloud", FabricParticleTypes.simple(true));
+		WATERFALL_CLOUD = Registry.register(Registries.PARTICLE_TYPE, "effective:waterfall_cloud", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.WATERFALL_CLOUD, WaterfallCloudParticle.DefaultFactory::new);
-		GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_splash", new SplashParticleType(true));
+		GLOW_SPLASH = Registry.register(Registries.PARTICLE_TYPE, "effective:glow_splash", new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
-		GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
+		GLOW_DROPLET = Registry.register(Registries.PARTICLE_TYPE, "effective:glow_droplet", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
-		GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
+		GLOW_RIPPLE = Registry.register(Registries.PARTICLE_TYPE, "effective:glow_ripple", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
-		GLOW_WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, "effective:glow_waterfall_cloud", FabricParticleTypes.simple(true));
+		GLOW_WATERFALL_CLOUD = Registry.register(Registries.PARTICLE_TYPE, "effective:glow_waterfall_cloud", FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_WATERFALL_CLOUD, GlowWaterfallCloudParticle.DefaultFactory::new);
-		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, "effective:allay_twinkle", new AllayTwinkleParticleType());
+		ALLAY_TWINKLE = Registry.register(Registries.PARTICLE_TYPE, "effective:allay_twinkle", new AllayTwinkleParticleType());
 		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
 
 		// sound events
-		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
+		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
 
 		// events
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {

@@ -20,7 +20,7 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"client": "ladysnake.effective.client.Effective"
+			"client_init": "ladysnake.effective.client.Effective"
 		},
 		"depends": [
 			{
@@ -29,11 +29,11 @@
 			},
 			{
 				"id": "quilted_fabric_api",
-				"versions": ">=4.0.0-"
+				"versions": ">=5.0.0-"
 			},
 			{
 				"id": "minecraft",
-				"versions": ">=1.19.2"
+				"versions": ">=1.19.3"
 			},
 			{
 				"id": "lodestone",

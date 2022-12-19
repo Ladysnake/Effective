@@ -1,6 +1,7 @@
 package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import ladysnake.effective.client.Effective;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -9,6 +10,8 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.*;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class WaterfallCloudParticle extends SpriteBillboardParticle {
 	private final SpriteProvider spriteProvider;
@@ -29,7 +32,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 		this.colorAlpha = 0f;
 
 		this.invisibleTimer = 1;
-		this.setSprite(this.spriteProvider.m_mqkdmdiv(world.random));
+		this.setSprite(this.spriteProvider.getRandom(world.random));
 	}
 
 	public ParticleTextureSheet getType() {
@@ -89,24 +92,24 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternion quaternion2;
+		Quaternionf quaternion2;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
-			quaternion2 = new Quaternion(camera.getRotation());
+			quaternion2 = new Quaternionf(camera.getRotation());
 			float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
+			Effective.idkWhatJOMLIsDoing(quaternion2, new Quaternionf().rotateZ(i));
 		}
 
-		Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
 		Vec3f.rotate(quaternion2);
-		Vec3f[] Vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+		Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vec3f Vec3f2 = Vec3fs[k];
+			Vector3f Vec3f2 = Vec3fs[k];
 			Vec3f2.rotate(quaternion2);
-			Vec3f2.scale(j);
+			Vec3f2.mul(j);
 			Vec3f2.add(f, g, h);
 		}
 
@@ -116,10 +119,10 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = this.getBrightness(tickDelta);
 
-		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[0].x, Vec3fs[0].y, Vec3fs[0].z).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].x, Vec3fs[1].y, Vec3fs[1].z).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].x, Vec3fs[2].y, Vec3fs[2].z).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].x, Vec3fs[3].y, Vec3fs[3].z).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
 	}
 
 	@Environment(EnvType.CLIENT)
