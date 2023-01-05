@@ -5,6 +5,7 @@ import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.contracts.SplashParticleInitialData;
 import ladysnake.effective.client.particle.types.SplashParticleType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particle.DefaultParticleType;
@@ -62,7 +63,7 @@ public abstract class EntityMixin {
 				float g = Math.min(1.0f, (float) Math.sqrt(vec3d.x * vec3d.x * (double) 0.2f + vec3d.y * vec3d.y + vec3d.z * vec3d.z * (double) 0.2f) * f);
 				for (int i = -10; i < 10; i++) {
 					if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().getFluid() == Fluids.WATER && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
-						this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g * 10f, 0.8f, true);
+						this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), entity instanceof PlayerEntity ? SoundEvents.ENTITY_PLAYER_SPLASH : SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g * 10f, 0.8f, true);
 						SplashParticleInitialData data = new SplashParticleInitialData(entity.getWidth(), vec3d.getY());
 
 						SplashParticleType splash = Effective.SPLASH;

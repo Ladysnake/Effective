@@ -87,9 +87,11 @@ dependencies {
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
 	modRuntimeOnly("maven.modrinth:sodium:${project.sodium_version}")
+	modRuntimeOnly("io.github.douira:glsl-transformer:2.0.0-pre8")
 	modRuntimeOnly("maven.modrinth:iris:${project.iris_version}")
 	runtimeOnly compileOnly("org.anarres:jcpp:1.4.14") // for iris
-	runtimeOnly('org.joml:joml:1.10.4') // for sodium
+	include 'com.moandjiezana.toml:toml4j:0.7.2'
+	implementation 'com.moandjiezana.toml:toml4j:0.7.2'
 }
 
 processResources {

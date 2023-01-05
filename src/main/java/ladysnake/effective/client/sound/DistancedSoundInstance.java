@@ -35,7 +35,9 @@ public class DistancedSoundInstance extends PositionedSoundInstance implements T
 
 	@Override
 	public void tick() {
-		float distance = MathHelper.sqrt((float) MinecraftClient.getInstance().player.getPos().squaredDistanceTo(this.x, this.y, this.z));
-		this.volume = MathHelper.clampedLerp(0f, 1.0f, 1.0f - distance / this.maxDistance);
+		if(MinecraftClient.getInstance().player != null) {
+			float distance = MathHelper.sqrt((float) MinecraftClient.getInstance().player.getPos().squaredDistanceTo(this.x, this.y, this.z));
+			this.volume = MathHelper.clampedLerp(0f, 1.0f, 1.0f - distance / this.maxDistance);
+		}
 	}
 }
