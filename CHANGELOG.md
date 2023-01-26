@@ -1,5 +1,8 @@
 # Effective - Changelog:
 
+## Effective 1.7 - 1.19.3
+- Merged Illuminations with Effective
+
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:
   - Wardens roaring

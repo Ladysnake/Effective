@@ -10,7 +10,9 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -38,19 +40,19 @@ public class GlowWaterfallCloudParticle extends WaterfallCloudParticle {
 		} else {
 			quaternion2 = new Quaternionf(camera.getRotation());
 			float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			Effective.idkWhatJOMLIsDoing(quaternion2, new Quaternionf().rotateZ(i));
+			Effective.wheresTheHamiltonProductMojangski(quaternion2, new Quaternionf().rotateZ(i));
 		}
 
-		Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-		Vec3f.rotate(quaternion2);
-		Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
+		Vector3f Vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
+		Vector3f.rotate(quaternion2);
+		Vector3f[] Vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vector3f Vec3f2 = Vec3fs[k];
-			Vec3f2.rotate(quaternion2);
-			Vec3f2.mul(j);
-			Vec3f2.add(f, g, h);
+			Vector3f Vector3f2 = Vector3fs[k];
+			Vector3f2.rotate(quaternion2);
+			Vector3f2.mul(j);
+			Vector3f2.add(f, g, h);
 		}
 
 		float minU = this.getMinU();
@@ -61,10 +63,10 @@ public class GlowWaterfallCloudParticle extends WaterfallCloudParticle {
 		int l = 15728880;
 		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, pos) / 15f);
 
-		vertexConsumer.vertex(Vec3fs[0].x, Vec3fs[0].y, Vec3fs[0].z).uv(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].x, Vec3fs[1].y, Vec3fs[1].z).uv(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].x, Vec3fs[2].y, Vec3fs[2].z).uv(minU, minV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].x, Vec3fs[3].y, Vec3fs[3].z).uv(minU, maxV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vector3fs[0].x, Vector3fs[0].y, Vector3fs[0].z).uv(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vector3fs[1].x, Vector3fs[1].y, Vector3fs[1].z).uv(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vector3fs[2].x, Vector3fs[2].y, Vector3fs[2].z).uv(minU, minV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
+		vertexConsumer.vertex(Vector3fs[3].x, Vector3fs[3].y, Vector3fs[3].z).uv(minU, maxV).color(redAndGreenRender, redAndGreenRender, blue, 1.0f).light(l).next();
 	}
 
 	@Environment(EnvType.CLIENT)

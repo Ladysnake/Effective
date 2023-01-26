@@ -12,16 +12,16 @@
     "glowsquids.FeatureRendererMixin",
     "glowsquids.GlowSquidEntityRendererMixin",
     "glowsquids.LivingEntityRendererMixin",
+    "screenshake.RavagerEntityMixin",
+    "screenshake.SittingAttackingPhaseMixin",
+    "screenshake.SonicBookTaskMixin",
+    "screenshake.WardenEntityMixin",
     "water.AbstractBlockMixin",
     "water.EntityMixin",
     "water.FluidRendererMixin",
     "water.WaterFluidMixin",
     "water.WorldMixin",
-    "water.integration.sodium.FluidRendererMixin",
-    "screenshake.SittingAttackingPhaseMixin",
-    "screenshake.RavagerEntityMixin",
-    "screenshake.SonicBookTaskMixin",
-    "screenshake.WardenEntityMixin"
+    "water.integration.sodium.FluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

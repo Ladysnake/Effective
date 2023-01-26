@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "ladysnake.illuminations.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "BlockMixin",
+    "CarvedPumpkinBlockMixin",
+    "ChorusFlowerBlockMixin",
+    "ClientWorldMixin",
+    "LivingEntityMixin",
+    "ParticleManagerMixin",
+    "PlayerEntityMixin",
+    "RenderLayerAccessor",
+    "SkullBlockMixin",
+    "jeb.FeatureRendererMixin",
+    "jeb.LivingEntityRendererMixin"
+  ],
+  "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

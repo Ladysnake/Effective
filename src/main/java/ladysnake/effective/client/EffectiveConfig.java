@@ -50,10 +50,16 @@ public class EffectiveConfig extends MidnightConfig {
 
 	@Entry
 	public static boolean wardenScreenShake = true;
+
 	@Entry
 	public static boolean sonicBoomScreenShake = true;
+
 	@Entry
 	public static boolean ravagerScreenShake = true;
+
 	@Entry
 	public static boolean dragonScreenShake = true;
+
+	@Entry(min = 0, max = 500)
+	public static int fireflyDensity = 100;
 }

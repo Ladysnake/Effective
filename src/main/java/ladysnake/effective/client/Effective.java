@@ -62,13 +62,14 @@ public class Effective implements ClientModInitializer {
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
 
 	// sound events
-	public static SoundEvent AMBIENCE_WATERFALL =  SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
+	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
 	private static int ticksJeb;
 
 	public static boolean isNightTime(World world) {
 		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
 	}
-	public static void idkWhatJOMLIsDoing(Quaternionf one, Quaternionf two) {
+
+	public static void wheresTheHamiltonProductMojangski(Quaternionf one, Quaternionf two) {
 		float f = one.x;
 		float g = one.y;
 		float h = one.z;

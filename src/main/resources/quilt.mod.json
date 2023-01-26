@@ -9,6 +9,7 @@
 			"description": "A client-side mod adding ambient and environmental interaction effects to enhance immersion.",
 			"contributors": {
 				"doctor4t": "Owner",
+				"Pyrofab": "Contributor",
 				"lonefelidae16": "Contributor"
 			},
 			"contact": {
@@ -20,7 +21,10 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"client_init": "ladysnake.effective.client.Effective"
+			"client_init": [
+				"ladysnake.effective.client.Effective",
+				"ladysnake.illuminations.client.Illuminations"
+			]
 		},
 		"depends": [
 			{
@@ -41,6 +45,12 @@
 			}
 		]
 	},
-	"mixin": "effective.mixins.json",
-	"access_widener": "effective.accesswidener"
+	"mixin": [
+		"effective.mixins.json",
+		"illuminations.mixins.json"
+	],
+	"access_widener": [
+		"effective.accesswidener",
+		"illuminations.accesswidener"
+	]
 }
