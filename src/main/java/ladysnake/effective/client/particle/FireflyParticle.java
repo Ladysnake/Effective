@@ -1,7 +1,8 @@
-package ladysnake.illuminations.client.particle;
+package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.particle.types.FireflyParticleType;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
 import net.fabricmc.api.EnvType;
@@ -11,18 +12,15 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.registry.Holder;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -38,8 +36,8 @@ public class FireflyParticle extends SpriteBillboardParticle {
 	protected int maxHeight;
 	private BlockPos lightTarget;
 
-	public FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-		super(world, x, y, z, velocityX, velocityY, velocityZ);
+	public FireflyParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+		super(world, x, y, z, 0f, 0f, 0f);
 		this.spriteProvider = spriteProvider;
 
 		this.scale *= 0.25f + random.nextFloat() * 0.50f;
@@ -48,34 +46,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		this.collidesWithWorld = true;
 		this.setSpriteForAge(spriteProvider);
 		this.colorAlpha = 0f;
-
-		Color c;
-		if (Config.getFireflyRainbow()) {
-			c = Color.getHSBColor(random.nextFloat(), 1f, 1f);
-		} else {
-			// Get color for current biome
-			Holder<Biome> b = world.getBiome(new BlockPos(x, y, z));
-			Identifier biome = world.getRegistryManager().get(RegistryKeys.BIOME).getId(b.value());
-			int rgb = Config.getBiomeSettings(biome).fireflyColor();
-			float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
-			// Shift hue by random ±30 deg angle
-			hsb[0] += (random.nextFloat() - 0.5f) * 30 / 360f;
-			// Convert back to rgb
-			c = Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
-		}
-
-		this.colorRed = c.getRed() / 255f;
-		this.colorGreen = c.getGreen() / 255f;
-		this.colorBlue = c.getBlue() / 255f;
-
-        /*if (LocalDate.now().getMonth() == Month.OCTOBER) {
-            this.colorRed = 1f;
-            this.colorGreen = 0.25f + new Random().nextFloat() * 0.25f;
-        } else {
-            this.colorRed = 0.5f + new Random().nextFloat() * 0.5f;
-            this.colorGreen = 1f;
-        }
-        this.colorBlue = 0f;*/
+		this.collidesWithWorld = false;
 	}
 
 	public ParticleTextureSheet getType() {
@@ -163,8 +134,8 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		double length = targetVector.length();
 		targetVector = targetVector.multiply(0.1 / length);
 
-
-		if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+		BlockPos blockPos = new BlockPos(this.x, this.y - 0.1, this.z);
+		if (!canFlyThroughBlock(this.world, blockPos, this.world.getBlockState(blockPos))) {
 			velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
 			velocityY = 0.05;
 			velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
@@ -183,8 +154,9 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			// Behaviour
 			double groundLevel = 0;
 			for (int i = 0; i < 20; i++) {
-				BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
-				if (!checkedBlock.getBlock().canMobSpawnInside()) {
+				BlockPos checkedPos = new BlockPos(this.x, this.y - i, this.z);
+				BlockState checkedBlock = this.world.getBlockState(checkedPos);
+				if (canFlyThroughBlock(this.world, checkedPos, checkedBlock)) {
 					groundLevel = this.y - i;
 				}
 				if (groundLevel != 0) break;
@@ -195,8 +167,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			this.zTarget = this.z + random.nextGaussian() * 10;
 
 			BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
-			if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)
-					&& this.world.getBlockState(targetPos).isSolidBlock(world, targetPos)) {
+			if (!canFlyThroughBlock(this.world, targetPos, this.world.getBlockState(targetPos))) {
 				this.yTarget += 1;
 			}
 
@@ -256,9 +227,26 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			this.spriteProvider = spriteProvider;
 		}
 
-		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new FireflyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+		@Nullable
+		@Override
+		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+			FireflyParticle instance = new FireflyParticle(world, x, y, z, spriteProvider);
+			if (parameters instanceof FireflyParticleType fireflyParameters && fireflyParameters.initialData != null) {
+				int color = fireflyParameters.initialData.color;
+
+				float r = (float) (color >> 16 & 0xFF) / 255.0f;
+				float g = (float) (color >> 8 & 0xFF) / 255.0f;
+				float b = (float) (color & 0xFF) / 255.0f;
+
+				instance.colorRed = r;
+				instance.colorGreen = g;
+				instance.colorBlue = b;
+			}
+			return instance;
 		}
 	}
 
+	public static boolean canFlyThroughBlock(World world, BlockPos blockPos, BlockState blockState) {
+		return !blockState.shouldSuffocate(world, blockPos);
+	}
 }

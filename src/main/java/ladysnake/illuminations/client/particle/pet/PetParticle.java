@@ -2,9 +2,7 @@ package ladysnake.illuminations.client.particle.pet;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
-import ladysnake.illuminations.client.particle.FireflyParticle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import ladysnake.effective.client.particle.FireflyParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.ParticleTextureSheet;
@@ -27,8 +25,8 @@ public class PetParticle extends FireflyParticle {
 	private final SpriteProvider spriteProvider;
 	protected float alpha = 0f;
 
-	public PetParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
+	public PetParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+		super(world, x, y, z, spriteProvider);
 		this.spriteProvider = spriteProvider;
 		this.setSpriteForAge(spriteProvider);
 
@@ -110,7 +108,7 @@ public class PetParticle extends FireflyParticle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 
@@ -119,7 +117,7 @@ public class PetParticle extends FireflyParticle {
 		}
 
 		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new PetParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+			return new PetParticle(clientWorld, d, e, f, this.spriteProvider);
 		}
 	}
 

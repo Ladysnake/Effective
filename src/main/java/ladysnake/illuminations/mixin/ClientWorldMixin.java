@@ -41,7 +41,6 @@ public abstract class ClientWorldMixin extends World {
 
 		Holder<Biome> b = this.getBiome(pos);
 		Identifier biome = this.getRegistryManager().get(RegistryKeys.BIOME).getId(b.value());
-		spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biome));
 
 		// Other miscellaneous biome settings
 		if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {

@@ -1,6 +1,8 @@
 package ladysnake.effective.client;
 
 import ladysnake.effective.client.particle.*;
+import ladysnake.effective.client.particle.types.AllayTwinkleParticleType;
+import ladysnake.effective.client.particle.types.FireflyParticleType;
 import ladysnake.effective.client.particle.types.SplashParticleType;
 import ladysnake.effective.client.render.entity.model.SplashBottomModel;
 import ladysnake.effective.client.render.entity.model.SplashBottomRimModel;
@@ -8,6 +10,7 @@ import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.RenderedHypnotizingEntities;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedCoreShader;
@@ -25,6 +28,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -60,6 +64,7 @@ public class Effective implements ClientModInitializer {
 	public static DefaultParticleType GLOW_RIPPLE;
 	public static DefaultParticleType GLOW_WATERFALL_CLOUD;
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
+	public static FireflyParticleType FIREFLY;
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -111,6 +116,8 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(Effective.GLOW_WATERFALL_CLOUD, GlowWaterfallCloudParticle.DefaultFactory::new);
 		ALLAY_TWINKLE = Registry.register(Registries.PARTICLE_TYPE, "effective:allay_twinkle", new AllayTwinkleParticleType());
 		ParticleFactoryRegistry.getInstance().register(Effective.ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
+		FIREFLY = Registry.register(Registries.PARTICLE_TYPE, "effective:firefly", new FireflyParticleType(true));
+		ParticleFactoryRegistry.getInstance().register(Effective.FIREFLY, FireflyParticle.DefaultFactory::new);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);

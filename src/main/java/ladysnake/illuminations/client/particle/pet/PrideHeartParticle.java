@@ -1,8 +1,6 @@
 package ladysnake.illuminations.client.particle.pet;
 
 import ladysnake.illuminations.client.render.entity.model.pet.PrideHeartModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -24,7 +22,7 @@ public class PrideHeartParticle extends PlayerLanternParticle {
 		super.tick();
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 		private final float red;

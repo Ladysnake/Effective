@@ -1,8 +1,6 @@
 package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.Particle;
@@ -178,7 +176,7 @@ public class PoltergeistParticle extends WillOWispParticle {
 		targetChangeCooldown = random.nextInt() % (int) (100 / this.speedModifier);
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 		private final float red;

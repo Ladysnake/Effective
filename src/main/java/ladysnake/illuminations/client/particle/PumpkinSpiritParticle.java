@@ -1,7 +1,5 @@
 package ladysnake.illuminations.client.particle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -147,7 +145,7 @@ public class PumpkinSpiritParticle extends WillOWispParticle {
 		targetChangeCooldown = random.nextInt() % (int) (100 / this.speedModifier);
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 		private final float red;

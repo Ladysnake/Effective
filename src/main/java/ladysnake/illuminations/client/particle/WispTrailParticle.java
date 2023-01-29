@@ -2,8 +2,6 @@ package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
@@ -111,7 +109,7 @@ public class WispTrailParticle extends SpriteBillboardParticle {
 		vertexConsumer.vertex(Vector3fs[3].x, Vector3fs[3].y, Vector3fs[3].z).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class Factory implements ParticleFactory<WispTrailParticleEffect> {
 		private final SpriteProvider spriteProvider;
 

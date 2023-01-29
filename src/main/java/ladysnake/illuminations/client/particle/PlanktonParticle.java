@@ -3,8 +3,6 @@ package ladysnake.illuminations.client.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
 import ladysnake.illuminations.client.config.Config;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
@@ -175,7 +173,7 @@ public class PlanktonParticle extends SpriteBillboardParticle {
 		return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 

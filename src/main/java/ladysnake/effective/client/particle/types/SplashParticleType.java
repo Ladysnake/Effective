@@ -1,6 +1,6 @@
 package ladysnake.effective.client.particle.types;
 
-import ladysnake.effective.client.contracts.SplashParticleInitialData;
+import ladysnake.effective.client.particle.contracts.SplashParticleInitialData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.particle.DefaultParticleType;

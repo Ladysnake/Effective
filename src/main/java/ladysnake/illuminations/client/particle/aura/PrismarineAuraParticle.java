@@ -1,8 +1,6 @@
 package ladysnake.illuminations.client.particle.aura;
 
 import ladysnake.illuminations.client.particle.PrismarineCrystalParticle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
@@ -54,7 +52,7 @@ public class PrismarineAuraParticle extends PrismarineCrystalParticle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 

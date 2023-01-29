@@ -5,8 +5,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import ladysnake.illuminations.client.Illuminations;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
@@ -84,32 +82,32 @@ public class WispTrailParticleEffect implements ParticleEffect {
 		return Illuminations.WISP_TRAIL;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public float getRed() {
 		return this.red;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public float getGreen() {
 		return this.green;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public float getBlue() {
 		return this.blue;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public float getRedEvolution() {
 		return redEvolution;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public float getGreenEvolution() {
 		return greenEvolution;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public float getBlueEvolution() {
 		return blueEvolution;
 	}

@@ -7,7 +7,7 @@ import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.EffectiveUtils;
-import ladysnake.effective.client.contracts.ColoredParticleInitialData;
+import ladysnake.effective.client.particle.contracts.ColoredParticleInitialData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;

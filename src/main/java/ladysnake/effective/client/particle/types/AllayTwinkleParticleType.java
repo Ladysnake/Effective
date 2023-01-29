@@ -1,7 +1,8 @@
-package ladysnake.effective.client.particle;
+package ladysnake.effective.client.particle.types;
 
 import com.mojang.serialization.Codec;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import ladysnake.effective.client.particle.AllayTwinkleParticle;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;

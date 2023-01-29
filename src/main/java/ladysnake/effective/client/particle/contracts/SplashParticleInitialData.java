@@ -1,4 +1,4 @@
-package ladysnake.effective.client.contracts;
+package ladysnake.effective.client.particle.contracts;
 
 public class SplashParticleInitialData {
 	public double width;

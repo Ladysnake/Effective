@@ -3,8 +3,6 @@ package ladysnake.illuminations.client.particle.pet;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
 import ladysnake.illuminations.client.Illuminations;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
@@ -20,8 +18,8 @@ import org.joml.Vector3f;
 public class JackoParticle extends PetParticle {
 	private float glow;
 
-	public JackoParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
+	public JackoParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+		super(world, x, y, z, spriteProvider);
 
 		this.glow = 0;
 	}
@@ -89,7 +87,7 @@ public class JackoParticle extends PetParticle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 
@@ -98,7 +96,7 @@ public class JackoParticle extends PetParticle {
 		}
 
 		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new JackoParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+			return new JackoParticle(clientWorld, d, e, f, this.spriteProvider);
 		}
 	}
 

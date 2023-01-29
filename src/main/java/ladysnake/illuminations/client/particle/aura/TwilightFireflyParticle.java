@@ -2,11 +2,9 @@ package ladysnake.illuminations.client.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
-import ladysnake.illuminations.client.particle.FireflyParticle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -29,8 +27,8 @@ import java.util.Random;
 public class TwilightFireflyParticle extends FireflyParticle {
 	private final PlayerEntity owner;
 
-	public TwilightFireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
+	public TwilightFireflyParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+		super(world, x, y, z, spriteProvider);
 
 		this.maxAge = 20;
 		this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
@@ -180,7 +178,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
 		targetChangeCooldown = random.nextInt() % 100;
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 
@@ -189,7 +187,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
 		}
 
 		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new TwilightFireflyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+			return new TwilightFireflyParticle(clientWorld, d, e, f, this.spriteProvider);
 		}
 	}
 

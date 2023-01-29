@@ -1,20 +1,20 @@
 package ladysnake.effective.client.particle.types;
 
-import ladysnake.effective.client.contracts.ColoredParticleInitialData;
+import ladysnake.effective.client.particle.contracts.FireflyParticleInitialData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
 
 @Environment(EnvType.CLIENT)
-public class ColoredParticleType extends DefaultParticleType {
-	public ColoredParticleInitialData initialData;
+public class FireflyParticleType extends DefaultParticleType {
+	public FireflyParticleInitialData initialData;
 
-	public ColoredParticleType(boolean alwaysShow) {
+	public FireflyParticleType(boolean alwaysShow) {
 		super(alwaysShow);
 	}
 
-	public ParticleEffect setData(ColoredParticleInitialData target) {
+	public ParticleEffect setData(FireflyParticleInitialData target) {
 		this.initialData = target;
 		return this;
 	}

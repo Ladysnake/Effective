@@ -2,7 +2,7 @@ package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.contracts.SplashParticleInitialData;
+import ladysnake.effective.client.particle.contracts.SplashParticleInitialData;
 import ladysnake.effective.client.particle.types.SplashParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

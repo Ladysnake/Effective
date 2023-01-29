@@ -2,8 +2,6 @@ package ladysnake.illuminations.client.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
@@ -111,7 +109,7 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 

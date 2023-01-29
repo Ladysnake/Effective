@@ -21,7 +21,8 @@
     "water.FluidRendererMixin",
     "water.WaterFluidMixin",
     "water.WorldMixin",
-    "water.integration.sodium.FluidRendererMixin"
+    "water.integration.sodium.FluidRendererMixin",
+    "fireflies.FireflySpawningClientWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -3,8 +3,6 @@ package ladysnake.illuminations.client.particle.pet;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.particle.Particle;
@@ -109,7 +107,7 @@ public class PlayerLanternParticle extends Particle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 		private final float red;
