@@ -1,6 +1,6 @@
 # Effective
 
-**Effective**  is a client-side Fabric mod that adds  various visual and auditory effects lacking in Vanilla Minecraft to  improve overall ambience and feel of the game. Currently, it adds water  and lava splashes to entities falling in liquids, as well as cascade  visual and sound effects.
+**Effective**  is a client-side Quilt mod (older versions being on Fabric) that adds  various visual and auditory effects lacking in Vanilla Minecraft to  improve overall ambience and feel of the game. Currently, it adds water  and lava splashes to entities falling in liquids, as well as cascade  visual and sound effects.
 
 https://www.curseforge.com/minecraft/mc-mods/effective
 
