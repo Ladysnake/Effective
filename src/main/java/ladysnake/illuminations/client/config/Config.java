@@ -1,6 +1,5 @@
 package ladysnake.illuminations.client.config;
 
-import ladysnake.effective.client.settings.data.FireflySpawnSetting;
 import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
@@ -33,16 +32,10 @@ public class Config {
 	private static WillOWispsSpawnRate willOWispsSpawnRate;
 	private static int chorusPetalsSpawnMultiplier;
 	private static int density;
-	private static boolean fireflySpawnAlways;
-	private static boolean fireflySpawnUnderground;
-	private static int fireflyWhiteAlpha;
-	private static boolean fireflyRainbow;
 	private static boolean viewAurasFP;
 	private static boolean debugMode;
 	private static boolean displayCosmetics;
 	private static boolean displayDonationToast;
-	private static HashMap<Identifier, FireflySpawnSetting> biomeSettings;
-	// private static HashMap<String, AuraSettings> auraSettings;
 
 	public static void load() {
 		// if illuminations.properties exist, load it
@@ -60,9 +53,6 @@ public class Config {
 			setWillOWispsSpawnRate(DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
 			setChorusPetalsSpawnMultiplier(DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER);
 			setDensity(DefaultConfig.DENSITY);
-			setFireflySpawnAlways(DefaultConfig.FIREFLY_SPAWN_ALWAYS);
-			setFireflySpawnUnderground(DefaultConfig.FIREFLY_SPAWN_UNDERGROUND);
-			setFireflyWhiteAlpha(DefaultConfig.FIREFLY_WHITE_ALPHA);
 			setDisplayCosmetics(DefaultConfig.DISPLAY_COSMETICS);
 			setViewAurasFP(DefaultConfig.VIEW_AURAS_FP);
 			setDisplayDonationToast(DefaultConfig.DISPLAY_DONATION_TOAST);
@@ -81,10 +71,6 @@ public class Config {
 		parseProperty("will-o-wisps-spawn-rate", Config::setWillOWispsSpawnRate, DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
 		parseProperty("chorus-petal-spawn-multiplier", Config::setChorusPetalsSpawnMultiplier, DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER);
 		parseProperty("density", Config::setDensity, DefaultConfig.DENSITY);
-		parseProperty("firefly-spawn-always", Config::setFireflySpawnAlways, DefaultConfig.FIREFLY_SPAWN_ALWAYS);
-		parseProperty("firefly-spawn-underground", Config::setFireflySpawnUnderground, DefaultConfig.FIREFLY_SPAWN_UNDERGROUND);
-		parseProperty("firefly-white-alpha", Config::setFireflyWhiteAlpha, DefaultConfig.FIREFLY_WHITE_ALPHA);
-		parseProperty("firefly-rainbow", Config::setFireflyRainbow, DefaultConfig.FIREFLY_RAINBOW);
 		parseProperty("display-cosmetics", Config::setDisplayCosmetics, DefaultConfig.DISPLAY_COSMETICS);
 		parseProperty("debug-mode", Config::setDebugMode, DefaultConfig.DEBUG_MODE);
 		parseProperty("view-auras-fp", Config::setViewAurasFP, DefaultConfig.VIEW_AURAS_FP);
@@ -182,42 +168,6 @@ public class Config {
 	public static void setDensity(int value) {
 		density = value;
 		config.setProperty("density", Integer.toString(value));
-	}
-
-	public static boolean doesFireflySpawnAlways() {
-		return fireflySpawnAlways;
-	}
-
-	public static void setFireflySpawnAlways(boolean value) {
-		fireflySpawnAlways = value;
-		config.setProperty("firefly-spawn-always", Boolean.toString(value));
-	}
-
-	public static boolean doesFireflySpawnUnderground() {
-		return fireflySpawnUnderground;
-	}
-
-	public static void setFireflySpawnUnderground(boolean value) {
-		fireflySpawnUnderground = value;
-		config.setProperty("firefly-spawn-underground", Boolean.toString(value));
-	}
-
-	public static int getFireflyWhiteAlpha() {
-		return fireflyWhiteAlpha;
-	}
-
-	public static void setFireflyWhiteAlpha(int value) {
-		fireflyWhiteAlpha = value;
-		config.setProperty("firefly-white-alpha", Integer.toString(value));
-	}
-
-	public static boolean getFireflyRainbow() {
-		return fireflyRainbow;
-	}
-
-	public static void setFireflyRainbow(boolean value) {
-		fireflyRainbow = value;
-		config.setProperty("firefly-rainbow", Boolean.toString(value));
 	}
 
 	public static boolean getViewAurasFP() {
