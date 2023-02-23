@@ -1,11 +1,16 @@
 # Effective - Changelog:
 
 ## Effective 1.7 - 1.19.3
-- Merged Illuminations with Effective
-- Improved Chorus Petals
-  - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
-  - Chorus petals now lay flat when touching the ground or water
-  - Chorus petals now cause ripples when landing on water
+- Merged Illuminations into Effective. Here's a list of all the Illuminations features that did and didn't make it in:
+  - Added Fireflies
+  - Added and improved Chorus Petals:
+      - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
+      - Chorus petals now lay flat when touching the ground or water
+      - Chorus petals now cause ripples when landing on water
+  - Removed Prismarine Crystals:
+    - As they brought too much clutter in builds that used prismarine, I decided to remove them. They may however may be reimplemented in the future as a more subtle and controllable effect
+  - Removed the Illuminations Glow Plankton:
+    - Effective's version of Glow Plankton introduced in 1.4 was how Illuminations' Glow Plankton was originally going to be updated
 
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:
