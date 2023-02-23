@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.particle.types.FireflyParticleType;
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.config.Config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -47,6 +46,10 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		this.setSpriteForAge(spriteProvider);
 		this.colorAlpha = 0f;
 		this.collidesWithWorld = false;
+	}
+
+	public static boolean canFlyThroughBlock(World world, BlockPos blockPos, BlockState blockState) {
+		return !blockState.shouldSuffocate(world, blockPos);
 	}
 
 	public ParticleTextureSheet getType() {
@@ -244,9 +247,5 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			}
 			return instance;
 		}
-	}
-
-	public static boolean canFlyThroughBlock(World world, BlockPos blockPos, BlockState blockState) {
-		return !blockState.shouldSuffocate(world, blockPos);
 	}
 }

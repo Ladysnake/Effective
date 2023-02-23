@@ -10,7 +10,6 @@ import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.RenderedHypnotizingEntities;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
-import ladysnake.illuminations.client.Illuminations;
 import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedCoreShader;

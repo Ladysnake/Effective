@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.config.Config;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;

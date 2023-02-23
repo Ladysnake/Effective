@@ -7,6 +7,18 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
 
 public class SpawnSettings {
+	public static final ImmutableMap<String, AuraSettings> AURAS = ImmutableMap.<String, AuraSettings>builder()
+			.put("twilight", new AuraSettings(0.1f, 1))
+			.put("ghostly", new AuraSettings(0.1f, 1))
+			.put("chorus", new AuraSettings(0.1f, 1))
+			.put("autumn_leaves", new AuraSettings(0.3f, 1))
+			.put("sculk_tendrils", new AuraSettings(0.1f, 1))
+			.put("shadowbringer_soul", new AuraSettings(0.1f, 1))
+			.put("goldenrod", new AuraSettings(0.4f, 1))
+			.put("confetti", new AuraSettings(0.1f, 1))
+			.put("prismatic_confetti", new AuraSettings(0.1f, 1))
+			.put("prismarine", new AuraSettings(0.1f, 1))
+			.build();
 	public static float LOW = 0.01f;
 	public static float MEDIUM = 0.05f;
 	public static float HIGH = 0.1f;
@@ -27,18 +39,5 @@ public class SpawnSettings {
 			.put(BiomeKeys.LUSH_CAVES.getValue(), new FireflySpawnSetting(MEDIUM, 0xF2B646))
 			.put(BiomeKeys.SWAMP.getValue(), new FireflySpawnSetting(HIGH, 0xBFFF00))
 			.put(BiomeKeys.MANGROVE_SWAMP.getValue(), new FireflySpawnSetting(HIGH, 0xBFFF00))
-			.build();
-
-	public static final ImmutableMap<String, AuraSettings> AURAS = ImmutableMap.<String, AuraSettings>builder()
-			.put("twilight", new AuraSettings(0.1f, 1))
-			.put("ghostly", new AuraSettings(0.1f, 1))
-			.put("chorus", new AuraSettings(0.1f, 1))
-			.put("autumn_leaves", new AuraSettings(0.3f, 1))
-			.put("sculk_tendrils", new AuraSettings(0.1f, 1))
-			.put("shadowbringer_soul", new AuraSettings(0.1f, 1))
-			.put("goldenrod", new AuraSettings(0.4f, 1))
-			.put("confetti", new AuraSettings(0.1f, 1))
-			.put("prismatic_confetti", new AuraSettings(0.1f, 1))
-			.put("prismarine", new AuraSettings(0.1f, 1))
 			.build();
 }

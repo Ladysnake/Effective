@@ -4,7 +4,6 @@ import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

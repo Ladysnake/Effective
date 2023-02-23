@@ -10,6 +10,9 @@
     "allays.AllayEntityMixin",
     "allays.AllayEntityRendererMixin",
     "allays.AllayLivingEntityRendererMixin",
+    "choruspetals.ChorusFlowerRandomDisplayTickBlockMixin",
+    "choruspetals.ParticleManagerMixin",
+    "fireflies.FireflySpawningClientWorldMixin",
     "glowsquids.FeatureRendererMixin",
     "glowsquids.GlowSquidEntityRendererMixin",
     "glowsquids.LivingEntityRendererMixin",
@@ -22,10 +25,7 @@
     "water.FluidRendererMixin",
     "water.WaterFluidMixin",
     "water.WorldMixin",
-    "water.integration.sodium.FluidRendererMixin",
-    "fireflies.FireflySpawningClientWorldMixin",
-    "choruspetals.ChorusFlowerRandomDisplayTickBlockMixin",
-    "choruspetals.ParticleManagerMixin"
+    "water.integration.sodium.FluidRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

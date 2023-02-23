@@ -2,8 +2,6 @@ package ladysnake.effective.mixin.choruspetals;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.config.Config;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChorusFlowerBlock;

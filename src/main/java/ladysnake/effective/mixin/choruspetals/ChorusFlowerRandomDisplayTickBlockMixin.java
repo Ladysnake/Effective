@@ -3,7 +3,6 @@ package ladysnake.effective.mixin.choruspetals;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.mixin.RandomDisplayTickBlockMixin;
-import ladysnake.illuminations.client.config.Config;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChorusFlowerBlock;
 import net.minecraft.util.math.BlockPos;

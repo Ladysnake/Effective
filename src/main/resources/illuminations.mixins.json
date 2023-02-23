@@ -3,16 +3,16 @@
   "package": "ladysnake.illuminations.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "SeaLanternBlockMixin",
     "CarvedPumpkinBlockMixin",
     "ClientWorldMixin",
     "LivingEntityMixin",
-    "ladysnake.effective.mixin.choruspetals.ParticleManagerMixin",
     "PlayerEntityMixin",
     "RenderLayerAccessor",
+    "SeaLanternBlockMixin",
     "SkullBlockMixin",
     "jeb.FeatureRendererMixin",
-    "jeb.LivingEntityRendererMixin"
+    "jeb.LivingEntityRendererMixin",
+    "ladysnake.effective.mixin.choruspetals.ParticleManagerMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {

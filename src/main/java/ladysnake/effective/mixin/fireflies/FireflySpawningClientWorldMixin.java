@@ -2,7 +2,6 @@ package ladysnake.effective.mixin.fireflies;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.particle.contracts.FireflyParticleInitialData;
-import ladysnake.effective.client.particle.contracts.SplashParticleInitialData;
 import ladysnake.effective.client.settings.SpawnSettings;
 import ladysnake.effective.client.settings.data.FireflySpawnSetting;
 import net.minecraft.client.world.ClientWorld;

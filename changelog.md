@@ -2,6 +2,10 @@
 
 ## Effective 1.7 - 1.19.3
 - Merged Illuminations with Effective
+- Improved Chorus Petals
+  - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
+  - Chorus petals now lay flat when touching the ground or water
+  - Chorus petals now cause ripples when landing on water
 
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:

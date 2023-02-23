@@ -2,6 +2,7 @@ package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
@@ -18,12 +19,14 @@ import java.util.Random;
 public class ChorusPetalParticle extends SpriteBillboardParticle {
 	private static final Random RANDOM = new Random();
 	protected final float rotationFactor;
+	private final float groundOffset;
+	private boolean isInAir = true;
 
 	public ChorusPetalParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
 
 		this.scale *= 1f + RANDOM.nextFloat();
-		this.maxAge = 30 + random.nextInt(60);
+		this.maxAge = 300 + random.nextInt(60);
 		this.collidesWithWorld = true;
 		int variant = RANDOM.nextInt(3);
 		this.setSprite(spriteProvider.getSprite(variant, 2));
@@ -38,6 +41,8 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 
 		this.rotationFactor = ((float) Math.random() - 0.5F) * 0.01F;
 		this.angle = random.nextFloat() * 360f;
+
+		this.groundOffset = RANDOM.nextFloat() / 100f + 0.001f;
 	}
 
 	@Override
@@ -49,24 +54,30 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
 		Quaternionf quaternion2;
+
+		float i = 0f;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
 			quaternion2 = new Quaternionf(camera.getRotation());
-			float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
+			i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
 			Effective.wheresTheHamiltonProductMojangski(quaternion2, new Quaternionf().rotateZ(i));
 		}
 
 		Vector3f Vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
 		Vector3f.rotate(quaternion2);
-		Vector3f[] Vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
+		Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vector3f Vector3f2 = Vector3fs[k];
-			Vector3f2.rotate(quaternion2);
-			Vector3f2.mul(j);
-			Vector3f2.add(f, g, h);
+			Vector3f vector3f = vector3fs[k];
+			if (this.velocityX == 0 && this.velocityY == 0 && this.velocityZ == 0) {
+				vector3f.rotate(new Quaternionf().rotateXYZ((float) Math.PI / 2, 0, i));
+			} else {
+				vector3f.rotate(quaternion2);
+			}
+			vector3f.mul(j);
+			vector3f.add(f, g + this.groundOffset, h);
 		}
 
 		float minU = this.getMinU();
@@ -75,10 +86,10 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = 15728880;
 
-		vertexConsumer.vertex(Vector3fs[0].x, Vector3fs[0].y, Vector3fs[0].z).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vector3fs[1].x, Vector3fs[1].y, Vector3fs[1].z).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vector3fs[2].x, Vector3fs[2].y, Vector3fs[2].z).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vector3fs[3].x, Vector3fs[3].y, Vector3fs[3].z).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[0].x, vector3fs[0].y, vector3fs[0].z).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[1].x, vector3fs[1].y, vector3fs[1].z).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[2].x, vector3fs[2].y, vector3fs[2].z).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[3].x, vector3fs[3].y, vector3fs[3].z).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
 	}
 
 	public ParticleTextureSheet getType() {
@@ -99,8 +110,8 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		this.velocityY *= 0.99D;
 		this.velocityZ *= 0.99D;
 
-		this.colorRed *= 0.99;
-		this.colorGreen *= 0.98;
+		this.colorRed /= 1.001;
+		this.colorGreen /= 1.002;
 
 		if (this.age >= this.maxAge) {
 //            this.colorRed *= 0.9;
@@ -115,9 +126,22 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 
 		this.prevAngle = this.angle;
 		if (this.onGround || this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-			this.velocityX = 0;
-			this.velocityY = 0;
-			this.velocityZ = 0;
+			if (this.isInAir) {
+				if (this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).getBlock() == Blocks.WATER) {
+					for (int i = 0; i > -10; i--) {
+						BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
+						if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
+							this.world.addParticle(Effective.RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
+							break;
+						}
+					}
+				}
+
+				this.velocityX = 0;
+				this.velocityY = 0;
+				this.velocityZ = 0;
+				this.isInAir = false;
+			}
 		}
 
 		if (this.velocityY != 0) {
