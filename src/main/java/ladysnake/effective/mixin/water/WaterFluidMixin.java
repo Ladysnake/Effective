@@ -2,6 +2,7 @@ package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.client.EffectiveUtils;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.WaterFluid;
 import net.minecraft.particle.DefaultParticleType;
@@ -60,12 +61,7 @@ public class WaterFluidMixin {
 		if (shouldRipple(world, pos)) {
 			for (int i = 0; i <= random.nextInt(EffectiveConfig.rainRippleDensity); i++) {
 				if (world.getBiome(pos).value().getPrecipitation() == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
-					DefaultParticleType ripple = Effective.RIPPLE;
-					if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
-						ripple = Effective.GLOW_RIPPLE;
-					}
-
-					world.addParticle(ripple, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 0.9f, pos.getZ() + .5 + random.nextGaussian() / 2f, 0f, 0f, 0f);
+					EffectiveUtils.spawnWaterEffect(world, pos, 0f, 0f, 0f, EffectiveUtils.WaterEffectType.RIPPLE);
 				}
 			}
 		}

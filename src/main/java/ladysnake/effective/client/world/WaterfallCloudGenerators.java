@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.client.EffectiveUtils;
 import ladysnake.effective.client.sound.WaterfallSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -122,12 +123,7 @@ public class WaterfallCloudGenerators {
 			double offsetX = world.getRandom().nextGaussian() / 5f;
 			double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-			DefaultParticleType waterfallCloud = Effective.WATERFALL_CLOUD;
-			if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
-				waterfallCloud = Effective.GLOW_WATERFALL_CLOUD;
-			}
-
-			world.addParticle(waterfallCloud, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ, world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ));
+			EffectiveUtils.spawnWaterEffect(world, pos.add(.5 + offsetX, world.getRandom().nextFloat(), .5 + offsetZ), world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ), EffectiveUtils.WaterEffectType.WATERFALL_CLOUD);
 		}
 	}
 

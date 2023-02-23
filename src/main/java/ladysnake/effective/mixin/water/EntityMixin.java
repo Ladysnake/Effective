@@ -2,6 +2,7 @@ package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.client.EffectiveUtils;
 import ladysnake.effective.client.particle.contracts.SplashParticleInitialData;
 import ladysnake.effective.client.particle.types.SplashParticleType;
 import net.minecraft.entity.Entity;
@@ -65,25 +66,13 @@ public abstract class EntityMixin {
 					if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().getFluid() == Fluids.WATER && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
 						this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), entity instanceof PlayerEntity ? SoundEvents.ENTITY_PLAYER_SPLASH : SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g * 10f, 0.8f, true);
 						SplashParticleInitialData data = new SplashParticleInitialData(entity.getWidth(), vec3d.getY());
-
-						SplashParticleType splash = Effective.SPLASH;
-						if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(blockPos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
-							splash = Effective.GLOW_SPLASH;
-						}
-
-						this.world.addParticle(splash.setData(data), this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), 0, 0, 0);
-
+						EffectiveUtils.spawnSplash(this.world, new BlockPos(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ()), 0, 0, 0, data);
 						break;
 					}
 				}
 
 				for (int j = 0; j < this.getWidth() * 25f; j++) {
-					DefaultParticleType ripple = Effective.DROPLET;
-					if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(blockPos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
-						ripple = Effective.GLOW_DROPLET;
-					}
-
-					this.world.addParticle(ripple, this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth(), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f);
+					EffectiveUtils.spawnWaterEffect(this.world, new BlockPos(this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth()), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f, EffectiveUtils.WaterEffectType.DROPLET);
 				}
 			}
 		}
