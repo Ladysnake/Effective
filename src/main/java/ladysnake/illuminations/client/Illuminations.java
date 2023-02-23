@@ -98,7 +98,6 @@ public class Illuminations implements ClientModInitializer {
 	public static DefaultParticleType GLOWWORM;
 	public static DefaultParticleType PLANKTON;
 	public static DefaultParticleType EYES;
-	public static DefaultParticleType CHORUS_PETAL;
 	public static DefaultParticleType WILL_O_WISP;
 	public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
 	public static DefaultParticleType PUMPKIN_SPIRIT;
@@ -223,8 +222,6 @@ public class Illuminations implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(Illuminations.PLANKTON, PlanktonParticle.DefaultFactory::new);
 		EYES = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Illuminations.EYES, EyesParticle.DefaultFactory::new);
-		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "chorus_petal"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(Illuminations.CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
 		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
 		WISP_TRAIL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "wisp_trail"), new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {

@@ -1,5 +1,7 @@
-package ladysnake.illuminations.mixin;
+package ladysnake.effective.mixin.choruspetals;
 
+import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
 import net.minecraft.block.BlockState;
@@ -32,8 +34,8 @@ public abstract class ParticleManagerMixin {
 	@Inject(method = "addBlockBreakParticles", at = @At(value = "RETURN"))
 	public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {
 		if (state.getBlock() == Blocks.CHORUS_FLOWER) {
-			for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * 10 * Config.getChorusPetalsSpawnMultiplier(); i++) {
-				this.addParticle(Illuminations.CHORUS_PETAL, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, random.nextGaussian() / 10f, random.nextGaussian() / 10f, random.nextGaussian() / 10f);
+			for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * (EffectiveConfig.chorusPetalDensity / 10f); i++) {
+				this.addParticle(Effective.CHORUS_PETAL, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, random.nextGaussian() / 10f, random.nextGaussian() / 10f, random.nextGaussian() / 10f);
 			}
 		}
 	}

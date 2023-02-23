@@ -30,7 +30,6 @@ public class Config {
 	private static HalloweenFeatures halloweenFeatures;
 	private static EyesInTheDarkSpawnRate eyesInTheDarkSpawnRate;
 	private static WillOWispsSpawnRate willOWispsSpawnRate;
-	private static int chorusPetalsSpawnMultiplier;
 	private static int density;
 	private static boolean viewAurasFP;
 	private static boolean debugMode;
@@ -51,7 +50,6 @@ public class Config {
 			setHalloweenFeatures(DefaultConfig.HALLOWEEN_FEATURES);
 			setEyesInTheDarkSpawnRate(DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE);
 			setWillOWispsSpawnRate(DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
-			setChorusPetalsSpawnMultiplier(DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER);
 			setDensity(DefaultConfig.DENSITY);
 			setDisplayCosmetics(DefaultConfig.DISPLAY_COSMETICS);
 			setViewAurasFP(DefaultConfig.VIEW_AURAS_FP);
@@ -69,7 +67,6 @@ public class Config {
 		parseProperty("halloween-features", Config::setHalloweenFeatures, DefaultConfig.HALLOWEEN_FEATURES);
 		parseProperty("eyes-in-the-dark-spawn-rate", Config::setEyesInTheDarkSpawnRate, DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE);
 		parseProperty("will-o-wisps-spawn-rate", Config::setWillOWispsSpawnRate, DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
-		parseProperty("chorus-petal-spawn-multiplier", Config::setChorusPetalsSpawnMultiplier, DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER);
 		parseProperty("density", Config::setDensity, DefaultConfig.DENSITY);
 		parseProperty("display-cosmetics", Config::setDisplayCosmetics, DefaultConfig.DISPLAY_COSMETICS);
 		parseProperty("debug-mode", Config::setDebugMode, DefaultConfig.DEBUG_MODE);
@@ -150,15 +147,6 @@ public class Config {
 	public static void setWillOWispsSpawnRate(WillOWispsSpawnRate value) {
 		willOWispsSpawnRate = value;
 		config.setProperty("will-o-wisps-spawn-rate", value.name());
-	}
-
-	public static int getChorusPetalsSpawnMultiplier() {
-		return chorusPetalsSpawnMultiplier;
-	}
-
-	public static void setChorusPetalsSpawnMultiplier(int value) {
-		chorusPetalsSpawnMultiplier = value;
-		config.setProperty("chorus-petal-spawn-multiplier", Integer.toString(value));
 	}
 
 	public static int getDensity() {

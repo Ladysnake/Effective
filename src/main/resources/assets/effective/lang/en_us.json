@@ -20,5 +20,6 @@
   "effective.midnightconfig.sonicBoomScreenShake": "Enable Warden sonic booms causing screen shake",
   "effective.midnightconfig.ravagerScreenShake": "Enable Ravager roar causing screen shake",
   "effective.midnightconfig.dragonScreenShake": "Enable Ender Dragon perch roaring causing screen shake",
-  "effective.midnightconfig.fireflyDensity": "Firefly density"
+  "effective.midnightconfig.fireflyDensity": "Firefly density",
+  "effective.midnightconfig.chorusPetalDensity": "Chorus Petal density"
 }

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 @Mixin(SkullBlock.class)
-public abstract class SkullBlockMixin extends BlockMixin {
+public abstract class SkullBlockMixin extends SeaLanternBlockMixin {
 	@Override
 	protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
 		if ((state.getBlock() == Blocks.SKELETON_SKULL || state.getBlock() == Blocks.SKELETON_WALL_SKULL) && Illuminations.isNightTime(world) && random.nextInt(100) == 0 && ((Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS)) {

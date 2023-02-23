@@ -62,4 +62,7 @@ public class EffectiveConfig extends MidnightConfig {
 
 	@Entry(min = 0, max = 500)
 	public static int fireflyDensity = 100;
+
+	@Entry(min = 0, max = 500)
+	public static int chorusPetalDensity = 100;
 }

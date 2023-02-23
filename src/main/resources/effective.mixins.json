@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
+    "RandomDisplayTickBlockMixin",
     "allays.AllayEntityMixin",
     "allays.AllayEntityRendererMixin",
     "allays.AllayLivingEntityRendererMixin",
@@ -22,7 +23,9 @@
     "water.WaterFluidMixin",
     "water.WorldMixin",
     "water.integration.sodium.FluidRendererMixin",
-    "fireflies.FireflySpawningClientWorldMixin"
+    "fireflies.FireflySpawningClientWorldMixin",
+    "choruspetals.ChorusFlowerRandomDisplayTickBlockMixin",
+    "choruspetals.ParticleManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

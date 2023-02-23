@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 @Mixin(CarvedPumpkinBlock.class)
-public abstract class CarvedPumpkinBlockMixin extends BlockMixin {
+public abstract class CarvedPumpkinBlockMixin extends SeaLanternBlockMixin {
 	@Override
 	protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
 		if (state.getBlock() == Blocks.JACK_O_LANTERN && Illuminations.isNightTime(world) && random.nextInt(100) == 0 && ((Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS)) {

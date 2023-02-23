@@ -13,7 +13,7 @@
 				"lonefelidae16": "Contributor"
 			},
 			"contact": {
-				"homepage": "https://illuminations.uuid.gg/",
+				"homepage": "https://doctor4t.uuid.gg/",
 				"sources": "https://github.com/Ladysnake/Effective",
 				"issues": "https://github.com/Ladysnake/Effective/issues"
 			},
@@ -22,8 +22,7 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"client_init": [
-				"ladysnake.effective.client.Effective",
-				"ladysnake.illuminations.client.Illuminations"
+				"ladysnake.effective.client.Effective"
 			]
 		},
 		"depends": [
@@ -46,11 +45,9 @@
 		]
 	},
 	"mixin": [
-		"effective.mixins.json",
-		"illuminations.mixins.json"
+		"effective.mixins.json"
 	],
 	"access_widener": [
-		"effective.accesswidener",
-		"illuminations.accesswidener"
+		"effective.accesswidener"
 	]
 }

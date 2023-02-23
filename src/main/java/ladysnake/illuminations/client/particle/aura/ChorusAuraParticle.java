@@ -1,6 +1,6 @@
 package ladysnake.illuminations.client.particle.aura;
 
-import ladysnake.illuminations.client.particle.ChorusPetalParticle;
+import ladysnake.effective.client.particle.ChorusPetalParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;

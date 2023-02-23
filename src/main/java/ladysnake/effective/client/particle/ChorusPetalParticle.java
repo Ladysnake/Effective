@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client.particle;
+package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
@@ -18,16 +18,14 @@ import java.util.Random;
 public class ChorusPetalParticle extends SpriteBillboardParticle {
 	private static final Random RANDOM = new Random();
 	protected final float rotationFactor;
-	private final int variant = RANDOM.nextInt(3);
-	private final SpriteProvider spriteProvider;
 
 	public ChorusPetalParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
-		this.spriteProvider = spriteProvider;
 
 		this.scale *= 1f + RANDOM.nextFloat();
 		this.maxAge = 30 + random.nextInt(60);
 		this.collidesWithWorld = true;
+		int variant = RANDOM.nextInt(3);
 		this.setSprite(spriteProvider.getSprite(variant, 2));
 
 		if (velocityY == 0f && velocityX == 0f && velocityZ == 0f) {
