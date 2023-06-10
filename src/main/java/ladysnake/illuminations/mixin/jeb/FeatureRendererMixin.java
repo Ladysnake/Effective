@@ -26,7 +26,7 @@ public abstract class FeatureRendererMixin {
 		isRgb = !(entity instanceof SheepEntity) && entity.hasCustomName() && "jeb_".equals(entity.getName().toString());
 	}
 
-	@ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/render/VertexConsumer;"))
+	@ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"))
 	private static RenderLayer replaceRenderLayer(RenderLayer base) {
 		if (isRgb) {
 			return Rainbowlluminations.RAINBOW_SHADER.getRenderLayer(base);

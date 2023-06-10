@@ -115,7 +115,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 		}
 
 		// if above block is no longer here, tag no longer on ceiling
-		if (this.world.getBlockState(new BlockPos(this.x, this.y + 0.5, this.z)).isAir()) {
+		if (this.world.getBlockState(BlockPos.create(this.x, this.y + 0.5, this.z)).isAir()) {
 			this.onCeiling = false;
 		}
 
@@ -147,7 +147,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 		targetVector = targetVector.multiply(0.1 / length);
 
 
-		if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+		if (!this.world.getBlockState(BlockPos.create(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
 			velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
 			velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
 		} else {
@@ -155,7 +155,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 			velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
 		}
 
-		if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+		if (!BlockPos.create(x, y, z).equals(this.getTargetPosition())) {
 			this.move(velocityX, velocityY, velocityZ);
 		}
 	}
@@ -165,7 +165,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 		this.xTarget = this.x + random.nextGaussian();
 		this.zTarget = this.z + random.nextGaussian();
 
-		BlockPos targetPos = new BlockPos(this.xTarget, this.y, this.zTarget);
+		BlockPos targetPos = BlockPos.create(this.xTarget, this.y, this.zTarget);
 
 		targetChangeCooldown = random.nextInt() % 100;
 	}
@@ -175,7 +175,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 		this.y = (float) Math.ceil(this.y) - 0.025;
 		this.colorAlpha = 0f;
 
-		while (this.world.getBlockState(new BlockPos(this.x, this.y + 1, this.z)).isAir()) {
+		while (this.world.getBlockState(BlockPos.create(this.x, this.y + 1, this.z)).isAir()) {
 			if (this.y++ > 255) {
 				this.markDead();
 				break;
@@ -186,7 +186,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 	}
 
 	public BlockPos getTargetPosition() {
-		return new BlockPos(this.xTarget, this.yTarget + 0.95, this.zTarget);
+		return BlockPos.create(this.xTarget, this.yTarget + 0.95, this.zTarget);
 	}
 
 

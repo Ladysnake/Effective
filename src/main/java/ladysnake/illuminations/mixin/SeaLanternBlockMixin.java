@@ -22,7 +22,7 @@ public abstract class SeaLanternBlockMixin {
 	protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
 		if (this.getDefaultState().getBlock() == Blocks.SEA_LANTERN) {
 			for (int i = 0; i < 10; i++) {
-				BlockPos blockPos = new BlockPos(pos.getX() + 0.5 + random.nextGaussian() * 15, pos.getY() + 0.5 + random.nextGaussian() * 15, pos.getZ() + 0.5 + random.nextGaussian() * 15);
+				BlockPos blockPos = BlockPos.create(pos.getX() + 0.5 + random.nextGaussian() * 15, pos.getY() + 0.5 + random.nextGaussian() * 15, pos.getZ() + 0.5 + random.nextGaussian() * 15);
 
 				if (world.getBlockState(blockPos).getBlock() == Blocks.WATER && random.nextInt(1 + world.getLightLevel(blockPos)) == 0) {
 					world.addParticle(Illuminations.PRISMARINE_CRYSTAL, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 0f, 0f, 0f);

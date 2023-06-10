@@ -3,7 +3,11 @@ package ladysnake.effective.mixin.allays;
 import com.sammy.lodestone.setup.LodestoneRenderLayers;
 import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
 import com.sammy.lodestone.systems.rendering.VFXBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.ScreenParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.SimpleParticleEffect;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.EffectiveUtils;
@@ -86,9 +90,11 @@ public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M e
 			// twinkles
 			if ((allayEntity.getRandom().nextInt(100) + 1) <= EffectiveConfig.allayTwinkleDensity && EffectiveUtils.isGoingFast(allayEntity) && !MinecraftClient.getInstance().isPaused()) {
 				float spreadDivider = 4f;
-				ParticleBuilders.create(Effective.ALLAY_TWINKLE)
-						.setColor(new Color(data.color), new Color(data.color))
-						.setAlpha(0.9f).setScale(0.06f).setLifetime(15)
+				WorldParticleBuilder.create(Effective.ALLAY_TWINKLE)
+						.setColorData(ColorParticleData.create(new Color(data.color), new Color(data.color)).build())
+						.setTransparencyData(GenericParticleData.create(0.9f).build())
+						.setScaleData(GenericParticleData.create(0.06f).build())
+						.setLifetime(15)
 						.setMotion(0, 0.05f, 0)
 						.spawn(allayEntity.world, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
 			}

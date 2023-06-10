@@ -125,12 +125,12 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		}
 
 		this.prevAngle = this.angle;
-		if (this.onGround || this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+		if (this.onGround || this.world.getFluidState(BlockPos.create(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
 			if (this.isInAir) {
-				if (this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).getBlock() == Blocks.WATER) {
+				if (this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).getBlock() == Blocks.WATER) {
 					for (int i = 0; i > -10; i--) {
-						BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
-						if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
+						BlockPos pos = BlockPos.create(this.x, Math.round(this.y) + i, this.z);
+						if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(BlockPos.create(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
 							this.world.addParticle(Effective.RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
 							break;
 						}

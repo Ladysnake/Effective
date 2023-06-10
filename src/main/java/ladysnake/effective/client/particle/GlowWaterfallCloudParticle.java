@@ -25,7 +25,7 @@ public class GlowWaterfallCloudParticle extends WaterfallCloudParticle {
 	private GlowWaterfallCloudParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
-		pos = new BlockPos(x, y, z);
+		pos = BlockPos.create(x, y, z);
 	}
 
 	@Override

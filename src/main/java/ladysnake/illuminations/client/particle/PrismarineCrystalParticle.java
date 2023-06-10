@@ -102,7 +102,7 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
 		this.prevPosY = this.y;
 		this.prevPosZ = this.z;
 
-		if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+		if (this.world.getFluidState(BlockPos.create(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
 			this.move(this.velocityX, this.velocityY, this.velocityZ);
 		} else {
 			this.move(this.velocityX, this.velocityY, this.velocityZ);

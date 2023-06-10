@@ -78,7 +78,7 @@ public class SplashParticle extends Particle {
 
 	private void drawSplash(int frame, Camera camera, float tickDelta, Vector3f multiplier) {
 		if (waterColor == -1) {
-			waterColor = BiomeColors.getWaterColor(world, new BlockPos(this.x, this.y, this.z));
+			waterColor = BiomeColors.getWaterColor(world, BlockPos.create(this.x, this.y, this.z));
 		}
 		float r = (float) (waterColor >> 16 & 0xFF) / 255.0f;
 		float g = (float) (waterColor >> 8 & 0xFF) / 255.0f;

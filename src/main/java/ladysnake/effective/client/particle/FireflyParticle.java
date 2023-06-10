@@ -137,7 +137,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		double length = targetVector.length();
 		targetVector = targetVector.multiply(0.1 / length);
 
-		BlockPos blockPos = new BlockPos(this.x, this.y - 0.1, this.z);
+		BlockPos blockPos = BlockPos.create(this.x, this.y - 0.1, this.z);
 		if (!canFlyThroughBlock(this.world, blockPos, this.world.getBlockState(blockPos))) {
 			velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
 			velocityY = 0.05;
@@ -147,7 +147,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
 			velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
 		}
-		if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+		if (!BlockPos.create(x, y, z).equals(this.getTargetPosition())) {
 			this.move(velocityX, velocityY, velocityZ);
 		}
 	}
@@ -157,7 +157,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			// Behaviour
 			double groundLevel = 0;
 			for (int i = 0; i < 20; i++) {
-				BlockPos checkedPos = new BlockPos(this.x, this.y - i, this.z);
+				BlockPos checkedPos = BlockPos.create(this.x, this.y - i, this.z);
 				BlockState checkedBlock = this.world.getBlockState(checkedPos);
 				if (canFlyThroughBlock(this.world, checkedPos, checkedBlock)) {
 					groundLevel = this.y - i;
@@ -169,7 +169,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, groundLevel), groundLevel + maxHeight);
 			this.zTarget = this.z + random.nextGaussian() * 10;
 
-			BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+			BlockPos targetPos = BlockPos.create(this.xTarget, this.yTarget, this.zTarget);
 			if (!canFlyThroughBlock(this.world, targetPos, this.world.getBlockState(targetPos))) {
 				this.yTarget += 1;
 			}
@@ -186,7 +186,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 			this.y = this.lightTarget.getY() + 1;
 			this.z = this.lightTarget.getZ();
 
-			if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) > 0 && !this.world.isDay()) {
+			if (this.world.getLightLevel(LightType.BLOCK, BlockPos.create(x, y, z)) > 0 && !this.world.isDay()) {
 				this.lightTarget = getMostLitBlockAround();
 			} else {
 				this.lightTarget = null;
@@ -197,7 +197,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 	}
 
 	public BlockPos getTargetPosition() {
-		return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+		return BlockPos.create(this.xTarget, this.yTarget + 0.5, this.zTarget);
 	}
 
 	private BlockPos getMostLitBlockAround() {
@@ -207,7 +207,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
 				for (int z = -1; z <= 1; z++) {
-					BlockPos bp = new BlockPos(this.x + x, this.y + y, this.z + z);
+					BlockPos bp = BlockPos.create(this.x + x, this.y + y, this.z + z);
 					randBlocks.put(bp, this.world.getLightLevel(LightType.BLOCK, bp));
 				}
 			}
@@ -215,7 +215,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
 		// get other random blocks to find a different light source
 		for (int i = 0; i < 15; i++) {
-			BlockPos randBP = new BlockPos(this.x + random.nextGaussian() * 10, this.y + random.nextGaussian() * 10, this.z + random.nextGaussian() * 10);
+			BlockPos randBP = BlockPos.create(this.x + random.nextGaussian() * 10, this.y + random.nextGaussian() * 10, this.z + random.nextGaussian() * 10);
 			randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
 		}
 

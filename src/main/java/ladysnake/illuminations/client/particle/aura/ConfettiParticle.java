@@ -117,8 +117,8 @@ public class ConfettiParticle extends SpriteBillboardParticle {
 		if (this.age++ >= this.maxAge) {
 			this.markDead();
 		} else {
-			if (this.world.getFluidState(new BlockPos(this.x, this.y + 0.2, this.z)).isEmpty()) {
-				if (this.world.getFluidState(new BlockPos(this.x, this.y - 0.01, this.z)).isIn(FluidTags.WATER)) {
+			if (this.world.getFluidState(BlockPos.create(this.x, this.y + 0.2, this.z)).isEmpty()) {
+				if (this.world.getFluidState(BlockPos.create(this.x, this.y - 0.01, this.z)).isIn(FluidTags.WATER)) {
 					this.onGround = true;
 					this.velocityY = 0;
 				} else {

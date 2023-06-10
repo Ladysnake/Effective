@@ -13,7 +13,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -60,7 +59,7 @@ public class WaterFluidMixin {
 		// still water rain ripples
 		if (shouldRipple(world, pos)) {
 			for (int i = 0; i <= random.nextInt(EffectiveConfig.rainRippleDensity); i++) {
-				if (world.getBiome(pos).value().getPrecipitation() == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
+				if (world.getBiome(pos).value().getPrecipitationAt(pos) == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
 					EffectiveUtils.spawnWaterEffect(world, pos, 0f, 0f, 0f, EffectiveUtils.WaterEffectType.RIPPLE);
 				}
 			}

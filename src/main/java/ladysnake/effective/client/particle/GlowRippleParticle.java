@@ -25,7 +25,7 @@ public class GlowRippleParticle extends RippleParticle {
 	private GlowRippleParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
-		pos = new BlockPos(x, y, z);
+		pos = BlockPos.create(x, y, z);
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 				this.velocityZ *= 0.5f;
 			}
 
-			if (this.onGround || (this.age > 10 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
+			if (this.onGround || (this.age > 10 && this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
 				this.colorAlpha -= 0.1f;
 				this.velocityX *= 0.5f;
 				this.velocityY *= 0.5f;
@@ -72,7 +72,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 				this.markDead();
 			}
 
-			if (this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
+			if (this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).isAir()) {
 				this.velocityX *= 0.9;
 				this.velocityY *= 0.9;
 				this.velocityZ *= 0.9;

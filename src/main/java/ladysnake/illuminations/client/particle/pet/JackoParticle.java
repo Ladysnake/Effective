@@ -79,7 +79,7 @@ public class JackoParticle extends PetParticle {
 
 		if (owner != null) {
 			// if night or dark enough
-			if (Illuminations.isNightTime(world) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
+			if (Illuminations.isNightTime(world) || (this.world.getLightLevel(BlockPos.create(this.x, this.y, this.z)) < 10)) {
 				glow = 1;
 			} else {
 				glow = 0;

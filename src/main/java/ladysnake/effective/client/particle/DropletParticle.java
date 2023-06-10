@@ -45,14 +45,14 @@ public class DropletParticle extends SpriteBillboardParticle {
 			this.markDead();
 		}
 
-		if (this.onGround || (this.age > 5 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
+		if (this.onGround || (this.age > 5 && this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
 			this.markDead();
 		}
 
-		if (this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
+		if (this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).isAir()) {
 			for (int i = 0; i > -10; i--) {
-				BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
-				if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
+				BlockPos pos = BlockPos.create(this.x, Math.round(this.y) + i, this.z);
+				if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(BlockPos.create(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
 					this.world.addParticle(Effective.RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
 					break;
 				}

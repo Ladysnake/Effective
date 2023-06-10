@@ -24,8 +24,4 @@ public class AllayTwinkleParticle extends FrameSetParticle {
 		}
 	}
 
-	@Override
-	public SimpleParticleEffect.Animator getAnimator() {
-		return SimpleParticleEffect.Animator.WITH_AGE;
-	}
 }
