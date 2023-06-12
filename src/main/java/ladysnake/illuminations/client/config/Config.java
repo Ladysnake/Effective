@@ -1,7 +1,5 @@
 package ladysnake.illuminations.client.config;
 
-import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
-import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +25,6 @@ public class Config {
 		}
 	};
 	private static HalloweenFeatures halloweenFeatures;
-	private static EyesInTheDarkSpawnRate eyesInTheDarkSpawnRate;
 	private static WillOWispsSpawnRate willOWispsSpawnRate;
 	private static int density;
 	private static boolean viewAurasFP;
@@ -47,7 +44,6 @@ public class Config {
 		} else { // if no illuminations.properties, load default values
 			// define default properties
 			setHalloweenFeatures(DefaultConfig.HALLOWEEN_FEATURES);
-			setEyesInTheDarkSpawnRate(DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE);
 			setWillOWispsSpawnRate(DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
 			setDensity(DefaultConfig.DENSITY);
 			setDisplayCosmetics(DefaultConfig.DISPLAY_COSMETICS);
@@ -64,7 +60,6 @@ public class Config {
 		}
 
 		parseProperty("halloween-features", Config::setHalloweenFeatures, DefaultConfig.HALLOWEEN_FEATURES);
-		parseProperty("eyes-in-the-dark-spawn-rate", Config::setEyesInTheDarkSpawnRate, DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE);
 		parseProperty("will-o-wisps-spawn-rate", Config::setWillOWispsSpawnRate, DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
 		parseProperty("density", Config::setDensity, DefaultConfig.DENSITY);
 		parseProperty("display-cosmetics", Config::setDisplayCosmetics, DefaultConfig.DISPLAY_COSMETICS);
@@ -128,15 +123,6 @@ public class Config {
 	public static void setHalloweenFeatures(HalloweenFeatures value) {
 		halloweenFeatures = value;
 		config.setProperty("halloween-features", value.toString());
-	}
-
-	public static EyesInTheDarkSpawnRate getEyesInTheDarkSpawnRate() {
-		return eyesInTheDarkSpawnRate;
-	}
-
-	public static void setEyesInTheDarkSpawnRate(EyesInTheDarkSpawnRate value) {
-		eyesInTheDarkSpawnRate = value;
-		config.setProperty("eyes-in-the-dark-spawn-rate", value.name());
 	}
 
 	public static WillOWispsSpawnRate getWillOWispsSpawnRate() {

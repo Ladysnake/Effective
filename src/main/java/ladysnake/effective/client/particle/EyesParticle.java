@@ -1,10 +1,9 @@
-package ladysnake.illuminations.client.particle;
+package ladysnake.effective.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.config.Config;
-import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
@@ -42,7 +41,7 @@ public class EyesParticle extends SpriteBillboardParticle {
 	@Override
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
 		// disable if night vision or config is set to disabled
-		if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || Config.getHalloweenFeatures() == HalloweenFeatures.DISABLE) {
+		if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || EffectiveConfig.enableEyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.DISABLED) {
 			this.markDead();
 		}
 

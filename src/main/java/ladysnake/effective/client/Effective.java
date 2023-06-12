@@ -10,6 +10,7 @@ import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.RenderedHypnotizingEntities;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedCoreShader;
@@ -66,6 +67,7 @@ public class Effective implements ClientModInitializer {
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
 	public static FireflyParticleType FIREFLY;
 	public static DefaultParticleType CHORUS_PETAL;
+	public static DefaultParticleType EYES;
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -121,6 +123,8 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticle.DefaultFactory::new);
 		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
+		EYES = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
+		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.DefaultFactory::new);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);

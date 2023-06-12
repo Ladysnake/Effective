@@ -12,7 +12,7 @@
     "allays.AllayLivingEntityRendererMixin",
     "choruspetals.ChorusFlowerRandomDisplayTickBlockMixin",
     "choruspetals.ParticleManagerMixin",
-    "fireflies.FireflySpawningClientWorldMixin",
+    "ParticleSpawningClientWorldMixin",
     "glowsquids.FeatureRendererMixin",
     "glowsquids.GlowSquidEntityRendererMixin",
     "glowsquids.LivingEntityRendererMixin",

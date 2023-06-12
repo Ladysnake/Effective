@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ChorusFlowerRandomDisplayTickBlockMixin extends RandomDisplayTickBlockMixin {
 	@Override
 	protected void effective$randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-		for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * (EffectiveConfig.chorusPetalDensity / 100f); i++) {
+		for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * EffectiveConfig.chorusPetalDensity; i++) {
 			world.addParticle(Effective.CHORUS_PETAL, true, pos.getX() + 0.5 + random.nextGaussian() * 5, pos.getY() + 0.5 + random.nextGaussian() * 5, pos.getZ() + 0.5 + random.nextGaussian() * 5, 0f, 0f, 0f);
 		}
 	}

@@ -11,7 +11,6 @@ import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.pet.*;
@@ -92,7 +91,6 @@ public class Illuminations implements ClientModInitializer {
 
 	// particle types
 	public static DefaultParticleType GLOWWORM;
-	public static DefaultParticleType EYES;
 	public static DefaultParticleType WILL_O_WISP;
 	public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
 	public static DefaultParticleType PUMPKIN_SPIRIT;
@@ -213,8 +211,6 @@ public class Illuminations implements ClientModInitializer {
 		// particles
 		GLOWWORM = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "glowworm"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Illuminations.GLOWWORM, GlowwormParticle.DefaultFactory::new);
-		EYES = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "eyes"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(Illuminations.EYES, EyesParticle.DefaultFactory::new);
 		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
 		WISP_TRAIL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "wisp_trail"), new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {
@@ -224,10 +220,6 @@ public class Illuminations implements ClientModInitializer {
 			}
 		});
 		ParticleFactoryRegistry.getInstance().register(Illuminations.WISP_TRAIL, WispTrailParticle.Factory::new);
-		PUMPKIN_SPIRIT = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "pumpkin_spirit"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(Illuminations.PUMPKIN_SPIRIT, fabricSpriteProvider -> new PumpkinSpiritParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pumpkin_spirit.png"), 1.0f, 0.95f, 0.0f, 0.0f, -0.03f, 0.0f));
-		POLTERGEIST = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "poltergeist"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(Illuminations.POLTERGEIST, fabricSpriteProvider -> new PoltergeistParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/poltergeist.png"), 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f));
 		PRISMARINE_CRYSTAL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(Illuminations.MODID, "prismarine_crystal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMARINE_CRYSTAL, PrismarineCrystalParticle.DefaultFactory::new);
 

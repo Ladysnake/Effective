@@ -1,6 +1,7 @@
-package ladysnake.effective.mixin.fireflies;
+package ladysnake.effective.mixin;
 
 import ladysnake.effective.client.Effective;
+import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.particle.contracts.FireflyParticleInitialData;
 import ladysnake.effective.client.settings.SpawnSettings;
 import ladysnake.effective.client.settings.data.FireflySpawnSetting;
@@ -23,29 +24,37 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.function.Supplier;
 
 @Mixin(ClientWorld.class)
-public abstract class FireflySpawningClientWorldMixin extends World {
-	protected FireflySpawningClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, Holder<DimensionType> dimension, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
+public abstract class ParticleSpawningClientWorldMixin extends World {
+	protected ParticleSpawningClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, Holder<DimensionType> dimension, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
 		super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
 	}
 
 	@Inject(method = "randomBlockDisplayTick", slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;")),
-			at = @At(value = "INVOKE", target = "Ljava/util/Optional;ifPresent(Ljava/util/function/Consumer;)V", ordinal = 0, shift = At.Shift.AFTER))
+		at = @At(value = "INVOKE", target = "Ljava/util/Optional;ifPresent(Ljava/util/function/Consumer;)V", ordinal = 0, shift = At.Shift.AFTER))
 	private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, RandomGenerator random, @Coerce Object blockParticle, BlockPos.Mutable blockPos, CallbackInfo ci) {
 		BlockPos.Mutable pos = blockPos.add(this.random.nextGaussian() * 50, this.random.nextGaussian() * 25, this.random.nextGaussian() * 50).mutableCopy();
 
 		Holder<Biome> b = this.getBiome(pos);
 		Identifier biome = this.getRegistryManager().get(RegistryKeys.BIOME).getId(b.value());
 
+		// FIREFLIES
 		FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome);
-
 		if (SpawnSettings.FIREFLIES.containsKey(biome)) {
-			if (random.nextFloat() * 100 <= fireflySpawnSetting.spawnChance()) {
+			if (random.nextFloat() * 100 <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity) {
 				FireflyParticleInitialData data = new FireflyParticleInitialData(fireflySpawnSetting.color());
 				this.addParticle(Effective.FIREFLY.setData(data), pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 			}
+		}
+
+		// EYES IN THE DARK
+		if ((EffectiveConfig.enableEyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.ALWAYS || (EffectiveConfig.enableEyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.HALLOWEEN && LocalDate.now().getMonth() == Month.OCTOBER))
+			&& random.nextFloat() <= 0.00002f) {
+			this.addParticle(Effective.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

@@ -60,9 +60,15 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean dragonScreenShake = true;
 
-	@Entry(min = 0, max = 500)
-	public static int fireflyDensity = 100;
+	@Entry(min = 0, max = 100)
+	public static float fireflyDensity = 1;
 
-	@Entry(min = 0, max = 500)
-	public static int chorusPetalDensity = 100;
+	@Entry(min = 0, max = 100)
+	public static int chorusPetalDensity = 1;
+
+	@Entry
+	public static EyesInTheDarkOptions enableEyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
+	public enum EyesInTheDarkOptions {
+		HALLOWEEN, ALWAYS, DISABLED
+	}
 }
