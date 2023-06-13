@@ -4,7 +4,7 @@ import com.sammy.lodestone.handlers.ScreenshakeHandler;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
 import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
-import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.EffectiveConfig;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;

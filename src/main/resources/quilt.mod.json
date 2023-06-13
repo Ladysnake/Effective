@@ -22,7 +22,8 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"client_init": [
-				"ladysnake.effective.client.Effective"
+				"ladysnake.effective.Effective",
+				"ladysnake.effective.cosmetics.Cosmetics"
 			]
 		},
 		"depends": [
@@ -45,7 +46,8 @@
 		]
 	},
 	"mixin": [
-		"effective.mixins.json"
+		"effective.mixins.json",
+		"effective_cosmetics.mixins.json"
 	],
 	"access_widener": [
 		"effective.accesswidener"

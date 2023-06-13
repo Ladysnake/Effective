@@ -1,7 +1,7 @@
 package ladysnake.effective.mixin.water;
 
-import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.EffectiveUtils;
+import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.EffectiveUtils;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.WaterFluid;
 import net.minecraft.particle.ParticleTypes;

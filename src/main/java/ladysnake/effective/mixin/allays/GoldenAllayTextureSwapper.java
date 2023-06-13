@@ -1,7 +1,7 @@
 package ladysnake.effective.mixin.allays;
 
-import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.Effective;
+import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.render.entity.AllayRenderer;
 import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.util.Identifier;

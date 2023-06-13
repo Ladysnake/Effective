@@ -4,10 +4,10 @@ import com.sammy.lodestone.setup.LodestoneRenderLayers;
 import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
 import com.sammy.lodestone.systems.rendering.VFXBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
-import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.EffectiveUtils;
-import ladysnake.effective.client.particle.contracts.ColoredParticleInitialData;
+import ladysnake.effective.Effective;
+import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.EffectiveUtils;
+import ladysnake.effective.particle.contracts.ColoredParticleInitialData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -61,25 +61,25 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 			float z = (float) MathHelper.lerp(tickDelta, allayEntity.prevZ, allayEntity.getZ());
 
 			builder.setColor(new Color(data.color)).setOffset(-x, -y, -z)
-					.setAlpha(alpha)
-					.renderTrail(
-							DELAYED_RENDER.getBuffer(LIGHT_TYPE),
-							matrixStack,
-							positions.stream()
-									.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
-									.toList(),
-							f -> MathHelper.sqrt(f) * size,
-							f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (alpha * f) - 0.1f)))
-					)
-					.renderTrail(
-							DELAYED_RENDER.getBuffer(LIGHT_TYPE),
-							matrixStack,
-							positions.stream()
-									.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
-									.toList(),
-							f -> (MathHelper.sqrt(f) * size) / 1.5f,
-							f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (((alpha * f) / 1.5f) - 0.1f))))
-					);
+				.setAlpha(alpha)
+				.renderTrail(
+					DELAYED_RENDER.getBuffer(LIGHT_TYPE),
+					matrixStack,
+					positions.stream()
+						.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
+						.toList(),
+					f -> MathHelper.sqrt(f) * size,
+					f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (alpha * f) - 0.1f)))
+				)
+				.renderTrail(
+					DELAYED_RENDER.getBuffer(LIGHT_TYPE),
+					matrixStack,
+					positions.stream()
+						.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
+						.toList(),
+					f -> (MathHelper.sqrt(f) * size) / 1.5f,
+					f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (((alpha * f) / 1.5f) - 0.1f))))
+				);
 
 			matrixStack.pop();
 
@@ -87,10 +87,12 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 			if ((allayEntity.getRandom().nextInt(100) + 1) <= EffectiveConfig.allayTwinkleDensity && EffectiveUtils.isGoingFast(allayEntity) && !MinecraftClient.getInstance().isPaused()) {
 				float spreadDivider = 4f;
 				ParticleBuilders.create(Effective.ALLAY_TWINKLE)
-						.setColor(new Color(data.color), new Color(data.color))
-						.setAlpha(0.9f).setScale(0.06f).setLifetime(15)
-						.setMotion(0, 0.05f, 0)
-						.spawn(allayEntity.world, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
+					.setColor(new Color(data.color), new Color(data.color))
+					.setAlpha(0.9f)
+					.setScale(0.06f)
+					.setLifetime(15)
+					.setMotion(0, 0.05f, 0)
+					.spawn(allayEntity.world, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
 			}
 		}
 	}

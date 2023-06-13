@@ -1,10 +1,10 @@
 package ladysnake.effective.mixin;
 
-import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.particle.contracts.FireflyParticleInitialData;
-import ladysnake.effective.client.settings.SpawnSettings;
-import ladysnake.effective.client.settings.data.FireflySpawnSetting;
+import ladysnake.effective.Effective;
+import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.particle.contracts.FireflyParticleInitialData;
+import ladysnake.effective.settings.SpawnSettings;
+import ladysnake.effective.settings.data.FireflySpawnSetting;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.Holder;
 import net.minecraft.registry.RegistryKey;

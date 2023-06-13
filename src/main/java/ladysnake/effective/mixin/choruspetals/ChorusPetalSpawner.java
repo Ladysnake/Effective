@@ -1,7 +1,7 @@
 package ladysnake.effective.mixin.choruspetals;
 
-import ladysnake.effective.client.Effective;
-import ladysnake.effective.client.EffectiveConfig;
+import ladysnake.effective.Effective;
+import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.mixin.RandomDisplayTickBlockMixin;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChorusFlowerBlock;

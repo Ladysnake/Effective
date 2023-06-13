@@ -1,20 +1,15 @@
 # Effective - Changelog:
 
 ## Effective 2.0 - 1.19.2
-- Merged Illuminations into Effective. Here's a list of all the Illuminations features that did and didn't make it in:
+- Merged Illuminations into Effective. Here's a list of all the Illuminations features that made it in:
   - Added Fireflies
   - Added and improved Chorus Petals:
       - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
       - Chorus petals now lay flat when touching the ground or water
       - Chorus petals now cause ripples when landing on water
-  - Removed Prismarine Crystals:
-    - As they brought too much clutter in builds that used prismarine, I decided to remove them. They may however may be reimplemented in the future as a more subtle and controllable effect
-  - Removed the Illuminations Glow Plankton:
-    - Effective's version of Glow Plankton introduced in 1.4 was how Illuminations' Glow Plankton was originally going to be updated
   - Added Eyes in the Dark (on Halloween)
-  - Removed Poltergeists and Pumpkin Spirits (that would spawn on Halloween)
-  - Removed Glow Worms, although they might get overhauled and updated in the future
-  - Removed all rainbow jeb mobs minus the glow squid
+  - Added Will o' Wisps
+  - Added Illuminations cosmetics (though they may get removed or reworked in the future)
 
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:

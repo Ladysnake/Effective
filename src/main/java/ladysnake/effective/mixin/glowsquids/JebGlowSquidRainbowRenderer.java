@@ -1,6 +1,6 @@
 package ladysnake.effective.mixin.glowsquids;
 
-import ladysnake.effective.client.Effective;
+import ladysnake.effective.Effective;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.entity.LivingEntity;

@@ -1,6 +1,6 @@
 package ladysnake.effective.mixin.glowsquids;
 
-import ladysnake.effective.client.world.RenderedHypnotizingEntities;
+import ladysnake.effective.world.RenderedHypnotizingEntities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.SquidEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;

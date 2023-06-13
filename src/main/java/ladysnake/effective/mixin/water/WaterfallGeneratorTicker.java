@@ -1,7 +1,7 @@
 package ladysnake.effective.mixin.water;
 
-import ladysnake.effective.client.EffectiveConfig;
-import ladysnake.effective.client.world.WaterfallCloudGenerators;
+import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.world.WaterfallCloudGenerators;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
