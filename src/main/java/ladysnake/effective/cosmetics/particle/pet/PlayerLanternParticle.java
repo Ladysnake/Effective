@@ -21,8 +21,8 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
 
 public class PlayerLanternParticle extends Particle {
 	public final Identifier texture;
@@ -68,8 +68,8 @@ public class PlayerLanternParticle extends Particle {
 
 		MatrixStack matrixStack = new MatrixStack();
 		matrixStack.translate(f, g, h);
-		matrixStack.multiply(new Quaternionf().rotateY(MathHelper.lerp(g, this.prevYaw, this.yaw) - 180));
-		matrixStack.multiply(new Quaternionf().rotateX(MathHelper.lerp(g, this.prevPitch, this.pitch)));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(g, this.prevYaw, this.yaw) - 180));
+		matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(g, this.prevPitch, this.pitch)));
 		matrixStack.scale(0.5F, -0.5F, 0.5F);
 		matrixStack.translate(0, -1, 0);
 		VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();

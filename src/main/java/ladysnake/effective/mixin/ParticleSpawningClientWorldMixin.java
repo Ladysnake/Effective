@@ -6,14 +6,14 @@ import ladysnake.effective.particle.contracts.FireflyParticleInitialData;
 import ladysnake.effective.settings.SpawnSettings;
 import ladysnake.effective.settings.data.FireflySpawnSetting;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.registry.Holder;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.Holder;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.random.RandomGenerator;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -41,8 +41,7 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 	private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, RandomGenerator random, @Coerce Object blockParticle, BlockPos.Mutable blockPos, CallbackInfo ci) {
 		BlockPos.Mutable pos = blockPos.add(this.random.nextGaussian() * 50, this.random.nextGaussian() * 25, this.random.nextGaussian() * 50).mutableCopy();
 
-		Holder<Biome> b = this.getBiome(pos);
-		Identifier biome = this.getRegistryManager().get(RegistryKeys.BIOME).getId(b.value());
+		Holder<Biome> biome = this.getBiome(pos);
 
 		// FIREFLIES
 		FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome);

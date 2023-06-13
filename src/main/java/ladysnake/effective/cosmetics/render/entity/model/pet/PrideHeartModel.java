@@ -28,20 +28,20 @@ public class PrideHeartModel extends Model {
 		ModelPartData modelPartData = modelData.getRoot();
 
 		modelPartData.addChild("heart", ModelPartBuilder.create(),
-				ModelTransform.pivot(0.0F, 16.0F, 0.0F)
+			ModelTransform.pivot(0.0F, 16.0F, 0.0F)
 		);
 
 		modelPartData.getChild("heart").addChild("cube1", ModelPartBuilder.create()
-						.uv(22, 0)
-						.cuboid(1.0F, -4.0F, -1.5F, 0.0F, 3.0F, 3.0F),
-				ModelTransform.rotation(0.0F, 0.0F, -0.7854F));
+				.uv(22, 0)
+				.cuboid(1.0F, -4.0F, -1.5F, 0.0F, 3.0F, 3.0F),
+			ModelTransform.rotation(0.0F, 0.0F, -0.7854F));
 
 		modelPartData.getChild("heart").addChild("cube2", ModelPartBuilder.create()
-						.uv(22, 0)
-						.cuboid(-1.0F, -4.0F, -1.5F, 0.0F, 3.0F, 3.0F)
-						.uv(0, 0)
-						.cuboid(-4.0F, -4.0F, -1.5F, 8.0F, 8.0F, 3.0F),
-				ModelTransform.rotation(0.0F, 0.0F, 0.7854F));
+				.uv(22, 0)
+				.cuboid(-1.0F, -4.0F, -1.5F, 0.0F, 3.0F, 3.0F)
+				.uv(0, 0)
+				.cuboid(-4.0F, -4.0F, -1.5F, 8.0F, 8.0F, 3.0F),
+			ModelTransform.rotation(0.0F, 0.0F, 0.7854F));
 
 		return TexturedModelData.of(modelData, 32, 32);
 	}

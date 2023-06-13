@@ -19,15 +19,15 @@ public class SonicBoomScreenshakeAdder {
 	@Inject(method = "keepRunning(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/mob/warden/WardenEntity;J)V", at = @At("HEAD"))
 	protected void keepRunning(ServerWorld serverWorld, WardenEntity wardenEntity, long l, CallbackInfo ci) {
 		if (EffectiveConfig.sonicBoomScreenShake && !wardenEntity.getBrain().hasMemoryModule(MemoryModuleType.SONIC_BOOM_SOUND_DELAY)
-				&& !wardenEntity.getBrain().hasMemoryModule(MemoryModuleType.SONIC_BOOM_SOUND_COOLDOWN)) {
+			&& !wardenEntity.getBrain().hasMemoryModule(MemoryModuleType.SONIC_BOOM_SOUND_COOLDOWN)) {
 			wardenEntity.getBrain()
-					.getOptionalMemory(MemoryModuleType.ATTACK_TARGET)
-					.filter(wardenEntity::isEnemy)
-					.filter(livingEntity -> wardenEntity.isInRange(livingEntity, 15.0, 20.0))
-					.ifPresent(livingEntity -> {
-						ScreenshakeInstance boomScreenShake = new PositionedScreenshakeInstance(20, wardenEntity.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(1.0f, 0.0f, 0.0f);
-						ScreenshakeHandler.addScreenshake(boomScreenShake);
-					});
+				.getOptionalMemory(MemoryModuleType.ATTACK_TARGET)
+				.filter(wardenEntity::isEnemy)
+				.filter(livingEntity -> wardenEntity.isInRange(livingEntity, 15.0, 20.0))
+				.ifPresent(livingEntity -> {
+					ScreenshakeInstance boomScreenShake = new PositionedScreenshakeInstance(20, wardenEntity.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(1.0f, 0.0f, 0.0f);
+					ScreenshakeHandler.addScreenshake(boomScreenShake);
+				});
 		}
 	}
 }

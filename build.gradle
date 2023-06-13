@@ -77,16 +77,14 @@ dependencies {
 	modImplementation include("io.github.ladysnake:satin:${satin_version}")
 
 	// lodestone lib
-	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:54fac3a")
+	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:${lodestone_version}")
 
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
 	modRuntimeOnly("maven.modrinth:sodium:${project.sodium_version}")
-	modRuntimeOnly("io.github.douira:glsl-transformer:2.0.0-pre8")
 	modRuntimeOnly("maven.modrinth:iris:${project.iris_version}")
 	runtimeOnly compileOnly("org.anarres:jcpp:1.4.14") // for iris
-	include 'com.moandjiezana.toml:toml4j:0.7.2'
-	implementation 'com.moandjiezana.toml:toml4j:0.7.2'
+	runtimeOnly('org.joml:joml:1.10.4') // for sodium
 }
 
 processResources {

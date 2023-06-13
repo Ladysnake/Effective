@@ -27,11 +27,11 @@ public class WillOWispModel extends Model {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
 		modelPartData.addChild("skull", ModelPartBuilder.create()
-						.uv(0, 0)
-						.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F)
-						.uv(0, 16)
-						.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F, new Dilation(0.25F)),
-				ModelTransform.pivot(0.0F, 16.0F, 0.0F)
+				.uv(0, 0)
+				.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F)
+				.uv(0, 16)
+				.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F, new Dilation(0.25F)),
+			ModelTransform.pivot(0.0F, 16.0F, 0.0F)
 		);
 		return TexturedModelData.of(modelData, 32, 32);
 	}

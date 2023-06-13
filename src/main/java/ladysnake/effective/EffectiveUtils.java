@@ -16,8 +16,8 @@ public class EffectiveUtils {
 		float speedRequired = 0.1f;
 
 		return (velocity.getX() >= speedRequired || velocity.getX() <= -speedRequired)
-				|| (velocity.getY() >= speedRequired || velocity.getY() <= -speedRequired)
-				|| (velocity.getZ() >= speedRequired || velocity.getZ() <= -speedRequired);
+			|| (velocity.getY() >= speedRequired || velocity.getY() <= -speedRequired)
+			|| (velocity.getZ() >= speedRequired || velocity.getZ() <= -speedRequired);
 	}
 
 	// chooses between spawning a normal droplet / ripple / waterfall cloud or glow one depending on biome
@@ -37,6 +37,7 @@ public class EffectiveUtils {
 
 		world.addParticle(particle, pos.getX(), pos.getY(), pos.getZ(), velocityX, velocityY, velocityZ);
 	}
+
 	// chooses between spawning a normal splash or glow splash depending on biome
 	public static void spawnSplash(World world, BlockPos pos, double velocityX, double velocityY, double velocityZ, @Nullable SplashParticleInitialData data) {
 		SplashParticleType splash = Effective.SPLASH;

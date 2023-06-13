@@ -24,7 +24,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 	public OverheadFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext, EntityRendererFactory.Context loader) {
 		super(featureRendererContext);
 		this.models = Cosmetics.OVERHEADS_DATA.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getKey, data -> new ResolvedOverheadData(data.getValue().getTexture(), data.getValue().createModel(loader))));
+			.collect(Collectors.toMap(Map.Entry::getKey, data -> new ResolvedOverheadData(data.getValue().getTexture(), data.getValue().createModel(loader))));
 	}
 
 	@Override

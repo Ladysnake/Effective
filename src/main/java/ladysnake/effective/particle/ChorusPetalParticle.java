@@ -7,12 +7,8 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.util.math.*;
 
 import java.util.Random;
 
@@ -53,31 +49,27 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternionf quaternion2;
+		Quaternion quaternion2;
 
 		float i = 0f;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
-			quaternion2 = new Quaternionf(camera.getRotation());
+			quaternion2 = new Quaternion(camera.getRotation());
 			i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			Effective.wheresTheHamiltonProductMojangski(quaternion2, new Quaternionf().rotateZ(i));
+			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
 		}
 
-		Vector3f Vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-		Vector3f.rotate(quaternion2);
-		Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
+		Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		Vec3f.rotate(quaternion2);
+		Vec3f[] vector3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vector3f vector3f = vector3fs[k];
-			if (this.velocityX == 0 && this.velocityY == 0 && this.velocityZ == 0) {
-				vector3f.rotate(new Quaternionf().rotateXYZ((float) Math.PI / 2, 0, i));
-			} else {
-				vector3f.rotate(quaternion2);
-			}
-			vector3f.mul(j);
-			vector3f.add(f, g + this.groundOffset, h);
+			Vec3f Vec3f2 = vector3fs[k];
+			Vec3f2.rotate(quaternion2);
+			Vec3f2.scale(j);
+			Vec3f2.add(f, g, h);
 		}
 
 		float minU = this.getMinU();
@@ -86,10 +78,10 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = 15728880;
 
-		vertexConsumer.vertex(vector3fs[0].x, vector3fs[0].y, vector3fs[0].z).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(vector3fs[1].x, vector3fs[1].y, vector3fs[1].z).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(vector3fs[2].x, vector3fs[2].y, vector3fs[2].z).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(vector3fs[3].x, vector3fs[3].y, vector3fs[3].z).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[0].getX(), vector3fs[0].getY(), vector3fs[0].getZ()).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[1].getX(), vector3fs[1].getY(), vector3fs[1].getZ()).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[2].getX(), vector3fs[2].getY(), vector3fs[2].getZ()).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
 	}
 
 	public ParticleTextureSheet getType() {

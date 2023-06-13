@@ -110,9 +110,9 @@ public class WaterfallCloudGenerators {
 			return false;
 		}
 		return Arrays.stream(Direction.values()).anyMatch(
-				direction ->
-						direction.getAxis() != Direction.Axis.Y &&
-								world.getFluidState(mutable.set(pos.getX() + direction.getOffsetX(), pos.getY() - 1, pos.getZ() + direction.getOffsetZ())).getFluid() == Fluids.WATER
+			direction ->
+				direction.getAxis() != Direction.Axis.Y &&
+					world.getFluidState(mutable.set(pos.getX() + direction.getOffsetX(), pos.getY() - 1, pos.getZ() + direction.getOffsetZ())).getFluid() == Fluids.WATER
 		);
 	}
 
