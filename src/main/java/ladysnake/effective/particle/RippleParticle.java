@@ -70,7 +70,7 @@ public class RippleParticle extends SpriteBillboardParticle {
 
 		for (int k = 0; k < 4; ++k) {
 			Vec3f Vec3f2 = Vec3fs[k];
-			Vec3f2.rotate(quaternion2);
+			Vec3f2.rotate(new Quaternion(90f, 0f, 0f, true));
 			Vec3f2.scale(j);
 			Vec3f2.add(f, g, h);
 		}

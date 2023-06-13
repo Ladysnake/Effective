@@ -45,7 +45,7 @@ public class EffectiveUtils {
 			splash = Effective.GLOW_SPLASH;
 		}
 
-		world.addParticle(splash.setData(data), pos.getX(), pos.getY(), pos.getZ(), velocityX, velocityY, velocityZ);
+		world.addParticle(splash.setData(data), pos.getX()+.5f, pos.getY()+.9f, pos.getZ()+.5f, velocityX, velocityY, velocityZ);
 	}
 
 	public enum WaterEffectType {

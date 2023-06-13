@@ -72,7 +72,7 @@ public class GlowSplashParticle extends SplashParticle {
 		// splash bottom matrices
 		float splashRimScaleOffset = 0.0001f;
 		MatrixStack modelRimMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, -heightMultiplier * multiplier.getZ() - splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
+		modelRimMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, -heightMultiplier * multiplier.getY() - splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
 		modelRimMatrix.translate(0, -1.001, 0);
 		MatrixStack modelRimBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
 		modelRimBottomMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, heightMultiplier * multiplier.getY() + splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);

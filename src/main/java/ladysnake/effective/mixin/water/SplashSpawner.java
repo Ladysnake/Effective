@@ -62,7 +62,7 @@ public abstract class SplashSpawner {
 					if (this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().getFluid() == Fluids.WATER && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {
 						this.world.playSound(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ(), entity instanceof PlayerEntity ? SoundEvents.ENTITY_PLAYER_SPLASH : SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, g * 10f, 0.8f, true);
 						SplashParticleInitialData data = new SplashParticleInitialData(entity.getWidth(), vec3d.getY());
-						EffectiveUtils.spawnSplash(this.world, new BlockPos(this.getX(), Math.round(this.getY()) + i + 0.9f, this.getZ()), 0, 0, 0, data);
+						EffectiveUtils.spawnSplash(this.world, new BlockPos(this.getX(), Math.round(this.getY()) + i, this.getZ()), 0, 0, 0, data);
 						break;
 					}
 				}
