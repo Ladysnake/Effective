@@ -1,6 +1,6 @@
 # Effective - Changelog:
 
-## Effective 2.0 - 1.19.3
+## Effective 2.0 - 1.19.2
 - Merged Illuminations into Effective. Here's a list of all the Illuminations features that did and didn't make it in:
   - Added Fireflies
   - Added and improved Chorus Petals:

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FeatureRenderer.class)
-public abstract class FeatureRendererMixin {
+public abstract class RainbowShaderRenderLayerSwapper {
 	@Unique
 	private static boolean isRgb;
 

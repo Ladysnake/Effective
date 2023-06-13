@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 
 @Mixin(AllayEntity.class)
-public abstract class AllayEntityMixin extends PathAwareEntity implements PositionTrackedEntity {
+public abstract class AllayPositionTracker extends PathAwareEntity implements PositionTrackedEntity {
 	public final ArrayList<Vec3d> pastPositions = new ArrayList<>();
 
-	protected AllayEntityMixin(EntityType<? extends PathAwareEntity> entityType, World world) {
+	protected AllayPositionTracker(EntityType<? extends PathAwareEntity> entityType, World world) {
 		super(entityType, world);
 	}
 

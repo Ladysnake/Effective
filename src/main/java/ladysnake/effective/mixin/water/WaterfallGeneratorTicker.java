@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Mixin(AbstractBlock.class)
-public class AbstractBlockMixin {
+public class WaterfallGeneratorTicker {
 	@Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
 	protected void effective$forceParticles(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
 		if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER) {

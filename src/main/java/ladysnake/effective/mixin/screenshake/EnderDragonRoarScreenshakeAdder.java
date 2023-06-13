@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SittingAttackingPhase.class)
-public abstract class SittingAttackingPhaseMixin extends AbstractSittingPhase {
-	public SittingAttackingPhaseMixin(EnderDragonEntity enderDragonEntity) {
+public abstract class EnderDragonRoarScreenshakeAdder extends AbstractSittingPhase {
+	public EnderDragonRoarScreenshakeAdder(EnderDragonEntity enderDragonEntity) {
 		super(enderDragonEntity);
 	}
 

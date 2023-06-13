@@ -1,7 +1,6 @@
 package ladysnake.illuminations.mixin;
 
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import net.minecraft.client.MinecraftClient;

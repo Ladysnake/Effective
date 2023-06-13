@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client.render.entity.feature;
 
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import ladysnake.illuminations.client.render.entity.model.hat.OverheadModel;

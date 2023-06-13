@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntityRenderer.class)
-public class LivingEntityRendererMixin {
+public class JebGlowSquidRainbowRenderer {
 	@Nullable
 	@Inject(method = "getRenderLayer", at = @At("RETURN"), cancellable = true)
 	protected void getRenderLayer(LivingEntity entity, boolean showBody, boolean translucent, boolean showOutline, CallbackInfoReturnable<RenderLayer> cir) {

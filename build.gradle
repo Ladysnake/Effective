@@ -79,7 +79,7 @@ dependencies {
 	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-fabric")
 
 	// lodestone lib
-	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:1.19.3-SNAPSHOT")
+	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:main-SNAPSHOT")
 
 	// satin
 	modImplementation include("io.github.ladysnake:satin:${satin_version}")

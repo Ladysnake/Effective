@@ -4,6 +4,7 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import ladysnake.effective.client.Effective;
 import ladysnake.illuminations.client.Illuminations;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
@@ -79,7 +80,7 @@ public class WispTrailParticleEffect implements ParticleEffect {
 	}
 
 	public ParticleType<WispTrailParticleEffect> getType() {
-		return Illuminations.WISP_TRAIL;
+		return Effective.WISP_TRAIL;
 	}
 
 

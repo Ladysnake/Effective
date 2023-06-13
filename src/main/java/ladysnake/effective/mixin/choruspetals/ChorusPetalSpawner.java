@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChorusFlowerBlock.class)
-public abstract class ChorusFlowerRandomDisplayTickBlockMixin extends RandomDisplayTickBlockMixin {
+public abstract class ChorusPetalSpawner extends RandomDisplayTickBlockMixin {
 	@Override
 	protected void effective$randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
 		for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * EffectiveConfig.chorusPetalDensity; i++) {

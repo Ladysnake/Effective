@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FluidRenderer.class)
-public class FluidRendererMixin {
+public class WaterfallGeneratorAdder {
 	@Inject(method = "render", at = @At("HEAD"))
 	public void effective$generateWaterfall(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfo ci) {
 		WaterfallCloudGenerators.addGenerator(fluidState, pos.toImmutable());

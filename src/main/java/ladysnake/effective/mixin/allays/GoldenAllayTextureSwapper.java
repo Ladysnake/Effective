@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AllayRenderer.class)
-public class AllayEntityRendererMixin {
+public class GoldenAllayTextureSwapper {
 	private static final Identifier GOLDEN_TEXTURE = new Identifier(Effective.MODID, "textures/entity/golden_allay.png");
 
 	@Shadow

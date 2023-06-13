@@ -16,11 +16,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WardenEntity.class)
-public class WardenEntityMixin extends HostileEntity {
+public class WardenRoarScreenshakeAdder extends HostileEntity {
 	public ScreenshakeInstance roarScreenShake;
 	public int ticksSinceAnimationStart = 0;
 
-	protected WardenEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
+	protected WardenRoarScreenshakeAdder(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 	}
 

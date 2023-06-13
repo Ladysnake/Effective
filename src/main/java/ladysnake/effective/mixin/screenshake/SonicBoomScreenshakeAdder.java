@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SonicBoomTask.class)
-public class SonicBookTaskMixin {
+public class SonicBoomScreenshakeAdder {
 	@Inject(method = "keepRunning(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/mob/warden/WardenEntity;J)V", at = @At("HEAD"))
 	protected void keepRunning(ServerWorld serverWorld, WardenEntity wardenEntity, long l, CallbackInfo ci) {
 		if (EffectiveConfig.sonicBoomScreenShake && !wardenEntity.getBrain().hasMemoryModule(MemoryModuleType.SONIC_BOOM_SOUND_DELAY)

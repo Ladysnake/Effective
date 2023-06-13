@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SquidEntityRenderer.class)
-public class GlowSquidEntityRendererMixin {
+public class HypnotizingGlowSquidsAdder {
 	// add glow squid to entities hypnotizing the client
 	@Inject(method = "setupTransforms(Lnet/minecraft/entity/passive/SquidEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At("TAIL"))
 	protected void setupTransforms(SquidEntity squidEntity, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callbackInfo) {

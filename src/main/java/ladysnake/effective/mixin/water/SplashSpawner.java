@@ -1,22 +1,18 @@
 package ladysnake.effective.mixin.water;
 
-import ladysnake.effective.client.Effective;
 import ladysnake.effective.client.EffectiveConfig;
 import ladysnake.effective.client.EffectiveUtils;
 import ladysnake.effective.client.particle.contracts.SplashParticleInitialData;
-import ladysnake.effective.client.particle.types.SplashParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin {
+public abstract class SplashSpawner {
 	@Shadow
 	public World world;
 	@Shadow

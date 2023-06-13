@@ -1,5 +1,6 @@
 package ladysnake.effective.client;
 
+import com.mojang.serialization.Codec;
 import ladysnake.effective.client.particle.*;
 import ladysnake.effective.client.particle.types.AllayTwinkleParticleType;
 import ladysnake.effective.client.particle.types.FireflyParticleType;
@@ -10,7 +11,9 @@ import ladysnake.effective.client.render.entity.model.SplashModel;
 import ladysnake.effective.client.render.entity.model.SplashRimModel;
 import ladysnake.effective.client.world.RenderedHypnotizingEntities;
 import ladysnake.effective.client.world.WaterfallCloudGenerators;
-import ladysnake.illuminations.client.Illuminations;
+import ladysnake.illuminations.client.particle.WillOWispParticle;
+import ladysnake.illuminations.client.particle.WispTrailParticle;
+import ladysnake.illuminations.client.particle.WispTrailParticleEffect;
 import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedCoreShader;
@@ -28,17 +31,16 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeKeys;
 import org.joml.Quaternionf;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
@@ -51,7 +53,7 @@ public class Effective implements ClientModInitializer {
 	private static final Uniform1f uniformSTimeJeb = RAINBOW_SHADER.findUniform1f("Time");
 	// squid hypno shader
 	private static final ManagedShaderEffect HYPNO_SHADER = ShaderEffectManager.getInstance()
-			.manage(new Identifier(MODID, "shaders/post/hypnotize.json"));
+		.manage(new Identifier(MODID, "shaders/post/hypnotize.json"));
 	private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
 	private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
 	private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
@@ -68,6 +70,8 @@ public class Effective implements ClientModInitializer {
 	public static FireflyParticleType FIREFLY;
 	public static DefaultParticleType CHORUS_PETAL;
 	public static DefaultParticleType EYES;
+	public static DefaultParticleType WILL_O_WISP;
+	public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -125,6 +129,15 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
 		EYES = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.DefaultFactory::new);
+		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
+		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
+		WISP_TRAIL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "wisp_trail"), new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {
+			@Override
+			public Codec<WispTrailParticleEffect> getCodec() {
+				return WispTrailParticleEffect.CODEC;
+			}
+		});
+		ParticleFactoryRegistry.getInstance().register(WISP_TRAIL, WispTrailParticle.Factory::new);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
@@ -199,8 +212,8 @@ public class Effective implements ClientModInitializer {
 					float desiredYaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(f, d) * 57.2957763671875) - 90.0f);
 
 					Vec2f rotationChange = new Vec2f(
-							MathHelper.wrapDegrees(desiredPitch - currentPitch),
-							MathHelper.wrapDegrees(desiredYaw - currentYaw)
+						MathHelper.wrapDegrees(desiredPitch - currentPitch),
+						MathHelper.wrapDegrees(desiredYaw - currentYaw)
 					);
 
 					Vec2f rotationStep = rotationChange.normalize().multiply((float) RenderedHypnotizingEntities.lookIntensity * 10f * (MathHelper.clamp(rotationChange.length(), 0, 10) / 10f));

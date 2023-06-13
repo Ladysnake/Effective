@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ParticleManager.class)
-public abstract class ParticleManagerMixin {
+public abstract class BrokenChorusFlowerPetalSpawner {
 	@Shadow
 	protected ClientWorld world;
 	@Shadow

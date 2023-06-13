@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(World.class)
-public abstract class WorldMixin {
+public abstract class WaterfallCloudSpawner {
 	@Shadow
 	public abstract FluidState getFluidState(BlockPos pos);
 

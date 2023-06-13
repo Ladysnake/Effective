@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RavagerEntity.class)
-public class RavagerEntityMixin extends HostileEntity {
-	protected RavagerEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
+public class RavagerRoarScreenshakeAdder extends HostileEntity {
+	protected RavagerRoarScreenshakeAdder(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 	}
 

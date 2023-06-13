@@ -33,11 +33,11 @@ import java.util.ArrayList;
 import static com.sammy.lodestone.handlers.RenderHandler.DELAYED_RENDER;
 
 @Mixin(LivingEntityRenderer.class)
-public abstract class AllayLivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
+public abstract class AllayTrailRenderer<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
 	private static final Identifier LIGHT_TRAIL = new Identifier(Effective.MODID, "textures/vfx/light_trail.png");
 	private static final RenderLayer LIGHT_TYPE = LodestoneRenderLayers.ADDITIVE_TEXTURE.apply(LIGHT_TRAIL);
 
-	protected AllayLivingEntityRendererMixin(EntityRendererFactory.Context ctx) {
+	protected AllayTrailRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
 	}
 
