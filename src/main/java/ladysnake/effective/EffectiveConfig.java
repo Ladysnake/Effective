@@ -64,7 +64,10 @@ public class EffectiveConfig extends MidnightConfig {
 	public static float fireflyDensity = 1;
 
 	@Entry(min = 0, max = 100)
-	public static int chorusPetalDensity = 1;
+	public static float chorusPetalDensity = 1;
+
+	@Entry(min = 0, max = 100)
+	public static float willOWispDensity = 1;
 
 	@Entry
 	public static EyesInTheDarkOptions enableEyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;

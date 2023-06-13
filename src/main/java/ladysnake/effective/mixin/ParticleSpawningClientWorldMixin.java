@@ -9,6 +9,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.Holder;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.profiler.Profiler;
@@ -16,6 +17,7 @@ import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,6 +50,15 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 			if (random.nextFloat() * 100 <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity) {
 				FireflyParticleInitialData data = new FireflyParticleInitialData(fireflySpawnSetting.color());
 				this.addParticle(Effective.FIREFLY.setData(data), pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
+			}
+		}
+
+		// WILL O WISP
+		if (biome.equals(BiomeKeys.SOUL_SAND_VALLEY.getValue())) {
+			if (random.nextFloat() * 100 <= 0.01f * EffectiveConfig.willOWispDensity) {
+				if (this.getBlockState(pos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
+					this.addParticle(Effective.WILL_O_WISP, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
+				}
 			}
 		}
 

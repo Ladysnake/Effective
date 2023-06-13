@@ -1,16 +1,7 @@
 plugins {
 	id 'maven-publish'
 	alias libs.plugins.quilt.loom
-	id 'com.matthewprenger.cursegradle' version '1.4.0'
-	id 'org.ajoberstar.grgit' version '3.1.1'
-	id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
-
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-// Adds a few utility methods like getProjectProperty
-apply from: 'https://raw.githubusercontent.com/NerdHubMC/Gradle-Scripts/master/scripts/utilities.gradle'
-apply from: 'https://raw.githubusercontent.com/NerdHubMC/Gradle-Scripts/master/scripts/fabric/publish/changelog.gradle'
 
 archivesBaseName = project.archives_base_name
 version = "${project.version}+${libs.versions.minecraft.get()}"
@@ -50,6 +41,10 @@ repositories {
 	}
 
 	maven { url 'https://masa.dy.fi/maven' }
+
+	// mialee misc
+	maven { url "https://maven.willbl.dev/releases" }
+
 }
 
 // All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
@@ -78,11 +73,11 @@ dependencies {
 	// midnightlib
 	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-fabric")
 
-	// lodestone lib
-	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:main-SNAPSHOT")
-
 	// satin
 	modImplementation include("io.github.ladysnake:satin:${satin_version}")
+
+	// lodestone lib
+	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:54fac3a")
 
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
@@ -95,7 +90,7 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", version
+	inputs.property 'version', version
 
 	filesMatching('quilt.mod.json') {
 		expand "version": version
@@ -103,7 +98,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
+	it.options.encoding = 'UTF-8'
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	it.options.release = 17
 }
@@ -124,143 +119,24 @@ java {
 
 // If you plan to use a different file for the license, don't forget to change the file name here!
 jar {
-	from("LICENSE") {
+	from('LICENSE') {
 		rename { "${it}_${archivesBaseName}" }
 	}
 }
 
-// configure the maven publication
+// Configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
+			from components.java
 		}
 	}
 
-	// select the repositories you want to publish to
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
 	}
-}
-
-
-task checkGitStatus() {
-	group = 'publishing'
-	description = 'Checks that the git repository is in a state suitable for release'
-	doLast {
-		if (grgit == null) throw new RuntimeException('No git repository')
-		if (!grgit.status().isClean()) {
-			throw new RuntimeException("Git repository not ready for release (${grgit.status()})")
-		}
-		def currentBranch = grgit.branch.current().getName()
-		grgit.fetch()
-		if (grgit.tag.list().any { it.name == project.version }) {
-			throw new RuntimeException("A tag already exists for ${project.version}")
-		}
-		def status = grgit.branch.status(name: currentBranch)
-		if (status.aheadCount != 0) {
-			throw new RuntimeException('Some commits have not been pushed')
-		}
-		if (status.behindCount != 0) {
-			throw new RuntimeException('Some commits have not been pulled')
-		}
-	}
-}
-
-githubRelease {
-	repo "Effective"
-	token "${getProjectProperty('github_releases_token')}"
-	// default owner: last component of maven group
-	// default repo: name of the project
-	tagName = project.version
-	targetCommitish = { grgit.branch.current().name }
-	body = { project.getChangelogText() }
-
-	FilenameFilter filter = { dir, filename -> filename.contains(project.version) && !filename.contains('-dev.jar') }
-	releaseAssets = { jar.destinationDirectory.asFile.get().listFiles filter }
-}
-tasks.githubRelease.dependsOn(checkGitStatus)
-
-curseforge {
-
-	if (project.getProjectProperty('curse_key') != null) {
-		apiKey = project.getProjectProperty('curse_key')
-	}
-
-	if (project.hasProperty('curseforge_id')) {
-		project {
-			id = findProperty('curseforge_id')
-
-			releaseType = project.release_type
-
-			//usually automatically determined by the CurseGradle plugin, but won't work with fabric
-			"${project.curseforge_versions}".split('; ').each {
-				addGameVersion it
-			}
-			addGameVersion 'Quilt'
-
-			mainArtifact(remapJar) {
-				displayName = "${project.name}-${project.version}.jar"
-
-				if (project.hasProperty('cf_requirements') || project.hasProperty('cf_optionals') || project.hasProperty('cf_embeddeds') || project.hasProperty('cf_tools') || project.hasProperty('cf_incompatibles') || project.hasProperty('cf_includes')) {
-					relations {
-						if (project.hasProperty('cf_requirements')) {
-							"${project.cf_requirements}".split('; ').each {
-								requiredDependency "${it}"
-							}
-						}
-						if (project.hasProperty('cf_optionals')) {
-							"${project.cf_optionals}".split('; ').each {
-								optionalDependency "${it}"
-							}
-						}
-						if (project.hasProperty('cf_embeddeds')) {
-							"${project.cf_embeddeds}".split('; ').each {
-								embeddedLibrary "${it}"
-							}
-						}
-						if (project.hasProperty('cf_tools')) {
-							"${project.cf_tools}".split('; ').each {
-								tool "${it}"
-							}
-						}
-						if (project.hasProperty('cf_incompatibles')) {
-							"${project.cf_incompatibles}".split('; ').each {
-								incompatible "${it}"
-							}
-						}
-						if (project.hasProperty('cf_includes')) {
-							"${project.cf_includes}".split('; ').each {
-								include "${it}"
-							}
-						}
-					}
-				}
-			}
-
-			changelogType = 'markdown'
-			changelog = project.getChangelogText()
-
-			afterEvaluate {
-				uploadTask.dependsOn remapSourcesJar
-			}
-		}
-		options {
-			forgeGradleIntegration = false
-		}
-	}
-}
-
-tasks.curseforge.dependsOn(checkGitStatus)
-
-task release(dependsOn: [tasks.githubRelease, tasks.curseforge]) {
-	group = 'publishing'
-	description = 'Releases a new version to Github and Curseforge'
 }
