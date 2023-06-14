@@ -9,7 +9,7 @@
       - Chorus petals now lay flat when touching the ground or water
       - Chorus petals now cause ripples when landing on water
   - Added Eyes in the Dark (on Halloween)
-  - Added Will o' Wisps // TODO: overhaul, lodestone particles
+  - Added and completely overhauled Will o' Wisps
   - Added Illuminations cosmetics (though they may get removed or reworked in the future)
 - TODO: Overhaul cascades
 - TODO: Overhaul fireballs
@@ -26,6 +26,7 @@
 - TODO: Campfire embers?
 - TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
 - TODO: Readd and overhaul glowworms
+- TODO: Bubbles coming out of open chests underwater?
 - Added configuration options for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 

@@ -4,13 +4,13 @@ import eu.midnightdust.lib.config.MidnightConfig;
 
 public class EffectiveConfig extends MidnightConfig {
 	@Entry
-	public static boolean enableSplashes = true;
+	public static boolean splashes = true;
 
 	@Entry(min = 0f, max = 1.0f, isSlider = true)
 	public static float splashRimAlpha = 0.7f;
 
 	@Entry
-	public static boolean enableCascades = true;
+	public static boolean cascades = true;
 
 	@Entry(min = 0, max = 500, isSlider = true)
 	public static int cascadeSoundsVolumeMultiplier = 100;
@@ -31,7 +31,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static int rainRippleDensity = 1;
 
 	@Entry
-	public static boolean enableGlowingPlankton = true;
+	public static boolean glowingPlankton = true;
 
 	@Entry
 	public static boolean glowsquidHypnotize = true;
@@ -40,7 +40,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static boolean glowsquidHypnotizeAttractCursor = true;
 
 	@Entry
-	public static boolean enableAllayTrails = true;
+	public static boolean allayTrails = true;
 
 	@Entry(min = 0, max = 100, isSlider = true)
 	public static int allayTwinkleDensity = 5;
@@ -70,12 +70,12 @@ public class EffectiveConfig extends MidnightConfig {
 	public static float willOWispDensity = 1;
 
 	@Entry
-	public static EyesInTheDarkOptions enableEyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
+	public static EyesInTheDarkOptions eyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
 	@Entry
-	public static CosmeticsOptions enableCosmetics = CosmeticsOptions.FALSE;
+	public static CosmeticsOptions cosmetics = CosmeticsOptions.FALSE;
 
 	public static boolean shouldDisplayCosmetics() {
-		return enableCosmetics == CosmeticsOptions.TRUE || enableCosmetics == CosmeticsOptions.FIRST_PERSON;
+		return cosmetics == CosmeticsOptions.TRUE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 
 	public enum EyesInTheDarkOptions {

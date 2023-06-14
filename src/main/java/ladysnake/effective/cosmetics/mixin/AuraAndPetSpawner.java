@@ -32,7 +32,7 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 			if (EffectiveConfig.shouldDisplayCosmetics() && playerAura != null && Cosmetics.AURAS_DATA.containsKey(playerAura)) {
 				// do not render in first person or if the player is invisible
 				// noinspection ConstantConditions
-				if (((EffectiveConfig.enableCosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+				if (((EffectiveConfig.cosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
 					if (Cosmetics.AURAS_DATA.containsKey(playerAura)) {
 						AuraData aura = Cosmetics.AURAS_DATA.get(playerAura);
 						if (Cosmetics.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
@@ -47,7 +47,7 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 			if (EffectiveConfig.shouldDisplayCosmetics() && playerPet != null && Cosmetics.PETS_DATA.containsKey(playerPet)) {
 				// do not render in first person or if the player is invisible
 				//noinspection ConstantConditions
-				if (((EffectiveConfig.enableCosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+				if (((EffectiveConfig.cosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
 					if (Cosmetics.PETS_DATA.containsKey(playerPet)) {
 						DefaultParticleType overhead = Cosmetics.PETS_DATA.get(playerPet);
 						if (this.age % 20 == 0) {

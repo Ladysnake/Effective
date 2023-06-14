@@ -29,7 +29,7 @@ public class WaterfallCloudGenerators {
 	private static World lastWorld = null;
 
 	public static void addGenerator(FluidState state, BlockPos pos) {
-		if (pos == null || !EffectiveConfig.enableCascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
+		if (pos == null || !EffectiveConfig.cascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
 			return;
 		}
 		if (shouldCauseWaterfall(MinecraftClient.getInstance().world, pos, state)) {
@@ -83,7 +83,7 @@ public class WaterfallCloudGenerators {
 	}
 
 	private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
-		if (!EffectiveConfig.enableCascades || fluidState.getFluid() != Fluids.FLOWING_WATER || world == null) {
+		if (!EffectiveConfig.cascades || fluidState.getFluid() != Fluids.FLOWING_WATER || world == null) {
 			return false;
 		}
 		MinecraftClient client = MinecraftClient.getInstance();

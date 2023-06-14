@@ -52,7 +52,7 @@ public abstract class SplashSpawner {
 
 	@Inject(method = "onSwimmingStart", at = @At("TAIL"))
 	protected void onSwimmingStart(CallbackInfo callbackInfo) {
-		if (this.world.isClient && EffectiveConfig.enableSplashes) {
+		if (this.world.isClient && EffectiveConfig.splashes) {
 			Entity entity = this.hasPassengers() && this.getPrimaryPassenger() != null ? this.getPrimaryPassenger() : (Entity) (Object) this;
 			if (!(entity instanceof FishingBobberEntity)) {
 				float f = entity == (Object) this ? 0.2f : 0.9f;

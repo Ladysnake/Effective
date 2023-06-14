@@ -1,9 +1,8 @@
 package ladysnake.effective;
 
-import com.mojang.serialization.Codec;
+import com.sammy.lodestone.helpers.DataHelper;
+import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import ladysnake.effective.cosmetics.particle.WillOWispParticle;
-import ladysnake.effective.cosmetics.particle.WispTrailParticle;
-import ladysnake.effective.cosmetics.particle.WispTrailParticleEffect;
 import ladysnake.effective.particle.*;
 import ladysnake.effective.particle.types.AllayTwinkleParticleType;
 import ladysnake.effective.particle.types.FireflyParticleType;
@@ -31,7 +30,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -69,7 +67,10 @@ public class Effective implements ClientModInitializer {
 	public static DefaultParticleType CHORUS_PETAL;
 	public static DefaultParticleType EYES;
 	public static DefaultParticleType WILL_O_WISP;
-	public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
+
+	// lodestone particles
+	public static LodestoneParticleType PIXEL = new LodestoneParticleType();
+	public static LodestoneParticleType WISP = new LodestoneParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -128,14 +129,13 @@ public class Effective implements ClientModInitializer {
 		EYES = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.DefaultFactory::new);
 		WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
-		WISP_TRAIL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "wisp_trail"), new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {
-			@Override
-			public Codec<WispTrailParticleEffect> getCodec() {
-				return WispTrailParticleEffect.CODEC;
-			}
-		});
-		ParticleFactoryRegistry.getInstance().register(WISP_TRAIL, WispTrailParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(MODID, "textures/entity/will_o_wisp.png"), 0.1f, 0.75f, 1.0f, 0.0f, 0.1f, 1.0f));
+
+		// lodestone particles
+		ParticleFactoryRegistry.getInstance().register(PIXEL, LodestoneParticleType.Factory::new);
+		PIXEL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "pixel"), PIXEL);
+		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneParticleType.Factory::new);
+		WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "wisp"), WISP);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);

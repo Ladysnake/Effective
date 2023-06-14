@@ -1,7 +1,6 @@
 package ladysnake.effective.cosmetics.particle.pet;
 
 import ladysnake.effective.cosmetics.particle.WillOWispParticle;
-import ladysnake.effective.cosmetics.particle.WispTrailParticleEffect;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
@@ -35,10 +34,6 @@ public class PlayerWispParticle extends WillOWispParticle {
 	public void tick() {
 		if (this.age > 10) {
 			this.colorAlpha = 1f;
-
-			for (int i = 0; i < 1; i++) {
-				this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
-			}
 		} else {
 			this.colorAlpha = 0;
 		}

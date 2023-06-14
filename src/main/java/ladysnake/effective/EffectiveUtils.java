@@ -27,7 +27,7 @@ public class EffectiveUtils {
 			case RIPPLE -> Effective.RIPPLE;
 			case WATERFALL_CLOUD -> Effective.WATERFALL_CLOUD;
 		};
-		if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
+		if (EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
 			particle = switch (waterEffect) {
 				case DROPLET -> Effective.GLOW_DROPLET;
 				case RIPPLE -> Effective.GLOW_RIPPLE;
@@ -41,7 +41,7 @@ public class EffectiveUtils {
 	// chooses between spawning a normal splash or glow splash depending on biome
 	public static void spawnSplash(World world, BlockPos pos, double velocityX, double velocityY, double velocityZ, @Nullable SplashParticleInitialData data) {
 		SplashParticleType splash = Effective.SPLASH;
-		if (EffectiveConfig.enableGlowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
+		if (EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
 			splash = Effective.GLOW_SPLASH;
 		}
 

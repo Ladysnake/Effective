@@ -36,7 +36,7 @@ public class EyesParticle extends SpriteBillboardParticle {
 	@Override
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
 		// disable if night vision or config is set to disabled
-		if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || EffectiveConfig.enableEyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.DISABLED) {
+		if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || EffectiveConfig.eyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.DISABLED) {
 			this.markDead();
 		}
 

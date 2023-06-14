@@ -45,7 +45,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 	@Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
 	public void render(T livingEntity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
 		// new render
-		if (EffectiveConfig.enableAllayTrails && livingEntity instanceof AllayEntity allayEntity && !allayEntity.isInvisible()) {
+		if (EffectiveConfig.allayTrails && livingEntity instanceof AllayEntity allayEntity && !allayEntity.isInvisible()) {
 			ColoredParticleInitialData data = new ColoredParticleInitialData(allayEntity.getUuid().hashCode() % 2 == 0 && EffectiveConfig.goldenAllays ? 0xFFC200 : 0x22CFFF);
 
 			// trail

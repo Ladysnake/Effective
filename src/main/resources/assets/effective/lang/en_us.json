@@ -1,19 +1,19 @@
 {
   "effective.subtitles.ambience.waterfall": "Water falls",
   "effective.midnightconfig.title": "Effective Config",
-  "effective.midnightconfig.enableSplashes": "Enable splashes",
+  "effective.midnightconfig.splashes": "Enable splashes",
   "effective.midnightconfig.splashRimAlpha": "Splash rim alpha",
-  "effective.midnightconfig.enableCascades": "Enable cascades",
+  "effective.midnightconfig.cascades": "Enable cascades",
   "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should flowing water spawn particles on first tick",
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis block update particle chance",
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to hear cascades [block(s)]",
   "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade sound volume multiplier",
   "effective.midnightconfig.rainRippleDensity": "Rain ripples density",
   "effective.midnightconfig.flowingWaterSplashingDensity": "Flowing water splashing density",
-  "effective.midnightconfig.enableGlowingPlankton": "Enable glowing plankton splashes and ripples in warm oceans at night",
+  "effective.midnightconfig.glowingPlankton": "Enable glowing plankton splashes and ripples in warm oceans at night",
   "effective.midnightconfig.glowsquidHypnotize": "Enable glow squid hypnotizing",
   "effective.midnightconfig.glowsquidHypnotizeAttractCursor": "Enable glow squid cursor attraction (requires glow squid hypnotizing)",
-  "effective.midnightconfig.enableAllayTrails": "Enable Allay trails",
+  "effective.midnightconfig.allayTrails": "Enable Allay trails",
   "effective.midnightconfig.allayTwinkleDensity": "Allay trail twinkle density (requires Allay trails)",
   "effective.midnightconfig.goldenAllays": "Enable golden Allays",
   "effective.midnightconfig.wardenScreenShake": "Enable Warden roar causing screen shake",
@@ -21,5 +21,8 @@
   "effective.midnightconfig.ravagerScreenShake": "Enable Ravager roar causing screen shake",
   "effective.midnightconfig.dragonScreenShake": "Enable Ender Dragon perch roaring causing screen shake",
   "effective.midnightconfig.fireflyDensity": "Firefly density",
-  "effective.midnightconfig.chorusPetalDensity": "Chorus Petal density"
+  "effective.midnightconfig.chorusPetalDensity": "Chorus Petal density",
+  "effective.midnightconfig.willOWispDensity": "Will O' Wisp density",
+  "effective.midnightconfig.eyesInTheDark": "Enable eyes in the dark",
+  "effective.midnightconfig.cosmetics": "Enable cosmetics"
 }

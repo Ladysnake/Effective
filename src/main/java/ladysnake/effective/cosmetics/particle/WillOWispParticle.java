@@ -1,7 +1,10 @@
 package ladysnake.effective.cosmetics.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.cosmetics.render.GlowyRenderLayer;
+import com.sammy.lodestone.setup.LodestoneParticles;
+import com.sammy.lodestone.systems.rendering.particle.Easing;
+import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import ladysnake.effective.Effective;
 import ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -11,10 +14,7 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.BlockStateParticleEffect;
@@ -27,16 +27,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.List;
 
 public class WillOWispParticle extends Particle {
 	public final Identifier texture;
-	protected final float redEvolution;
-	protected final float greenEvolution;
-	protected final float blueEvolution;
+	protected final float gotoRed;
+	protected final float gotoGreen;
+	protected final float gotoBlue;
 	final Model model;
 	final RenderLayer layer;
 	public float yaw;
@@ -50,7 +50,7 @@ public class WillOWispParticle extends Particle {
 	protected int targetChangeCooldown = 0;
 	protected int timeInSolid = -1;
 
-	protected WillOWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
+	protected WillOWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float gotoRed, float gotoGreen, float gotoBlue) {
 		super(world, x, y, z);
 		this.texture = texture;
 		this.model = new WillOWispModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(WillOWispModel.MODEL_LAYER));
@@ -63,9 +63,9 @@ public class WillOWispParticle extends Particle {
 		this.colorGreen = green;
 		this.colorBlue = blue;
 
-		this.redEvolution = redEvolution;
-		this.blueEvolution = blueEvolution;
-		this.greenEvolution = greenEvolution;
+		this.gotoRed = gotoRed;
+		this.gotoBlue = gotoBlue;
+		this.gotoGreen = gotoGreen;
 	}
 
 	@Override
@@ -75,23 +75,37 @@ public class WillOWispParticle extends Particle {
 
 	@Override
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-		Vec3d vec3d = camera.getPos();
-		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
-		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
-		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+		if (this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
+			this.world.addParticle(ParticleTypes.SOUL, this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
+		} else {
+			float x = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x));
+			float y = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y));
+			float z = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z));
 
-		MatrixStack matrixStack = new MatrixStack();
-		matrixStack.translate(f, g, h);
-		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(g, this.prevYaw, this.yaw) - 180));
-		matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(g, this.prevPitch, this.pitch)));
-		matrixStack.scale(0.5F, -0.5F, 0.5F);
-		matrixStack.translate(0, -1, 0);
-		VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-		VertexConsumer vertexConsumer2 = immediate.getBuffer(GlowyRenderLayer.get(texture));
-		if (this.colorAlpha > 0) {
-			this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
+			for (int i = 0; i < 2; i++) {
+				ParticleBuilders.create(Effective.WISP)
+					.setSpin((float) (this.world.random.nextGaussian() / 5f))
+					.setScale(0.25f, 0f)
+					.setScaleEasing(Easing.CIRC_OUT)
+					.setAlpha(1f)
+					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
+					.setColorEasing(Easing.CIRC_OUT)
+					.setMotion(0, 0.1f, 0)
+					.enableNoClip()
+					.setLifetime(40)
+					.spawn(this.world, x + random.nextGaussian() / 20f, y + random.nextGaussian() / 20f, z + random.nextGaussian() / 20f);
+			}
+
+			ParticleBuilders.create(Effective.WISP)
+				.setSpin((float) (this.world.random.nextGaussian() / 5f))
+				.setScale(0.15f)
+				.setAlpha(1f, 0f)
+				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
+				.setMotion(0, 0.1f, 0)
+				.enableNoClip()
+				.setLifetime(3)
+				.spawn(this.world, x, y, z);
 		}
-		immediate.draw();
 	}
 
 	@Override
@@ -106,7 +120,7 @@ public class WillOWispParticle extends Particle {
 
 		if (this.age++ >= this.maxAge) {
 			for (int i = 0; i < 25; i++) {
-				this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+				// TODO: Flames
 				this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.SOUL_SAND.getDefaultState()), this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
 			}
 			this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
@@ -134,14 +148,6 @@ public class WillOWispParticle extends Particle {
 		float f = (float) Math.sqrt(vec3d.x * vec3d.x + vec3d.z * vec3d.z);
 		this.yaw = (float) (MathHelper.atan2(vec3d.x, vec3d.z) * 57.2957763671875D);
 		this.pitch = (float) (MathHelper.atan2(vec3d.y, f) * 57.2957763671875D);
-
-		for (int i = 0; i < 10 * this.speedModifier; i++) {
-			if (this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
-				this.world.addParticle(ParticleTypes.SOUL, this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
-			} else {
-				this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
-			}
-		}
 
 		if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
 			this.move(velocityX, velocityY, velocityZ);
@@ -218,24 +224,24 @@ public class WillOWispParticle extends Particle {
 		private final float red;
 		private final float green;
 		private final float blue;
-		private final float redEvolution;
-		private final float greenEvolution;
-		private final float blueEvolution;
+		private final float toRed;
+		private final float toGreen;
+		private final float toBlue;
 
-		public DefaultFactory(SpriteProvider spriteProvider, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
+		public DefaultFactory(SpriteProvider spriteProvider, Identifier texture, float red, float green, float blue, float toRed, float toGreen, float toBlue) {
 			this.texture = texture;
 			this.red = red;
 			this.green = green;
 			this.blue = blue;
-			this.redEvolution = redEvolution;
-			this.greenEvolution = greenEvolution;
-			this.blueEvolution = blueEvolution;
+			this.toRed = toRed;
+			this.toGreen = toGreen;
+			this.toBlue = toBlue;
 		}
 
 		@Nullable
 		@Override
 		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-			return new WillOWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
+			return new WillOWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.toRed, this.toGreen, this.toBlue);
 		}
 	}
 }
