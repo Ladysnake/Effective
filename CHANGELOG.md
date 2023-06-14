@@ -3,14 +3,31 @@
 ## Effective 2.0 - 1.19.2
 - Rewrote the mod from scratch
 - Merged Illuminations into Effective. Here's a list of all the Illuminations features that made it in:
-  - Added Fireflies
+  - Added Fireflies // TODO: overhaul, trail?
   - Added and improved Chorus Petals:
       - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
       - Chorus petals now lay flat when touching the ground or water
       - Chorus petals now cause ripples when landing on water
   - Added Eyes in the Dark (on Halloween)
-  - Added Will o' Wisps
+  - Added Will o' Wisps // TODO: overhaul, lodestone particles
   - Added Illuminations cosmetics (though they may get removed or reworked in the future)
+- TODO: Overhaul cascades
+- TODO: Overhaul fireballs
+- TODO: Overhaul enderdragon fireball and fire
+- TODO: Overhaul blazes
+- TODO: Void particles? like old versions
+- TODO: Deep dark sculk particles
+- TODO: Lava bubbles?
+- TODO: Fix cascades
+- TODO: Shooting stars?
+- TODO: Ore shining / twinkling?
+- TODO: Vex trails?
+- TODO: Spectral arrows with a trail and twinkle?
+- TODO: Campfire embers?
+- TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
+- TODO: Readd and overhaul glowworms
+- Added configuration options for all new effects
+- Added sliders in the Mod Menu config for all numerical configuration options
 
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:

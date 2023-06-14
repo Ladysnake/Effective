@@ -55,9 +55,7 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 		// WILL O' WISP
 		if (biome.isRegistryKey(BiomeKeys.SOUL_SAND_VALLEY)) {
 			if (random.nextFloat() * 100 <= 0.01f * EffectiveConfig.willOWispDensity) {
-				System.out.println("LUCK CHECK");
 				if (this.getBlockState(pos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
-					System.out.println("TRUE");
 					this.addParticle(Effective.WILL_O_WISP, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 				}
 			}
