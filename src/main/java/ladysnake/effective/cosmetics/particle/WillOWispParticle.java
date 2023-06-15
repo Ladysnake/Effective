@@ -1,7 +1,6 @@
 package ladysnake.effective.cosmetics.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.sammy.lodestone.setup.LodestoneParticles;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import ladysnake.effective.Effective;
@@ -27,6 +26,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -119,8 +119,18 @@ public class WillOWispParticle extends Particle {
 		this.prevPosZ = this.z;
 
 		if (this.age++ >= this.maxAge) {
-			for (int i = 0; i < 25; i++) {
-				// TODO: Flames
+			for (int i = 0; i < 50; i++) {
+				ParticleBuilders.create(Effective.WISP)
+					.setSpin((float) (this.world.random.nextGaussian() / 5f))
+					.setScale(0.25f, 0f)
+					.setScaleEasing(Easing.CIRC_OUT)
+					.setAlpha(1f)
+					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
+					.setColorEasing(Easing.CIRC_OUT)
+					.setForcedMotion(new Vec3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)), Vec3f.ZERO)
+					.enableNoClip()
+					.setLifetime(20)
+					.repeat(this.world, x, y, z, 3);
 				this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.SOUL_SAND.getDefaultState()), this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
 			}
 			this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
