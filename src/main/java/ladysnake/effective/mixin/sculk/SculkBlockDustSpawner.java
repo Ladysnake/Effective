@@ -24,19 +24,19 @@ import java.awt.*;
 public class SculkBlockDustSpawner {
 	@Inject(method = "randomDisplayTick", at = @At("HEAD"))
 	protected void effective$spawnSculkParticles(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-		if (EffectiveConfig.sculkParticles && state.getBlock() == Blocks.SCULK && (world.getBlockState(pos.offset(Direction.UP, 1)).isOf(Blocks.SCULK_VEIN) || world.getBlockState(pos.offset(Direction.UP, 1)).isAir())) {
+		if (random.nextFloat() <= (EffectiveConfig.sculkParticleDensity / 100f) && state.getBlock() == Blocks.SCULK && (world.getBlockState(pos.offset(Direction.UP, 1)).isOf(Blocks.SCULK_VEIN) || world.getBlockState(pos.offset(Direction.UP, 1)).isAir())) {
 			boolean bright = random.nextInt(50) == 0;
 			Color color = bright ? new Color(0x29DFEB) : new Color(0x0D1217);
 			ParticleBuilders.create(Effective.PIXEL)
 				.setScale(0.02f)
-				.setAlpha(0f, 1f, 0f)
-				.setAlphaEasing(Easing.CIRC_OUT, Easing.SINE_OUT)
+				.setAlpha(1f, 1f, 0f)
+				.setAlphaEasing(Easing.SINE_OUT)
 				.setColor(color, color)
 				.enableNoClip()
 				.setLifetime(100 + random.nextInt(50))
 				.setMotion(0f, 0.01f + random.nextFloat() * .01f, 0f)
 				.overrideRenderType(bright ? ParticleTextureSheets.ADDITIVE : ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
-				.spawn(world, pos.getX() + random.nextGaussian(), pos.getY() + 1.1f, pos.getZ() + random.nextGaussian());
+				.spawn(world, pos.getX() + .5f + random.nextGaussian() / 3f, pos.getY() + 0.975f, pos.getZ() + .5f + random.nextGaussian() / 3f);
 		}
 	}
 }

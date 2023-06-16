@@ -78,8 +78,8 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean improvedDragonFireballsAndBreath = true;
 
-	@Entry
-	public static boolean sculkParticles = true;
+	@Entry(min = 0, max = 100, isSlider = true)
+	public static float sculkParticleDensity = 100;
 
 
 	@Entry
