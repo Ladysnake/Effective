@@ -12,7 +12,8 @@
     "fireballs.FireballVisualFireDisabler",
     "fireballs.LandingFlamingRendererSwapper",
     "fireballs.SittingFlamingRendererSwapper",
-    "sculk.SculkBlockDustSpawner"
+    "sculk.SculkBlockDustSpawner",
+    "spectral_arrows.SpectralArrowPositionTrackerAndParticleRemover"
   ],
   "client": [
     "ParticleSpawningClientWorldMixin",
@@ -31,6 +32,8 @@
     "screenshake.RavagerRoarScreenshakeAdder",
     "screenshake.SonicBoomScreenshakeAdder",
     "screenshake.WardenRoarScreenshakeAdder",
+    "spectral_arrows.SpectralArrowEmissiveEnforcer",
+    "spectral_arrows.SpectralArrowTrailRenderer",
     "water.RippleAndFlowingWaterSplashesSpawner",
     "water.SplashSpawner",
     "water.WaterfallCloudSpawner",

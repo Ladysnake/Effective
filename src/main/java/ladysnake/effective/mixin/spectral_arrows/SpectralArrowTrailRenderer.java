@@ -1,4 +1,4 @@
-package ladysnake.effective.mixin.allays;
+package ladysnake.effective.mixin.spectral_arrows;
 
 import com.sammy.lodestone.setup.LodestoneRenderLayers;
 import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
@@ -11,13 +11,13 @@ import ladysnake.effective.particle.contracts.ColoredParticleInitialData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.*;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AllayEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -32,33 +32,33 @@ import java.util.ArrayList;
 
 import static com.sammy.lodestone.handlers.RenderHandler.DELAYED_RENDER;
 
-@Mixin(LivingEntityRenderer.class)
-public abstract class AllayTrailRenderer<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
+@Mixin(ProjectileEntityRenderer.class)
+public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileEntity> extends EntityRenderer<T> {
 	private static final Identifier LIGHT_TRAIL = new Identifier(Effective.MODID, "textures/vfx/light_trail.png");
 	private static final RenderLayer LIGHT_TYPE = LodestoneRenderLayers.ADDITIVE_TEXTURE.apply(LIGHT_TRAIL);
 
-	protected AllayTrailRenderer(EntityRendererFactory.Context ctx) {
+	protected SpectralArrowTrailRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
 	}
 
-	// allay trail and twinkle
-	@Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
-	public void render(T livingEntity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
+	// spectral arrow trail and twinkle
+	@Inject(method = "render(Lnet/minecraft/entity/projectile/PersistentProjectileEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
+	public void render(T entity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
 		// new render
-		if (EffectiveConfig.allayTrails && livingEntity instanceof AllayEntity allayEntity && !allayEntity.isInvisible()) {
-			ColoredParticleInitialData data = new ColoredParticleInitialData(allayEntity.getUuid().hashCode() % 2 == 0 && EffectiveConfig.goldenAllays ? 0xFFC200 : 0x22CFFF);
+		if (EffectiveConfig.improvedSpectralArrows && entity instanceof SpectralArrowEntity spectralArrowEntity && !spectralArrowEntity.isInvisible()) {
+			ColoredParticleInitialData data = new ColoredParticleInitialData(0xFFFF77);
 
 			// trail
 			matrixStack.push();
-			ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) allayEntity).getPastPositions());
+			ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) spectralArrowEntity).getPastPositions());
 			VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setPosColorTexLightmapDefaultFormat();
 
-			float size = 0.2f;
+			float size = 0.15f;
 			float alpha = 1f;
 
-			float x = (float) MathHelper.lerp(tickDelta, allayEntity.prevX, allayEntity.getX());
-			float y = (float) MathHelper.lerp(tickDelta, allayEntity.prevY, allayEntity.getY());
-			float z = (float) MathHelper.lerp(tickDelta, allayEntity.prevZ, allayEntity.getZ());
+			float x = (float) MathHelper.lerp(tickDelta, spectralArrowEntity.prevX, spectralArrowEntity.getX());
+			float y = (float) MathHelper.lerp(tickDelta, spectralArrowEntity.prevY, spectralArrowEntity.getY());
+			float z = (float) MathHelper.lerp(tickDelta, spectralArrowEntity.prevZ, spectralArrowEntity.getZ());
 
 			builder.setColor(new Color(data.color)).setOffset(-x, -y, -z)
 				.setAlpha(alpha)
@@ -84,7 +84,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 			matrixStack.pop();
 
 			// twinkles
-			if ((allayEntity.getRandom().nextInt(100) + 1) <= 5 && EffectiveUtils.isGoingFast(allayEntity) && !MinecraftClient.getInstance().isPaused()) {
+			if ((spectralArrowEntity.world.getRandom().nextInt(100) + 1) <= 5 && !MinecraftClient.getInstance().isPaused()) {
 				float spreadDivider = 4f;
 				ParticleBuilders.create(Effective.ALLAY_TWINKLE)
 					.setColor(new Color(data.color), new Color(data.color))
@@ -92,7 +92,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 					.setScale(0.06f)
 					.setLifetime(15)
 					.setMotion(0, 0.05f, 0)
-					.spawn(allayEntity.world, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
+					.spawn(spectralArrowEntity.world, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider);
 			}
 		}
 	}

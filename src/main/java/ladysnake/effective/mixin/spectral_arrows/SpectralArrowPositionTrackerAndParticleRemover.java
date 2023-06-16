@@ -1,12 +1,15 @@
-package ladysnake.effective.mixin.allays;
+package ladysnake.effective.mixin.spectral_arrows;
 
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.AllayEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.SpectralArrowEntity;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,23 +19,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 
-@Mixin(AllayEntity.class)
-public abstract class AllayPositionTracker extends PathAwareEntity implements PositionTrackedEntity {
+@Mixin(SpectralArrowEntity.class)
+public abstract class SpectralArrowPositionTrackerAndParticleRemover extends PersistentProjectileEntity implements PositionTrackedEntity {
 	public final ArrayList<Vec3d> pastPositions = new ArrayList<>();
 
-	protected AllayPositionTracker(EntityType<? extends PathAwareEntity> entityType, World world) {
+	protected SpectralArrowPositionTrackerAndParticleRemover(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
 	@Inject(method = "tick", at = @At("HEAD"))
 	public void tick(CallbackInfo ci) {
-		if (EffectiveConfig.allayTrails) {
+		if (EffectiveConfig.improvedSpectralArrows) {
 			trackPastPositions();
 		}
 	}
 
 	public void trackPastPositions() {
-		Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()).add(0f, -.1f, 0f);
+		Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()).add(0, -.1f, 0f);
 		if (!pastPositions.isEmpty()) {
 			Vec3d latest = pastPositions.get(pastPositions.size() - 1);
 			float distance = (float) latest.distanceTo(position);
@@ -42,7 +45,7 @@ public abstract class AllayPositionTracker extends PathAwareEntity implements Po
 			int excess = pastPositions.size() - 1;
 			ArrayList<Vec3d> toRemove = new ArrayList<>();
 			float efficiency = (float) (excess * 0.12f + Math.exp((Math.max(0, excess - 20)) * 0.2f));
-			float ratio = 0.1f;
+			float ratio = 0.03f;
 			if (efficiency > 0f) {
 				for (int i = 0; i < excess; i++) {
 					Vec3d excessPosition = pastPositions.get(i);
@@ -63,5 +66,12 @@ public abstract class AllayPositionTracker extends PathAwareEntity implements Po
 	@Override
 	public ArrayList<Vec3d> getPastPositions() {
 		return pastPositions;
+	}
+
+	@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"))
+	public void tick(World world, ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ, Operation<Void> voidOperation) {
+		if (!EffectiveConfig.improvedSpectralArrows) {
+			voidOperation.call(world, parameters, x, y, z, velocityX, velocityY, velocityZ);
+		}
 	}
 }

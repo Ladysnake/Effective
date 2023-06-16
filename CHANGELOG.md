@@ -12,13 +12,10 @@
   - Added and completely overhauled Will o' Wisps
   - Added Illuminations cosmetics (though they may get removed or reworked in the future)
 - TODO: Overhaul cascades
-- TODO: Void particles? like old versions
 - TODO: Lava bubbles?
-- TODO: Fix cascades
 - TODO: Shooting stars?
 - TODO: Ore shining / twinkling?
 - TODO: Vex trails?
-- TODO: Spectral arrows with a trail and twinkle?
 - TODO: Campfire embers?
 - TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
 - TODO: Readd and overhaul glowworms
@@ -27,6 +24,7 @@
 - Improved fireball visuals
 - Improved dragon fireball and dragon breath visuals
 - Added sculk dust particles
+- Added spectral arrows trails and made them emissive
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Added a new secret config option :)
