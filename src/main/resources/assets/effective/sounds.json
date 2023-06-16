@@ -4,5 +4,11 @@
       "effective:ambient/waterfall"
     ],
     "subtitle": "effective.subtitles.ambience.waterfall"
+  },
+  "entity.parry": {
+    "sounds": [
+      "effective:entity/parry"
+    ],
+    "subtitle": "effective.subtitles.entity.parry"
   }
 }

@@ -29,6 +29,7 @@
 - TODO: Bubbles coming out of open chests underwater?
 - Added configuration options for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
+- Added a new secret config option :)
 
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:

@@ -1,11 +1,16 @@
 package ladysnake.effective;
 
-import com.sammy.lodestone.helpers.DataHelper;
+import com.sammy.lodestone.setup.LodestoneScreenParticles;
+import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
+import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
 import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import ladysnake.effective.cosmetics.particle.WillOWispParticle;
+import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
 import ladysnake.effective.particle.types.AllayTwinkleParticleType;
 import ladysnake.effective.particle.types.FireflyParticleType;
+import ladysnake.effective.particle.types.FlameParticleType;
 import ladysnake.effective.particle.types.SplashParticleType;
 import ladysnake.effective.render.entity.model.SplashBottomModel;
 import ladysnake.effective.render.entity.model.SplashBottomRimModel;
@@ -21,13 +26,13 @@ import ladysnake.satin.api.managed.ShaderEffectManager;
 import ladysnake.satin.api.managed.uniform.Uniform1f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundEvent;
@@ -40,6 +45,10 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
+import org.quiltmc.qsl.lifecycle.api.client.event.ClientTickEvents;
+import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
+
+import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class Effective implements ClientModInitializer {
@@ -47,12 +56,17 @@ public class Effective implements ClientModInitializer {
 	// rainbow shader for jeb glow squid
 	public static final ManagedCoreShader RAINBOW_SHADER = ShaderEffectManager.getInstance().manageCoreShader(new Identifier(MODID, "jeb"));
 	private static final Uniform1f uniformSTimeJeb = RAINBOW_SHADER.findUniform1f("Time");
+
 	// squid hypno shader
 	private static final ManagedShaderEffect HYPNO_SHADER = ShaderEffectManager.getInstance()
 		.manage(new Identifier(MODID, "shaders/post/hypnotize.json"));
 	private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
 	private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
 	private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
+
+	// freeze frames for feedbacking
+	public static int freezeFrames;
+
 	// particle types
 	public static SplashParticleType SPLASH;
 	public static DefaultParticleType DROPLET;
@@ -71,9 +85,11 @@ public class Effective implements ClientModInitializer {
 	// lodestone particles
 	public static LodestoneParticleType PIXEL = new LodestoneParticleType();
 	public static LodestoneParticleType WISP = new LodestoneParticleType();
+	public static FlameParticleType FLAME = new FlameParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
+	public static SoundEvent PARRY = new SoundEvent(new Identifier(MODID, "entity.parry"));
 	private static int ticksJeb;
 
 	public static boolean isNightTime(World world) {
@@ -136,12 +152,15 @@ public class Effective implements ClientModInitializer {
 		PIXEL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "pixel"), PIXEL);
 		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneParticleType.Factory::new);
 		WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "wisp"), WISP);
+		ParticleFactoryRegistry.getInstance().register(FLAME, FlameParticleType.Factory::new);
+		FLAME = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "flame"), FLAME);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
+		PARRY = Registry.register(Registry.SOUND_EVENT, PARRY.getId(), PARRY);
 
 		// events
-		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+		ClientTickEvents.END.register(client -> {
 			WaterfallCloudGenerators.tick();
 		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
@@ -226,7 +245,27 @@ public class Effective implements ClientModInitializer {
 		});
 
 		// jeb rainbow glow squids
-		ClientTickEvents.END_CLIENT_TICK.register(client -> ticksJeb++);
+		ClientTickEvents.END.register(client -> ticksJeb++);
 		EntitiesPreRenderCallback.EVENT.register((camera, frustum, tickDelta) -> uniformSTimeJeb.set((ticksJeb + tickDelta) * 0.05f));
+
+		// tick freeze frames for feedbacking
+		ClientTickEvents.END.register(client -> {
+			if (freezeFrames > 0) {
+				freezeFrames--;
+
+				ParticleBuilders.ScreenParticleBuilder b2 = ParticleBuilders.create(LodestoneScreenParticles.SPARKLE).setAlpha(0.6f).setScale(100000f).setColor(new Color(0xFFFFFF), new Color(0xFFFFFF)).setLifetime(1).overrideRenderType(ParticleTextureSheets.ADDITIVE).overrideRenderOrder(ScreenParticle.RenderOrder.AFTER_EVERYTHING);
+				b2.repeat(0, 0, 1);
+
+//				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();
+//				if (bl) {
+//					MinecraftClient.getInstance().paused = true;
+				MinecraftClient.getInstance().setScreen(new ParryScreen());
+//					MinecraftClient.getInstance().getSoundManager().pauseAll();
+//				}
+			} else if (freezeFrames == 0) {
+				MinecraftClient.getInstance().setScreen(null);
+				freezeFrames = -1;
+			}
+		});
 	}
 }

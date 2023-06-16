@@ -4,7 +4,12 @@
   "package": "ladysnake.effective.mixin",
   "plugin": "ladysnake.effective.EffectiveMixinPlugin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [],
+  "mixins": [
+    "feedbacking.FeedbackingParryFireballEffect",
+    "feedbacking.ScreenParticleParryRenderEnforcer",
+    "fireballs.FireballSmokeDisabler",
+    "fireballs.FireballVisualFireDisabler"
+  ],
   "client": [
     "ParticleSpawningClientWorldMixin",
     "RandomDisplayTickBlockMixin",
@@ -13,6 +18,7 @@
     "allays.GoldenAllayTextureSwapper",
     "choruspetals.BrokenChorusFlowerPetalSpawner",
     "choruspetals.ChorusPetalSpawner",
+    "fireballs.ImprovedFireballRendererSwapper",
     "glowsquids.HypnotizingGlowSquidsAdder",
     "glowsquids.JebGlowSquidRainbowRenderer",
     "glowsquids.RainbowShaderRenderLayerSwapper",

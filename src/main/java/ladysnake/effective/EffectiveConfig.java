@@ -71,8 +71,16 @@ public class EffectiveConfig extends MidnightConfig {
 
 	@Entry
 	public static EyesInTheDarkOptions eyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
+
+	@Entry
+	public static boolean improvedFireballs = true;
+
+
 	@Entry
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.FALSE;
+
+	@Entry
+	public static boolean feedbacking = true;
 
 	public static boolean shouldDisplayCosmetics() {
 		return cosmetics == CosmeticsOptions.TRUE || cosmetics == CosmeticsOptions.FIRST_PERSON;

@@ -85,6 +85,9 @@ dependencies {
 	modRuntimeOnly("maven.modrinth:iris:${project.iris_version}")
 	runtimeOnly compileOnly("org.anarres:jcpp:1.4.14") // for iris
 	runtimeOnly('org.joml:joml:1.10.4') // for sodium
+
+	// mixin extras
+	include( implementation( annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extras_version}")))
 }
 
 processResources {
