@@ -12,10 +12,7 @@
   - Added and completely overhauled Will o' Wisps
   - Added Illuminations cosmetics (though they may get removed or reworked in the future)
 - TODO: Overhaul cascades
-- TODO: Overhaul enderdragon fireball and fire
-- TODO: Overhaul blazes
 - TODO: Void particles? like old versions
-- TODO: Deep dark sculk particles
 - TODO: Lava bubbles?
 - TODO: Fix cascades
 - TODO: Shooting stars?
@@ -28,6 +25,8 @@
 - TODO: Bubbles coming out of open chests underwater?
 
 - Improved fireball visuals
+- Improved dragon fireball and dragon breath visuals
+- Added sculk dust particles
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Added a new secret config option :)

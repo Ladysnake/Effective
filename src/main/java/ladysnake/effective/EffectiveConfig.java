@@ -78,12 +78,15 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean improvedDragonFireballsAndBreath = true;
 
+	@Entry
+	public static boolean sculkParticles = true;
+
 
 	@Entry
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.TRUE;
 
 	@Entry
-	public static boolean feedbacking = true;
+	public static boolean feedbacking = false;
 
 	public static boolean shouldDisplayCosmetics() {
 		return cosmetics == CosmeticsOptions.TRUE || cosmetics == CosmeticsOptions.FIRST_PERSON;

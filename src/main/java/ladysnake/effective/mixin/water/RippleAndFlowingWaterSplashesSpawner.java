@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WaterFluid.class)
-public class RippleSpawner {
+public class RippleAndFlowingWaterSplashesSpawner {
 	@Unique
 	private static boolean shouldSplash(World world, BlockPos pos) {
 		if (EffectiveConfig.flowingWaterSplashingDensity > 0) {

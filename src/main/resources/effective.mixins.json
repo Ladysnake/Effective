@@ -11,7 +11,8 @@
     "fireballs.FireballSmokeDisabler",
     "fireballs.FireballVisualFireDisabler",
     "fireballs.LandingFlamingRendererSwapper",
-    "fireballs.SittingFlamingRendererSwapper"
+    "fireballs.SittingFlamingRendererSwapper",
+    "sculk.SculkBlockDustSpawner"
   ],
   "client": [
     "ParticleSpawningClientWorldMixin",
@@ -30,7 +31,7 @@
     "screenshake.RavagerRoarScreenshakeAdder",
     "screenshake.SonicBoomScreenshakeAdder",
     "screenshake.WardenRoarScreenshakeAdder",
-    "water.RippleSpawner",
+    "water.RippleAndFlowingWaterSplashesSpawner",
     "water.SplashSpawner",
     "water.WaterfallCloudSpawner",
     "water.WaterfallGeneratorAdder",
