@@ -20,9 +20,18 @@
   "effective.midnightconfig.sonicBoomScreenShake": "Enable Warden sonic booms causing screen shake",
   "effective.midnightconfig.ravagerScreenShake": "Enable Ravager roar causing screen shake",
   "effective.midnightconfig.dragonScreenShake": "Enable Ender Dragon perch roaring causing screen shake",
-  "effective.midnightconfig.fireflyDensity": "Firefly density",
-  "effective.midnightconfig.chorusPetalDensity": "Chorus Petal density",
-  "effective.midnightconfig.willOWispDensity": "Will O' Wisp density",
+  "effective.midnightconfig.fireflyDensity": "Firefly spawn density",
+  "effective.midnightconfig.chorusPetalDensity": "Chorus Petal spawn density",
+  "effective.midnightconfig.willOWispDensity": "Will O' Wisp spawn density",
   "effective.midnightconfig.eyesInTheDark": "Enable eyes in the dark",
-  "effective.midnightconfig.cosmetics": "Enable cosmetics"
+  "effective.midnightconfig.eyesInTheDarkOptions.HALLOWEEN": "On Halloween",
+  "effective.midnightconfig.eyesInTheDarkOptions.ALWAYS": "Always",
+  "effective.midnightconfig.eyesInTheDarkOptions.DISABLED": "No",
+  "effective.midnightconfig.improvedFireballs": "Improve fireballs",
+  "effective.midnightconfig.improvedDragonFireballsAndBreath": "Improve dragon fireballs and breath",
+  "effective.midnightconfig.cosmetics": "Enable cosmetics",
+  "effective.midnightconfig.CosmeticsOptions.true": "Yes",
+  "effective.midnightconfig.CosmeticsOptions.FIRST_PERSON": "Yes + First Person",
+  "effective.midnightconfig.CosmeticsOptions.FALSE": "No",
+  "effective.midnightconfig.feedbacking": "Feedbacking"
 }

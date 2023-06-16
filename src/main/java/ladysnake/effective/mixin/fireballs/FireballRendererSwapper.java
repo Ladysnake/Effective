@@ -1,6 +1,5 @@
 package ladysnake.effective.mixin.fireballs;
 
-import com.sammy.lodestone.setup.LodestoneRenderLayers;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import ladysnake.effective.Effective;
@@ -11,12 +10,11 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
+import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.util.math.MathHelper;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,11 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 
 @Mixin(FlyingItemEntityRenderer.class)
-public class ImprovedFireballRendererSwapper<T extends Entity & FlyingItemEntity> {
-	@Shadow
-	@Final
-	private float scale;
-
+public class FireballRendererSwapper<T extends Entity & FlyingItemEntity> {
 	@Inject(method = "render", at = @At("HEAD"), cancellable = true)
 	public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
 		if (EffectiveConfig.improvedFireballs && entity instanceof AbstractFireballEntity fireballEntity) {

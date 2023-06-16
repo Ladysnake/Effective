@@ -7,8 +7,11 @@
   "mixins": [
     "feedbacking.FeedbackingParryFireballEffect",
     "feedbacking.ScreenParticleParryRenderEnforcer",
+    "fireballs.DragonBreathRendererSwapper",
     "fireballs.FireballSmokeDisabler",
-    "fireballs.FireballVisualFireDisabler"
+    "fireballs.FireballVisualFireDisabler",
+    "fireballs.LandingFlamingRendererSwapper",
+    "fireballs.SittingFlamingRendererSwapper"
   ],
   "client": [
     "ParticleSpawningClientWorldMixin",
@@ -18,7 +21,8 @@
     "allays.GoldenAllayTextureSwapper",
     "choruspetals.BrokenChorusFlowerPetalSpawner",
     "choruspetals.ChorusPetalSpawner",
-    "fireballs.ImprovedFireballRendererSwapper",
+    "fireballs.DragonFireballRendererSwapper",
+    "fireballs.FireballRendererSwapper",
     "glowsquids.HypnotizingGlowSquidsAdder",
     "glowsquids.JebGlowSquidRainbowRenderer",
     "glowsquids.RainbowShaderRenderLayerSwapper",

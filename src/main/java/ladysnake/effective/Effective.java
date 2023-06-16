@@ -30,9 +30,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundEvent;
@@ -86,6 +84,7 @@ public class Effective implements ClientModInitializer {
 	public static LodestoneParticleType PIXEL = new LodestoneParticleType();
 	public static LodestoneParticleType WISP = new LodestoneParticleType();
 	public static FlameParticleType FLAME = new FlameParticleType();
+	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -154,6 +153,8 @@ public class Effective implements ClientModInitializer {
 		WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "wisp"), WISP);
 		ParticleFactoryRegistry.getInstance().register(FLAME, FlameParticleType.Factory::new);
 		FLAME = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "flame"), FLAME);
+		ParticleFactoryRegistry.getInstance().register(DRAGON_BREATH, FlameParticleType.Factory::new);
+		DRAGON_BREATH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "dragon_breath"), DRAGON_BREATH);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
@@ -256,12 +257,10 @@ public class Effective implements ClientModInitializer {
 				ParticleBuilders.ScreenParticleBuilder b2 = ParticleBuilders.create(LodestoneScreenParticles.SPARKLE).setAlpha(0.6f).setScale(100000f).setColor(new Color(0xFFFFFF), new Color(0xFFFFFF)).setLifetime(1).overrideRenderType(ParticleTextureSheets.ADDITIVE).overrideRenderOrder(ScreenParticle.RenderOrder.AFTER_EVERYTHING);
 				b2.repeat(0, 0, 1);
 
-//				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();
-//				if (bl) {
-//					MinecraftClient.getInstance().paused = true;
-				MinecraftClient.getInstance().setScreen(new ParryScreen());
-//					MinecraftClient.getInstance().getSoundManager().pauseAll();
-//				}
+				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();
+				if (bl) {
+					MinecraftClient.getInstance().setScreen(new ParryScreen());
+				}
 			} else if (freezeFrames == 0) {
 				MinecraftClient.getInstance().setScreen(null);
 				freezeFrames = -1;

@@ -1,6 +1,7 @@
 package ladysnake.effective.mixin.feedbacking;
 
 import ladysnake.effective.Effective;
+import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,7 @@ public abstract class FeedbackingParryFireballEffect {
 
 	@Inject(method = "attack", at = @At("HEAD"))
 	public void attack(Entity target, CallbackInfo ci) {
-		if (this.isMainPlayer() && target instanceof ExplosiveProjectileEntity) {
+		if (EffectiveConfig.feedbacking && this.isMainPlayer() && target instanceof ExplosiveProjectileEntity) {
 			MinecraftClient.getInstance().player.playSound(Effective.PARRY, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
 			Effective.freezeFrames = 5;

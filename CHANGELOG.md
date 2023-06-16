@@ -12,7 +12,6 @@
   - Added and completely overhauled Will o' Wisps
   - Added Illuminations cosmetics (though they may get removed or reworked in the future)
 - TODO: Overhaul cascades
-- TODO: Overhaul fireballs
 - TODO: Overhaul enderdragon fireball and fire
 - TODO: Overhaul blazes
 - TODO: Void particles? like old versions
@@ -27,7 +26,9 @@
 - TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
 - TODO: Readd and overhaul glowworms
 - TODO: Bubbles coming out of open chests underwater?
-- Added configuration options for all new effects
+
+- Improved fireball visuals
+- Added configuration options to control whether the effect is enabled and / or its density for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Added a new secret config option :)
 
