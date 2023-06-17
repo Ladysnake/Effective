@@ -19,7 +19,6 @@
 - TODO: Campfire embers?
 - TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
 - TODO: Readd and overhaul glowworms
-- TODO: Bubbles coming out of open chests underwater?
 
 - Improved fireball visuals
 - Improved dragon fireball and dragon breath visuals
