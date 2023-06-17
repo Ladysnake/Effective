@@ -81,6 +81,9 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean improvedSpectralArrows = true;
 
+	@Entry
+	public static boolean underwaterOpenChestBubbles = true;
+
 
 	@Entry
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.TRUE;
@@ -88,7 +91,7 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean feedbacking = false;
 
-	public static boolean shouldDisplayCosmetics() {
+    public static boolean shouldDisplayCosmetics() {
 		return cosmetics == CosmeticsOptions.TRUE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 

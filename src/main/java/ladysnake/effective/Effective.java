@@ -8,10 +8,7 @@ import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType
 import ladysnake.effective.cosmetics.particle.WillOWispParticle;
 import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
-import ladysnake.effective.particle.types.AllayTwinkleParticleType;
-import ladysnake.effective.particle.types.FireflyParticleType;
-import ladysnake.effective.particle.types.FlameParticleType;
-import ladysnake.effective.particle.types.SplashParticleType;
+import ladysnake.effective.particle.types.*;
 import ladysnake.effective.render.entity.model.SplashBottomModel;
 import ladysnake.effective.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.render.entity.model.SplashModel;
@@ -85,6 +82,7 @@ public class Effective implements ClientModInitializer {
 	public static LodestoneParticleType WISP = new LodestoneParticleType();
 	public static FlameParticleType FLAME = new FlameParticleType();
 	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
+	public static BubbleParticleType BUBBLE = new BubbleParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -155,6 +153,8 @@ public class Effective implements ClientModInitializer {
 		FLAME = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "flame"), FLAME);
 		ParticleFactoryRegistry.getInstance().register(DRAGON_BREATH, FlameParticleType.Factory::new);
 		DRAGON_BREATH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "dragon_breath"), DRAGON_BREATH);
+		ParticleFactoryRegistry.getInstance().register(BUBBLE, BubbleParticleType.Factory::new);
+		BUBBLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);

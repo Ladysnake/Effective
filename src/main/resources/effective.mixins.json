@@ -5,6 +5,7 @@
   "plugin": "ladysnake.effective.EffectiveMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "chest_bubbles.JustSoICanSeeTheBubblesWithoutTheUI",
     "feedbacking.FeedbackingParryFireballEffect",
     "feedbacking.ScreenParticleParryRenderEnforcer",
     "fireballs.DragonBreathRendererSwapper",
@@ -21,6 +22,7 @@
     "allays.AllayPositionTracker",
     "allays.AllayTrailRenderer",
     "allays.GoldenAllayTextureSwapper",
+    "chest_bubbles.UnderwaterOpenChestBubbleSpawner",
     "choruspetals.BrokenChorusFlowerPetalSpawner",
     "choruspetals.ChorusPetalSpawner",
     "fireballs.DragonFireballRendererSwapper",

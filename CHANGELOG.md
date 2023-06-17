@@ -25,6 +25,7 @@
 - Improved dragon fireball and dragon breath visuals
 - Added sculk dust particles
 - Added spectral arrows trails and made them emissive
+- Added air bubbles coming out of chests when opened underwater
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Added a new secret config option :)
