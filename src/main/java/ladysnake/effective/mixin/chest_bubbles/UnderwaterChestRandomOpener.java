@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.enums.ChestType;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +43,8 @@ public class UnderwaterChestRandomOpener {
 			// randomly open chests
 			if (world.random.nextInt(200) == 0
 				&& blockEntity.stateManager.getViewerCount() <= 0
-				&& !CHESTS_TIMERS.containsKey(pos)) {
+				&& !CHESTS_TIMERS.containsKey(pos)
+				&& blockEntity.lidAnimator.getProgress(MinecraftClient.getInstance().getTickDelta()) == 0f) {
 				// only trigger for single and left chests to avoid double openings and double sounds for double chests
 				ChestType chestType = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
 

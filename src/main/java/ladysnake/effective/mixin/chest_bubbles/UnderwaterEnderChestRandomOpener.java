@@ -32,7 +32,7 @@ public class UnderwaterEnderChestRandomOpener {
 				if (CHESTS_TIMERS.get(pos) > 0 && blockEntity.stateManager.getViewerCount() <= 0) {
 					CHESTS_TIMERS.put(pos, CHESTS_TIMERS.get(pos) - 1);
 				} else {
-					world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.AMBIENT, 0.1f, 1.0f, false);
+					world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ENDER_CHEST_CLOSE, SoundCategory.AMBIENT, 0.1f, 1.0f, false);
 					blockEntity.lidAnimator.setOpen(false);
 					CHESTS_TIMERS.remove(pos);
 				}
@@ -43,7 +43,7 @@ public class UnderwaterEnderChestRandomOpener {
 				&& blockEntity.stateManager.getViewerCount() <= 0
 				&& !CHESTS_TIMERS.containsKey(pos)) {
 				CHESTS_TIMERS.put(pos, 100);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.AMBIENT, 0.1f, 1.0f, false);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ENDER_CHEST_OPEN, SoundCategory.AMBIENT, 0.1f, 1.0f, false);
 				blockEntity.lidAnimator.setOpen(true);
 			}
 		} else {
