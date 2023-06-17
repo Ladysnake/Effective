@@ -77,7 +77,7 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 							spawnBubble(world, entity.getPos().getX() + xOffset + xOffsetRand, entity.getPos().getY() + .5f, entity.getPos().getZ() + zOffset + zOffsetRand, block == Blocks.ENDER_CHEST);
 
 							if (openFactor <= .6f) {
-								spawnClosingBubble(world, entity.getPos().getX() + xOffset, entity.getPos().getY() + .5f, entity.getPos().getZ() + zOffset, facing, block == Blocks.ENDER_CHEST);
+								spawnClosingBubble(world, entity.getPos().getX() + xOffset, entity.getPos().getY() + .5f, entity.getPos().getZ() + zOffset, facing, true, block == Blocks.ENDER_CHEST);
 							}
 						}
 					} else {
@@ -85,7 +85,7 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 							spawnBubble(world, entity.getPos().getX() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, entity.getPos().getY() + .5f, entity.getPos().getZ() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, block == Blocks.ENDER_CHEST);
 						}
 						if (openFactor <= .6f) {
-							spawnClosingBubble(world, entity.getPos().getX() + .5f, entity.getPos().getY() + .5f, entity.getPos().getZ() + .5f, facing, block == Blocks.ENDER_CHEST);
+							spawnClosingBubble(world, entity.getPos().getX() + .5f, entity.getPos().getY() + .5f, entity.getPos().getZ() + .5f, facing, false,block == Blocks.ENDER_CHEST);
 						}
 					}
 				}
@@ -105,22 +105,22 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 			.spawn(world, x, y, z);
 	}
 
-	private void spawnClosingBubble(World world, float x, float y, float z, Direction direction, boolean endChest) {
-		for (int i = 0; i < 5; i++) {
+	private void spawnClosingBubble(World world, float x, float y, float z, Direction direction, boolean doubleChest, boolean endChest) {
+		for (int i = 0; i < (doubleChest ? 10 : 5); i++) {
 			float velX = .5f;
 			float velZ = .5f;
 			if (direction == Direction.NORTH) {
-				velX = (world.random.nextFloat() - world.random.nextFloat()) / 5f;
+				velX = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 				velZ = -.05f - (world.random.nextFloat() / 5f);
 			} else if (direction == Direction.SOUTH) {
-				velX = (world.random.nextFloat() - world.random.nextFloat()) / 5f;
+				velX = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 				velZ = .05f + (world.random.nextFloat() / 5f);
 			} else if (direction == Direction.EAST) {
 				velX = .05f + (world.random.nextFloat() / 5f);
-				velZ = (world.random.nextFloat() - world.random.nextFloat()) / 5f;
+				velZ = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 			} else if (direction == Direction.WEST) {
 				velX = -.05f - (world.random.nextFloat() / 5f);
-				velZ = (world.random.nextFloat() - world.random.nextFloat()) / 5f;
+				velZ = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 			}
 
 			ParticleBuilders.create(Effective.BUBBLE)

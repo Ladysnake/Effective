@@ -6,6 +6,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "chest_bubbles.JustSoICanSeeTheBubblesWithoutTheUI",
+    "chest_bubbles.UnderwaterChestRandomOpener",
+    "chest_bubbles.UnderwaterEnderChestRandomOpener",
     "feedbacking.FeedbackingParryFireballEffect",
     "feedbacking.ScreenParticleParryRenderEnforcer",
     "fireballs.DragonBreathRendererSwapper",

@@ -84,6 +84,9 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean underwaterOpenChestBubbles = true;
 
+	@Entry
+	public static ChestsOpenOptions underwaterChestsOpenRandomly = ChestsOpenOptions.ON_SOUL_SAND;
+
 
 	@Entry
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.TRUE;
@@ -96,7 +99,11 @@ public class EffectiveConfig extends MidnightConfig {
 	}
 
 	public enum EyesInTheDarkOptions {
-		HALLOWEEN, ALWAYS, DISABLED
+		HALLOWEEN, ALWAYS, NEVER
+	}
+
+	public enum ChestsOpenOptions {
+		ON_SOUL_SAND, RANDOMLY, NEVER
 	}
 
 	public enum CosmeticsOptions {

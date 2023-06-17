@@ -3,3 +3,7 @@ accessWidener	v1	named
 accessible  class   net/minecraft/client/render/RenderLayer$MultiPhase
 accessible  class   net/minecraft/client/render/RenderLayer$MultiPhaseParameters
 accessible field net/minecraft/client/MinecraftClient paused Z
+accessible field net/minecraft/block/entity/ChestBlockEntity lidAnimator Lnet/minecraft/block/entity/ChestLidAnimator;
+accessible field net/minecraft/block/entity/ChestBlockEntity stateManager Lnet/minecraft/block/entity/ViewerCountManager;
+accessible field net/minecraft/block/entity/EnderChestBlockEntity lidAnimator Lnet/minecraft/block/entity/ChestLidAnimator;
+accessible field net/minecraft/block/entity/EnderChestBlockEntity stateManager Lnet/minecraft/block/entity/ViewerCountManager;
