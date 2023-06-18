@@ -4,7 +4,6 @@ import com.sammy.lodestone.setup.LodestoneParticles;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
-import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.Effective;
@@ -131,16 +130,11 @@ public class WaterfallCloudGenerators {
 
 				ParticleBuilders.create(Effective.WATERFALL_CLOUD)
 					.setScale(0.1f + world.random.nextFloat() * .9f)
-//					.setAlpha(1f, 0f)
-//					.setAlphaEasing(Easing.SINE_OUT)
 					.setColor(EffectiveUtils.isGlowingWater(world, pos) ? EffectiveUtils.getGlowingWaterColor(world, pos) : new Color(0xFFFFFF), EffectiveUtils.isGlowingWater(world, pos) ? EffectiveUtils.getGlowingWaterColor(world, pos) : new Color(0xFFFFFF))
-//					.enableNoClip()
 					.setLifetime(10)
 					.overrideRenderType(EffectiveUtils.isGlowingWater(world, pos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
 					.setMotion(world.getRandom().nextFloat() / 10f * Math.signum(offsetX), world.getRandom().nextFloat() / 10f, world.getRandom().nextFloat() / 10f * Math.signum(offsetZ))
 					.spawn(world, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ);
-
-//			EffectiveUtils.spawnWaterEffect(world, pos.add(.5 + offsetX, world.getRandom().nextFloat(), .5 + offsetZ), world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ), EffectiveUtils.WaterEffectType.WATERFALL_CLOUD);
 			}
 		}
 
@@ -149,11 +143,11 @@ public class WaterfallCloudGenerators {
 			double offsetZ = world.getRandom().nextGaussian() / 5f;
 
 			ParticleBuilders.create(LodestoneParticles.SMOKE_PARTICLE)
-				.setSpin((world.random.nextFloat()-world.random.nextFloat())/20f)
+				.setSpin((world.random.nextFloat() - world.random.nextFloat()) / 20f)
 				.setScale(1f + world.random.nextFloat() * 5f)
 				.setAlpha(0f, 0.05f, 0f)
 				.setAlphaEasing(Easing.SINE_OUT)
-				.setColor(new Color(0xFFFFFF),new Color(0xFFFFFF))
+				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
 				.enableNoClip()
 				.setLifetime(500)
 				.overrideRenderType(ParticleTextureSheets.TRANSPARENT)

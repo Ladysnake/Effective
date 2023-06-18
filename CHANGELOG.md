@@ -18,6 +18,11 @@
 - Added sculk dust particles
 - Added spectral arrows trails and made them emissive
 - Added air bubbles coming out of chests when opened underwater
+- Improved cascades
+  - Waterfall cloud particles now have an animated texture
+  - Waterfall clouds are now more dense
+  - Waterfall clouds now generate a mist effect
+
 
 - TODO: Overhaul cascades
 - TODO: Lava bubbles?
