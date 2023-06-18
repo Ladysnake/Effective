@@ -1,5 +1,10 @@
 package ladysnake.effective.world;
 
+import com.sammy.lodestone.setup.LodestoneParticles;
+import com.sammy.lodestone.systems.rendering.particle.Easing;
+import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
+import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.Effective;
@@ -8,6 +13,7 @@ import ladysnake.effective.EffectiveUtils;
 import ladysnake.effective.sound.WaterfallSoundInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -19,6 +25,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -117,11 +124,41 @@ public class WaterfallCloudGenerators {
 	}
 
 	public static void addWaterfallCloud(World world, BlockPos pos) {
-		if (pos != null) {
+		for (int i = 0; i < 5; i++) {
+			if (pos != null) {
+				double offsetX = world.getRandom().nextGaussian() / 5f;
+				double offsetZ = world.getRandom().nextGaussian() / 5f;
+
+				ParticleBuilders.create(Effective.WATERFALL_CLOUD)
+					.setScale(0.1f + world.random.nextFloat() * .9f)
+//					.setAlpha(1f, 0f)
+//					.setAlphaEasing(Easing.SINE_OUT)
+					.setColor(EffectiveUtils.isGlowingWater(world, pos) ? EffectiveUtils.getGlowingWaterColor(world, pos) : new Color(0xFFFFFF), EffectiveUtils.isGlowingWater(world, pos) ? EffectiveUtils.getGlowingWaterColor(world, pos) : new Color(0xFFFFFF))
+//					.enableNoClip()
+					.setLifetime(10)
+					.overrideRenderType(EffectiveUtils.isGlowingWater(world, pos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
+					.setMotion(world.getRandom().nextFloat() / 10f * Math.signum(offsetX), world.getRandom().nextFloat() / 10f, world.getRandom().nextFloat() / 10f * Math.signum(offsetZ))
+					.spawn(world, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ);
+
+//			EffectiveUtils.spawnWaterEffect(world, pos.add(.5 + offsetX, world.getRandom().nextFloat(), .5 + offsetZ), world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ), EffectiveUtils.WaterEffectType.WATERFALL_CLOUD);
+			}
+		}
+
+		if (world.random.nextInt(5) == 0) {
 			double offsetX = world.getRandom().nextGaussian() / 5f;
 			double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-			EffectiveUtils.spawnWaterEffect(world, pos.add(.5 + offsetX, world.getRandom().nextFloat(), .5 + offsetZ), world.getRandom().nextFloat() / 5f * Math.signum(offsetX), world.getRandom().nextFloat() / 5f, world.getRandom().nextFloat() / 5f * Math.signum(offsetZ), EffectiveUtils.WaterEffectType.WATERFALL_CLOUD);
+			ParticleBuilders.create(LodestoneParticles.SMOKE_PARTICLE)
+				.setSpin((world.random.nextFloat()-world.random.nextFloat())/20f)
+				.setScale(1f + world.random.nextFloat() * 5f)
+				.setAlpha(0f, 0.05f, 0f)
+				.setAlphaEasing(Easing.SINE_OUT)
+				.setColor(new Color(0xFFFFFF),new Color(0xFFFFFF))
+				.enableNoClip()
+				.setLifetime(500)
+				.overrideRenderType(ParticleTextureSheets.TRANSPARENT)
+				.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
+				.spawn(world, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ);
 		}
 	}
 

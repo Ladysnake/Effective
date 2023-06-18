@@ -6,9 +6,12 @@ import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
 
 public class EffectiveUtils {
 	public static boolean isGoingFast(AllayEntity allayEntity) {
@@ -25,17 +28,23 @@ public class EffectiveUtils {
 		DefaultParticleType particle = switch (waterEffect) {
 			case DROPLET -> Effective.DROPLET;
 			case RIPPLE -> Effective.RIPPLE;
-			case WATERFALL_CLOUD -> Effective.WATERFALL_CLOUD;
 		};
-		if (EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN)) {
+		if (isGlowingWater(world, pos)) {
 			particle = switch (waterEffect) {
 				case DROPLET -> Effective.GLOW_DROPLET;
 				case RIPPLE -> Effective.GLOW_RIPPLE;
-				case WATERFALL_CLOUD -> Effective.GLOW_WATERFALL_CLOUD;
 			};
 		}
 
 		world.addParticle(particle, pos.getX(), pos.getY(), pos.getZ(), velocityX, velocityY, velocityZ);
+	}
+
+	public static boolean isGlowingWater(World world, BlockPos pos) {
+		return EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).isRegistryKey(BiomeKeys.WARM_OCEAN);
+	}
+
+	public static Color getGlowingWaterColor(World world, BlockPos pos) {
+		return new Color(Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f),Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f),1f);
 	}
 
 	// chooses between spawning a normal splash or glow splash depending on biome
@@ -45,12 +54,11 @@ public class EffectiveUtils {
 			splash = Effective.GLOW_SPLASH;
 		}
 
-		world.addParticle(splash.setData(data), pos.getX()+.5f, pos.getY()+.9f, pos.getZ()+.5f, velocityX, velocityY, velocityZ);
+		world.addParticle(splash.setData(data), pos.getX() + .5f, pos.getY() + .9f, pos.getZ() + .5f, velocityX, velocityY, velocityZ);
 	}
 
 	public enum WaterEffectType {
 		DROPLET,
-		RIPPLE,
-		WATERFALL_CLOUD
+		RIPPLE
 	}
 }

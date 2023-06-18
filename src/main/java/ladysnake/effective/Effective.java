@@ -66,11 +66,9 @@ public class Effective implements ClientModInitializer {
 	public static SplashParticleType SPLASH;
 	public static DefaultParticleType DROPLET;
 	public static DefaultParticleType RIPPLE;
-	public static DefaultParticleType WATERFALL_CLOUD;
 	public static SplashParticleType GLOW_SPLASH;
 	public static DefaultParticleType GLOW_DROPLET;
 	public static DefaultParticleType GLOW_RIPPLE;
-	public static DefaultParticleType GLOW_WATERFALL_CLOUD;
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
 	public static FireflyParticleType FIREFLY;
 	public static DefaultParticleType CHORUS_PETAL;
@@ -83,6 +81,7 @@ public class Effective implements ClientModInitializer {
 	public static FlameParticleType FLAME = new FlameParticleType();
 	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
 	public static BubbleParticleType BUBBLE = new BubbleParticleType();
+	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -123,16 +122,12 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(DROPLET, DropletParticle.DefaultFactory::new);
 		RIPPLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(RIPPLE, RippleParticle.DefaultFactory::new);
-		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticle.DefaultFactory::new);
 		GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
 		GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
 		GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
-		GLOW_WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_waterfall_cloud"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(GLOW_WATERFALL_CLOUD, GlowWaterfallCloudParticle.DefaultFactory::new);
 		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "allay_twinkle"), new AllayTwinkleParticleType());
 		ParticleFactoryRegistry.getInstance().register(ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
 		FIREFLY = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "firefly"), new FireflyParticleType(true));
@@ -155,6 +150,8 @@ public class Effective implements ClientModInitializer {
 		DRAGON_BREATH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "dragon_breath"), DRAGON_BREATH);
 		ParticleFactoryRegistry.getInstance().register(BUBBLE, BubbleParticleType.Factory::new);
 		BUBBLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
+		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticleType.Factory::new);
+		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
@@ -238,7 +235,6 @@ public class Effective implements ClientModInitializer {
 
 					player.setPitch(player.getPitch(tickDelta) + rotationStep.x);
 					player.setYaw(player.getYaw(tickDelta) + rotationStep.y);
-
 				}
 
 				RenderedHypnotizingEntities.GLOWSQUIDS.clear();
