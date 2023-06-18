@@ -60,16 +60,25 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
 		}
 
-		Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
-		Vec3f.rotate(quaternion2);
+		Vec3f vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		vec3f.rotate(quaternion2);
 		Vec3f[] vector3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
-		for (int k = 0; k < 4; ++k) {
-			Vec3f Vec3f2 = vector3fs[k];
-			Vec3f2.rotate(quaternion2);
-			Vec3f2.scale(j);
-			Vec3f2.add(f, g, h);
+		if (isInAir) {
+			for (int k = 0; k < 4; ++k) {
+				Vec3f Vec3f2 = vector3fs[k];
+				Vec3f2.rotate(quaternion2);
+				Vec3f2.scale(j);
+				Vec3f2.add(f, g, h);
+			}
+		} else {
+			for (int k = 0; k < 4; ++k) {
+				Vec3f Vec3f2 = vector3fs[k];
+				Vec3f2.rotate(new Quaternion(90f, 0f, this.angle, true));
+				Vec3f2.scale(j);
+				Vec3f2.add(f, g + this.groundOffset, h);
+			}
 		}
 
 		float minU = this.getMinU();
@@ -106,9 +115,6 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		this.colorGreen /= 1.002;
 
 		if (this.age >= this.maxAge) {
-//            this.colorRed *= 0.9;
-//            this.colorGreen *= 0.8;
-
 			this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
 
 			if (this.colorAlpha <= 0f) {

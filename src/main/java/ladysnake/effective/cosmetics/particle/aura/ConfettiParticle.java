@@ -74,7 +74,7 @@ public class ConfettiParticle extends SpriteBillboardParticle {
 
 			for (int k = 0; k < 4; ++k) {
 				Vec3f Vec3f2 = Vec3fs[k];
-				Vec3f2.rotate(new Quaternion(rotationX, rotationY, rotationZ, 0));
+				Vec3f2.rotate(new Quaternion(rotationX, rotationY, rotationZ, true));
 				Vec3f2.scale(j);
 				Vec3f2.add(f, g, h);
 			}
@@ -84,7 +84,7 @@ public class ConfettiParticle extends SpriteBillboardParticle {
 
 			for (int k = 0; k < 4; ++k) {
 				Vec3f Vec3f2 = Vec3fs[k];
-				Vec3f2.rotate(new Quaternion(rotationX, rotationY, rotationZ, 0));
+				Vec3f2.rotate(new Quaternion(rotationX, rotationY, rotationZ, true));
 				Vec3f2.scale(j);
 				Vec3f2.add(f, g + this.groundOffset, h);
 			}

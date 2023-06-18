@@ -19,7 +19,6 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
 		this.setSprite(spriteProvider.getSprite(0, 1));
 		provider = spriteProvider;
 		this.maxAge = 100;
-		this.angle = RANDOM.nextFloat() * 180f;
 
 		this.scale = 0f;
 		this.collidesWithWorld = true;
@@ -37,7 +36,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
 
 		for (int k = 0; k < 4; ++k) {
 			Vec3f Vec3f2 = Vec3fs[k];
-			Vec3f2.rotate(new Quaternion(0f, angle, 0f, 0));
+			Vec3f2.rotate(new Quaternion(0f, -camera.getYaw(), 0f, true));
 			Vec3f2.scale(j);
 			Vec3f2.add(f, g, h);
 		}
