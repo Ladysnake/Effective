@@ -1,7 +1,7 @@
 package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import ladysnake.effective.particle.types.FireflyParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -104,7 +104,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		this.prevPosZ = this.z;
 
 		// fade and die on daytime or if old enough unless fireflies can spawn any time of day
-		if ((!world.getDimension().hasFixedTime() && !Cosmetics.isNightTime(world)) || this.age++ >= this.maxAge) {
+		if ((!world.getDimension().hasFixedTime() && !EffectiveCosmetics.isNightTime(world)) || this.age++ >= this.maxAge) {
 			nextAlphaGoal = 0;
 			if (this.colorAlpha <= 0.01f) {
 				this.markDead();

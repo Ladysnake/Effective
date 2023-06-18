@@ -1,6 +1,6 @@
 package ladysnake.effective.cosmetics.data;
 
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import ladysnake.effective.cosmetics.render.entity.model.hat.OverheadModel;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
@@ -13,7 +13,7 @@ public class OverheadData {
 
 	public OverheadData(Function<EntityRendererFactory.Context, OverheadModel> model, String textureName) {
 		this.model = model;
-		this.texture = new Identifier(Cosmetics.MODID, "textures/entity/" + textureName + ".png");
+		this.texture = new Identifier(EffectiveCosmetics.MODID, "textures/entity/" + textureName + ".png");
 	}
 
 	public OverheadModel createModel(EntityRendererFactory.Context ctx) {

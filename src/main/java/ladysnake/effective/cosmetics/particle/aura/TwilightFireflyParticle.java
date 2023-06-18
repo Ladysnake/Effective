@@ -1,7 +1,7 @@
 package ladysnake.effective.cosmetics.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import ladysnake.effective.particle.FireflyParticle;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.Particle;
@@ -28,11 +28,11 @@ public class TwilightFireflyParticle extends FireflyParticle {
 		this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
 		this.maxHeight = 2;
 
-		Optional.ofNullable(owner).map(Cosmetics::getCosmeticData).ifPresentOrElse(
+		Optional.ofNullable(owner).map(EffectiveCosmetics::getCosmeticData).ifPresentOrElse(
 			data -> {
-				this.colorRed = data.getColorRed() / 255f;
-				this.colorGreen = data.getColorGreen() / 255f;
-				this.colorBlue = data.getColorBlue() / 255f;
+				this.colorRed = data.getColor1Red() / 255f;
+				this.colorGreen = data.getColor1Green() / 255f;
+				this.colorBlue = data.getColor1Blue() / 255f;
 				this.nextAlphaGoal = 1f;
 			},
 			this::markDead

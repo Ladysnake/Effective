@@ -1,6 +1,8 @@
 package ladysnake.effective.cosmetics.particle.pet;
 
-import ladysnake.effective.cosmetics.particle.WillOWispParticle;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
+import ladysnake.effective.cosmetics.data.PlayerCosmeticData;
+import ladysnake.effective.particle.WillOWispParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
@@ -11,11 +13,17 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class PlayerWispParticle extends WillOWispParticle {
 	protected PlayerEntity owner;
 
 	protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
 		super(world, x, y, z, texture, red, green, blue, redEvolution, greenEvolution, blueEvolution);
+
+		this.prevPosX = this.x;
+		this.prevPosY = this.y;
+		this.prevPosZ = this.z;
 
 		this.maxAge = 35;
 		this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(1D), this.x, this.y, this.z);
@@ -24,9 +32,17 @@ public class PlayerWispParticle extends WillOWispParticle {
 			this.markDead();
 		}
 
-		this.colorRed = red;
-		this.colorGreen = green;
-		this.colorBlue = blue;
+		if (owner != null && owner.getUuid() != null && EffectiveCosmetics.getCosmeticData(owner) != null) {
+			PlayerCosmeticData data = Objects.requireNonNull(EffectiveCosmetics.getCosmeticData(owner));
+			this.colorRed = data.getColor1Red() / 255f;
+			this.colorGreen = data.getColor1Green() / 255f;
+			this.colorBlue = data.getColor1Blue() / 255f;
+			this.gotoRed = data.getColor2Red() / 255f;
+			this.gotoGreen = data.getColor2Green() / 255f;
+			this.gotoBlue = data.getColor2Blue() / 255f;
+		} else {
+			this.markDead();
+		}
 		this.colorAlpha = 0;
 	}
 

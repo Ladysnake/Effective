@@ -3,27 +3,39 @@ package ladysnake.effective.cosmetics.data;
 import com.google.gson.JsonElement;
 
 public class PlayerCosmeticData {
-	private final int red;
-	private final int green;
-	private final int blue;
+	private final int red1;
+	private final int green1;
+	private final int blue1;
+	private final int red2;
+	private final int green2;
+	private final int blue2;
 	private String aura;
 	private String overhead;
 	private String pet;
 
-	public PlayerCosmeticData(JsonElement aura, JsonElement color, JsonElement overhead, JsonElement pet) {
+	public PlayerCosmeticData(JsonElement aura, JsonElement color1, JsonElement color2, JsonElement overhead, JsonElement pet) {
 		if (aura.isJsonNull()) {
 			this.aura = null;
 		} else {
 			this.aura = aura.getAsString();
 		}
-		if (color.isJsonNull()) {
-			this.red = 0;
-			this.green = 0;
-			this.blue = 0;
+		if (color1.isJsonNull()) {
+			this.red1 = 0;
+			this.green1 = 0;
+			this.blue1 = 0;
 		} else {
-			this.red = Integer.valueOf(color.getAsString().substring(1, 3), 16);
-			this.green = Integer.valueOf(color.getAsString().substring(3, 5), 16);
-			this.blue = Integer.valueOf(color.getAsString().substring(5), 16);
+			this.red1 = Integer.valueOf(color1.getAsString().substring(1, 3), 16);
+			this.green1 = Integer.valueOf(color1.getAsString().substring(3, 5), 16);
+			this.blue1 = Integer.valueOf(color1.getAsString().substring(5), 16);
+		}
+		if (color2.isJsonNull()) {
+			this.red2 = 0;
+			this.green2 = 0;
+			this.blue2 = 0;
+		} else {
+			this.red2 = Integer.valueOf(color2.getAsString().substring(1, 3), 16);
+			this.green2 = Integer.valueOf(color2.getAsString().substring(3, 5), 16);
+			this.blue2 = Integer.valueOf(color2.getAsString().substring(5), 16);
 		}
 		if (overhead.isJsonNull()) {
 			this.overhead = null;
@@ -41,17 +53,30 @@ public class PlayerCosmeticData {
 		return aura;
 	}
 
-	public int getColorRed() {
-		return red;
+	public int getColor1Red() {
+		return red1;
 	}
 
-	public int getColorBlue() {
-		return blue;
+	public int getColor1Green() {
+		return green1;
 	}
 
-	public int getColorGreen() {
-		return green;
+	public int getColor1Blue() {
+		return blue1;
 	}
+
+	public int getColor2Red() {
+		return red2;
+	}
+
+	public int getColor2Green() {
+		return green2;
+	}
+
+	public int getColor2Blue() {
+		return blue2;
+	}
+
 
 	public String getOverhead() {
 		return overhead;

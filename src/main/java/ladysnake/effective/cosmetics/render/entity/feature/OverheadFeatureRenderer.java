@@ -1,7 +1,7 @@
 package ladysnake.effective.cosmetics.render.entity.feature;
 
 import ladysnake.effective.EffectiveConfig;
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import ladysnake.effective.cosmetics.data.PlayerCosmeticData;
 import ladysnake.effective.cosmetics.render.GlowyRenderLayer;
 import ladysnake.effective.cosmetics.render.entity.model.hat.OverheadModel;
@@ -23,13 +23,13 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 
 	public OverheadFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext, EntityRendererFactory.Context loader) {
 		super(featureRendererContext);
-		this.models = Cosmetics.OVERHEADS_DATA.entrySet().stream()
+		this.models = EffectiveCosmetics.OVERHEADS_DATA.entrySet().stream()
 			.collect(Collectors.toMap(Map.Entry::getKey, data -> new ResolvedOverheadData(data.getValue().getTexture(), data.getValue().createModel(loader))));
 	}
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-		PlayerCosmeticData cosmeticData = Cosmetics.getCosmeticData(entity);
+		PlayerCosmeticData cosmeticData = EffectiveCosmetics.getCosmeticData(entity);
 		if (EffectiveConfig.shouldDisplayCosmetics() && cosmeticData != null && !entity.isInvisible()) {
 			String playerOverhead = cosmeticData.getOverhead();
 			if (playerOverhead != null) {

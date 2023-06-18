@@ -1,6 +1,6 @@
 package ladysnake.effective.cosmetics.particle.aura;
 
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import ladysnake.effective.cosmetics.data.PlayerCosmeticData;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -18,11 +18,11 @@ public class PrismaticConfettiParticle extends ConfettiParticle {
 
 		PlayerEntity owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
 
-		if (owner != null && owner.getUuid() != null && Cosmetics.getCosmeticData(owner) != null) {
-			PlayerCosmeticData data = Objects.requireNonNull(Cosmetics.getCosmeticData(owner));
-			this.colorRed = data.getColorRed() / 255f;
-			this.colorGreen = data.getColorGreen() / 255f;
-			this.colorBlue = data.getColorBlue() / 255f;
+		if (owner != null && owner.getUuid() != null && EffectiveCosmetics.getCosmeticData(owner) != null) {
+			PlayerCosmeticData data = Objects.requireNonNull(EffectiveCosmetics.getCosmeticData(owner));
+			this.colorRed = data.getColor1Red() / 255f;
+			this.colorGreen = data.getColor1Green() / 255f;
+			this.colorBlue = data.getColor1Blue() / 255f;
 		} else {
 			this.markDead();
 		}

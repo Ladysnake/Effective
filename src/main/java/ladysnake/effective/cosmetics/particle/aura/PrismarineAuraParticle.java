@@ -1,6 +1,5 @@
 package ladysnake.effective.cosmetics.particle.aura;
 
-import ladysnake.effective.cosmetics.particle.PrismarineCrystalParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;

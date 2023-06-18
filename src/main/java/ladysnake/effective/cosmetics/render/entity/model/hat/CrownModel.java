@@ -1,7 +1,7 @@
 package ladysnake.effective.cosmetics.render.entity.model.hat;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
@@ -9,7 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class CrownModel extends OverheadModel {
-	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Cosmetics.MODID, "crown"), "main");
+	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(EffectiveCosmetics.MODID, "crown"), "main");
 
 	public CrownModel(EntityRendererFactory.Context ctx) {
 		super(ctx, MODEL_LAYER);

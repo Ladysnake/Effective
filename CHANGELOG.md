@@ -11,23 +11,25 @@
   - Added Eyes in the Dark (on Halloween)
   - Added and completely overhauled Will o' Wisps
   - Added Illuminations cosmetics (though they may get removed or reworked in the future)
-- TODO: Overhaul cascades
-- TODO: Lava bubbles?
-- TODO: Shooting stars?
-- TODO: Ore shining / twinkling?
-- TODO: Vex trails?
-- TODO: Campfire embers?
-- TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
-- TODO: Readd and overhaul glowworms
-
+    - Reworked the Will o' Wisp pet cosmetic to allow players to choose two custom colors to personalize their Will o' Wisp
+    - As a result, Golden Will and Founding Skull cosmetics were removed as they can be replicated with custom colors
 - Improved fireball visuals
 - Improved dragon fireball and dragon breath visuals
 - Added sculk dust particles
 - Added spectral arrows trails and made them emissive
 - Added air bubbles coming out of chests when opened underwater
+
+- TODO: Overhaul cascades
+- TODO: Lava bubbles?
+- TODO: Shooting stars?
+- TODO: Ore shining / twinkling?
+- TODO: Campfire embers?
+- TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
+- TODO: Readd and overhaul glowworms
+
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
-- Added a new secret config option :)
+- Added a new secret config option for a new secret effect :)
 
 ## Effective 1.6 - 1.19.2
 - Added a screen shake effect for:

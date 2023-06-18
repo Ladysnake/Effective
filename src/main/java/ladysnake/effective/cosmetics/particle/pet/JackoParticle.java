@@ -1,7 +1,7 @@
 package ladysnake.effective.cosmetics.particle.pet;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
@@ -74,7 +74,7 @@ public class JackoParticle extends PetParticle {
 
 		if (owner != null) {
 			// if night or dark enough
-			if (Cosmetics.isNightTime(world) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
+			if (EffectiveCosmetics.isNightTime(world) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
 				glow = 1;
 			} else {
 				glow = 0;

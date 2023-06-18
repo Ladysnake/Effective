@@ -1,9 +1,10 @@
-package ladysnake.effective.cosmetics.particle;
+package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import ladysnake.effective.Effective;
+import ladysnake.effective.cosmetics.particle.pet.PlayerWispParticle;
 import ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -34,9 +35,9 @@ import java.util.List;
 
 public class WillOWispParticle extends Particle {
 	public final Identifier texture;
-	protected final float gotoRed;
-	protected final float gotoGreen;
-	protected final float gotoBlue;
+	protected float gotoRed;
+	protected float gotoGreen;
+	protected float gotoBlue;
 	final Model model;
 	final RenderLayer layer;
 	public float yaw;
@@ -85,7 +86,7 @@ public class WillOWispParticle extends Particle {
 			for (int i = 0; i < 2; i++) {
 				ParticleBuilders.create(Effective.WISP)
 					.setSpin((float) (this.world.random.nextGaussian() / 5f))
-					.setScale(0.25f, 0f)
+					.setScale(0.25f , 0f)
 					.setScaleEasing(Easing.CIRC_OUT)
 					.setAlpha(1f)
 					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
@@ -98,8 +99,8 @@ public class WillOWispParticle extends Particle {
 
 			ParticleBuilders.create(Effective.WISP)
 				.setSpin((float) (this.world.random.nextGaussian() / 5f))
-				.setScale(0.15f)
-				.setAlpha(1f, 0f)
+				.setScale(0.15f )
+				.setAlpha(0.2f, 0f)
 				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
 				.setMotion(0, 0.1f, 0)
 				.enableNoClip()

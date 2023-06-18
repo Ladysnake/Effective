@@ -1,4 +1,4 @@
-package ladysnake.effective.cosmetics.particle;
+package ladysnake.effective.cosmetics.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.particle.*;

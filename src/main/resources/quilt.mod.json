@@ -23,7 +23,7 @@
 		"entrypoints": {
 			"client_init": [
 				"ladysnake.effective.Effective",
-				"ladysnake.effective.cosmetics.Cosmetics"
+				"ladysnake.effective.cosmetics.EffectiveCosmetics"
 			]
 		},
 		"depends": [

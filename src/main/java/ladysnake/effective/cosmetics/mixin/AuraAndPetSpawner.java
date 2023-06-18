@@ -1,7 +1,7 @@
 package ladysnake.effective.cosmetics.mixin;
 
 import ladysnake.effective.EffectiveConfig;
-import ladysnake.effective.cosmetics.Cosmetics;
+import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import ladysnake.effective.cosmetics.data.AuraData;
 import ladysnake.effective.cosmetics.data.PlayerCosmeticData;
 import net.minecraft.client.MinecraftClient;
@@ -23,19 +23,19 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 
 	@Inject(method = "tick", at = @At("RETURN"))
 	public void tick(CallbackInfo callbackInfo) {
-		PlayerCosmeticData cosmeticData = Cosmetics.getCosmeticData((PlayerEntity) (Object) this);
+		PlayerCosmeticData cosmeticData = EffectiveCosmetics.getCosmeticData((PlayerEntity) (Object) this);
 
 		// if player has cosmetics
 		if (cosmeticData != null) {
 			// player aura
 			String playerAura = cosmeticData.getAura();
-			if (EffectiveConfig.shouldDisplayCosmetics() && playerAura != null && Cosmetics.AURAS_DATA.containsKey(playerAura)) {
+			if (EffectiveConfig.shouldDisplayCosmetics() && playerAura != null && EffectiveCosmetics.AURAS_DATA.containsKey(playerAura)) {
 				// do not render in first person or if the player is invisible
 				// noinspection ConstantConditions
 				if (((EffectiveConfig.cosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
-					if (Cosmetics.AURAS_DATA.containsKey(playerAura)) {
-						AuraData aura = Cosmetics.AURAS_DATA.get(playerAura);
-						if (Cosmetics.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
+					if (EffectiveCosmetics.AURAS_DATA.containsKey(playerAura)) {
+						AuraData aura = EffectiveCosmetics.AURAS_DATA.get(playerAura);
+						if (EffectiveCosmetics.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
 							world.addParticle(aura.particle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
 						}
 					}
@@ -44,12 +44,12 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 
 			// player pet
 			String playerPet = cosmeticData.getPet();
-			if (EffectiveConfig.shouldDisplayCosmetics() && playerPet != null && Cosmetics.PETS_DATA.containsKey(playerPet)) {
+			if (EffectiveConfig.shouldDisplayCosmetics() && playerPet != null && EffectiveCosmetics.PETS_DATA.containsKey(playerPet)) {
 				// do not render in first person or if the player is invisible
 				//noinspection ConstantConditions
 				if (((EffectiveConfig.cosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
-					if (Cosmetics.PETS_DATA.containsKey(playerPet)) {
-						DefaultParticleType overhead = Cosmetics.PETS_DATA.get(playerPet);
+					if (EffectiveCosmetics.PETS_DATA.containsKey(playerPet)) {
+						DefaultParticleType overhead = EffectiveCosmetics.PETS_DATA.get(playerPet);
 						if (this.age % 20 == 0) {
 							world.addParticle(overhead, this.getX() + Math.cos(this.bodyYaw / 50) * 0.5, this.getY() + this.getHeight() + 0.5f + Math.sin(this.age / 12f) / 12f, this.getZ() - Math.cos(this.bodyYaw / 50) * 0.5, 0, 0, 0);
 						}
