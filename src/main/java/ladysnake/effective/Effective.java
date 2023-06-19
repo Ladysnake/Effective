@@ -171,7 +171,7 @@ public class Effective implements ClientModInitializer {
 
 		// hypnotizing glow squids
 		ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
-			if (EffectiveConfig.glowsquidHypnotize && (!RenderedHypnotizingEntities.GLOWSQUIDS.isEmpty() || RenderedHypnotizingEntities.lockedIntensityTimer > 0 || RenderedHypnotizingEntities.lookIntensity > 0)) {
+			if (EffectiveConfig.shouldGlowSquidsHypnotize() && (!RenderedHypnotizingEntities.GLOWSQUIDS.isEmpty() || RenderedHypnotizingEntities.lockedIntensityTimer > 0 || RenderedHypnotizingEntities.lookIntensity > 0)) {
 				double bestLookIntensity = 0;
 				GlowSquidEntity bestSquid = null;
 
@@ -215,7 +215,7 @@ public class Effective implements ClientModInitializer {
 				}
 
 				// look at squid
-				if (EffectiveConfig.glowsquidHypnotizeAttractCursor && bestSquid != null && !MinecraftClient.getInstance().isPaused()) {
+				if (EffectiveConfig.glowSquidHypnotize == EffectiveConfig.GlowSquidHypnoOptions.ATTRACT && bestSquid != null && !MinecraftClient.getInstance().isPaused()) {
 					ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
 					Vec3d target = bestSquid.getPos();

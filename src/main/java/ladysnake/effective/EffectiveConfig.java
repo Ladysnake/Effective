@@ -3,11 +3,17 @@ package ladysnake.effective;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 public class EffectiveConfig extends MidnightConfig {
+	@Comment(centered = true)
+	public static Comment waterEffects;
+
 	@Entry
 	public static boolean splashes = true;
 
 	@Entry(min = 0f, max = 1.0f, isSlider = true)
 	public static float splashRimAlpha = 0.7f;
+
+	@Entry(min = 0, max = 200, isSlider = true)
+	public static int flowingWaterSplashingDensity = 50;
 
 	@Entry
 	public static boolean cascades = true;
@@ -30,9 +36,6 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(min = 0, max = 100, isSlider = true)
 	public static int lapisBlockUpdateParticleChance = 10;
 
-	@Entry(min = 0, max = 200, isSlider = true)
-	public static int flowingWaterSplashingDensity = 50;
-
 	@Entry(min = 0, max = 10, isSlider = true)
 	public static int rainRippleDensity = 1;
 
@@ -40,16 +43,25 @@ public class EffectiveConfig extends MidnightConfig {
 	public static boolean glowingPlankton = true;
 
 	@Entry
-	public static boolean glowsquidHypnotize = true;
+	public static boolean underwaterOpenChestBubbles = true;
 
 	@Entry
-	public static boolean glowsquidHypnotizeAttractCursor = true;
+	public static ChestsOpenOptions underwaterChestsOpenRandomly = ChestsOpenOptions.ON_SOUL_SAND;
+
+	@Comment(centered = true)
+	public static Comment entityEffects;
+
+	@Entry
+	public static GlowSquidHypnoOptions glowSquidHypnotize = GlowSquidHypnoOptions.ATTRACT;
 
 	@Entry
 	public static boolean allayTrails = true;
 
 	@Entry
 	public static boolean goldenAllays = true;
+
+	@Comment(centered = true)
+	public static Comment screenShakeEffects;
 
 	@Entry
 	public static boolean wardenScreenShake = true;
@@ -63,6 +75,10 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean dragonScreenShake = true;
 
+
+	@Comment(centered = true)
+	public static Comment illuminatedEffects;
+
 	@Entry(min = 0, max = 100, isSlider = true)
 	public static float fireflyDensity = 1;
 
@@ -75,47 +91,54 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static EyesInTheDarkOptions eyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
 
+	@Comment(centered = true)
+	public static Comment improvedEffects;
+
 	@Entry
 	public static boolean improvedFireballs = true;
 
 	@Entry
 	public static boolean improvedDragonFireballsAndBreath = true;
 
-	@Entry(min = 0, max = 100, isSlider = true)
-	public static float sculkParticleDensity = 100;
-
 	@Entry
 	public static boolean improvedSpectralArrows = true;
 
 	@Entry
-	public static boolean underwaterOpenChestBubbles = true;
-
-	@Entry
-	public static ChestsOpenOptions underwaterChestsOpenRandomly = ChestsOpenOptions.ON_SOUL_SAND;
-
-	@Entry
 	public static boolean improvedGlowsquidParticles = true;
 
+	@Comment(centered = true)
+	public static Comment miscellaneous;
+
+	@Entry(min = 0, max = 100, isSlider = true)
+	public static float sculkParticleDensity = 100;
+
 	@Entry
-	public static CosmeticsOptions cosmetics = CosmeticsOptions.TRUE;
+	public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
 
 	@Entry
 	public static boolean feedbacking = false;
 
-	public static boolean shouldDisplayCosmetics() {
-		return cosmetics == CosmeticsOptions.TRUE || cosmetics == CosmeticsOptions.FIRST_PERSON;
+	public enum ChestsOpenOptions {
+		ON_SOUL_SAND, RANDOMLY, NEVER
+	}
+
+	public static boolean shouldGlowSquidsHypnotize() {
+		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;
+	}
+
+	public enum GlowSquidHypnoOptions {
+		ATTRACT, VISUAL, NEVER
 	}
 
 	public enum EyesInTheDarkOptions {
 		HALLOWEEN, ALWAYS, NEVER
 	}
 
-	public enum ChestsOpenOptions {
-		ON_SOUL_SAND, RANDOMLY, NEVER
+	public static boolean shouldDisplayCosmetics() {
+		return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 
 	public enum CosmeticsOptions {
-		FALSE, TRUE, FIRST_PERSON
+		ENABLE, FIRST_PERSON, DISABLE
 	}
-
 }

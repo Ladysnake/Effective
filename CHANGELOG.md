@@ -25,8 +25,8 @@
   - Waterfall cloud density as well as mist density can be customized in the configuration options
 - Improved Glow Squid particles
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
-- Merged both configuration options of Glow Squid hypnotizing into one
 - Added sliders in the Mod Menu config for all numerical configuration options
+- Merged both configuration options of Glow Squid hypnotizing into one
 - Added a new secret config option for a new secret effect :)
 
 ## Effective 1.6 - 1.19.2
