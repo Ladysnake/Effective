@@ -82,6 +82,7 @@ public class Effective implements ClientModInitializer {
 	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
 	public static BubbleParticleType BUBBLE = new BubbleParticleType();
 	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
+	public static LodestoneParticleType MIST = new LodestoneParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -152,6 +153,8 @@ public class Effective implements ClientModInitializer {
 		BUBBLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
 		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticleType.Factory::new);
 		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
+		ParticleFactoryRegistry.getInstance().register(MIST, LodestoneParticleType.Factory::new);
+		MIST = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "mist"), MIST);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);

@@ -12,6 +12,9 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean cascades = true;
 
+	@Entry
+	public static boolean cascadeMist = true;
+
 	@Entry(min = 0, max = 500, isSlider = true)
 	public static int cascadeSoundsVolumeMultiplier = 100;
 
