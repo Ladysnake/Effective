@@ -2,7 +2,7 @@
 
 ## Effective 2.0 - 1.19.2
 - Rewrote the mod from scratch
-- Merged Illuminations into Effective. Here's a list of all the Illuminations features that made it in:
+- Merged some Illuminations features into Effective. Here's a list of all the Illuminations features that made it in:
   - Added Fireflies // TODO: overhaul, trail?
   - Added and improved Chorus Petals:
       - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
@@ -27,6 +27,7 @@
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Merged both configuration options of Glow Squid hypnotizing into one
+- Removed splash rim alpha and allay trail twinkle density configuration options
 - Added a new secret config option for a new secret effect :)
 
 ## Effective 1.6 - 1.19.2

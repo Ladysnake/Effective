@@ -25,7 +25,7 @@ public class GlowsquidParticleEffectSwapper extends SquidEntity {
 
 	@WrapOperation(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"))
 	private void effective$swapGlowsquidParticles(World world, ParticleEffect particleEffect, double x, double y, double z, double velX, double velY, double velZ, Operation<Void> voidOperation) {
-		if (EffectiveConfig.improvedGlowsquidParticles) {
+		if (EffectiveConfig.improvedGlowSquidParticles) {
 			if (random.nextInt(5) == 0) {
 				float spreadDivider = 1.2f;
 				ParticleBuilders.create(Effective.ALLAY_TWINKLE)

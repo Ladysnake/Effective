@@ -86,12 +86,12 @@ public class WillOWispParticle extends Particle {
 			for (int i = 0; i < 2; i++) {
 				ParticleBuilders.create(Effective.WISP)
 					.setSpin((float) (this.world.random.nextGaussian() / 5f))
-					.setScale(0.25f , 0f)
+					.setScale(this instanceof PlayerWispParticle ? 0.16f : 0.25f, 0f)
 					.setScaleEasing(Easing.CIRC_OUT)
 					.setAlpha(1f)
 					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
 					.setColorEasing(Easing.CIRC_OUT)
-					.setMotion(0, 0.1f, 0)
+					.setMotion(0, 0.066f, 0)
 					.enableNoClip()
 					.setLifetime(40)
 					.spawn(this.world, x + random.nextGaussian() / 20f, y + random.nextGaussian() / 20f, z + random.nextGaussian() / 20f);
@@ -99,10 +99,10 @@ public class WillOWispParticle extends Particle {
 
 			ParticleBuilders.create(Effective.WISP)
 				.setSpin((float) (this.world.random.nextGaussian() / 5f))
-				.setScale(0.15f )
+				.setScale(this instanceof PlayerWispParticle ? 0.10f : 0.15f)
 				.setAlpha(0.2f, 0f)
 				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
-				.setMotion(0, 0.1f, 0)
+				.setMotion(0, 0.066f, 0)
 				.enableNoClip()
 				.setLifetime(3)
 				.spawn(this.world, x, y, z);

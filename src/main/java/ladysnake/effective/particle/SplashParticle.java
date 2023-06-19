@@ -115,8 +115,8 @@ public class SplashParticle extends Particle {
 		this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
 
 		VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
-		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
-		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, EffectiveConfig.splashRimAlpha);
+		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
 
 		immediate.draw();
 	}

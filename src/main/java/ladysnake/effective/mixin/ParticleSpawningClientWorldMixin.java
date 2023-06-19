@@ -44,7 +44,7 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 		// FIREFLIES
 		FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome);
 		if (SpawnSettings.FIREFLIES.containsKey(biome)) {
-			if (random.nextFloat() * 100 <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity) {
+			if (random.nextFloat() * 10f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity) {
 				FireflyParticleInitialData data = new FireflyParticleInitialData(fireflySpawnSetting.color());
 				this.addParticle(Effective.FIREFLY.setData(data), pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 			}
@@ -52,7 +52,7 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 
 		// WILL O' WISP
 		if (biome.isRegistryKey(BiomeKeys.SOUL_SAND_VALLEY)) {
-			if (random.nextFloat() * 100 <= 0.01f * EffectiveConfig.willOWispDensity) {
+			if (random.nextFloat() * 100f <= 0.01f * EffectiveConfig.willOWispDensity) {
 				if (this.getBlockState(pos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
 					this.addParticle(Effective.WILL_O_WISP, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 				}

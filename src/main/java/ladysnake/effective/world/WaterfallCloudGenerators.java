@@ -155,9 +155,10 @@ public class WaterfallCloudGenerators {
 				ParticleBuilders.create(Effective.MIST)
 					.setSpin((world.random.nextFloat() - world.random.nextFloat()) / 20f)
 					.setScale(10f + world.random.nextFloat() * 5f)
-					.setAlpha(0f, 0.2f, 0f)
+					.setAlpha(0f, 0.1f, 0f)
 					.setAlphaEasing(Easing.SINE_OUT)
 					.setLifetime(500)
+					.enableNoClip()
 					.overrideRenderType(ParticleTextureSheets.TRANSPARENT)
 					.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
 					.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);

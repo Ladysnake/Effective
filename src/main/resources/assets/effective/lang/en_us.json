@@ -52,10 +52,10 @@
   "effective.midnightconfig.improvedGlowSquidParticles": "Improved Glow Squid Particles",
 
   "effective.midnightconfig.miscellaneous": "Miscellaneous",
-
+  "effective.midnightconfig.sculkDustDensity": "Sculk Dust Density",
   "effective.midnightconfig.cosmetics": "Enable Cosmetics",
   "effective.midnightconfig.enum.CosmeticsOptions.ENABLE": "Yes",
-  "effective.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "Yes and in First Person)",
+  "effective.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "Yes and in First Person",
   "effective.midnightconfig.enum.CosmeticsOptions.DISABLE": "No",
   "effective.midnightconfig.feedbacking": "Feedbacking"
 }

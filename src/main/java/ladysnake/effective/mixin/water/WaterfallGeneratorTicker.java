@@ -25,10 +25,10 @@ public class WaterfallGeneratorTicker {
 	@Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
 	protected void effective$forceParticles(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
 		if (neighborState.getBlock() == Blocks.LAPIS_BLOCK && state.getBlock() == Blocks.WATER) {
-			long chance = EffectiveConfig.lapisBlockUpdateParticleChance;
-			if (chance > 0) {
+			float chance = EffectiveConfig.lapisBlockUpdateParticleChance;
+			if (chance > 0f) {
 				gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> {
-					if (world.getRandom().nextInt(100) < chance) {
+					if (world.getRandom().nextFloat() * 10f < chance) {
 						WaterfallCloudGenerators.scheduleParticleTick(new Waterfall(waterPos, state.getFluidState().getHeight()), 1);
 					}
 				});

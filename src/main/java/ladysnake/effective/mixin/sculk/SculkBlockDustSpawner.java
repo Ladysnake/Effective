@@ -24,7 +24,7 @@ import java.awt.*;
 public class SculkBlockDustSpawner {
 	@Inject(method = "randomDisplayTick", at = @At("HEAD"))
 	protected void effective$spawnSculkParticles(BlockState state, World world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-		if (random.nextFloat() <= (EffectiveConfig.sculkParticleDensity / 100f) && state.getBlock() == Blocks.SCULK && (world.getBlockState(pos.offset(Direction.UP, 1)).isOf(Blocks.SCULK_VEIN) || world.getBlockState(pos.offset(Direction.UP, 1)).isAir())) {
+		if (random.nextFloat() <= (EffectiveConfig.sculkDustDensity / 100f) && state.getBlock() == Blocks.SCULK && (world.getBlockState(pos.offset(Direction.UP, 1)).isOf(Blocks.SCULK_VEIN) || world.getBlockState(pos.offset(Direction.UP, 1)).isAir())) {
 			boolean bright = random.nextInt(50) == 0;
 			Color color = bright ? new Color(0x29DFEB) : new Color(0x0D1217);
 			ParticleBuilders.create(Effective.PIXEL)

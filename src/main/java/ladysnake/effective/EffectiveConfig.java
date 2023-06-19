@@ -9,10 +9,7 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean splashes = true;
 
-	@Entry(min = 0f, max = 1.0f, isSlider = true)
-	public static float splashRimAlpha = 0.7f;
-
-	@Entry(min = 0, max = 200, isSlider = true)
+	@Entry(min = 0, max = 100, isSlider = true)
 	public static int flowingWaterSplashingDensity = 50;
 
 	@Entry
@@ -33,8 +30,8 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 
-	@Entry(min = 0, max = 100, isSlider = true)
-	public static int lapisBlockUpdateParticleChance = 10;
+	@Entry(min = 0, max = 10, isSlider = true)
+	public static float lapisBlockUpdateParticleChance = 1;
 
 	@Entry(min = 0, max = 10, isSlider = true)
 	public static int rainRippleDensity = 1;
@@ -79,13 +76,13 @@ public class EffectiveConfig extends MidnightConfig {
 	@Comment(centered = true)
 	public static Comment illuminatedEffects;
 
-	@Entry(min = 0, max = 100, isSlider = true)
+	@Entry(min = 0, max = 10, isSlider = true)
 	public static float fireflyDensity = 1;
 
-	@Entry(min = 0, max = 100, isSlider = true)
+	@Entry(min = 0, max = 10, isSlider = true)
 	public static float chorusPetalDensity = 1;
 
-	@Entry(min = 0, max = 100, isSlider = true)
+	@Entry(min = 0, max = 10, isSlider = true)
 	public static float willOWispDensity = 1;
 
 	@Entry
@@ -104,13 +101,13 @@ public class EffectiveConfig extends MidnightConfig {
 	public static boolean improvedSpectralArrows = true;
 
 	@Entry
-	public static boolean improvedGlowsquidParticles = true;
+	public static boolean improvedGlowSquidParticles = true;
 
 	@Comment(centered = true)
 	public static Comment miscellaneous;
 
 	@Entry(min = 0, max = 100, isSlider = true)
-	public static float sculkParticleDensity = 100;
+	public static float sculkDustDensity = 100;
 
 	@Entry
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
