@@ -1,6 +1,5 @@
 package ladysnake.effective.world;
 
-import com.sammy.lodestone.setup.LodestoneParticles;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
@@ -30,17 +29,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WaterfallCloudGenerators {
-	public static final List<BlockPos> generators = new ArrayList<>();
-	public static final Object2IntMap<BlockPos> particlesToSpawn = new Object2IntOpenHashMap<>();
+	public static final List<Waterfall> generators = new ArrayList<>();
+	public static final Object2IntMap<Waterfall> particlesToSpawn = new Object2IntOpenHashMap<>();
 	private static World lastWorld = null;
 
 	public static void addGenerator(FluidState state, BlockPos pos) {
 		if (pos == null || !EffectiveConfig.cascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
 			return;
 		}
-		if (shouldCauseWaterfall(MinecraftClient.getInstance().world, pos, state)) {
+		float waterfallHeight = getWaterfallHeight(MinecraftClient.getInstance().world, pos, state);
+		if (waterfallHeight > 0) {
 			synchronized (generators) {
-				generators.add(new BlockPos(pos));
+				generators.removeIf(waterfall -> waterfall.blockPos().equals(pos));
+				generators.add(new Waterfall(pos, waterfallHeight));
 			}
 		}
 	}
@@ -61,44 +62,44 @@ public class WaterfallCloudGenerators {
 			if (world.getTime() % 3 != 0) {
 				return;
 			}
-			generators.forEach(blockPos -> {
-				if (blockPos == null) {
+			generators.forEach(waterfall -> {
+				if (waterfall == null) {
 					return;
 				}
-				scheduleParticleTick(blockPos, 6);
-				float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(blockPos));
+				scheduleParticleTick(waterfall, 6);
+				float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(waterfall.blockPos()));
 				if (distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
 					return;
 				}
 				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
-					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, blockPos, EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
+					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});
-			generators.removeIf(blockPos -> blockPos == null || !shouldCauseWaterfall(world, blockPos, world.getFluidState(blockPos)));
+			generators.removeIf(waterfall -> waterfall == null || getWaterfallHeight(world, waterfall.blockPos(), world.getFluidState(waterfall.blockPos())) <= 0);
 		}
 	}
 
 	private static void tickParticles(World world) {
-		for (BlockPos pos : particlesToSpawn.keySet()) {
-			if (pos != null) {
-				particlesToSpawn.computeInt(pos, (blockPos, integer) -> integer - 1);
-				addWaterfallCloud(world, pos);
+		for (Waterfall waterfall : particlesToSpawn.keySet()) {
+			if (waterfall != null) {
+				particlesToSpawn.computeInt(waterfall, (blockPos, integer) -> integer - 1);
+				addWaterfallCloud(world, waterfall);
 			}
 		}
 		particlesToSpawn.values().removeIf(integer -> integer < 0);
 	}
 
-	private static boolean shouldCauseWaterfall(BlockView world, BlockPos pos, FluidState fluidState) {
+	private static float getWaterfallHeight(BlockView world, BlockPos pos, FluidState fluidState) {
 		if (!EffectiveConfig.cascades || fluidState.getFluid() != Fluids.FLOWING_WATER || world == null) {
-			return false;
+			return 0f;
 		}
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (Math.sqrt(pos.getSquaredDistance(client.player.getBlockPos())) > client.options.getViewDistance().get() * 32) {
-			return false;
+			return 0f;
 		}
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		if (world.getFluidState(mutable.set(pos, Direction.DOWN)).getFluid() != Fluids.WATER) {
-			return false;
+			return 0f;
 		}
 		boolean foundAir = false;
 		for (int x = -1; x <= 1; x++) {
@@ -113,52 +114,61 @@ public class WaterfallCloudGenerators {
 			}
 		}
 		if (!foundAir) {
-			return false;
+			return 0f;
 		}
-		return Arrays.stream(Direction.values()).anyMatch(
+		if (Arrays.stream(Direction.values()).anyMatch(
 			direction ->
 				direction.getAxis() != Direction.Axis.Y &&
 					world.getFluidState(mutable.set(pos.getX() + direction.getOffsetX(), pos.getY() - 1, pos.getZ() + direction.getOffsetZ())).getFluid() == Fluids.WATER
-		);
+		)) {
+			return fluidState.getHeight();
+		}
+		return 0f;
 	}
 
-	public static void addWaterfallCloud(World world, BlockPos pos) {
-		for (int i = 0; i < 5; i++) {
-			if (pos != null) {
+	public static void addWaterfallCloud(World world, Waterfall waterfall) {
+		boolean isGlowingWater = EffectiveUtils.isGlowingWater(world, waterfall.blockPos());
+		Color glowingWaterColor = EffectiveUtils.getGlowingWaterColor(world, waterfall.blockPos());
+		Color white = new Color(0xFFFFFF);
+		BlockPos blockPos = waterfall.blockPos();
+
+		for (int i = 0; i < EffectiveConfig.cascadeCloudDensity; i++) {
+			if (waterfall != null) {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
 				double offsetZ = world.getRandom().nextGaussian() / 5f;
 
 				ParticleBuilders.create(Effective.WATERFALL_CLOUD)
-					.setScale(0.1f + world.random.nextFloat() * .9f)
-					.setColor(EffectiveUtils.isGlowingWater(world, pos) ? EffectiveUtils.getGlowingWaterColor(world, pos) : new Color(0xFFFFFF), EffectiveUtils.isGlowingWater(world, pos) ? EffectiveUtils.getGlowingWaterColor(world, pos) : new Color(0xFFFFFF))
+					.setScale((1f + world.random.nextFloat()) * waterfall.height())
+					.setColor(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white)
 					.setLifetime(10)
-					.overrideRenderType(EffectiveUtils.isGlowingWater(world, pos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
-					.setMotion(world.getRandom().nextFloat() / 10f * Math.signum(offsetX), world.getRandom().nextFloat() / 10f, world.getRandom().nextFloat() / 10f * Math.signum(offsetZ))
-					.spawn(world, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ);
+					.overrideRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
+					.setMotion((world.getRandom().nextFloat() * waterfall.height()) / 4f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.height()) / 4f, (world.getRandom().nextFloat() * waterfall.height()) / 4f * Math.signum(offsetZ))
+					.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 			}
 		}
 
-		if (world.random.nextInt(5) == 0) {
-			double offsetX = world.getRandom().nextGaussian() / 5f;
-			double offsetZ = world.getRandom().nextGaussian() / 5f;
+		if (waterfall.height() == 0.8888889f) {
+			if ((world.random.nextFloat() * 100f) <= EffectiveConfig.cascadeMistDensity) {
+				double offsetX = world.getRandom().nextGaussian() / 5f;
+				double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-			ParticleBuilders.create(LodestoneParticles.SMOKE_PARTICLE)
-				.setSpin((world.random.nextFloat() - world.random.nextFloat()) / 20f)
-				.setScale(1f + world.random.nextFloat() * 5f)
-				.setAlpha(0f, 0.05f, 0f)
-				.setAlphaEasing(Easing.SINE_OUT)
-				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
-				.enableNoClip()
-				.setLifetime(500)
-				.overrideRenderType(ParticleTextureSheets.TRANSPARENT)
-				.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
-				.spawn(world, pos.getX() + .5 + offsetX, pos.getY() + world.getRandom().nextFloat(), pos.getZ() + .5 + offsetZ);
+				ParticleBuilders.create(Effective.MIST)
+					.setSpin((world.random.nextFloat() - world.random.nextFloat()) / 20f)
+					.setScale(10f + world.random.nextFloat() * 5f)
+					.setAlpha(0f, 0.2f, 0f)
+					.setAlphaEasing(Easing.SINE_OUT)
+					.setLifetime(500)
+					.overrideRenderType(ParticleTextureSheets.TRANSPARENT)
+					.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
+					.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
+			}
 		}
+
 	}
 
-	public static void scheduleParticleTick(BlockPos pos, int ticks) {
-		if (pos != null) {
-			particlesToSpawn.put(pos, ticks);
+	public static void scheduleParticleTick(Waterfall waterfall, int ticks) {
+		if (waterfall.blockPos() != null) {
+			particlesToSpawn.put(waterfall, ticks);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.world.Waterfall;
 import ladysnake.effective.world.WaterfallCloudGenerators;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -28,7 +29,7 @@ public class WaterfallGeneratorTicker {
 			if (chance > 0) {
 				gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> {
 					if (world.getRandom().nextInt(100) < chance) {
-						WaterfallCloudGenerators.scheduleParticleTick(waterPos, 1);
+						WaterfallCloudGenerators.scheduleParticleTick(new Waterfall(waterPos, state.getFluidState().getHeight()), 1);
 					}
 				});
 			}

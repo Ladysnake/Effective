@@ -12,8 +12,11 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean cascades = true;
 
-	@Entry
-	public static boolean cascadeMist = true;
+	@Entry(min = 0, max = 5, isSlider = true)
+	public static float cascadeCloudDensity = 1;
+
+	@Entry(min = 0, max = 5, isSlider = true)
+	public static float cascadeMistDensity = 1;
 
 	@Entry(min = 0, max = 500, isSlider = true)
 	public static int cascadeSoundsVolumeMultiplier = 100;
@@ -97,7 +100,7 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean feedbacking = false;
 
-    public static boolean shouldDisplayCosmetics() {
+	public static boolean shouldDisplayCosmetics() {
 		return cosmetics == CosmeticsOptions.TRUE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 

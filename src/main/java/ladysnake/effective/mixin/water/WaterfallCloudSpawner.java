@@ -1,6 +1,7 @@
 package ladysnake.effective.mixin.water;
 
 import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.world.Waterfall;
 import ladysnake.effective.world.WaterfallCloudGenerators;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.FluidState;
@@ -21,7 +22,7 @@ public abstract class WaterfallCloudSpawner {
 	@Inject(method = "setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;II)Z", at = @At("RETURN"))
 	private void effective$flowingWaterCascade(BlockPos pos, BlockState state, int flags, int maxUpdateDepth, CallbackInfoReturnable<Boolean> cir) {
 		if (cir.getReturnValueZ() && EffectiveConfig.shouldFlowingWaterSpawnParticlesOnFirstTick && getFluidState(pos).getFluid() == Fluids.FLOWING_WATER) {
-			WaterfallCloudGenerators.addWaterfallCloud(World.class.cast(this), pos);
+			WaterfallCloudGenerators.addWaterfallCloud(World.class.cast(this), new Waterfall(pos, getFluidState(pos).getHeight()));
 		}
 	}
 }
