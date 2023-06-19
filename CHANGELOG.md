@@ -23,16 +23,9 @@
   - Waterfall cloud size, cascade sound pitch, volume and distance are now dependent on the strength of the flowing water
   - Waterfalls with the strongest current (flowing directly from above) now generate a mist effect
   - Waterfall cloud density as well as mist density can be customized in the configuration options
-
-
-- TODO: Lava bubbles?
-- TODO: Shooting stars?
-- TODO: Ore shining / twinkling?
-- TODO: Campfire embers?
-- TODO: Sleeping foxes ZZZZZZZZZZZZZZZZZZs
-- TODO: Readd and overhaul glowworms
-
+- Improved Glow Squid particles
 - Added configuration options to control whether the effect is enabled and / or its density for all new effects
+- Merged both configuration options of Glow Squid hypnotizing into one
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Added a new secret config option for a new secret effect :)
 

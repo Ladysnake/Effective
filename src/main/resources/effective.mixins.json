@@ -15,6 +15,7 @@
     "fireballs.FireballVisualFireDisabler",
     "fireballs.LandingFlamingRendererSwapper",
     "fireballs.SittingFlamingRendererSwapper",
+    "glowsquids.GlowsquidParticleEffectSwapper",
     "sculk.SculkBlockDustSpawner",
     "spectral_arrows.SpectralArrowPositionTrackerAndParticleRemover"
   ],

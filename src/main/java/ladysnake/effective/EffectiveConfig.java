@@ -93,6 +93,8 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static ChestsOpenOptions underwaterChestsOpenRandomly = ChestsOpenOptions.ON_SOUL_SAND;
 
+	@Entry
+	public static boolean improvedGlowsquidParticles = true;
 
 	@Entry
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.TRUE;

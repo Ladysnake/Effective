@@ -89,7 +89,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 				ParticleBuilders.create(Effective.ALLAY_TWINKLE)
 					.setColor(new Color(data.color), new Color(data.color))
 					.setAlpha(0.9f)
-					.setScale(0.06f)
+					.setScale(0.12f)
 					.setLifetime(15)
 					.setMotion(0, 0.05f, 0)
 					.spawn(allayEntity.world, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);

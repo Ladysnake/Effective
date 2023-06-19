@@ -12,13 +12,11 @@ public class AllayTwinkleParticle extends FrameSetParticle {
 		super(world, data, spriteSet, x, y, z, xd, yd, zd);
 		addFrames(0, 5);
 		setMaxAge(frameSet.size() * 3);
-		this.scale = 0.12f;
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-		this.scale = 0.12f;
 		if (age < frameSet.size() * 3) {
 			setSprite(frameSet.get(MathHelper.floor(age / 3f)));
 		}
