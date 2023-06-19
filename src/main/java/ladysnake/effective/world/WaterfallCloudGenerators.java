@@ -72,7 +72,7 @@ public class WaterfallCloudGenerators {
 					return;
 				}
 				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
-					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
+					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, (1.2f + world.random.nextFloat() / 10f) + (1-waterfall.height()), waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks * waterfall.height()), (int) (distance / 2));
 				}
 			});
 			generators.removeIf(waterfall -> waterfall == null || getWaterfallHeight(world, waterfall.blockPos(), world.getFluidState(waterfall.blockPos())) <= 0);
