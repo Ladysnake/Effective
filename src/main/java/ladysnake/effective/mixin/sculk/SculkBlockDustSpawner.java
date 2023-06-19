@@ -35,7 +35,7 @@ public class SculkBlockDustSpawner {
 				.enableNoClip()
 				.setLifetime(100 + random.nextInt(50))
 				.setMotion(0f, 0.01f + random.nextFloat() * .01f, 0f)
-				.overrideRenderType(bright ? ParticleTextureSheets.ADDITIVE : ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
+				.overrideRenderType(bright ? ParticleTextureSheets.ADDITIVE : ParticleTextureSheets.TRANSPARENT)
 				.spawn(world, pos.getX() + .5f + random.nextGaussian() / 3f, pos.getY() + 0.975f, pos.getZ() + .5f + random.nextGaussian() / 3f);
 		}
 	}
