@@ -35,8 +35,8 @@ public class UnderwaterChestRandomOpener {
 					CHESTS_TIMERS.put(pos, CHESTS_TIMERS.get(pos) - 1);
 				} else {
 					world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.AMBIENT, 0.1f, 1.0f, false);
-					blockEntity.lidAnimator.setOpen(false);
-					CHESTS_TIMERS.remove(pos);
+//					blockEntity.lidAnimator.setOpen(false);
+//					CHESTS_TIMERS.remove(pos);
 				}
 			}
 
@@ -57,8 +57,8 @@ public class UnderwaterChestRandomOpener {
 		} else {
 			// remove chests if config option not enabled
 			if (CHESTS_TIMERS.containsKey(pos)) {
-				blockEntity.lidAnimator.setOpen(false);
-				CHESTS_TIMERS.remove(pos);
+//				blockEntity.lidAnimator.setOpen(false);
+//				CHESTS_TIMERS.remove(pos);
 			}
 		}
 	}
