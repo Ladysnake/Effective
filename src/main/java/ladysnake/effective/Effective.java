@@ -1,10 +1,14 @@
 package ladysnake.effective;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
 import com.sammy.lodestone.setup.LodestoneScreenParticles;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
 import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
 import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
+import ladysnake.effective.mixin.ParticleManagerAccessor;
 import ladysnake.effective.particle.WillOWispParticle;
 import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
@@ -25,9 +29,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundEvent;
@@ -82,7 +90,7 @@ public class Effective implements ClientModInitializer {
 	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
 	public static BubbleParticleType BUBBLE = new BubbleParticleType();
 	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
-	public static LodestoneParticleType MIST = new LodestoneParticleType();
+	public static MistParticleType MIST = new MistParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -153,7 +161,7 @@ public class Effective implements ClientModInitializer {
 		BUBBLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
 		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticleType.Factory::new);
 		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
-		ParticleFactoryRegistry.getInstance().register(MIST, LodestoneParticleType.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(MIST, MistParticleType.Factory::new);
 		MIST = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "mist"), MIST);
 
 		// sound events

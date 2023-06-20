@@ -3,6 +3,7 @@ package ladysnake.effective.particle.types;
 import com.mojang.serialization.Codec;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import ladysnake.effective.particle.BubbleParticle;
+import ladysnake.effective.particle.MistParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
@@ -32,7 +33,7 @@ public class MistParticleType extends ParticleType<WorldParticleEffect> {
 	public record Factory(SpriteProvider sprite) implements ParticleFactory<WorldParticleEffect> {
 		@Override
 		public Particle createParticle(WorldParticleEffect data, ClientWorld world, double x, double y, double z, double mx, double my, double mz) {
-			return new BubbleParticle(world, data, (FabricSpriteProviderImpl) sprite, x, y, z, mx, my, mz);
+			return new MistParticle(world, data, (FabricSpriteProviderImpl) sprite, x, y, z, mx, my, mz);
 		}
 	}
 }

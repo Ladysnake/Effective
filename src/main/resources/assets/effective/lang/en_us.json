@@ -15,7 +15,7 @@
   "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should Flowing Water Spawn Particles on First Tick",
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis Lazuli block update particle chance",
   "effective.midnightconfig.rainRippleDensity": "Rain Ripples Density",
-  "effective.midnightconfig.glowingPlankton": "Glowing Plankton (in Warm / Lukewarm Oceans at Night)",
+  "effective.midnightconfig.glowingPlankton": "Glowing Plankton (in Warm Oceans at Night)",
   "effective.midnightconfig.underwaterOpenChestBubbles": "Open Chests Underwater Emit Bubbles",
   "effective.midnightconfig.underwaterChestsOpenRandomly": "Underwater Chests Open Randomly",
   "effective.midnightconfig.enum.ChestsOpenOptions.ON_SOUL_SAND": "On Soul Sand",
