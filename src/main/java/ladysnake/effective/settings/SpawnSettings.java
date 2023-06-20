@@ -3,7 +3,6 @@ package ladysnake.effective.settings;
 import com.google.common.collect.ImmutableMap;
 import ladysnake.effective.cosmetics.data.AuraSettings;
 import ladysnake.effective.settings.data.FireflySpawnSetting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;

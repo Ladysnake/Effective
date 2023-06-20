@@ -5,7 +5,6 @@ import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
 import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
 import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
-import ladysnake.effective.cosmetics.particle.type.LegacyFireflyParticleType;
 import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
 import ladysnake.effective.particle.types.*;

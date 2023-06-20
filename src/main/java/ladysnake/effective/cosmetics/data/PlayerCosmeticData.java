@@ -9,9 +9,9 @@ public class PlayerCosmeticData {
 	private final int red2;
 	private final int green2;
 	private final int blue2;
-	private String aura;
-	private String overhead;
-	private String pet;
+	private final String aura;
+	private final String overhead;
+	private final String pet;
 
 	public PlayerCosmeticData(JsonElement aura, JsonElement color1, JsonElement color2, JsonElement overhead, JsonElement pet) {
 		if (aura.isJsonNull()) {

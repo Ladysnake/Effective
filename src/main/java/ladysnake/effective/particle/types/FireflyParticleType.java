@@ -2,7 +2,6 @@ package ladysnake.effective.particle.types;
 
 import com.mojang.serialization.Codec;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
-import ladysnake.effective.cosmetics.particle.LegacyFireflyParticle;
 import ladysnake.effective.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

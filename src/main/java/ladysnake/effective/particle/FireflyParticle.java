@@ -1,14 +1,13 @@
 package ladysnake.effective.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import ladysnake.effective.cosmetics.EffectiveCosmetics;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
@@ -16,15 +15,6 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends GenericParticle {
-	public FireflyParticle(ClientWorld world, WorldParticleEffect data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
-		super(world, data, spriteSet, x, y, z, xd, yd, zd);
-
-		this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
-		this.maxHeight = 4;
-		this.colorAlpha = 0f;
-		this.collidesWithWorld = false;
-	}
-
 	protected static final float BLINK_STEP = 0.05f;
 	protected float nextAlphaGoal = 0f;
 	protected double xTarget;
@@ -33,6 +23,14 @@ public class FireflyParticle extends GenericParticle {
 	protected int targetChangeCooldown = 0;
 	protected int maxHeight;
 	private BlockPos lightTarget;
+	public FireflyParticle(ClientWorld world, WorldParticleEffect data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
+		super(world, data, spriteSet, x, y, z, xd, yd, zd);
+
+		this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
+		this.maxHeight = 4;
+		this.colorAlpha = 0f;
+		this.collidesWithWorld = false;
+	}
 
 	public static boolean canFlyThroughBlock(World world, BlockPos blockPos, BlockState blockState) {
 		return !blockState.shouldSuffocate(world, blockPos) && blockState.getFluidState().isEmpty();
