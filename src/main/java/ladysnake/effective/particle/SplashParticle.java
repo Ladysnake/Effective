@@ -97,13 +97,12 @@ public class SplashParticle extends Particle {
 		modelBottomMatrix.translate(0, 0.001, 0);
 
 		// splash bottom matrices
-		float splashRimScaleOffset = 0.0001f;
 		MatrixStack modelRimMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, -heightMultiplier * multiplier.getY() - splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
-		modelRimMatrix.translate(0, -1.001, 0);
+		modelRimMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelRimMatrix.translate(0, -1, 0);
 		MatrixStack modelRimBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimBottomMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, heightMultiplier * multiplier.getY() + splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
-		modelRimBottomMatrix.translate(0, 0.002, 0);
+		modelRimBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelRimBottomMatrix.translate(0, 0.001, 0);
 
 		int light = this.getBrightness(tickDelta);
 
