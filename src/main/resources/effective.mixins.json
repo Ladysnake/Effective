@@ -8,6 +8,7 @@
     "chest_bubbles.JustSoICanSeeTheBubblesWithoutTheUI",
     "chest_bubbles.UnderwaterChestRandomOpener",
     "chest_bubbles.UnderwaterEnderChestRandomOpener",
+    "chest_bubbles.UnderwaterOpenEnderChestBubbleSpawner",
     "feedbacking.FeedbackingParryFireballEffect",
     "feedbacking.ScreenParticleParryRenderEnforcer",
     "fireballs.DragonBreathRendererSwapper",

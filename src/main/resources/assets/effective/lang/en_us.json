@@ -1,5 +1,6 @@
 {
   "effective.subtitles.ambience.waterfall": "Water falls",
+  "effective.subtitles.entity.parry": "I'm not gonna sugarcoat it",
   "effective.midnightconfig.title": "Effective Config",
   "effective.midnightconfig.waterEffects": "Water Effects",
   "effective.midnightconfig.splashes": "Enable Splashes",
@@ -50,5 +51,5 @@
   "effective.midnightconfig.enum.CosmeticsOptions.ENABLE": "Yes",
   "effective.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "Yes and in First Person",
   "effective.midnightconfig.enum.CosmeticsOptions.DISABLE": "No",
-  "effective.midnightconfig.feedbacking": "Feedbacking"
+  "effective.midnightconfig.ultrakill": "ULTRAKILL"
 }

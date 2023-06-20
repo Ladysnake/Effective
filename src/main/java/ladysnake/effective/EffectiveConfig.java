@@ -113,7 +113,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
 
 	@Entry
-	public static boolean feedbacking = false;
+	public static boolean ultrakill = false;
 
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;

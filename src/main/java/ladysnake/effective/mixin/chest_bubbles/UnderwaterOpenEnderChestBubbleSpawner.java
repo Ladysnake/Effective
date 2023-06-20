@@ -6,6 +6,7 @@ import ladysnake.effective.EffectiveConfig;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.EnderChestBlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.particle.ParticleTextureSheet;
@@ -20,12 +21,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.awt.*;
 
-@Mixin(ChestBlockEntity.class)
-public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnimationProgress> {
+@Mixin(EnderChestBlockEntity.class)
+public class UnderwaterOpenEnderChestBubbleSpawner<T extends BlockEntity & ChestAnimationProgress> {
 	public boolean justClosed = false;
 
 	@Inject(method = "clientTick", at = @At("TAIL"))
-	private static void clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
+	private static void clientTick(World world, BlockPos pos, BlockState state, EnderChestBlockEntity blockEntity, CallbackInfo ci) {
 		boolean bl = world != null;
 
 		if (EffectiveConfig.underwaterOpenChestBubbles && bl && world.random.nextInt(2) == 0) {
