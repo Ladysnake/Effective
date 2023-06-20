@@ -4,6 +4,7 @@ import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.particle.FireflyParticle;
 import ladysnake.effective.settings.SpawnSettings;
 import ladysnake.effective.settings.data.FireflySpawnSetting;
 import net.minecraft.client.render.WorldRenderer;
@@ -53,15 +54,14 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 		// FIREFLIES
 		if (EffectiveConfig.fireflyDensity > 0) {
 			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
-			if (fireflySpawnSetting != null && this.getBlockState(pos).shouldSuffocate(this, blockPos)) {
+			if (fireflySpawnSetting != null && FireflyParticle.canFlyThroughBlock(this, pos, this.getBlockState(pos))) {
 				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity) {
 					ParticleBuilders.create(Effective.FIREFLY)
 						.setColor(fireflySpawnSetting.color(), fireflySpawnSetting.color())
 						.setScale(0.05f + random.nextFloat() * 0.10f)
 						.setLifetime(ThreadLocalRandom.current().nextInt(40, 120))
 						.overrideRenderType(ParticleTextureSheets.ADDITIVE)
-						.enableNoClip()
-						.spawn(this, blockPos.getX() + random.nextFloat(), blockPos.getY() + random.nextFloat(), blockPos.getZ() + random.nextFloat());
+						.spawn(this, pos.getX() + random.nextFloat(), pos.getY() + random.nextFloat(), pos.getZ() + random.nextFloat());
 				}
 			}
 		}

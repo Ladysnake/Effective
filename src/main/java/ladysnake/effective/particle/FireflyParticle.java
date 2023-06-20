@@ -35,7 +35,7 @@ public class FireflyParticle extends GenericParticle {
 	private BlockPos lightTarget;
 
 	public static boolean canFlyThroughBlock(World world, BlockPos blockPos, BlockState blockState) {
-		return !blockState.shouldSuffocate(world, blockPos);
+		return !blockState.shouldSuffocate(world, blockPos) && blockState.getFluidState().isEmpty();
 	}
 
 	public void tick() {
