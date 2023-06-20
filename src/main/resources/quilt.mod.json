@@ -6,7 +6,7 @@
 		"version": "${version}",
 		"metadata": {
 			"name": "Effective",
-			"description": "A client-side mod adding ambient and environmental interaction effects to enhance immersion.",
+			"description": "Client-side mod designed to improve Minecraft's ambience through particles, visual effects and sounds",
 			"contributors": {
 				"doctor4t": "Owner",
 				"Pyrofab": "Contributor",
