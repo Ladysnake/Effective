@@ -12,7 +12,7 @@ public class PrismarineAuraParticle extends PrismarineCrystalParticle {
 	public PrismarineAuraParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
-		this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
+		this.setPos(this.x + TwilightLegacyFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightLegacyFireflyParticle.getWanderingDistance(this.random));
 
 		this.maxAge = ThreadLocalRandom.current().nextInt(100, 400);
 	}

@@ -1,15 +1,11 @@
 package ladysnake.effective;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tessellator;
 import com.sammy.lodestone.setup.LodestoneScreenParticles;
 import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
 import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
 import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
-import ladysnake.effective.mixin.ParticleManagerAccessor;
-import ladysnake.effective.particle.WillOWispParticle;
+import ladysnake.effective.cosmetics.particle.type.LegacyFireflyParticleType;
 import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
 import ladysnake.effective.particle.types.*;
@@ -29,13 +25,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundEvent;
@@ -78,7 +70,6 @@ public class Effective implements ClientModInitializer {
 	public static DefaultParticleType GLOW_DROPLET;
 	public static DefaultParticleType GLOW_RIPPLE;
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
-	public static FireflyParticleType FIREFLY;
 	public static DefaultParticleType CHORUS_PETAL;
 	public static DefaultParticleType EYES;
 	public static DefaultParticleType WILL_O_WISP;
@@ -91,6 +82,7 @@ public class Effective implements ClientModInitializer {
 	public static BubbleParticleType BUBBLE = new BubbleParticleType();
 	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
 	public static MistParticleType MIST = new MistParticleType();
+	public static FireflyParticleType FIREFLY = new FireflyParticleType();
 
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
@@ -139,8 +131,6 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
 		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "allay_twinkle"), new AllayTwinkleParticleType());
 		ParticleFactoryRegistry.getInstance().register(ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
-		FIREFLY = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "firefly"), new FireflyParticleType(true));
-		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticle.DefaultFactory::new);
 		CHORUS_PETAL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
 		EYES = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
@@ -163,6 +153,8 @@ public class Effective implements ClientModInitializer {
 		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
 		ParticleFactoryRegistry.getInstance().register(MIST, MistParticleType.Factory::new);
 		MIST = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "mist"), MIST);
+		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticleType.Factory::new);
+		FIREFLY = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "firefly"), FIREFLY);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);

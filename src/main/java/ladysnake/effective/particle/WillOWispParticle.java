@@ -35,9 +35,6 @@ import java.util.List;
 
 public class WillOWispParticle extends Particle {
 	public final Identifier texture;
-	protected float gotoRed;
-	protected float gotoGreen;
-	protected float gotoBlue;
 	final Model model;
 	final RenderLayer layer;
 	public float yaw;
@@ -45,6 +42,9 @@ public class WillOWispParticle extends Particle {
 	public float prevYaw;
 	public float prevPitch;
 	public float speedModifier;
+	protected float gotoRed;
+	protected float gotoGreen;
+	protected float gotoBlue;
 	protected double xTarget;
 	protected double yTarget;
 	protected double zTarget;

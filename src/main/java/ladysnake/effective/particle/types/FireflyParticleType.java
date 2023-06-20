@@ -1,21 +1,39 @@
 package ladysnake.effective.particle.types;
 
-import ladysnake.effective.particle.contracts.FireflyParticleInitialData;
+import com.mojang.serialization.Codec;
+import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import ladysnake.effective.cosmetics.particle.LegacyFireflyParticle;
+import ladysnake.effective.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleEffect;
+import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.particle.ParticleType;
 
 @Environment(EnvType.CLIENT)
-public class FireflyParticleType extends DefaultParticleType {
-	public FireflyParticleInitialData initialData;
+public class FireflyParticleType extends ParticleType<WorldParticleEffect> {
 
-	public FireflyParticleType(boolean alwaysShow) {
-		super(alwaysShow);
+	public FireflyParticleType() {
+		super(false, WorldParticleEffect.DESERIALIZER);
 	}
 
-	public ParticleEffect setData(FireflyParticleInitialData target) {
-		this.initialData = target;
-		return this;
+	@Override
+	public boolean shouldAlwaysSpawn() {
+		return true;
+	}
+
+	@Override
+	public Codec<WorldParticleEffect> getCodec() {
+		return WorldParticleEffect.codecFor(this);
+	}
+
+	public record Factory(SpriteProvider sprite) implements ParticleFactory<WorldParticleEffect> {
+		@Override
+		public Particle createParticle(WorldParticleEffect data, ClientWorld world, double x, double y, double z, double mx, double my, double mz) {
+			return new FireflyParticle(world, data, (FabricSpriteProviderImpl) sprite, x, y, z, mx, my, mz);
+		}
 	}
 }

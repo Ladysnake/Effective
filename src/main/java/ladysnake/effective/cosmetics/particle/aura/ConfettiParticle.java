@@ -50,7 +50,7 @@ public class ConfettiParticle extends SpriteBillboardParticle {
 
 		this.groundOffset = RANDOM.nextFloat() / 100f + 0.001f;
 
-		this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
+		this.setPos(this.x + TwilightLegacyFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightLegacyFireflyParticle.getWanderingDistance(this.random));
 	}
 
 	public ParticleTextureSheet getType() {

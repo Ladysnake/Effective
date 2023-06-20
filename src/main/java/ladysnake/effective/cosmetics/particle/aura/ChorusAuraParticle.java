@@ -17,7 +17,7 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
 		this.velocityX = random.nextGaussian() / 50;
 		this.velocityZ = random.nextGaussian() / 50;
 
-		this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
+		this.setPos(this.x + TwilightLegacyFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightLegacyFireflyParticle.getWanderingDistance(this.random));
 	}
 
 	public void tick() {

@@ -1,11 +1,7 @@
 package ladysnake.effective.cosmetics.particle.pet;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import ladysnake.effective.particle.FireflyParticle;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -18,14 +14,14 @@ import net.minecraft.util.math.Vec3f;
 
 import java.util.Random;
 
-public class PetParticle extends FireflyParticle {
+public class PetParticle extends SpriteBillboardParticle {
 	private static final Random RANDOM = new Random();
 	protected final PlayerEntity owner;
 	private final SpriteProvider spriteProvider;
 	protected float alpha = 0f;
 
 	public PetParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
-		super(world, x, y, z, spriteProvider);
+		super(world, x, y, z);
 		this.spriteProvider = spriteProvider;
 		this.setSpriteForAge(spriteProvider);
 

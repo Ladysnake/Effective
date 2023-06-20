@@ -115,12 +115,16 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry
 	public static boolean feedbacking = false;
 
-	public enum ChestsOpenOptions {
-		ON_SOUL_SAND, RANDOMLY, NEVER
-	}
-
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;
+	}
+
+	public static boolean shouldDisplayCosmetics() {
+		return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
+	}
+
+	public enum ChestsOpenOptions {
+		ON_SOUL_SAND, RANDOMLY, NEVER
 	}
 
 	public enum GlowSquidHypnoOptions {
@@ -129,10 +133,6 @@ public class EffectiveConfig extends MidnightConfig {
 
 	public enum EyesInTheDarkOptions {
 		HALLOWEEN, ALWAYS, NEVER
-	}
-
-	public static boolean shouldDisplayCosmetics() {
-		return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 
 	public enum CosmeticsOptions {

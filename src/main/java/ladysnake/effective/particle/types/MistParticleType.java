@@ -2,7 +2,6 @@ package ladysnake.effective.particle.types;
 
 import com.mojang.serialization.Codec;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
-import ladysnake.effective.particle.BubbleParticle;
 import ladysnake.effective.particle.MistParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,13 +15,13 @@ import net.minecraft.particle.ParticleType;
 @Environment(EnvType.CLIENT)
 public class MistParticleType extends ParticleType<WorldParticleEffect> {
 
+	public MistParticleType() {
+		super(false, WorldParticleEffect.DESERIALIZER);
+	}
+
 	@Override
 	public boolean shouldAlwaysSpawn() {
 		return true;
-	}
-
-	public MistParticleType() {
-		super(false, WorldParticleEffect.DESERIALIZER);
 	}
 
 	@Override

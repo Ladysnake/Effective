@@ -7,7 +7,6 @@ import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.entity.boss.dragon.phase.LandingPhase;
-import net.minecraft.entity.boss.dragon.phase.SittingFlamingPhase;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +28,7 @@ public class LandingFlamingRendererSwapper {
 				.setColorEasing(Easing.CIRC_OUT)
 				.enableNoClip()
 				.setLifetime(40)
-				.setMotion((float) velocityX, (float) velocityY+0.05f, (float) velocityZ)
+				.setMotion((float) velocityX, (float) velocityY + 0.05f, (float) velocityZ)
 				.spawn(world, x, y, z);
 		} else {
 			voidOperation.call(world, parameters, x, y, z, velocityX, velocityY, velocityZ);

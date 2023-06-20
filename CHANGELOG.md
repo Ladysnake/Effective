@@ -3,7 +3,10 @@
 ## Effective 2.0 - 1.19.2
 - Rewrote the mod from scratch
 - Merged some Illuminations features into Effective. Here's a list of all the Illuminations features that made it in:
-  - Added Fireflies // TODO: overhaul, trail?
+  - Added and improved Fireflies
+    - Fireflies now disappear faster and spawn more frequently, giving the effect a more consistent look
+    - Fixed fireflies not being attracted to light
+    - Fixed various bugs like fireflies stopping or teleporting
   - Added and improved Chorus Petals:
       - Chorus petals now stay around approximately 10x longer and fade into their blueish purple state more slowly
       - Chorus petals now lay flat when touching the ground or water
@@ -24,10 +27,9 @@
   - Waterfalls with the strongest current (flowing directly from above) now generate a mist effect
   - Waterfall cloud density as well as mist density can be customized in the configuration options
 - Improved Glow Squid particles
-- Added configuration options to control whether the effect is enabled and / or its density for all new effects
+- Rewrote the configuration from scratch and added options to control whether the effect is enabled and / or its density for all effects
 - Added sliders in the Mod Menu config for all numerical configuration options
 - Merged both configuration options of Glow Squid hypnotizing into one
-- Removed splash rim alpha and allay trail twinkle density configuration options
 - Added a new secret config option for a new secret effect :)
 
 ## Effective 1.6 - 1.19.2

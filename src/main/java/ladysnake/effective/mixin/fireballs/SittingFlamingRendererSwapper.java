@@ -28,7 +28,7 @@ public class SittingFlamingRendererSwapper {
 				.setColorEasing(Easing.CIRC_OUT)
 				.enableNoClip()
 				.setLifetime(40)
-				.setMotion((float) velocityX, (float) velocityY+0.05f, (float) velocityZ)
+				.setMotion((float) velocityX, (float) velocityY + 0.05f, (float) velocityZ)
 				.spawn(world, x, y, z);
 		} else {
 			voidOperation.call(world, parameters, x, y, z, velocityX, velocityY, velocityZ);

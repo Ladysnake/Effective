@@ -29,7 +29,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 		this.colorAlpha = 0;
 
 
-		this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 1.5, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
+		this.setPos(this.x + TwilightLegacyFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 1.5, this.z + TwilightLegacyFireflyParticle.getWanderingDistance(this.random));
 	}
 
 	public void tick() {

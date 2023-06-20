@@ -20,13 +20,12 @@ import static com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenP
 public abstract class ScreenParticleParryRenderEnforcer {
 	@Shadow
 	public static ArrayList<ScreenParticleHandler.StackTracker> RENDERED_STACKS;
+	@Shadow
+	public static boolean canSpawnParticles;
 
 	@Shadow
 	public static void renderParticles(ScreenParticle.RenderOrder... renderOrders) {
 	}
-
-	@Shadow
-	public static boolean canSpawnParticles;
 
 	@Inject(method = "renderParticles()V", at = @At("TAIL"))
 	private static void renderParticles(CallbackInfo ci) {

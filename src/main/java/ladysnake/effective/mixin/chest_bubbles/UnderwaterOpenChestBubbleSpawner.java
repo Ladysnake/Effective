@@ -85,7 +85,7 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 							spawnBubble(world, entity.getPos().getX() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, entity.getPos().getY() + .5f, entity.getPos().getZ() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, block == Blocks.ENDER_CHEST);
 						}
 						if (openFactor <= .6f) {
-							spawnClosingBubble(world, entity.getPos().getX() + .5f, entity.getPos().getY() + .5f, entity.getPos().getZ() + .5f, facing, false,block == Blocks.ENDER_CHEST);
+							spawnClosingBubble(world, entity.getPos().getX() + .5f, entity.getPos().getY() + .5f, entity.getPos().getZ() + .5f, facing, false, block == Blocks.ENDER_CHEST);
 						}
 					}
 				}

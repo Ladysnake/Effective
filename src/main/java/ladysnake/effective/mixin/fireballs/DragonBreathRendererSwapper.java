@@ -10,7 +10,6 @@ import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,7 +34,7 @@ public abstract class DragonBreathRendererSwapper extends Entity {
 				.setColorEasing(Easing.CIRC_OUT)
 				.enableNoClip()
 				.setLifetime(40)
-				.setMotion((float) velocityX, (float) velocityY+0.05f, (float) velocityZ)
+				.setMotion((float) velocityX, (float) velocityY + 0.05f, (float) velocityZ)
 				.spawn(world, x, y, z);
 		} else {
 			voidOperation.call(world, parameters, x, y, z, velocityX, velocityY, velocityZ);

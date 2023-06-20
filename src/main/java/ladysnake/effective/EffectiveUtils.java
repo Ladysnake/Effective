@@ -44,7 +44,7 @@ public class EffectiveUtils {
 	}
 
 	public static Color getGlowingWaterColor(World world, BlockPos pos) {
-		return new Color(Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f),Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f),1f);
+		return new Color(Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f), Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f), 1f);
 	}
 
 	// chooses between spawning a normal splash or glow splash depending on biome

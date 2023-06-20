@@ -2,7 +2,7 @@ package ladysnake.effective.cosmetics.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.cosmetics.EffectiveCosmetics;
-import ladysnake.effective.particle.FireflyParticle;
+import ladysnake.effective.cosmetics.particle.LegacyFireflyParticle;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -18,10 +18,10 @@ import net.minecraft.util.random.RandomGenerator;
 import java.util.Optional;
 import java.util.Random;
 
-public class TwilightFireflyParticle extends FireflyParticle {
+public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 	private final PlayerEntity owner;
 
-	public TwilightFireflyParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+	public TwilightLegacyFireflyParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
 		super(world, x, y, z, spriteProvider);
 
 		this.maxAge = 20;
@@ -38,7 +38,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
 			this::markDead
 		);
 
-		this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
+		this.setPos(this.x + TwilightLegacyFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightLegacyFireflyParticle.getWanderingDistance(this.random));
 	}
 
 	public static double getWanderingDistance(RandomGenerator random) {
@@ -181,7 +181,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
 		}
 
 		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new TwilightFireflyParticle(clientWorld, d, e, f, this.spriteProvider);
+			return new TwilightLegacyFireflyParticle(clientWorld, d, e, f, this.spriteProvider);
 		}
 	}
 

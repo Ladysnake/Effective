@@ -1,8 +1,6 @@
 {
   "effective.subtitles.ambience.waterfall": "Water falls",
-
   "effective.midnightconfig.title": "Effective Config",
-
   "effective.midnightconfig.waterEffects": "Water Effects",
   "effective.midnightconfig.splashes": "Enable Splashes",
   "effective.midnightconfig.splashRimAlpha": "Splash Rim Alpha",
@@ -21,7 +19,6 @@
   "effective.midnightconfig.enum.ChestsOpenOptions.ON_SOUL_SAND": "On Soul Sand",
   "effective.midnightconfig.enum.ChestsOpenOptions.RANDOMLY": "Randomly",
   "effective.midnightconfig.enum.ChestsOpenOptions.NEVER": "Never",
-
   "effective.midnightconfig.entityEffects": "Entity Effects",
   "effective.midnightconfig.glowSquidHypnotize": "Glow Squid Hypnotizing",
   "effective.midnightconfig.enum.GlowSquidHypnoOptions.ATTRACT": "Attract Cursor",
@@ -29,13 +26,11 @@
   "effective.midnightconfig.enum.GlowSquidHypnoOptions.NEVER": "Never",
   "effective.midnightconfig.allayTrails": "Enable Allay trails",
   "effective.midnightconfig.goldenAllays": "Enable Golden Allays",
-
   "effective.midnightconfig.screenShakeEffects": "Screen Shake Effects",
   "effective.midnightconfig.wardenScreenShake": "Warden Roars Cause Screen Shake",
   "effective.midnightconfig.sonicBoomScreenShake": "Warden Sonic Booms Cause Screen Shake",
   "effective.midnightconfig.ravagerScreenShake": "Ravager Roars Cause Screen Shake",
   "effective.midnightconfig.dragonScreenShake": "Ender Dragon Roars Cause Screen Shake",
-
   "effective.midnightconfig.illuminatedEffects": "Illuminated Effects",
   "effective.midnightconfig.fireflyDensity": "Firefly Spawn Density",
   "effective.midnightconfig.chorusPetalDensity": "Chorus Petal Spawn Density",
@@ -44,13 +39,11 @@
   "effective.midnightconfig.enum.EyesInTheDarkOptions.HALLOWEEN": "On Halloween",
   "effective.midnightconfig.enum.EyesInTheDarkOptions.ALWAYS": "Always",
   "effective.midnightconfig.enum.EyesInTheDarkOptions.DISABLED": "No",
-
   "effective.midnightconfig.improvedEffects": "Improved Effects",
   "effective.midnightconfig.improvedFireballs": "Improved Fireballs",
   "effective.midnightconfig.improvedDragonFireballsAndBreath": "Improved Dragon Fireballs and Breath",
   "effective.midnightconfig.improvedSpectralArrows": "Improved Spectral Arrows",
   "effective.midnightconfig.improvedGlowSquidParticles": "Improved Glow Squid Particles",
-
   "effective.midnightconfig.miscellaneous": "Miscellaneous",
   "effective.midnightconfig.sculkDustDensity": "Sculk Dust Density",
   "effective.midnightconfig.cosmetics": "Enable Cosmetics",

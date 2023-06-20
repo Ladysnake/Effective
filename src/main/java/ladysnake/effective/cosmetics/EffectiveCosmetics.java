@@ -132,10 +132,6 @@ public class EffectiveCosmetics implements ClientModInitializer {
 		// get illuminations player cosmetics
 		loadPlayerCosmetics();
 
-		// register resource packs
-		ResourceLoader.registerBuiltinResourcePack(new Identifier(EffectiveCosmetics.MODID, "lowerres"), mod, org.quiltmc.qsl.resource.loader.api.ResourcePackActivationType.NORMAL, Text.translatable(""));
-		ResourceLoader.registerBuiltinResourcePack(new Identifier(EffectiveCosmetics.MODID, "pixelaccurate"), mod, org.quiltmc.qsl.resource.loader.api.ResourcePackActivationType.NORMAL);
-
 		// register model layers
 		EntityModelLayerRegistry.registerModelLayer(CrownModel.MODEL_LAYER, CrownModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(HornsModel.MODEL_LAYER, HornsModel::getTexturedModelData);
@@ -149,7 +145,7 @@ public class EffectiveCosmetics implements ClientModInitializer {
 
 		// aura particles
 		TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "twilight_aura"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
+		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.TWILIGHT_AURA, TwilightLegacyFireflyParticle.DefaultFactory::new);
 		GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "ghostly_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.GHOSTLY_AURA, GhostlyAuraParticle.DefaultFactory::new);
 		CHORUS_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "chorus_aura"), FabricParticleTypes.simple(true));

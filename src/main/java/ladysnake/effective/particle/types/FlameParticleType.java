@@ -15,13 +15,13 @@ import net.minecraft.particle.ParticleType;
 @Environment(EnvType.CLIENT)
 public class FlameParticleType extends ParticleType<WorldParticleEffect> {
 
+	public FlameParticleType() {
+		super(false, WorldParticleEffect.DESERIALIZER);
+	}
+
 	@Override
 	public boolean shouldAlwaysSpawn() {
 		return true;
-	}
-
-	public FlameParticleType() {
-		super(false, WorldParticleEffect.DESERIALIZER);
 	}
 
 	@Override

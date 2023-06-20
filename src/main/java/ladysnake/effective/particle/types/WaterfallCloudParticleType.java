@@ -2,7 +2,6 @@ package ladysnake.effective.particle.types;
 
 import com.mojang.serialization.Codec;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
-import ladysnake.effective.particle.FlameParticle;
 import ladysnake.effective.particle.WaterfallCloudParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,13 +15,13 @@ import net.minecraft.particle.ParticleType;
 @Environment(EnvType.CLIENT)
 public class WaterfallCloudParticleType extends ParticleType<WorldParticleEffect> {
 
+	public WaterfallCloudParticleType() {
+		super(false, WorldParticleEffect.DESERIALIZER);
+	}
+
 	@Override
 	public boolean shouldAlwaysSpawn() {
 		return true;
-	}
-
-	public WaterfallCloudParticleType() {
-		super(false, WorldParticleEffect.DESERIALIZER);
 	}
 
 	@Override

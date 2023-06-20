@@ -1,4 +1,4 @@
-package ladysnake.effective.particle.contracts;
+package ladysnake.effective.cosmetics.particle.contracts;
 
 public class FireflyParticleInitialData {
 	public int color;

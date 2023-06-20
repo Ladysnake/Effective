@@ -51,7 +51,7 @@ public class PlayerFacingParticle extends GenericParticle {
 		Vec3d v1 = new Vec3d(0, 0, 1);
 		Vec3d v2 = new Vec3d(this.x, this.y, this.z).subtract(camera.getPos()).normalize();
 		Vec3d a = v1.crossProduct(v2);
-		Quaternion q = new Quaternion((float)0f, (float) a.getY(), (float) a.getZ(), (float) (MathHelper.sqrt((float) ((v1.length() * v1.length()) * (v2.length() * v2.length()))) + v1.dotProduct(v2)));
+		Quaternion q = new Quaternion((float) 0f, (float) a.getY(), (float) a.getZ(), (float) (MathHelper.sqrt((float) ((v1.length() * v1.length()) * (v2.length() * v2.length()))) + v1.dotProduct(v2)));
 		q.normalize();
 
 		for (int k = 0; k < 4; ++k) {
