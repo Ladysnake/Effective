@@ -18,16 +18,16 @@ import static com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenP
 
 @Mixin(ScreenParticleHandler.class)
 public abstract class ScreenParticleParryRenderEnforcer {
-	@Shadow
+	@Shadow(remap = false)
 	public static ArrayList<ScreenParticleHandler.StackTracker> RENDERED_STACKS;
-	@Shadow
+	@Shadow(remap = false)
 	public static boolean canSpawnParticles;
 
-	@Shadow
+	@Shadow(remap = false)
 	public static void renderParticles(ScreenParticle.RenderOrder... renderOrders) {
 	}
 
-	@Inject(method = "renderParticles()V", at = @At("TAIL"))
+	@Inject(method = "renderParticles()V", at = @At("TAIL"), remap = false)
 	private static void renderParticles(CallbackInfo ci) {
 		final MinecraftClient client = MinecraftClient.getInstance();
 		Screen screen = client.currentScreen;
