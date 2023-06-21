@@ -23,6 +23,7 @@
 - Added air bubbles coming out of chests when opened underwater
 - Improved cascades
   - Waterfall cloud particles now have an animated texture
+  - Waterfall clouds will now only generate if water is flowing into a 2 block deep water source with at least one adjacent source block
   - Waterfall cloud size and cascade sound pitch are now dependent on the strength of the flowing water as well as the amount of water sources it is flowing into
   - Waterfalls with the strongest current (flowing directly from above) flowing into 4 water sources now generate a mist effect
   - Waterfall cloud density as well as mist density can be customized in the configuration options

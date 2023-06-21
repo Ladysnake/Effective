@@ -97,7 +97,7 @@ public class WaterfallCloudGenerators {
 			return 0f;
 		}
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		if (world.getFluidState(mutable.set(pos, Direction.DOWN)).getFluid() != Fluids.WATER) {
+		if (world.getFluidState(mutable.set(pos, 0, -1, 0)).getFluid() != Fluids.WATER || world.getFluidState(mutable.set(pos, 0, -2, 0)).getFluid() != Fluids.WATER) {
 			return 0f;
 		}
 		boolean foundAir = false;
@@ -117,6 +117,7 @@ public class WaterfallCloudGenerators {
 		}
 
 		float waterLandingSize = 0f;
+
 		for (Direction direction : Direction.values()) {
 			if (direction.getAxis() != Direction.Axis.Y) {
 				if (world.getFluidState(mutable.set(pos.getX() + direction.getOffsetX(), pos.getY() - 1, pos.getZ() + direction.getOffsetZ())).getFluid() == Fluids.WATER) {
@@ -124,7 +125,7 @@ public class WaterfallCloudGenerators {
 				}
 			}
 		}
-		if (waterLandingSize >= 2f) {
+		if (waterLandingSize >= 1f) {
 			return (fluidState.getHeight() + (waterLandingSize - 2f) / 2f);
 		}
 
