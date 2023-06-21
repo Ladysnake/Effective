@@ -1,0 +1,12 @@
+{
+  "effective.subtitles.ambience.waterfall": "瀑布",
+  "effective.midnightconfig.generateSplashes": "生成飛濺物",
+  "effective.midnightconfig.splashRimAlpha": "飛濺物邊緣不透明度",
+  "effective.midnightconfig.generateCascades": "聯鎖生成",
+  "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "流動的水是否在第一刻產生粒子",
+  "effective.midnightconfig.lapisBlockUpdateParticleChance": "青金石方塊更新顆粒概率",
+  "effective.midnightconfig.cascadeSoundDistanceBlocks": "聽見聯鎖方塊的距離",
+  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "聯鎖產生的聲音倍率",
+  "effective.midnightconfig.rainRippleDensity": "雨滴漣漪密度",
+  "effective.midnightconfig.flowingWaterSplashingDesity": "流水飛濺密度"
+}
