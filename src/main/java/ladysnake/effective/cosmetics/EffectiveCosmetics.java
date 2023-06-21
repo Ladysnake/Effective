@@ -194,7 +194,7 @@ public class EffectiveCosmetics implements ClientModInitializer {
                 WILL O' WISP PETS
          */
 		WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "will_o_wisp_pet"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
+		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f));
 		DISSOLUTION_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "dissolution_wisp_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
