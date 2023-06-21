@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WaterfallCloudGenerators {
@@ -37,11 +36,11 @@ public class WaterfallCloudGenerators {
 		if (pos == null || !EffectiveConfig.cascades || state.getFluid() != Fluids.FLOWING_WATER || generators.contains(pos)) {
 			return;
 		}
-		float waterfallHeight = getWaterfallHeight(MinecraftClient.getInstance().world, pos, state);
-		if (waterfallHeight > 0) {
+		float waterfallStrength = getWaterfallStrength(MinecraftClient.getInstance().world, pos, state);
+		if (waterfallStrength > 0) {
 			synchronized (generators) {
 				generators.removeIf(waterfall -> waterfall.blockPos().equals(pos));
-				generators.add(new Waterfall(pos, waterfallHeight));
+				generators.add(new Waterfall(pos, waterfallStrength));
 			}
 		}
 	}
@@ -72,10 +71,10 @@ public class WaterfallCloudGenerators {
 					return;
 				}
 				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
-					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, (1.2f + world.random.nextFloat() / 10f) + (1 - waterfall.height()), waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
+					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, (1.2f + world.random.nextFloat() / 10f) + (1 - waterfall.strength()), waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});
-			generators.removeIf(waterfall -> waterfall == null || getWaterfallHeight(world, waterfall.blockPos(), world.getFluidState(waterfall.blockPos())) <= 0);
+			generators.removeIf(waterfall -> waterfall == null || getWaterfallStrength(world, waterfall.blockPos(), world.getFluidState(waterfall.blockPos())) <= 0);
 		}
 	}
 
@@ -89,7 +88,7 @@ public class WaterfallCloudGenerators {
 		particlesToSpawn.values().removeIf(integer -> integer < 0);
 	}
 
-	private static float getWaterfallHeight(BlockView world, BlockPos pos, FluidState fluidState) {
+	private static float getWaterfallStrength(BlockView world, BlockPos pos, FluidState fluidState) {
 		if (!EffectiveConfig.cascades || fluidState.getFluid() != Fluids.FLOWING_WATER || world == null) {
 			return 0f;
 		}
@@ -116,9 +115,19 @@ public class WaterfallCloudGenerators {
 		if (!foundAir) {
 			return 0f;
 		}
-		if (Arrays.stream(Direction.values()).anyMatch(direction -> direction.getAxis() != Direction.Axis.Y && world.getFluidState(mutable.set(pos.getX() + direction.getOffsetX(), pos.getY() - 1, pos.getZ() + direction.getOffsetZ())).getFluid() == Fluids.WATER)) {
-			return fluidState.getHeight();
+
+		float waterLandingSize = 0f;
+		for (Direction direction : Direction.values()) {
+			if (direction.getAxis() != Direction.Axis.Y) {
+				if (world.getFluidState(mutable.set(pos.getX() + direction.getOffsetX(), pos.getY() - 1, pos.getZ() + direction.getOffsetZ())).getFluid() == Fluids.WATER) {
+					waterLandingSize += 1f;
+				}
+			}
 		}
+		if (waterLandingSize >= 2f) {
+			return (fluidState.getHeight() + (waterLandingSize-2f)/2f);
+		}
+
 		return 0f;
 	}
 
@@ -133,16 +142,25 @@ public class WaterfallCloudGenerators {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
 				double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-				ParticleBuilders.create(Effective.WATERFALL_CLOUD).setScale((1f + world.random.nextFloat()) * waterfall.height()).setColor(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white).setLifetime(10).overrideRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE).setMotion((world.getRandom().nextFloat() * waterfall.height()) / 4f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.height()) / 4f, (world.getRandom().nextFloat() * waterfall.height()) / 4f * Math.signum(offsetZ)).spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
+				ParticleBuilders.create(Effective.WATERFALL_CLOUD).setScale((0.4f + waterfall.strength()*world.random.nextFloat())).setColor(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white).setLifetime(10).overrideRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE).setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ)).spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 			}
 		}
 
-		if (waterfall.height() == 0.8888889f) {
+		if (EffectiveConfig.cascadeMistDensity > 0f && waterfall.strength() >= 1.2f) {
 			if ((world.random.nextFloat() * 100f) <= EffectiveConfig.cascadeMistDensity) {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
 				double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-				ParticleBuilders.create(Effective.MIST).setSpin((world.random.nextFloat() - world.random.nextFloat()) / 20f).setScale(10f + world.random.nextFloat() * 5f).setAlpha(0f, 0.1f, 0f).setAlphaEasing(Easing.SINE_OUT).setLifetime(500).enableNoClip().overrideRenderType(ParticleTextureSheets.TRANSPARENT).setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ)).spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
+				ParticleBuilders.create(Effective.MIST)
+					.setSpin((world.random.nextFloat() - world.random.nextFloat()) / 20f)
+					.setScale(10f + world.random.nextFloat() * 5f)
+					.setAlpha(0f, 0.2f, 0f)
+					.setAlphaEasing(Easing.EXPO_OUT, Easing.SINE_OUT)
+					.setLifetime(300)
+					.enableNoClip()
+					.overrideRenderType(ParticleTextureSheets.TRANSPARENT)
+					.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
+					.spawn(world, blockPos.getX() + .5f, blockPos.getY() +.5f, blockPos.getZ() + .5f);
 			}
 		}
 
