@@ -23,8 +23,8 @@
 - Added air bubbles coming out of chests when opened underwater
 - Improved cascades
   - Waterfall cloud particles now have an animated texture
-  - Waterfall cloud size and cascade sound pitch are now dependent on the strength of the flowing water
-  - Waterfalls with the strongest current (flowing directly from above) now generate a mist effect
+  - Waterfall cloud size and cascade sound pitch are now dependent on the strength of the flowing water as well as the amount of water sources it is flowing into
+  - Waterfalls with the strongest current (flowing directly from above) flowing into 4 water sources now generate a mist effect
   - Waterfall cloud density as well as mist density can be customized in the configuration options
 - Improved Glow Squid particles
 - Rewrote the configuration from scratch and added options to control whether the effect is enabled and / or its density for all effects
