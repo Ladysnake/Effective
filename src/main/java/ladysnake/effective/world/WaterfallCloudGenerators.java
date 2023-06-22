@@ -147,7 +147,7 @@ public class WaterfallCloudGenerators {
 			}
 		}
 
-		if (EffectiveConfig.cascadeMistDensity > 0f && waterfall.strength() >= 1.3f) {
+		if (EffectiveConfig.cascadeMistDensity > 0f && waterfall.strength() >= 1.6f) {
 			if ((world.random.nextFloat() * 100f) <= EffectiveConfig.cascadeMistDensity) {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
 				double offsetZ = world.getRandom().nextGaussian() / 5f;

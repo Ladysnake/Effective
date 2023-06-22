@@ -1,5 +1,8 @@
 # Effective - Changelog:
 
+## Effective 2.0.1 - 1.19.2
+- Fixed cascades with water flowing from straight up creating mist starting at 3 adjacent source blocks instead of 4
+
 ## Effective 2.0 - 1.19.2
 - Rewrote the mod from scratch
 - Merged some Illuminations features into Effective. Here's a list of all the Illuminations features that made it in:
