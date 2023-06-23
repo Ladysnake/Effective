@@ -71,13 +71,17 @@ Every effect is customisable and can be toggled in the configuration.
 
 ## FAQ
 
-#### Q: Can I include this mod in a modpack?**
-
-**A: Yes** you can. Go ahead, don't bother asking. Please however provide credit and a link to either the GitHub repository or Modrinth project page.
-
 #### Q: Can I use this mod on a vanilla server?
 
 **A: Yes**. If you have installed this mod on your Minecraft client, you will  be able to connect to vanilla Minecraft servers and the ambient effects  will work as intended.
+
+#### Q: Why Quilt? Why not Forge or Fabric?
+
+**A: For many reasons**. First and foremost, some utilities and libraries I need for my mods are only available for Quilt. Second I do not wish to continue supporting loaders led by transphobes / racists, especially when a better product like Quilt exists.
+
+#### Q: But I really wanna play with this mod and I play on Fabric!
+
+**A: You can run Fabric mods on Quilt**. 99% of Fabric mods run perfectly on Quilt, so if you wanna use this mod alongside Fabric ones, consider switching. It's not as big of a task to move as it seems.
 
 #### Q: Can I port this mod to Forge / Fabric?
 
@@ -85,6 +89,10 @@ Every effect is customisable and can be toggled in the configuration.
 
 #### Q: Can you backport this mod to 1.x? When will you update to 1.x?
 
-**A: No**. I mod Minecraft as a hobby with very limited time. Therefore, I will not backport this mod to older versions of Minecraft, and I will update it to future versions when I feel like it.
+**A: No**. I mod Minecraft as a hobby with very limited time. Therefore, I will not backport this mod to older versions of Minecraft, and I will update it to future versions when I feel like it. If you want it updated to newer versions, feel free to contribute to the mod and make a pull request, it's appreciated! Otherwise, don't come begging.
+
+#### Q: Can I include this mod in a modpack?**
+
+**A: Yes** you can. Go ahead, don't bother asking. Please however provide credit and a link to either the GitHub repository or Modrinth project page.
 
 ###### Copyright (C) 2023 Ladysnake
