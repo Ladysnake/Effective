@@ -21,8 +21,8 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(min = 0, max = 5, isSlider = true)
 	public static float cascadeMistDensity = 1;
 
-	@Entry(min = 0, max = 500, isSlider = true)
-	public static int cascadeSoundsVolumeMultiplier = 100;
+	@Entry(min = 0, max = 100, isSlider = true)
+	public static int cascadeSoundsVolumeMultiplier = 30;
 
 	@Entry(min = 0, max = 400, isSlider = true)
 	public static int cascadeSoundDistanceBlocks = 150;
