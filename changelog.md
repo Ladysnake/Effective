@@ -1,6 +1,6 @@
-# Effective - Changelog:
-
-## Effective 2.1 - 1.19.2
+------------------------------------------------------
+Effective 2.1 - 1.19.2
+------------------------------------------------------
 - Added the ability to make cascades silent
   - Placing wool under the receiving water source of the cascade now makes cascades silent
 - Added the ability to color cascade mist
@@ -10,7 +10,9 @@
 - Limited cascade sound volume multiplier to 100% and set the default to 30%
 - Fixed flowing water clouds causing mist
 
-## Effective 2.0 - 1.19.2
+------------------------------------------------------
+Effective 2.0 - 1.19.2
+------------------------------------------------------
 - Rewrote the mod from scratch
 - Merged some Illuminations features into Effective. Here's a list of all the Illuminations features that made it in:
   - Added and improved Fireflies
@@ -43,7 +45,9 @@
 - Merged both configuration options of Glow Squid hypnotizing into one
 - Added a new secret config option for a new secret effect :)
 
-## Effective 1.6 - 1.19.2
+------------------------------------------------------
+Effective 1.6 - 1.19.2
+------------------------------------------------------
 - Added a screen shake effect for:
   - Wardens roaring
   - Wardens using their sonic boom attack
@@ -54,7 +58,9 @@
 - Added Ukrainian translation, thanks to ttrafford7 and V972!
 - Added Portuguese (Brazil) translation, thanks to FITFC!
 
-## Effective 1.5 - 1.19.2
+------------------------------------------------------
+Effective 1.5 - 1.19.2
+------------------------------------------------------
 - Added Allay trails
   - Allay will now leave a colored trail and twinkles when flying around, inspired from the Minecraft Legends announce trailer
   - Allay trails can be disabled and trail twinkle density can be configured
@@ -62,14 +68,18 @@
   - Allays now have a 50% chance of being a golden variant, also inspired from the Minecraft Legends announce trailer
   - Can be disabled in the configuration
 
-## Effective 1.4.1 - 1.19.2
+------------------------------------------------------
+Effective 1.4.1 - 1.19.2
+------------------------------------------------------
 - Added glowing plankton waterfall clouds in warm oceans at night
 - Fixed splash rims looking incorrectly with Sodium
 - Waterfalls no longer play sound if the player cannot see them
 - Now includes Satin API
 - Migrated the mod to Quilt
 
-## Effective 1.4 - 1.19.2
+------------------------------------------------------
+Effective 1.4 - 1.19.2
+------------------------------------------------------
 - Hypnotizing glow squids
   - Glow squids can now hypnotize you, displaying a hypnotizing shader that gradually gets stronger the longer you look at them
   - Glow squids will attract your cursor if they appear on your screen, this attraction getting stronger with the shader
@@ -78,7 +88,9 @@
 - Splashes and ripples (from rain or splashes) in warm oceans at night will now glow from glowing plankton
   - Glowing plankton can be disabled with a new configuration option
 
-## Effective 1.3 - 1.19.2
+------------------------------------------------------
+Effective 1.3 - 1.19.2
+------------------------------------------------------
 - Overhauled splashes:
   - Splashes will now be colored depending on the water they originate from
   - Reworked the splash texture to be more fitting with the vanilla Minecraft aesthetic
@@ -94,13 +106,19 @@
 - Changed config library from Cloth Config to MidnightLib
 - Updated to Minecraft 1.19.2
 
-## Effective 1.2.2 - 1.19
+------------------------------------------------------
+Effective 1.2.2 - 1.19
+------------------------------------------------------
 - Updated to Minecraft 1.19
 
-## Effective 1.2.1 - 1.18.2
+------------------------------------------------------
+Effective 1.2.1 - 1.18.2
+------------------------------------------------------
 - Updated to Minecraft 1.18.2
 
-## Effective 1.2 - 1.18.1
+------------------------------------------------------
+Effective 1.2 - 1.18.1
+------------------------------------------------------
 Massive thanks to MoriyaShiine for most of these additions and changes!
 - Lapis lazuli block updates (piston moved, placed, broken...) connected to a flowing water block now cause connected flowing water blocks to spawn waterfall particles
 - Updating flowing water blocks now spawns waterfall particles
@@ -111,21 +129,24 @@ Massive thanks to MoriyaShiine for most of these additions and changes!
 - Massively improved performance with dynamic audio mods such as Sound Physics Remastered
 - Fixed concurrent modification crashes
 
-## Effective 1.1.1 - 1.18.1
+------------------------------------------------------
+Effective 1.1.1 - 1.18.1
+------------------------------------------------------
 - Fixed the first wave of splash particles being inverted
 - Made waterfall sound effects quieter yet still present far away from them
 - Removed lava splashes for now, as they were causing more issues than adding to the ambience
 - Removed cascades appearing underwater when no air is present
 
-## Effective 1.1 - 1.18.1
+------------------------------------------------------
+Effective 1.1 - 1.18.1
+------------------------------------------------------
 - Added two settings to enable or disable splashes and cascade effects available in the config file of your Minecraft instance config folder, thanks to devpelux
 - Implemented various optimizations and performance fixes, thanks to Sollace
 - Fixed the cascade sounds playing too many times resulting in them being louder than they are supposed to be, thanks to Sollace
 - Fixed Canvas and Sodium cascade incompatibilities, thanks to spiralhalo
 - Added russian subtitles, thanks to Felix14-v2
 
-### Effective 1.0 - 1.18
+------------------------------------------------------
+Effective 1.0 - 1.18
+------------------------------------------------------
 Initial release with water splashes, lava splashes and cascade effects.
-
-
-see full changelog [here](https://github.com/Ladysnake/Effective/blob/main/CHANGELOG.md "Changelog")
