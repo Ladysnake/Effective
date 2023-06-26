@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.awt.*;
+
 @Mixin(World.class)
 public abstract class WaterfallCloudSpawner {
 	@Shadow
@@ -22,7 +24,7 @@ public abstract class WaterfallCloudSpawner {
 	@Inject(method = "setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;II)Z", at = @At("RETURN"))
 	private void effective$flowingWaterCascade(BlockPos pos, BlockState state, int flags, int maxUpdateDepth, CallbackInfoReturnable<Boolean> cir) {
 		if (cir.getReturnValueZ() && EffectiveConfig.shouldFlowingWaterSpawnParticlesOnFirstTick && getFluidState(pos).getFluid() == Fluids.FLOWING_WATER) {
-			WaterfallCloudGenerators.addWaterfallCloud(World.class.cast(this), new Waterfall(pos, getFluidState(pos).getHeight()));
+			WaterfallCloudGenerators.addWaterfallCloud(World.class.cast(this), new Waterfall(pos, getFluidState(pos).getHeight() / 2f, true, new Color(0xFFFFFF)));
 		}
 	}
 }

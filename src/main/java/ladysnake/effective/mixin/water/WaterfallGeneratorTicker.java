@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class WaterfallGeneratorTicker {
 			if (chance > 0f) {
 				gatherWater(new HashSet<>(), world, new BlockPos.Mutable().set(pos)).forEach(waterPos -> {
 					if (world.getRandom().nextFloat() * 10f < chance) {
-						WaterfallCloudGenerators.scheduleParticleTick(new Waterfall(waterPos, state.getFluidState().getHeight()), 1);
+						WaterfallCloudGenerators.scheduleParticleTick(new Waterfall(waterPos, state.getFluidState().getHeight(), true, new Color(0xFFFFFF)), 1);
 					}
 				});
 			}

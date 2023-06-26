@@ -1,9 +1,14 @@
 # Effective - Changelog:
 
 ## Effective 2.0.1 - 1.19.2
+- Added the ability to make cascades silent
+  - Placing wool under the receiving water source of the cascade now makes cascades silent
+- Added the ability to color cascade mist
+  - Placing coloured wool under the receiving water source of the cascade will now color the mist according to the wool block's color
 - Fixed cascades with water flowing from straight up creating mist starting at 3 adjacent source blocks instead of 4
 - Fixed lingering potion effects using the improved dragon breath particles
 - Limited cascade sound volume multiplier to 100% and set the default to 30%
+- Fixed flowing water clouds causing mist
 
 ## Effective 2.0 - 1.19.2
 - Rewrote the mod from scratch

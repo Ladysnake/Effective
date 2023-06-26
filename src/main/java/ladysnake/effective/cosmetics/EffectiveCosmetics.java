@@ -292,7 +292,7 @@ public class EffectiveCosmetics implements ClientModInitializer {
 		public PlayerCosmeticData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jsonObject = json.getAsJsonObject();
 			return new PlayerCosmeticData(jsonObject.get("aura")
-				, jsonObject.get("color")
+				, jsonObject.get("mistColor")
 				, jsonObject.get("color2")
 				, jsonObject.get("overhead")
 				, jsonObject.get("pet"));

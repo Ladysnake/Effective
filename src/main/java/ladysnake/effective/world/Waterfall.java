@@ -2,5 +2,7 @@ package ladysnake.effective.world;
 
 import net.minecraft.util.math.BlockPos;
 
-public record Waterfall(BlockPos blockPos, float strength) {
+import java.awt.*;
+
+public record Waterfall(BlockPos blockPos, float strength, boolean isSilent, Color mistColor) {
 }
