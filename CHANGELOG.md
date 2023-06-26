@@ -1,6 +1,6 @@
 # Effective - Changelog:
 
-## Effective 2.0.1 - 1.19.2
+## Effective 2.1 - 1.19.2
 - Added the ability to make cascades silent
   - Placing wool under the receiving water source of the cascade now makes cascades silent
 - Added the ability to color cascade mist
