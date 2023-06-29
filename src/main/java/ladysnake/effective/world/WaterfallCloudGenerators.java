@@ -112,7 +112,6 @@ public class WaterfallCloudGenerators {
 				isSilent = true;
 
 				mistColor = new Color(world.getBlockState(mutable.set(pos, 0, -2, 0)).getMapColor(world, pos).color);
-				System.out.println(mistColor);
 			} else {
 				return NO_WATERFALL;
 			}
@@ -153,7 +152,7 @@ public class WaterfallCloudGenerators {
 	}
 
 	public static void addWaterfallCloud(World world, Waterfall waterfall) {
-		boolean isGlowingWater = EffectiveUtils.isGlowingWater(world, waterfall.blockPos());
+		boolean isGlowingWater = EffectiveUtils.isGlowingWater(world, Vec3d.ofCenter(waterfall.blockPos()));
 		Color glowingWaterColor = EffectiveUtils.getGlowingWaterColor(world, waterfall.blockPos());
 		Color white = new Color(0xFFFFFF);
 		BlockPos blockPos = waterfall.blockPos();
@@ -163,7 +162,7 @@ public class WaterfallCloudGenerators {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
 				double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-				ParticleBuilders.create(Effective.WATERFALL_CLOUD).setScale((0.4f + waterfall.strength() * world.random.nextFloat())).setColor(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white).setLifetime(10).overrideRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE).setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ)).spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
+				ParticleBuilders.create(Effective.WATERFALL_CLOUD).setScale((0.4f + waterfall.strength() * world.random.nextFloat())).setColor(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white).setLifetime(10).overrideRenderType(EffectiveUtils.isGlowingWater(world, Vec3d.ofCenter(blockPos)) ? ParticleTextureSheets.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE).setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ)).spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 			}
 		}
 

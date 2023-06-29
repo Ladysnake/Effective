@@ -68,7 +68,7 @@ public abstract class SplashSpawner {
 				}
 
 				for (int j = 0; j < this.getWidth() * 25f; j++) {
-					EffectiveUtils.spawnWaterEffect(this.world, new BlockPos(this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth()), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f, EffectiveUtils.WaterEffectType.DROPLET);
+					EffectiveUtils.spawnWaterEffect(this.world, new Vec3d(this.getX() + random.nextGaussian() * this.getWidth() / 5f, this.getY(), this.getZ() + random.nextGaussian() * this.getWidth()), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f, EffectiveUtils.WaterEffectType.DROPLET);
 				}
 			}
 		}
