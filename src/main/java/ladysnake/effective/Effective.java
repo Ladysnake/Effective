@@ -252,8 +252,8 @@ public class Effective implements ClientModInitializer {
 			if (freezeFrames > 0) {
 				freezeFrames--;
 
-				ParticleBuilders.ScreenParticleBuilder b2 = ParticleBuilders.create(LodestoneScreenParticles.SPARKLE).setAlpha(0.6f).setScale(100000f).setColor(new Color(0xFFFFFF), new Color(0xFFFFFF)).setLifetime(1).overrideRenderType(ParticleTextureSheets.ADDITIVE).overrideRenderOrder(ScreenParticle.RenderOrder.AFTER_EVERYTHING);
-				b2.repeat(0, 0, 1);
+				ParticleBuilders.ScreenParticleBuilder b2 = ParticleBuilders.create(LodestoneScreenParticles.SPARKLE).setAlpha(0.3f).setScale(100000f).setColor(new Color(0xFFFFFF), new Color(0xFFFFFF)).setLifetime(1).overrideRenderType(ParticleTextureSheets.ADDITIVE).overrideRenderOrder(ScreenParticle.RenderOrder.AFTER_EVERYTHING);
+				b2.spawn(0, 0);
 
 				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();
 				if (bl) {

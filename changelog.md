@@ -2,6 +2,8 @@
 Effective 2.1.1 - 1.19.2
 ------------------------------------------------------
 - Fixed rain ripples not being displayed at the correct position
+- Fixed broken chorus flowers spawning too few chorus petals
+- Fixed ULTRAKILL parry effect being too bright
 
 ------------------------------------------------------
 Effective 2.1 - 1.19.2
