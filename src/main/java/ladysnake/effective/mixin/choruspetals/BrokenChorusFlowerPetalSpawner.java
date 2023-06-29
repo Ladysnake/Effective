@@ -32,7 +32,7 @@ public abstract class BrokenChorusFlowerPetalSpawner {
 	@Inject(method = "addBlockBreakParticles", at = @At(value = "RETURN"))
 	public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {
 		if (state.getBlock() == Blocks.CHORUS_FLOWER) {
-			for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * (EffectiveConfig.chorusPetalDensity / 10f); i++) {
+			for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * (EffectiveConfig.chorusPetalDensity*10f); i++) {
 				this.addParticle(Effective.CHORUS_PETAL, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, random.nextGaussian() / 10f, random.nextGaussian() / 10f, random.nextGaussian() / 10f);
 			}
 		}
