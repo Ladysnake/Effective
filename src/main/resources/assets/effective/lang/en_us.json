@@ -39,7 +39,7 @@
   "effective.midnightconfig.eyesInTheDark": "Enable Eyes in the Dark",
   "effective.midnightconfig.enum.EyesInTheDarkOptions.HALLOWEEN": "On Halloween",
   "effective.midnightconfig.enum.EyesInTheDarkOptions.ALWAYS": "Always",
-  "effective.midnightconfig.enum.EyesInTheDarkOptions.DISABLED": "No",
+  "effective.midnightconfig.enum.EyesInTheDarkOptions.NEVER": "Never",
   "effective.midnightconfig.improvedEffects": "Improved Effects",
   "effective.midnightconfig.improvedFireballs": "Improved Fireballs",
   "effective.midnightconfig.improvedDragonFireballsAndBreath": "Improved Dragon Fireballs and Breath",
