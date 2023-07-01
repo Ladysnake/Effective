@@ -108,11 +108,15 @@ public class EffectiveCosmetics implements ClientModInitializer {
 		CompletableFuture.supplyAsync(() -> {
 			try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
 				return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
-			} catch (IOException ignored) {
+			} catch (IOException exception) {
+				exception.printStackTrace();
 			}
 
 			return null;
-		}).exceptionally(throwable -> null).thenAcceptAsync(playerData -> {
+		}).exceptionally(throwable -> {
+			throwable.printStackTrace();
+			return null;
+		}).thenAcceptAsync(playerData -> {
 			if (playerData != null) {
 				PLAYER_COSMETICS = playerData;
 			} else {
@@ -190,7 +194,8 @@ public class EffectiveCosmetics implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.AGENDER_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/agender_pride_heart.png"), 1.0f, 1.0f, 1.0f));
 		GENDERFLUID_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "genderfluid_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.GENDERFLUID_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/genderfluid_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-        /*
+
+		/*
                 WILL O' WISP PETS
          */
 		WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "will_o_wisp_pet"), FabricParticleTypes.simple(true));
@@ -292,7 +297,7 @@ public class EffectiveCosmetics implements ClientModInitializer {
 		public PlayerCosmeticData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jsonObject = json.getAsJsonObject();
 			return new PlayerCosmeticData(jsonObject.get("aura")
-				, jsonObject.get("mistColor")
+				, jsonObject.get("color")
 				, jsonObject.get("color2")
 				, jsonObject.get("overhead")
 				, jsonObject.get("pet"));

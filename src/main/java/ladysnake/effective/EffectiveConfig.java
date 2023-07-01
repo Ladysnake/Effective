@@ -52,7 +52,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static GlowSquidHypnoOptions glowSquidHypnotize = GlowSquidHypnoOptions.ATTRACT;
 
 	@Entry
-	public static boolean allayTrails = true;
+	public static AllayTrailOptions allayTrails = AllayTrailOptions.BOTH;
 
 	@Entry
 	public static boolean goldenAllays = true;
@@ -121,6 +121,10 @@ public class EffectiveConfig extends MidnightConfig {
 
 	public static boolean shouldDisplayCosmetics() {
 		return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
+	}
+
+	public enum AllayTrailOptions {
+		BOTH, TRAIL, TWINKLE, NONE
 	}
 
 	public enum ChestsOpenOptions {
