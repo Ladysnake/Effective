@@ -29,13 +29,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
@@ -116,48 +117,48 @@ public class Effective implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
 		// particles
-		SPLASH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "splash"), new SplashParticleType(true));
+		SPLASH = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(SPLASH, SplashParticle.DefaultFactory::new);
-		DROPLET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "droplet"), FabricParticleTypes.simple(true));
+		DROPLET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(DROPLET, DropletParticle.DefaultFactory::new);
-		RIPPLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "ripple"), FabricParticleTypes.simple(true));
+		RIPPLE = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(RIPPLE, RippleParticle.DefaultFactory::new);
-		GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_splash"), new SplashParticleType(true));
+		GLOW_SPLASH = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "glow_splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
-		GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_droplet"), FabricParticleTypes.simple(true));
+		GLOW_DROPLET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "glow_droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
-		GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_ripple"), FabricParticleTypes.simple(true));
+		GLOW_RIPPLE = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "glow_ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
-		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "allay_twinkle"), new AllayTwinkleParticleType());
+		ALLAY_TWINKLE = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "allay_twinkle"), new AllayTwinkleParticleType());
 		ParticleFactoryRegistry.getInstance().register(ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
-		CHORUS_PETAL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
+		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
-		EYES = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
+		EYES = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.DefaultFactory::new);
-		WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
+		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(MODID, "textures/entity/will_o_wisp.png"), 0.1f, 0.75f, 1.0f, 0.0f, 0.1f, 1.0f));
 
 		// lodestone particles
 		ParticleFactoryRegistry.getInstance().register(PIXEL, LodestoneParticleType.Factory::new);
-		PIXEL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "pixel"), PIXEL);
+		PIXEL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "pixel"), PIXEL);
 		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneParticleType.Factory::new);
-		WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "wisp"), WISP);
+		WISP = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "wisp"), WISP);
 		ParticleFactoryRegistry.getInstance().register(FLAME, FlameParticleType.Factory::new);
-		FLAME = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "flame"), FLAME);
+		FLAME = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "flame"), FLAME);
 		ParticleFactoryRegistry.getInstance().register(DRAGON_BREATH, FlameParticleType.Factory::new);
-		DRAGON_BREATH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "dragon_breath"), DRAGON_BREATH);
+		DRAGON_BREATH = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "dragon_breath"), DRAGON_BREATH);
 		ParticleFactoryRegistry.getInstance().register(BUBBLE, BubbleParticleType.Factory::new);
-		BUBBLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
+		BUBBLE = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
 		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticleType.Factory::new);
-		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
+		WATERFALL_CLOUD = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
 		ParticleFactoryRegistry.getInstance().register(MIST, MistParticleType.Factory::new);
-		MIST = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "mist"), MIST);
+		MIST = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "mist"), MIST);
 		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticleType.Factory::new);
-		FIREFLY = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "firefly"), FIREFLY);
+		FIREFLY = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "firefly"), FIREFLY);
 
 		// sound events
-		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
-		PARRY = Registry.register(Registry.SOUND_EVENT, PARRY.getId(), PARRY);
+		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
+		PARRY = Registry.register(Registries.SOUND_EVENT, PARRY.getId(), PARRY);
 
 		// events
 		ClientTickEvents.END.register(client -> {

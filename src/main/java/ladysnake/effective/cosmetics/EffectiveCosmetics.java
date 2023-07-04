@@ -27,8 +27,9 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.loader.api.ModContainer;
@@ -146,79 +147,79 @@ public class EffectiveCosmetics implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(PrideHeartModel.MODEL_LAYER, PrideHeartModel::getTexturedModelData);
 
 		// aura particles
-		TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "twilight_aura"), FabricParticleTypes.simple(true));
+		TWILIGHT_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "twilight_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.TWILIGHT_AURA, TwilightLegacyFireflyParticle.DefaultFactory::new);
-		GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "ghostly_aura"), FabricParticleTypes.simple(true));
+		GHOSTLY_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "ghostly_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.GHOSTLY_AURA, GhostlyAuraParticle.DefaultFactory::new);
-		CHORUS_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "chorus_aura"), FabricParticleTypes.simple(true));
+		CHORUS_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "chorus_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.CHORUS_AURA, ChorusAuraParticle.DefaultFactory::new);
-		AUTUMN_LEAVES_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "autumn_leaves"), FabricParticleTypes.simple(true));
+		AUTUMN_LEAVES_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "autumn_leaves"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.AUTUMN_LEAVES_AURA, AutumnLeavesParticle.DefaultFactory::new);
-		SCULK_TENDRIL_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "sculk_tendril"), FabricParticleTypes.simple(true));
+		SCULK_TENDRIL_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "sculk_tendril"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.SCULK_TENDRIL_AURA, SculkTendrilParticle.DefaultFactory::new);
-		SHADOWBRINGER_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "shadowbringer_aura"), FabricParticleTypes.simple(true));
+		SHADOWBRINGER_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "shadowbringer_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
-		GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "goldenrod_aura"), FabricParticleTypes.simple(true));
+		GOLDENROD_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "goldenrod_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
-		CONFETTI_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "confetti"), FabricParticleTypes.simple(true));
+		CONFETTI_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "confetti"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.CONFETTI_AURA, ConfettiParticle.DefaultFactory::new);
-		PRISMATIC_CONFETTI_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "prismatic_confetti"), FabricParticleTypes.simple(true));
+		PRISMATIC_CONFETTI_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "prismatic_confetti"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.PRISMATIC_CONFETTI_AURA, PrismaticConfettiParticle.DefaultFactory::new);
-		PRISMARINE_AURA = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "prismarine_aura"), FabricParticleTypes.simple(true));
+		PRISMARINE_AURA = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "prismarine_aura"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.PRISMARINE_AURA, PrismarineAuraParticle.DefaultFactory::new);
 
         /*
                 PRIDE PETS
          */
-		PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "pride_pet"), FabricParticleTypes.simple(true));
+		PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		GAY_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "gay_pride_pet"), FabricParticleTypes.simple(true));
+		GAY_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "gay_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.GAY_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/gay_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		TRANS_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "trans_pride_pet"), FabricParticleTypes.simple(true));
+		TRANS_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "trans_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.TRANS_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/trans_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		LESBIAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "lesbian_pride_pet"), FabricParticleTypes.simple(true));
+		LESBIAN_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "lesbian_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.LESBIAN_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/lesbian_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		BI_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "bi_pride_pet"), FabricParticleTypes.simple(true));
+		BI_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "bi_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.BI_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/bi_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		ACE_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "ace_pride_pet"), FabricParticleTypes.simple(true));
+		ACE_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "ace_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.ACE_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/ace_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		NB_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "nb_pride_pet"), FabricParticleTypes.simple(true));
+		NB_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "nb_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.NB_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/nb_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		INTERSEX_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "intersex_pride_pet"), FabricParticleTypes.simple(true));
+		INTERSEX_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "intersex_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.INTERSEX_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/intersex_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		ARO_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "aro_pride_pet"), FabricParticleTypes.simple(true));
+		ARO_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "aro_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.ARO_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/aro_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		PAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "pan_pride_pet"), FabricParticleTypes.simple(true));
+		PAN_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "pan_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.PAN_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/pan_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		AGENDER_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "agender_pride_pet"), FabricParticleTypes.simple(true));
+		AGENDER_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "agender_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.AGENDER_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/agender_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-		GENDERFLUID_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "genderfluid_pride_pet"), FabricParticleTypes.simple(true));
+		GENDERFLUID_PRIDE_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "genderfluid_pride_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.GENDERFLUID_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/genderfluid_pride_heart.png"), 1.0f, 1.0f, 1.0f));
 
 		/*
                 WILL O' WISP PETS
          */
-		WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "will_o_wisp_pet"), FabricParticleTypes.simple(true));
+		WILL_O_WISP_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "will_o_wisp_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f));
-		DISSOLUTION_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "dissolution_wisp_pet"), FabricParticleTypes.simple(true));
+		DISSOLUTION_WISP_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "dissolution_wisp_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
         /*
                 SPOOKY PETS
          */
-		JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "jacko_pet"), FabricParticleTypes.simple(true));
+		JACKO_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "jacko_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.JACKO_PET, JackoParticle.DefaultFactory::new);
-		PUMPKIN_SPIRIT_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "pumpkin_spirit_pet"), FabricParticleTypes.simple(true));
+		PUMPKIN_SPIRIT_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "pumpkin_spirit_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.PUMPKIN_SPIRIT_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/pumpkin_spirit.png"), 1.0f, 0.95f, 0.0f, 0.0f, -0.03f, 0.0f));
-		POLTERGEIST_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "poltergeist_pet"), FabricParticleTypes.simple(true));
+		POLTERGEIST_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "poltergeist_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.POLTERGEIST_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/poltergeist.png"), 1.0f, 1.0f, 1.0f, 0f, 0f, 0f));
-		LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "lantern_pet"), FabricParticleTypes.simple(true));
+		LANTERN_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "lantern_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/lantern.png"), 1.0f, 1.0f, 1.0f));
-		SOUL_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "soul_lantern_pet"), FabricParticleTypes.simple(true));
+		SOUL_LANTERN_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "soul_lantern_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.SOUL_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/soul_lantern.png"), 1.0f, 1.0f, 1.0f));
-		CRYING_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "crying_lantern_pet"), FabricParticleTypes.simple(true));
+		CRYING_LANTERN_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "crying_lantern_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.CRYING_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/crying_lantern.png"), 1.0f, 1.0f, 1.0f));
-		SOOTHING_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "soothing_lantern_pet"), FabricParticleTypes.simple(true));
+		SOOTHING_LANTERN_PET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(EffectiveCosmetics.MODID, "soothing_lantern_pet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EffectiveCosmetics.SOOTHING_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(EffectiveCosmetics.MODID, "textures/entity/soothing_lantern.png"), 1.0f, 1.0f, 1.0f));
 
         /*
