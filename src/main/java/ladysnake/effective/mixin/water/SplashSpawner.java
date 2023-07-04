@@ -4,6 +4,7 @@ import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.EffectiveUtils;
 import ladysnake.effective.particle.contracts.SplashParticleInitialData;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.fluid.Fluids;
@@ -45,7 +46,7 @@ public abstract class SplashSpawner {
 
 	@Shadow
 	@Nullable
-	public abstract Entity getPrimaryPassenger();
+	public abstract LivingEntity getPrimaryPassenger();
 
 	@Shadow
 	public abstract float getWidth();
