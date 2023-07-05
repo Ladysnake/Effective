@@ -1,8 +1,11 @@
 package ladysnake.effective;
 
+import com.sammy.lodestone.handlers.screenparticle.ScreenParticleHandler;
 import com.sammy.lodestone.setup.LodestoneScreenParticles;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
+import com.sammy.lodestone.systems.rendering.particle.ScreenParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import com.sammy.lodestone.systems.rendering.particle.screen.LodestoneScreenParticleTextureSheet;
 import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
 import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import ladysnake.effective.gui.ParryScreen;
@@ -253,7 +256,12 @@ public class Effective implements ClientModInitializer {
 			if (freezeFrames > 0) {
 				freezeFrames--;
 
-				ParticleBuilders.ScreenParticleBuilder b2 = ParticleBuilders.create(LodestoneScreenParticles.SPARKLE).setAlpha(0.3f).setScale(100000f).setColor(new Color(0xFFFFFF), new Color(0xFFFFFF)).setLifetime(1).overrideRenderType(ParticleTextureSheets.ADDITIVE).overrideRenderOrder(ScreenParticle.RenderOrder.AFTER_EVERYTHING);
+				ScreenParticleBuilder b2 = ScreenParticleBuilder.create(LodestoneScreenParticles.SPARKLE, ScreenParticleHandler.LATE_PARTICLES)
+					.setTransparencyData(GenericParticleData.create(0.3f).build())
+					.setScaleData(GenericParticleData.create(100000f).build())
+					.setColorData(ColorParticleData.create(new Color(0xFFFFFF), new Color(0xFFFFFF)).build())
+					.setLifetime(1)
+					.setRenderType(LodestoneScreenParticleTextureSheet.ADDITIVE);
 				b2.spawn(0, 0);
 
 				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();

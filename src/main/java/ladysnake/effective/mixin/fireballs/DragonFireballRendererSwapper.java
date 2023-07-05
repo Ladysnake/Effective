@@ -1,7 +1,10 @@
 package ladysnake.effective.mixin.fireballs;
 
 import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -27,13 +30,15 @@ public class DragonFireballRendererSwapper {
 			float scale = 1f;
 
 			for (int i = 0; i < 2; i++) {
-				ParticleBuilders.create(Effective.DRAGON_BREATH)
-					.setSpin((float) (dragonFireballEntity.world.random.nextGaussian() / 5f))
-					.setScale(scale, 0f)
-					.setScaleEasing(Easing.CIRC_OUT)
-					.setAlpha(1f)
-					.setColor(new Color(0xD21EFF), new Color(0x7800FF))
-					.setColorEasing(Easing.CIRC_OUT)
+				WorldParticleBuilder.create(Effective.DRAGON_BREATH)
+					.setSpinData(SpinParticleData.create((float) (dragonFireballEntity.world.random.nextGaussian() / 5f)).build())
+					.setScaleData(GenericParticleData.create(scale, 0f).setEasing(Easing.CIRC_OUT).build())
+					.setTransparencyData(GenericParticleData.create(1f).build())
+					.setColorData(
+						ColorParticleData.create(new Color(0xD21EFF), new Color(0x7800FF))
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
 					.enableNoClip()
 					.setLifetime(20)
 					.spawn(dragonFireballEntity.world, x + dragonFireballEntity.world.random.nextGaussian() / 20f, y + (dragonFireballEntity.getHeight() / 2f) + dragonFireballEntity.world.random.nextGaussian() / 20f, z + dragonFireballEntity.world.random.nextGaussian() / 20f);

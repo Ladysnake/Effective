@@ -1,8 +1,10 @@
 package ladysnake.effective.mixin.sculk;
 
 import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
+import com.sammy.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.block.Block;
@@ -27,15 +29,18 @@ public class SculkBlockDustSpawner {
 		if (random.nextFloat() <= (EffectiveConfig.sculkDustDensity / 100f) && state.getBlock() == Blocks.SCULK && (world.getBlockState(pos.offset(Direction.UP, 1)).isOf(Blocks.SCULK_VEIN) || world.getBlockState(pos.offset(Direction.UP, 1)).isAir())) {
 			boolean bright = random.nextInt(50) == 0;
 			Color color = bright ? new Color(0x29DFEB) : new Color(0x0D1217);
-			ParticleBuilders.create(Effective.PIXEL)
-				.setScale(0.02f)
-				.setAlpha(1f, 1f, 0f)
-				.setAlphaEasing(Easing.SINE_OUT)
-				.setColor(color, color)
+			WorldParticleBuilder.create(Effective.PIXEL)
+				.setScaleData(GenericParticleData.create(0.02f).build())
+				.setTransparencyData(
+					GenericParticleData.create(1f, 1f, 0f)
+						.setEasing(Easing.SINE_OUT)
+						.build()
+				)
+				.setColorData(ColorParticleData.create(color, color).build())
 				.enableNoClip()
 				.setLifetime(100 + random.nextInt(50))
 				.setMotion(0f, 0.01f + random.nextFloat() * .01f, 0f)
-				.overrideRenderType(bright ? ParticleTextureSheets.ADDITIVE : ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
+				.setRenderType(bright ? LodestoneWorldParticleTextureSheet.ADDITIVE : ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
 				.spawn(world, pos.getX() + .5f + random.nextGaussian() / 3f, pos.getY() + 0.975f, pos.getZ() + .5f + random.nextGaussian() / 3f);
 		}
 	}

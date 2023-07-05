@@ -2,7 +2,10 @@ package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.cosmetics.particle.pet.PlayerWispParticle;
 import ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
@@ -84,24 +87,30 @@ public class WillOWispParticle extends Particle {
 			float z = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z));
 
 			for (int i = 0; i < 2; i++) {
-				ParticleBuilders.create(Effective.WISP)
-					.setSpin((float) (this.world.random.nextGaussian() / 5f))
-					.setScale(this instanceof PlayerWispParticle ? 0.16f : 0.25f, 0f)
-					.setScaleEasing(Easing.CIRC_OUT)
-					.setAlpha(1f)
-					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
-					.setColorEasing(Easing.CIRC_OUT)
+				WorldParticleBuilder.create(Effective.WISP)
+					.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
+					.setScaleData(
+						GenericParticleData.create(this instanceof PlayerWispParticle ? 0.16f : 0.25f, 0f)
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
+					.setTransparencyData(GenericParticleData.create(1f).build())
+					.setColorData(
+						ColorParticleData.create(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
 					.setMotion(0, 0.066f, 0)
 					.enableNoClip()
 					.setLifetime(40)
 					.spawn(this.world, x + random.nextGaussian() / 20f, y + random.nextGaussian() / 20f, z + random.nextGaussian() / 20f);
 			}
 
-			ParticleBuilders.create(Effective.WISP)
-				.setSpin((float) (this.world.random.nextGaussian() / 5f))
-				.setScale(this instanceof PlayerWispParticle ? 0.10f : 0.15f)
-				.setAlpha(0.2f, 0f)
-				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
+			WorldParticleBuilder.create(Effective.WISP)
+				.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
+				.setScaleData(GenericParticleData.create(this instanceof PlayerWispParticle ? 0.10f : 0.15f).build())
+				.setTransparencyData(GenericParticleData.create(0.2f, 0f).build())
+				.setColorData(ColorParticleData.create(new Color(0xFFFFFF), new Color(0xFFFFFF)).build())
 				.setMotion(0, 0.066f, 0)
 				.enableNoClip()
 				.setLifetime(3)
@@ -121,14 +130,19 @@ public class WillOWispParticle extends Particle {
 
 		if (this.age++ >= this.maxAge) {
 			for (int i = 0; i < 50; i++) {
-				ParticleBuilders.create(Effective.WISP)
-					.setSpin((float) (this.world.random.nextGaussian() / 5f))
-					.setScale(0.25f, 0f)
-					.setScaleEasing(Easing.CIRC_OUT)
-					.setAlpha(1f)
-					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
-					.setColorEasing(Easing.CIRC_OUT)
-					.setForcedMotion(new Vector3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)), new Vector3f())
+				// TODO: Check if this works
+				Vector3f start = new Vector3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f));
+				Vector3f motion = new Vector3f().sub(start).absolute();
+				WorldParticleBuilder.create(Effective.WISP)
+					.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
+					.setScaleData(GenericParticleData.create(0.25f, 0f).setEasing(Easing.CIRC_OUT).build())
+					.setTransparencyData(GenericParticleData.create(1f).build())
+					.setColorData(
+						ColorParticleData.create(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
+					.setMotion(motion.x(), motion.y(), motion.z())
 					.enableNoClip()
 					.setLifetime(20)
 					.repeat(this.world, x, y, z, 3);

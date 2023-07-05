@@ -3,7 +3,9 @@ package ladysnake.effective.mixin.spectral_arrows;
 import com.sammy.lodestone.setup.LodestoneRenderLayers;
 import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
 import com.sammy.lodestone.systems.rendering.VFXBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.particle.contracts.ColoredParticleInitialData;
@@ -84,10 +86,10 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 			// twinkles
 			if ((spectralArrowEntity.world.getRandom().nextInt(100) + 1) <= 5 && !MinecraftClient.getInstance().isPaused()) {
 				float spreadDivider = 4f;
-				ParticleBuilders.create(Effective.ALLAY_TWINKLE)
-					.setColor(new Color(data.color), new Color(data.color))
-					.setAlpha(0.9f)
-					.setScale(0.06f)
+				WorldParticleBuilder.create(Effective.ALLAY_TWINKLE)
+					.setColorData(ColorParticleData.create(new Color(data.color), new Color(data.color)).build())
+					.setTransparencyData(GenericParticleData.create(0.9f).build())
+					.setScaleData(GenericParticleData.create(0.06f).build())
 					.setLifetime(15)
 					.setMotion(0, 0.05f, 0)
 					.spawn(spectralArrowEntity.world, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider);

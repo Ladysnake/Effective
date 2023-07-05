@@ -11,15 +11,14 @@ public class WaterfallCloudParticle extends GenericParticle {
 	public WaterfallCloudParticle(ClientWorld world, WorldParticleEffect data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
 		super(world, data, spriteSet, x, y, z, xd, yd, zd);
 
-
-		this.setSprite(this.spriteProvider.method_18139(world.random));
+		this.setSprite(this.spriteSet.getRandom(world.random));
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
 
-		this.setSpriteForAge(spriteProvider);
+		this.setSpriteForAge(this.spriteSet);
 
 		this.prevPosX = this.x;
 		this.prevPosY = this.y;

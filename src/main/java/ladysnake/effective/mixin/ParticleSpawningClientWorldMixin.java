@@ -1,7 +1,9 @@
 package ladysnake.effective.mixin;
 
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
+import com.sammy.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.particle.FireflyParticle;
@@ -57,11 +59,11 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
 			if (fireflySpawnSetting != null && FireflyParticle.canFlyThroughBlock(this, pos, this.getBlockState(pos))) {
 				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity) {
-					ParticleBuilders.create(Effective.FIREFLY)
-						.setColor(fireflySpawnSetting.color(), fireflySpawnSetting.color())
-						.setScale(0.05f + random.nextFloat() * 0.10f)
+					WorldParticleBuilder.create(Effective.FIREFLY)
+						.setColorData(ColorParticleData.create(fireflySpawnSetting.color(), fireflySpawnSetting.color()).build())
+						.setScaleData(GenericParticleData.create(0.05f + random.nextFloat() * 0.10f).build())
 						.setLifetime(ThreadLocalRandom.current().nextInt(40, 120))
-						.overrideRenderType(ParticleTextureSheets.ADDITIVE)
+						.setRenderType(LodestoneWorldParticleTextureSheet.ADDITIVE)
 						.spawn(this, pos.getX() + random.nextFloat(), pos.getY() + random.nextFloat(), pos.getZ() + random.nextFloat());
 				}
 			}

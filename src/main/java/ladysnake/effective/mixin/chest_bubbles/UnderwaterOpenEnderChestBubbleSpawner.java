@@ -1,8 +1,11 @@
 package ladysnake.effective.mixin.chest_bubbles;
 
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
+import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
+import ladysnake.effective.LinearForcedMotionImpl;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -97,14 +100,14 @@ public class UnderwaterOpenEnderChestBubbleSpawner<T extends BlockEntity & Chest
 
 	private static void spawnBubble(World world, float x, float y, float z, boolean endChest) {
 		float bubbleSize= .05f + world.random.nextFloat() * .05f;
-		ParticleBuilders.create(Effective.BUBBLE)
-			.setScale(bubbleSize)
-			.setAlpha(1f)
+		WorldParticleBuilder.create(Effective.BUBBLE)
+			.setScaleData(GenericParticleData.create(bubbleSize).build())
+			.setTransparencyData(GenericParticleData.create(1f).build())
 			.enableNoClip()
 			.setLifetime(60 + world.random.nextInt(60))
 			.setMotion(0f, bubbleSize, 0f)
-			.overrideRenderType(ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
-			.setColor(new Color(endChest ? 0x00FF90 : 0xFFFFFF), new Color(endChest ? 0x00FF90 : 0xFFFFFF))
+			.setRenderType(ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
+			.setColorData(ColorParticleData.create(new Color(endChest ? 0x00FF90 : 0xFFFFFF), new Color(endChest ? 0x00FF90 : 0xFFFFFF)).build())
 			.spawn(world, x, y, z);
 	}
 
@@ -125,16 +128,19 @@ public class UnderwaterOpenEnderChestBubbleSpawner<T extends BlockEntity & Chest
 				velX = -.05f - (world.random.nextFloat() / 5f);
 				velZ = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 			}
-
-			ParticleBuilders.create(Effective.BUBBLE)
-				.setScale(.05f + world.random.nextFloat() * .05f)
-				.setAlpha(1f)
+			// TODO: Check if this works
+			WorldParticleBuilder.create(Effective.BUBBLE)
+				.setScaleData(GenericParticleData.create(.05f + world.random.nextFloat() * .05f).build())
+				.setTransparencyData(GenericParticleData.create(1f).build())
 				.enableNoClip()
 				.setLifetime(60 + world.random.nextInt(60))
-				.setForcedMotion(new Vector3f(velX, .1f - (world.random.nextFloat() * .1f), velZ), new Vector3f(0f, .1f, 0f))
-				.setMotionCoefficient(10f)
-				.overrideRenderType(ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
-				.setColor(new Color(endChest ? 0x00FF90 : 0xFFFFFF), new Color(endChest ? 0x00FF90 : 0xFFFFFF))
+				.addActor(new LinearForcedMotionImpl(
+					new Vector3f(velX, .1f - (world.random.nextFloat() * .1f), velZ),
+					new Vector3f(0f, .1f, 0f),
+					10f
+				))
+				.setRenderType(ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
+				.setColorData(ColorParticleData.create(new Color(endChest ? 0x00FF90 : 0xFFFFFF), new Color(endChest ? 0x00FF90 : 0xFFFFFF)).build())
 				.spawn(world, x, y, z);
 		}
 	}

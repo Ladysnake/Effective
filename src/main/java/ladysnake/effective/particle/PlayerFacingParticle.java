@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sammy.lodestone.config.ClientConfig;
 import com.sammy.lodestone.handlers.RenderHandler;
 import com.sammy.lodestone.setup.LodestoneRenderLayers;
-import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
+import com.sammy.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
 import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
 import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
@@ -24,10 +24,10 @@ public class PlayerFacingParticle extends GenericParticle {
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
 		VertexConsumer consumer = vertexConsumer;
 		if (ClientConfig.DELAYED_RENDERING) {
-			if (getType().equals(ParticleTextureSheets.ADDITIVE)) {
+			if (getType().equals(LodestoneWorldParticleTextureSheet.ADDITIVE)) {
 				consumer = RenderHandler.DELAYED_RENDER.getBuffer(LodestoneRenderLayers.ADDITIVE_PARTICLE);
 			}
-			if (getType().equals(ParticleTextureSheets.TRANSPARENT)) {
+			if (getType().equals(LodestoneWorldParticleTextureSheet.TRANSPARENT)) {
 				consumer = RenderHandler.DELAYED_RENDER.getBuffer(LodestoneRenderLayers.TRANSPARENT_PARTICLE);
 			}
 		}
