@@ -27,8 +27,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.List;
@@ -128,7 +128,7 @@ public class WillOWispParticle extends Particle {
 					.setAlpha(1f)
 					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
 					.setColorEasing(Easing.CIRC_OUT)
-					.setForcedMotion(new Vec3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)), Vec3f.ZERO)
+					.setForcedMotion(new Vector3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)), new Vector3f())
 					.enableNoClip()
 					.setLifetime(20)
 					.repeat(this.world, x, y, z, 3);

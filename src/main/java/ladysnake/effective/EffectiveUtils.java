@@ -6,7 +6,6 @@ import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biomes;
@@ -41,7 +40,7 @@ public class EffectiveUtils {
 	}
 
 	public static boolean isGlowingWater(World world, Vec3d pos) {
-		return EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(new BlockPos(pos)).isRegistryKey(Biomes.WARM_OCEAN);
+		return EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(BlockPos.create(pos.getX(), pos.getY(), pos.getZ())).isRegistryKey(Biomes.WARM_OCEAN);
 	}
 
 	public static Color getGlowingWaterColor(World world, BlockPos pos) {

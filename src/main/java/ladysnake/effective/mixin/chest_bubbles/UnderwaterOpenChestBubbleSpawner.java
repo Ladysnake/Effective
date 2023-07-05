@@ -11,8 +11,8 @@ import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -130,7 +130,7 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 				.setAlpha(1f)
 				.enableNoClip()
 				.setLifetime(60 + world.random.nextInt(60))
-				.setForcedMotion(new Vec3f(velX, .1f - (world.random.nextFloat() * .1f), velZ), new Vec3f(0f, .1f, 0f))
+				.setForcedMotion(new Vector3f(velX, .1f - (world.random.nextFloat() * .1f), velZ), new Vector3f(0f, .1f, 0f))
 				.setMotionCoefficient(10f)
 				.overrideRenderType(ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT)
 				.setColor(new Color(endChest ? 0x00FF90 : 0xFFFFFF), new Color(endChest ? 0x00FF90 : 0xFFFFFF))

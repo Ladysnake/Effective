@@ -21,9 +21,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.LightType;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 public class GlowSplashParticle extends SplashParticle {
 	public float redAndGreen = random.nextFloat() / 5f;
@@ -44,11 +44,11 @@ public class GlowSplashParticle extends SplashParticle {
 		}
 		// second splash
 		if (age >= this.wave2Start) {
-			drawSplash(Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * MAX_FRAME), camera, tickDelta, new Vec3f(0.5f, 2, 0.5f));
+			drawSplash(Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * MAX_FRAME), camera, tickDelta, new Vector3f(0.5f, 2, 0.5f));
 		}
 	}
 
-	private void drawSplash(int frame, Camera camera, float tickDelta, Vec3f multiplier) {
+	private void drawSplash(int frame, Camera camera, float tickDelta, Vector3f multiplier) {
 		if (waterColor == -1) {
 			waterColor = BiomeColors.getWaterColor(world, BlockPos.create(this.x, this.y, this.z));
 		}
@@ -63,19 +63,19 @@ public class GlowSplashParticle extends SplashParticle {
 
 		// splash matrices
 		MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelMatrix.scale(widthMultiplier * multiplier.x(), -heightMultiplier * multiplier.y(), widthMultiplier * multiplier.z());
 		modelMatrix.translate(0, -1, 0);
 		MatrixStack modelBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelBottomMatrix.scale(widthMultiplier * multiplier.x(), heightMultiplier * multiplier.y(), widthMultiplier * multiplier.z());
 		modelBottomMatrix.translate(0, 0.001, 0);
 
 		// splash bottom matrices
 		float splashRimScaleOffset = 0.0001f;
 		MatrixStack modelRimMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, -heightMultiplier * multiplier.getY() - splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
+		modelRimMatrix.scale(widthMultiplier * multiplier.x() + splashRimScaleOffset, -heightMultiplier * multiplier.y() - splashRimScaleOffset, widthMultiplier * multiplier.z() + splashRimScaleOffset);
 		modelRimMatrix.translate(0, -1.001, 0);
 		MatrixStack modelRimBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimBottomMatrix.scale(widthMultiplier * multiplier.getX() + splashRimScaleOffset, heightMultiplier * multiplier.getY() + splashRimScaleOffset, widthMultiplier * multiplier.getZ() + splashRimScaleOffset);
+		modelRimBottomMatrix.scale(widthMultiplier * multiplier.x() + splashRimScaleOffset, heightMultiplier * multiplier.y() + splashRimScaleOffset, widthMultiplier * multiplier.z() + splashRimScaleOffset);
 		modelRimBottomMatrix.translate(0, 0.002, 0);
 
 		int light = this.getBrightness(tickDelta);
@@ -96,7 +96,7 @@ public class GlowSplashParticle extends SplashParticle {
 	}
 
 	private void drawSplash(int frame, Camera camera, float tickDelta) {
-		drawSplash(frame, camera, tickDelta, new Vec3f(1, 1, 1));
+		drawSplash(frame, camera, tickDelta, new Vector3f(1, 1, 1));
 	}
 
 	private MatrixStack getMatrixStackFromCamera(Camera camera, float tickDelta) {
