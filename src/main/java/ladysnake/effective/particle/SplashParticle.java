@@ -7,8 +7,6 @@ import ladysnake.effective.render.entity.model.SplashBottomModel;
 import ladysnake.effective.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.render.entity.model.SplashModel;
 import ladysnake.effective.render.entity.model.SplashRimModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.model.Model;
@@ -27,8 +25,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 public class SplashParticle extends Particle {
 	static final int MAX_FRAME = 12;
@@ -71,13 +70,13 @@ public class SplashParticle extends Particle {
 		}
 		// second splash
 		if (age >= this.wave2Start) {
-			drawSplash(Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * MAX_FRAME), camera, tickDelta, new Vec3f(0.5f, 2, 0.5f));
+			drawSplash(Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * MAX_FRAME), camera, tickDelta, new Vector3f(0.5f, 2, 0.5f));
 		}
 	}
 
-	private void drawSplash(int frame, Camera camera, float tickDelta, Vec3f multiplier) {
+	private void drawSplash(int frame, Camera camera, float tickDelta, Vector3f multiplier) {
 		if (waterColor == -1) {
-			waterColor = BiomeColors.getWaterColor(world, new BlockPos(this.x, this.y, this.z));
+			waterColor = BiomeColors.getWaterColor(world, new BlockPos((int) this.x, (int) this.y, (int) this.z));
 		}
 		float r = (float) (waterColor >> 16 & 0xFF) / 255.0f;
 		float g = (float) (waterColor >> 8 & 0xFF) / 255.0f;
@@ -90,18 +89,18 @@ public class SplashParticle extends Particle {
 
 		// splash matrices
 		MatrixStack modelMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelMatrix.scale(widthMultiplier * multiplier.x(), -heightMultiplier * multiplier.y(), widthMultiplier * multiplier.z());
 		modelMatrix.translate(0, -1, 0);
 		MatrixStack modelBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelBottomMatrix.scale(widthMultiplier * multiplier.x(), heightMultiplier * multiplier.y(), widthMultiplier * multiplier.z());
 		modelBottomMatrix.translate(0, 0.001, 0);
 
 		// splash bottom matrices
 		MatrixStack modelRimMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimMatrix.scale(widthMultiplier * multiplier.getX(), -heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelRimMatrix.scale(widthMultiplier * multiplier.x(), -heightMultiplier * multiplier.y(), widthMultiplier * multiplier.z());
 		modelRimMatrix.translate(0, -1, 0);
 		MatrixStack modelRimBottomMatrix = getMatrixStackFromCamera(camera, tickDelta);
-		modelRimBottomMatrix.scale(widthMultiplier * multiplier.getX(), heightMultiplier * multiplier.getY(), widthMultiplier * multiplier.getZ());
+		modelRimBottomMatrix.scale(widthMultiplier * multiplier.x(), heightMultiplier * multiplier.y(), widthMultiplier * multiplier.z());
 		modelRimBottomMatrix.translate(0, 0.001, 0);
 
 		int light = this.getBrightness(tickDelta);
@@ -120,7 +119,7 @@ public class SplashParticle extends Particle {
 	}
 
 	private void drawSplash(int frame, Camera camera, float tickDelta) {
-		drawSplash(frame, camera, tickDelta, new Vec3f(1, 1, 1));
+		drawSplash(frame, camera, tickDelta, new Vector3f(1, 1, 1));
 	}
 
 	private MatrixStack getMatrixStackFromCamera(Camera camera, float tickDelta) {
@@ -161,7 +160,7 @@ public class SplashParticle extends Particle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+	@ClientOnly
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		public DefaultFactory(SpriteProvider spriteProvider) {
 		}

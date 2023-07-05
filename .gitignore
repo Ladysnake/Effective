@@ -17,6 +17,9 @@ run/
 *.ipr
 *.iws
 
+# Fleet
+.fleet/
+
 # Visual Studio Code
 .settings/
 .vscode/

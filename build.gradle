@@ -72,13 +72,10 @@ dependencies {
 	modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
 
 	// midnightlib
-	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-fabric")
+	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-quilt")
 
 	// satin
 	modImplementation include("io.github.ladysnake:satin:${satin_version}")
-
-	// lodestone lib
-	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:${lodestone_version}")
 
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")

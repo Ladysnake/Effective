@@ -60,7 +60,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 		}
 
 		this.prevAngle = this.angle;
-		if (this.onGround || this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).getFluid() != Fluids.EMPTY) {
+		if (this.onGround || this.world.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).getFluid() != Fluids.EMPTY) {
 			this.velocityY *= 0.95;
 		}
 

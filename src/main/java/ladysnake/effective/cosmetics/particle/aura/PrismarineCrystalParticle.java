@@ -1,12 +1,16 @@
 package ladysnake.effective.cosmetics.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import ladysnake.effective.EffectiveUtils;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.*;
+import org.joml.Math;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -47,28 +51,32 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
 		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternion quaternion2;
+		Quaternionf quaternion2;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
-			quaternion2 = new Quaternion(camera.getRotation());
+			quaternion2 = new Quaternionf(camera.getRotation());
 			float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
+			// other = Vec3f.POSITIVE_Z.getRadialQuaternion(i)
+			float otherz = Math.sin(i / 2.0F);
+			float otherw = Math.cos(i / 2.0F);
+			Quaternionf other = new Quaternionf(0, 0, otherz, otherw);
+			quaternion2 = EffectiveUtils.hamiltonProduct(quaternion2, other);
 		}
 
-		Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
 		Vec3f.rotate(quaternion2);
-		Vec3f[] Vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+		Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vec3f Vec3f2 = Vec3fs[k];
+			Vector3f Vec3f2 = Vec3fs[k];
 			if (this.onGround) {
-				Vec3f2.rotate(new Quaternion(90f, 0f, quaternion2.getZ(), 0));
+				Vec3f2.rotate(new Quaternionf(90f, 0f, quaternion2.z(), 0));
 			} else {
 				Vec3f2.rotate(quaternion2);
 			}
-			Vec3f2.scale(j);
+			Vec3f2.mul(j);
 			Vec3f2.add(f, g + this.groundOffset, h);
 		}
 
@@ -78,10 +86,10 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = 15728880;
 
-		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[0].z(), Vec3fs[0].y(), Vec3fs[0].z()).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].z(), Vec3fs[1].y(), Vec3fs[1].z()).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].z(), Vec3fs[2].y(), Vec3fs[2].z()).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].z(), Vec3fs[3].y(), Vec3fs[3].z()).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
 	}
 
 	public ParticleTextureSheet getType() {
@@ -97,7 +105,7 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
 		this.prevPosY = this.y;
 		this.prevPosZ = this.z;
 
-		if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+		if (this.world.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).isIn(FluidTags.WATER)) {
 			this.move(this.velocityX, this.velocityY, this.velocityZ);
 		} else {
 			this.move(this.velocityX, this.velocityY, this.velocityZ);

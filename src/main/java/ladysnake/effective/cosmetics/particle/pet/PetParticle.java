@@ -1,6 +1,7 @@
 package ladysnake.effective.cosmetics.particle.pet;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import ladysnake.effective.EffectiveUtils;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
@@ -8,9 +9,10 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Math;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.Random;
 
@@ -42,24 +44,28 @@ public class PetParticle extends SpriteBillboardParticle {
 		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternion quaternion2;
+		Quaternionf quaternion2;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
-			quaternion2 = new Quaternion(camera.getRotation());
+			quaternion2 = new Quaternionf(camera.getRotation());
 			float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
+			// other = Vec3f.POSITIVE_Z.getRadialQuaternion(i)
+			float otherz = Math.sin(i / 2.0F);
+			float otherw = Math.cos(i / 2.0F);
+			Quaternionf other = new Quaternionf(0, 0, otherz, otherw);
+			quaternion2 = EffectiveUtils.hamiltonProduct(quaternion2, other);
 		}
 
-		Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
 		Vec3f.rotate(quaternion2);
-		Vec3f[] Vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+		Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vec3f Vec3f2 = Vec3fs[k];
+			Vector3f Vec3f2 = Vec3fs[k];
 			Vec3f2.rotate(quaternion2);
-			Vec3f2.scale(j);
+			Vec3f2.mul(j);
 			Vec3f2.add(f, g, h);
 		}
 
@@ -69,10 +75,10 @@ public class PetParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = 15728880;
 
-		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).uv(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).uv(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[0].x(), Vec3fs[0].y(), Vec3fs[0].z()).uv(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].x(), Vec3fs[1].y(), Vec3fs[1].z()).uv(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].x(), Vec3fs[2].y(), Vec3fs[2].z()).uv(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].x(), Vec3fs[3].y(), Vec3fs[3].z()).uv(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
 	}
 
 	public ParticleTextureSheet getType() {

@@ -1,10 +1,5 @@
 package ladysnake.effective;
 
-import com.sammy.lodestone.setup.LodestoneScreenParticles;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleTextureSheets;
-import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
-import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
 import ladysnake.effective.particle.types.*;
@@ -13,15 +8,12 @@ import ladysnake.effective.render.entity.model.SplashBottomRimModel;
 import ladysnake.effective.render.entity.model.SplashModel;
 import ladysnake.effective.render.entity.model.SplashRimModel;
 import ladysnake.effective.world.RenderedHypnotizingEntities;
-import ladysnake.effective.world.WaterfallCloudGenerators;
 import ladysnake.satin.api.event.EntitiesPreRenderCallback;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedCoreShader;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import ladysnake.satin.api.managed.uniform.Uniform1f;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -29,22 +21,25 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
+
 import net.minecraft.world.World;
 import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.lifecycle.api.client.event.ClientTickEvents;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
 	// rainbow shader for jeb glow squid
@@ -68,24 +63,12 @@ public class Effective implements ClientModInitializer {
 	public static SplashParticleType GLOW_SPLASH;
 	public static DefaultParticleType GLOW_DROPLET;
 	public static DefaultParticleType GLOW_RIPPLE;
-	public static AllayTwinkleParticleType ALLAY_TWINKLE;
 	public static DefaultParticleType CHORUS_PETAL;
 	public static DefaultParticleType EYES;
-	public static DefaultParticleType WILL_O_WISP;
-
-	// lodestone particles
-	public static LodestoneParticleType PIXEL = new LodestoneParticleType();
-	public static LodestoneParticleType WISP = new LodestoneParticleType();
-	public static FlameParticleType FLAME = new FlameParticleType();
-	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
-	public static BubbleParticleType BUBBLE = new BubbleParticleType();
-	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
-	public static MistParticleType MIST = new MistParticleType();
-	public static FireflyParticleType FIREFLY = new FireflyParticleType();
 
 	// sound events
-	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
-	public static SoundEvent PARRY = new SoundEvent(new Identifier(MODID, "entity.parry"));
+	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
+	public static SoundEvent PARRY = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "entity.parry"));
 	private static int ticksJeb;
 
 	public static boolean isNightTime(World world) {
@@ -116,57 +99,26 @@ public class Effective implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
 		// particles
-		SPLASH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "splash"), new SplashParticleType(true));
+		SPLASH = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(SPLASH, SplashParticle.DefaultFactory::new);
-		DROPLET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "droplet"), FabricParticleTypes.simple(true));
+		DROPLET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(DROPLET, DropletParticle.DefaultFactory::new);
-		RIPPLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "ripple"), FabricParticleTypes.simple(true));
+		RIPPLE = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(RIPPLE, RippleParticle.DefaultFactory::new);
-		GLOW_SPLASH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_splash"), new SplashParticleType(true));
+		GLOW_SPLASH = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "glow_splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
-		GLOW_DROPLET = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_droplet"), FabricParticleTypes.simple(true));
+		GLOW_DROPLET = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "glow_droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
-		GLOW_RIPPLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "glow_ripple"), FabricParticleTypes.simple(true));
+		GLOW_RIPPLE = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "glow_ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
-		ALLAY_TWINKLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "allay_twinkle"), new AllayTwinkleParticleType());
-		ParticleFactoryRegistry.getInstance().register(ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
-		CHORUS_PETAL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
+		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
-		EYES = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
+		EYES = Registry.register(Registries.PARTICLE_TYPE, new Identifier(MODID, "eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.DefaultFactory::new);
-		WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(MODID, "textures/entity/will_o_wisp.png"), 0.1f, 0.75f, 1.0f, 0.0f, 0.1f, 1.0f));
-
-		// lodestone particles
-		ParticleFactoryRegistry.getInstance().register(PIXEL, LodestoneParticleType.Factory::new);
-		PIXEL = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "pixel"), PIXEL);
-		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneParticleType.Factory::new);
-		WISP = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "wisp"), WISP);
-		ParticleFactoryRegistry.getInstance().register(FLAME, FlameParticleType.Factory::new);
-		FLAME = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "flame"), FLAME);
-		ParticleFactoryRegistry.getInstance().register(DRAGON_BREATH, FlameParticleType.Factory::new);
-		DRAGON_BREATH = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "dragon_breath"), DRAGON_BREATH);
-		ParticleFactoryRegistry.getInstance().register(BUBBLE, BubbleParticleType.Factory::new);
-		BUBBLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "bubble"), BUBBLE);
-		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticleType.Factory::new);
-		WATERFALL_CLOUD = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
-		ParticleFactoryRegistry.getInstance().register(MIST, MistParticleType.Factory::new);
-		MIST = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "mist"), MIST);
-		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticleType.Factory::new);
-		FIREFLY = Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "firefly"), FIREFLY);
 
 		// sound events
-		AMBIENCE_WATERFALL = Registry.register(Registry.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
-		PARRY = Registry.register(Registry.SOUND_EVENT, PARRY.getId(), PARRY);
-
-		// events
-		ClientTickEvents.END.register(client -> {
-			WaterfallCloudGenerators.tick();
-		});
-		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-			WaterfallCloudGenerators.generators.clear();
-			WaterfallCloudGenerators.particlesToSpawn.clear();
-		});
+		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
+		PARRY = Registry.register(Registries.SOUND_EVENT, PARRY.getId(), PARRY);
 
 		// hypnotizing glow squids
 		ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
@@ -251,9 +203,6 @@ public class Effective implements ClientModInitializer {
 		ClientTickEvents.END.register(client -> {
 			if (freezeFrames > 0) {
 				freezeFrames--;
-
-				ParticleBuilders.ScreenParticleBuilder b2 = ParticleBuilders.create(LodestoneScreenParticles.SPARKLE).setAlpha(0.3f).setScale(100000f).setColor(new Color(0xFFFFFF), new Color(0xFFFFFF)).setLifetime(1).overrideRenderType(ParticleTextureSheets.ADDITIVE).overrideRenderOrder(ScreenParticle.RenderOrder.AFTER_EVERYTHING);
-				b2.spawn(0, 0);
 
 				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();
 				if (bl) {

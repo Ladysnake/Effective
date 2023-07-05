@@ -1,12 +1,11 @@
 package ladysnake.effective.particle.types;
 
 import ladysnake.effective.particle.contracts.SplashParticleInitialData;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class SplashParticleType extends DefaultParticleType {
 	public SplashParticleInitialData initialData;
 

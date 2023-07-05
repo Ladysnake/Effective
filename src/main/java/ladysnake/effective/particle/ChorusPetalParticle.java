@@ -2,13 +2,17 @@ package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.Effective;
+import ladysnake.effective.EffectiveUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.*;
+import org.joml.Math;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.Random;
 
@@ -49,35 +53,54 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternion quaternion2;
+		Quaternionf quaternion2;
 
 		float i = 0f;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
-			quaternion2 = new Quaternion(camera.getRotation());
+			quaternion2 = new Quaternionf(camera.getRotation());
 			i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
+			// other = Vec3f.POSITIVE_Z.getRadialQuaternion(i)
+			float otherz = Math.sin(i / 2.0F);
+			float otherw = Math.cos(i / 2.0F);
+			Quaternionf other = new Quaternionf(0, 0, otherz, otherw);
+			quaternion2 = EffectiveUtils.hamiltonProduct(quaternion2, other);
 		}
 
-		Vec3f vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		Vector3f vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
 		vec3f.rotate(quaternion2);
-		Vec3f[] vector3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+		Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		if (isInAir) {
 			for (int k = 0; k < 4; ++k) {
-				Vec3f Vec3f2 = vector3fs[k];
-				Vec3f2.rotate(quaternion2);
-				Vec3f2.scale(j);
-				Vec3f2.add(f, g, h);
+				Vector3f vec3f2 = vector3fs[k];
+				vec3f2.rotate(quaternion2);
+				vec3f2.mul(j);
+				vec3f2.add(f, g, h);
 			}
 		} else {
 			for (int k = 0; k < 4; ++k) {
-				Vec3f Vec3f2 = vector3fs[k];
-				Vec3f2.rotate(new Quaternion(90f, 0f, this.angle, true));
-				Vec3f2.scale(j);
-				Vec3f2.add(f, g + this.groundOffset, h);
+				Vector3f vec3f2 = vector3fs[k];
+				float x = 90f, y = 0f, z = this.angle;
+				x *= (float) (Math.PI / 180.0);
+				y *= (float) (Math.PI / 180.0);
+				z *= (float) (Math.PI / 180.0);
+
+				float quatf = Math.sin(0.5F * x);
+				float quatg = Math.cos(0.5F * x);
+				float quath = Math.sin(0.5F * y);
+				float quati = Math.cos(0.5F * y);
+				float quatj = Math.sin(0.5F * z);
+				float quatk = Math.cos(0.5F * z);
+				x = quatf * quati * quatk + quatg * quath * quatj;
+				y = quatg * quath * quatk - quatf * quati * quatj;
+				z = quatf * quath * quatk + quatg * quati * quatj;
+				float w = quatg * quati * quatk - quatf * quath * quatj;
+				vec3f2.rotate(new Quaternionf(x, y, z, w));
+				vec3f2.mul(j);
+				vec3f2.add(f, g + this.groundOffset, h);
 			}
 		}
 
@@ -87,10 +110,10 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = 15728880;
 
-		vertexConsumer.vertex(vector3fs[0].getX(), vector3fs[0].getY(), vector3fs[0].getZ()).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(vector3fs[1].getX(), vector3fs[1].getY(), vector3fs[1].getZ()).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(vector3fs[2].getX(), vector3fs[2].getY(), vector3fs[2].getZ()).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-		vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[0].x(), vector3fs[0].y(), vector3fs[0].z()).uv(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[1].x(), vector3fs[1].y(), vector3fs[1].z()).uv(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[2].x(), vector3fs[2].y(), vector3fs[2].z()).uv(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+		vertexConsumer.vertex(vector3fs[3].x(), vector3fs[3].y(), vector3fs[3].z()).uv(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
 	}
 
 	public ParticleTextureSheet getType() {
@@ -123,12 +146,12 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		}
 
 		this.prevAngle = this.angle;
-		if (this.onGround || this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+		if (this.onGround || this.world.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).isIn(FluidTags.WATER)) {
 			if (this.isInAir) {
-				if (this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).getBlock() == Blocks.WATER) {
+				if (this.world.getBlockState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).getBlock() == Blocks.WATER) {
 					for (int i = 0; i > -10; i--) {
-						BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
-						if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
+						BlockPos pos = new BlockPos((int) this.x, (int) (Math.round(this.y) + i), (int) this.z);
+						if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos((int) this.x, (int) (Math.round(this.y) + i), (int) this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos((int) this.x, (int) (Math.round(this.y) + i + 1), (int) this.z)).isAir()) {
 							this.world.addParticle(Effective.RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
 							break;
 						}

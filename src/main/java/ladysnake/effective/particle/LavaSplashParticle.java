@@ -4,8 +4,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import ladysnake.effective.Effective;
 import ladysnake.effective.render.entity.model.SplashBottomModel;
 import ladysnake.effective.render.entity.model.SplashModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Model;
@@ -26,6 +24,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -167,7 +166,7 @@ public class LavaSplashParticle extends Particle {
 	@Override
 	public void tick() {
 		if (this.widthMultiplier == 0f) {
-			List<Entity> closeEntities = world.getOtherEntities(null, this.getBoundingBox().expand(5.0f)).stream().filter(entity -> world.getBlockState(entity.getBlockPos().add(entity.getVelocity().x, entity.getVelocity().y, entity.getVelocity().z)).getBlock() == Blocks.LAVA).collect(Collectors.toList());
+			List<Entity> closeEntities = world.getOtherEntities(null, this.getBoundingBox().expand(5.0f)).stream().filter(entity -> world.getBlockState(entity.getBlockPos().add((int) entity.getVelocity().x, (int) entity.getVelocity().y, (int) entity.getVelocity().z)).getBlock() == Blocks.LAVA).collect(Collectors.toList());
 			closeEntities.sort((o1, o2) -> (int) (o1.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z)) - o2.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z))));
 
 			if (!closeEntities.isEmpty()) {
@@ -203,7 +202,7 @@ public class LavaSplashParticle extends Particle {
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+	@ClientOnly
 	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 
