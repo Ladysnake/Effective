@@ -32,14 +32,14 @@ public class GlowDropletParticle extends DropletParticle {
 			this.markDead();
 		}
 
-		if (this.onGround || (this.age > 5 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
+		if (this.onGround || (this.age > 5 && this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
 			this.markDead();
 		}
 
-		if (this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
+		if (this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).isAir()) {
 			for (int i = 0; i > -10; i--) {
-				BlockPos pos = new BlockPos(this.x, Math.round(this.y) + i, this.z);
-				if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(new BlockPos(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
+				BlockPos pos = BlockPos.create(this.x, Math.round(this.y) + i, this.z);
+				if (this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, Math.round(this.y) + i, this.z)).getFluidState().isSource() && this.world.getBlockState(BlockPos.create(this.x, Math.round(this.y) + i + 1, this.z)).isAir()) {
 					this.world.addParticle(Effective.GLOW_RIPPLE, this.x, Math.round(this.y) + i + 0.9f, this.z, 0, 0, 0);
 					break;
 				}
@@ -88,7 +88,7 @@ public class GlowDropletParticle extends DropletParticle {
 		float maxV = this.getMaxV();
 
 		int l = 15728880;
-		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) / 15f);
+		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, BlockPos.create(x, y, z)) / 15f);
 
 		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, maxV).color(redAndGreenRender, redAndGreenRender, blue, colorAlpha).light(l).next();
 		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV).color(redAndGreenRender, redAndGreenRender, blue, colorAlpha).light(l).next();

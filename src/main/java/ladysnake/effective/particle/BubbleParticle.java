@@ -15,7 +15,7 @@ public class BubbleParticle extends GenericParticle {
 	public void tick() {
 		super.tick();
 
-		if (!world.isWater(new BlockPos(this.x, this.y, this.z))) {
+		if (!world.isWater(BlockPos.create(this.x, this.y, this.z))) {
 			this.markDead();
 		}
 	}

@@ -25,13 +25,13 @@ public class WaterfallCloudParticle extends GenericParticle {
 		this.prevPosY = this.y;
 		this.prevPosZ = this.z;
 
-		if (this.onGround || (this.age > 10 && this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
+		if (this.onGround || (this.age > 10 && this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER)) {
 			this.velocityX *= 0.5f;
 			this.velocityY *= 0.5f;
 			this.velocityZ *= 0.5f;
 		}
 
-		if (this.world.getBlockState(new BlockPos(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
+		if (this.world.getBlockState(BlockPos.create(this.x, this.y + this.velocityY, this.z)).getBlock() == Blocks.WATER && this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).isAir()) {
 			this.velocityX *= 0.9;
 			this.velocityY *= 0.9;
 			this.velocityZ *= 0.9;

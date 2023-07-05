@@ -130,7 +130,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 			targetVector = targetVector.multiply(0.025 / length);
 
 
-			if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+			if (!this.world.getBlockState(BlockPos.create(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
 				velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
 				velocityY = 0.05;
 				velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
@@ -140,7 +140,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 				velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
 			}
 
-			if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+			if (!BlockPos.create(x, y, z).equals(this.getTargetPosition())) {
 				this.move(velocityX, velocityY, velocityZ);
 			}
 		} else {
@@ -152,7 +152,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		// Behaviour
 		double groundLevel = 0;
 		for (int i = 0; i < 20; i++) {
-			BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
+			BlockState checkedBlock = this.world.getBlockState(BlockPos.create(this.x, this.y - i, this.z));
 			if (!checkedBlock.getBlock().canMobSpawnInside()) {
 				groundLevel = this.y - i;
 			}
@@ -163,7 +163,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		this.yTarget = Math.min(Math.max(owner.getY() + random.nextGaussian(), groundLevel), groundLevel + maxHeight);
 		this.zTarget = owner.getZ() + random.nextGaussian();
 
-		BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+		BlockPos targetPos = BlockPos.create(this.xTarget, this.yTarget, this.zTarget);
 		if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)
 			&& this.world.getBlockState(targetPos).isSolidBlock(world, targetPos)) {
 			this.yTarget += 1;
