@@ -7,6 +7,7 @@ import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
 import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
 import com.sammy.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
+import ladysnake.effective.LinearForcedMotionImpl;
 import ladysnake.effective.cosmetics.particle.pet.PlayerWispParticle;
 import ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
 import net.minecraft.block.Blocks;
@@ -130,9 +131,6 @@ public class WillOWispParticle extends Particle {
 
 		if (this.age++ >= this.maxAge) {
 			for (int i = 0; i < 50; i++) {
-				// TODO: Check if this works
-				Vector3f start = new Vector3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f));
-				Vector3f motion = new Vector3f().sub(start).absolute();
 				WorldParticleBuilder.create(Effective.WISP)
 					.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
 					.setScaleData(GenericParticleData.create(0.25f, 0f).setEasing(Easing.CIRC_OUT).build())
@@ -142,7 +140,11 @@ public class WillOWispParticle extends Particle {
 							.setEasing(Easing.CIRC_OUT)
 							.build()
 					)
-					.setMotion(motion.x(), motion.y(), motion.z())
+					.addActor(new LinearForcedMotionImpl(
+						new Vector3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)),
+						new Vector3f(),
+						1f
+					))
 					.enableNoClip()
 					.setLifetime(20)
 					.repeat(this.world, x, y, z, 3);

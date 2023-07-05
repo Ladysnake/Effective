@@ -127,7 +127,6 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 				velX = -.05f - (world.random.nextFloat() / 5f);
 				velZ = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 			}
-
 			WorldParticleBuilder.create(Effective.BUBBLE)
 				.setScaleData(GenericParticleData.create(.05f + world.random.nextFloat() * .05f).build())
 				.setTransparencyData(GenericParticleData.create(1f).build())

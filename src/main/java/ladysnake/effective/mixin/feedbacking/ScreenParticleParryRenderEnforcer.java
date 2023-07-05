@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
 
 
 @Mixin(ScreenParticleHandler.class)
@@ -32,8 +31,6 @@ public abstract class ScreenParticleParryRenderEnforcer {
 			renderEarliestParticles();
 			renderLateParticles();
 		}
-		// TODO: Check if this work, I'm not sure if this needs any replacement.
-//		RENDERED_STACKS.clear();
 		canSpawnParticles = false;
 	}
 

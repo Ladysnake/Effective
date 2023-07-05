@@ -128,7 +128,6 @@ public class UnderwaterOpenEnderChestBubbleSpawner<T extends BlockEntity & Chest
 				velX = -.05f - (world.random.nextFloat() / 5f);
 				velZ = (world.random.nextFloat() - world.random.nextFloat()) / (doubleChest ? 2.5f : 5f);
 			}
-			// TODO: Check if this works
 			WorldParticleBuilder.create(Effective.BUBBLE)
 				.setScaleData(GenericParticleData.create(.05f + world.random.nextFloat() * .05f).build())
 				.setTransparencyData(GenericParticleData.create(1f).build())
