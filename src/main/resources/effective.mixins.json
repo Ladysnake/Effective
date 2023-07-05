@@ -8,7 +8,7 @@
     "chest_bubbles.JustSoICanSeeTheBubblesWithoutTheUI",
     "chest_bubbles.UnderwaterChestRandomOpener",
     "chest_bubbles.UnderwaterEnderChestRandomOpener",
-    "feedbacking.FeedbackingParryFireballEffect",
+    "feedbacking.FeedbackingParryFireballEffect"
   ],
   "client": [
     "ParticleSpawningClientWorldMixin",
