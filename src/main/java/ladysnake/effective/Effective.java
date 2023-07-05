@@ -85,8 +85,8 @@ public class Effective implements ClientModInitializer {
 	public static FireflyParticleType FIREFLY = new FireflyParticleType();
 
 	// sound events
-	public static SoundEvent AMBIENCE_WATERFALL = new SoundEvent(new Identifier(MODID, "ambience.waterfall"));
-	public static SoundEvent PARRY = new SoundEvent(new Identifier(MODID, "entity.parry"));
+	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "ambience.waterfall"));
+	public static SoundEvent PARRY = SoundEvent.createVariableRangeEvent(new Identifier(MODID, "entity.parry"));
 	private static int ticksJeb;
 
 	public static boolean isNightTime(World world) {
