@@ -77,7 +77,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		} else {
 			for (int k = 0; k < 4; ++k) {
 				Vector3f Vec3f2 = vector3fs[k];
-				Vec3f2.rotate(new Quaternionf().rotateXYZ(90f, 0f, this.angle));
+				Vec3f2.rotate(new Quaternionf().rotateXYZ((float) Math.toRadians(90f), 0f, (float) Math.toRadians(this.angle)));
 				Vec3f2.mul(j);
 				Vec3f2.add(f, g + this.groundOffset, h);
 			}

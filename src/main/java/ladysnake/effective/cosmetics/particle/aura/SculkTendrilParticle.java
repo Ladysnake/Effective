@@ -38,7 +38,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
 
 		for (int k = 0; k < 4; ++k) {
 			Vector3f Vec3f2 = Vec3fs[k];
-			Vec3f2.rotate(new Quaternionf().rotateXYZ(0f, -camera.getYaw(), 0f));
+			Vec3f2.rotate(new Quaternionf().rotateXYZ(0f, (float) Math.toRadians(-camera.getYaw()), 0f));
 			Vec3f2.mul(j);
 			Vec3f2.add(f, g, h);
 		}
