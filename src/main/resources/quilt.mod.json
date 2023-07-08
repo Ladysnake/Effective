@@ -51,5 +51,8 @@
 	],
 	"access_widener": [
 		"effective.accesswidener"
-	]
+	],
+	"minecraft": {
+		"environment": "client"
+	}
 }
