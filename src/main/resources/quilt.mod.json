@@ -13,7 +13,7 @@
 				"lonefelidae16": "Contributor"
 			},
 			"contact": {
-				"homepage": "https://doctor4t.uuid.gg/",
+				"homepage": "https://doctor4t.ladysnake.org",
 				"sources": "https://github.com/Ladysnake/Effective",
 				"issues": "https://github.com/Ladysnake/Effective/issues"
 			},
@@ -51,5 +51,8 @@
 	],
 	"access_widener": [
 		"effective.accesswidener"
-	]
+	],
+	"minecraft": {
+		"environment": "client"
+	}
 }

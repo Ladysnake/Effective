@@ -4,7 +4,8 @@
   "package": "ladysnake.effective.mixin",
   "plugin": "ladysnake.effective.EffectiveMixinPlugin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
+  "mixins": [],
+  "client": [
     "chest_bubbles.JustSoICanSeeTheBubblesWithoutTheUI",
     "chest_bubbles.UnderwaterChestRandomOpener",
     "chest_bubbles.UnderwaterEnderChestRandomOpener",
@@ -18,9 +19,7 @@
     "fireballs.SittingFlamingRendererSwapper",
     "glowsquids.GlowsquidParticleEffectSwapper",
     "sculk.SculkBlockDustSpawner",
-    "spectral_arrows.SpectralArrowPositionTrackerAndParticleRemover"
-  ],
-  "client": [
+    "spectral_arrows.SpectralArrowPositionTrackerAndParticleRemover",
     "ParticleSpawningClientWorldMixin",
     "RandomDisplayTickBlockMixin",
     "allays.AllayPositionTracker",
