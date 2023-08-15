@@ -26,6 +26,9 @@ repositories {
 	maven {
 		name = 'Ladysnake Mods'
 		url = 'https://maven.ladysnake.org/releases'
+		content {
+			includeGroup 'org.ladysnake'
+		}
 	}
 
 	// mod menu
@@ -69,16 +72,20 @@ dependencies {
 
 	// mod menu
 	modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
-	modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
+	//modRuntimeOnly ("com.terraformersmc:modmenu:${mod_menu_version}")
 
 	// midnightlib
-	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-fabric")
+	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-quilt")
 
 	// satin
-	modImplementation include("io.github.ladysnake:satin:${satin_version}")
+	modImplementation include("org.ladysnake:satin:${satin_version}") {
+		exclude group: 'net.fabricmc'
+	}
 
 	// lodestone lib
-	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:${lodestone_version}")
+	modImplementation include("com.github.Arathain:LodestoneLib-Quilt:${lodestone_version}") {
+		exclude group: 'io.github.ladysnake'
+	}
 
 	// iris and sodium
 	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")

@@ -1,11 +1,11 @@
 package ladysnake.effective.mixin.allays;
 
-import com.sammy.lodestone.setup.LodestoneRenderLayers;
-import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
-import com.sammy.lodestone.systems.rendering.VFXBuilders;
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.setup.LodestoneRenderLayers;
+import team.lodestar.lodestone.systems.rendering.PositionTrackedEntity;
+import team.lodestar.lodestone.systems.rendering.VFXBuilders;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.EffectiveUtils;
@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.sammy.lodestone.handlers.RenderHandler.DELAYED_RENDER;
+import static team.lodestar.lodestone.handlers.RenderHandler.DELAYED_RENDER;
 
 @Mixin(LivingEntityRenderer.class)
 public abstract class AllayTrailRenderer<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
@@ -97,7 +97,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 						.setScaleData(GenericParticleData.create(0.12f).build())
 						.setLifetime(15)
 						.setMotion(0, 0.05f, 0)
-						.spawn(allayEntity.world, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
+						.spawn(allayEntity.getWorld(), allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
 				}
 			}
 		}

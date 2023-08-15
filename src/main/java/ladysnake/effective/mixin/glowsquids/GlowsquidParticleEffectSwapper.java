@@ -2,10 +2,10 @@ package ladysnake.effective.mixin.glowsquids;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.MinecraftClient;
@@ -34,7 +34,7 @@ public class GlowsquidParticleEffectSwapper extends SquidEntity {
 					.setColorData(ColorParticleData.create(new Color(0x00FFAA), new Color(0x51FFFF)).build())
 					.setScaleData(GenericParticleData.create(0f, .2f + random.nextFloat() / 10f).setEasing(Easing.EXPO_OUT).build())
 					.setLifetime(40)
-					.spawn(this.world, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + this.getRandom().nextGaussian() / spreadDivider);
+					.spawn(this.getWorld(), this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + this.getRandom().nextGaussian() / spreadDivider);
 			}
 		} else {
 			voidOperation.call(world, particleEffect, x, y, z, velX, velY, velZ);

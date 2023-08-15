@@ -2,11 +2,11 @@ package ladysnake.effective.mixin.fireballs;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.SpinParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.entity.boss.dragon.phase.SittingFlamingPhase;

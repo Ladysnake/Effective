@@ -1,7 +1,7 @@
 package ladysnake.effective.mixin.feedbacking;
 
-import com.sammy.lodestone.handlers.screenparticle.ScreenParticleHandler;
-import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
+import team.lodestar.lodestone.handlers.screenparticle.ScreenParticleHandler;
+import team.lodestar.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
 import ladysnake.effective.gui.ParryScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;

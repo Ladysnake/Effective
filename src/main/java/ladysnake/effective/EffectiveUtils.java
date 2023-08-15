@@ -1,6 +1,5 @@
 package ladysnake.effective;
 
-import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
 import ladysnake.effective.particle.contracts.SplashParticleInitialData;
 import ladysnake.effective.particle.types.SplashParticleType;
 import net.minecraft.entity.passive.AllayEntity;
@@ -11,7 +10,6 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biomes;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 import java.awt.*;
 

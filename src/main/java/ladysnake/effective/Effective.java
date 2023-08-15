@@ -1,13 +1,13 @@
 package ladysnake.effective;
 
-import com.sammy.lodestone.handlers.screenparticle.ScreenParticleHandler;
-import com.sammy.lodestone.setup.LodestoneScreenParticles;
-import com.sammy.lodestone.systems.rendering.particle.ScreenParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
-import com.sammy.lodestone.systems.rendering.particle.screen.LodestoneScreenParticleTextureSheet;
-import com.sammy.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
-import com.sammy.lodestone.systems.rendering.particle.type.LodestoneParticleType;
+import team.lodestar.lodestone.handlers.screenparticle.ScreenParticleHandler;
+import team.lodestar.lodestone.setup.LodestoneScreenParticles;
+import team.lodestar.lodestone.systems.rendering.particle.ScreenParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.screen.LodestoneScreenParticleTextureSheet;
+import team.lodestar.lodestone.systems.rendering.particle.screen.base.ScreenParticle;
+import team.lodestar.lodestone.systems.rendering.particle.type.LodestoneParticleType;
 import ladysnake.effective.gui.ParryScreen;
 import ladysnake.effective.particle.*;
 import ladysnake.effective.particle.types.*;

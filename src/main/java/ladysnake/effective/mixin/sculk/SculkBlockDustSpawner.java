@@ -1,10 +1,10 @@
 package ladysnake.effective.mixin.sculk;
 
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.block.Block;

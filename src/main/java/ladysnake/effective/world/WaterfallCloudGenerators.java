@@ -1,11 +1,11 @@
 package ladysnake.effective.world;
 
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.SpinParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import ladysnake.effective.Effective;

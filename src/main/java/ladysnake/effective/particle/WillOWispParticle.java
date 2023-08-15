@@ -1,11 +1,11 @@
 package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.SpinParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.LinearForcedMotionImpl;
 import ladysnake.effective.cosmetics.particle.pet.PlayerWispParticle;

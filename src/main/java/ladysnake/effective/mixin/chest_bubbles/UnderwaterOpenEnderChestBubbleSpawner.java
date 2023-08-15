@@ -1,8 +1,8 @@
 package ladysnake.effective.mixin.chest_bubbles;
 
-import com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import com.sammy.lodestone.systems.rendering.particle.data.ColorParticleData;
-import com.sammy.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.LinearForcedMotionImpl;

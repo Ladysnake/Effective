@@ -3,7 +3,7 @@ package ladysnake.effective.mixin.spectral_arrows;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
+import team.lodestar.lodestone.systems.rendering.PositionTrackedEntity;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;

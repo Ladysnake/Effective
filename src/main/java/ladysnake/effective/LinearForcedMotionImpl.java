@@ -1,6 +1,6 @@
 package ladysnake.effective;
 
-import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
+import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Vector3f;
 
@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  * Arathain removed setForcedMotion and motion coefficient.
  * Here is my implementation of it or rather a copy paste from LodestoneLib 1.19.2
  * It makes a particle travel from one point to another and can be applied using
- * {@link com.sammy.lodestone.systems.rendering.particle.WorldParticleBuilder#addActor(Consumer)}
+ * {@link team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder#addActor(Consumer)}
  */
 public class LinearForcedMotionImpl implements Consumer<GenericParticle> {
 

@@ -131,8 +131,8 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 			double length = targetVector.length();
 			targetVector = targetVector.multiply(0.025 / length);
 
-
-			if (!this.world.getBlockState(BlockPos.create(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+			BlockState stateBelow = this.world.getBlockState(BlockPos.create(this.x, this.y - 0.1, this.z));
+			if (!stateBelow.getBlock().canMobSpawnInside(stateBelow)) {
 				velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
 				velocityY = 0.05;
 				velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
@@ -155,7 +155,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		double groundLevel = 0;
 		for (int i = 0; i < 20; i++) {
 			BlockState checkedBlock = this.world.getBlockState(BlockPos.create(this.x, this.y - i, this.z));
-			if (!checkedBlock.getBlock().canMobSpawnInside()) {
+			if (!checkedBlock.getBlock().canMobSpawnInside(checkedBlock)) {
 				groundLevel = this.y - i;
 			}
 			if (groundLevel != 0) break;

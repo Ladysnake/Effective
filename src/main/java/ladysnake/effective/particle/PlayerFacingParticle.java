@@ -1,12 +1,12 @@
 package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.sammy.lodestone.config.ClientConfig;
-import com.sammy.lodestone.handlers.RenderHandler;
-import com.sammy.lodestone.setup.LodestoneRenderLayers;
-import com.sammy.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
-import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
-import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.config.ClientConfig;
+import team.lodestar.lodestone.handlers.RenderHandler;
+import team.lodestar.lodestone.setup.LodestoneRenderLayers;
+import team.lodestar.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
+import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
+import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;

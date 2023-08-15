@@ -1,9 +1,9 @@
 package ladysnake.effective.mixin.screenshake;
 
-import com.sammy.lodestone.handlers.ScreenshakeHandler;
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.screenshake.PositionedScreenshakeInstance;
-import com.sammy.lodestone.systems.screenshake.ScreenshakeInstance;
+import team.lodestar.lodestone.handlers.ScreenshakeHandler;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.screenshake.PositionedScreenshakeInstance;
+import team.lodestar.lodestone.systems.screenshake.ScreenshakeInstance;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.SonicBoomTask;
