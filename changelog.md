@@ -1,4 +1,9 @@
 ------------------------------------------------------
+Effective 2.1.2 - 1.19.2
+------------------------------------------------------
+- Updated Ukrainian localization thanks to unroman
+
+------------------------------------------------------
 Effective 2.1.1 - 1.19.2
 ------------------------------------------------------
 - Added two new choices to the Allay trail option to either have trail only, twinkle only, both or none
