@@ -1,4 +1,14 @@
 ------------------------------------------------------
+Effective 3.0.0 - 1.20.1
+------------------------------------------------------
+Brought to you on 1.20.1 by the combined efforts of SzczurekYT and Motschen (big thanks to them !)
+
+- Updated to 1.20.1
+- Updated config screen
+- Added Swedish localization (Thanks Dontknow09 !)
+- *Dev thing: changed maven group and package to `org.ladysnake`*
+
+------------------------------------------------------
 Effective 2.1.2 - 1.19.2
 ------------------------------------------------------
 - Updated Ukrainian localization thanks to unroman
