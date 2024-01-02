@@ -28,6 +28,7 @@ repositories {
 		url = 'https://maven.ladysnake.org/releases'
 		content {
 			includeGroup 'org.ladysnake'
+			includeGroup 'io.github.ladysnake'
 		}
 	}
 
