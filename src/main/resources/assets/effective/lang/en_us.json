@@ -55,5 +55,6 @@
   "effective.midnightconfig.enum.CosmeticsOptions.ENABLE": "Yes",
   "effective.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "Yes and in First Person",
   "effective.midnightconfig.enum.CosmeticsOptions.DISABLE": "No",
-  "effective.midnightconfig.ultrakill": "ULTRAKILL"
+  "effective.midnightconfig.ultrakill": "ULTRAKILL",
+  "effective:modmenu.dashboard": "Dashboard"
 }
