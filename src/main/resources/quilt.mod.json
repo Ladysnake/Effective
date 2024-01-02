@@ -9,8 +9,10 @@
 			"description": "Client-side mod designed to improve Minecraft's ambience through particles, visual effects and sounds",
 			"contributors": {
 				"doctor4t": "Owner",
-				"Pyrofab": "Contributor",
-				"lonefelidae16": "Contributor"
+				"Pyrofab": "Maintainer",
+				"lonefelidae16": "Contributor",
+				"SzczurekYT": "Contributor",
+				"Motschen": "Contributor"
 			},
 			"contact": {
 				"homepage": "https://doctor4t.ladysnake.org",
