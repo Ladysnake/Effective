@@ -107,7 +107,6 @@ chenille {
 	configurePublishing {
 		mainArtifact = remapJar.archiveFile
 		withLadysnakeMaven()
-		withCurseforgeRelease()
 		withGithubRelease()
 		withModrinthRelease()
 	}
