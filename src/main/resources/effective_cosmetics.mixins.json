@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "ladysnake.effective.cosmetics.mixin",
+  "package": "org.ladysnake.effective.cosmetics.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [

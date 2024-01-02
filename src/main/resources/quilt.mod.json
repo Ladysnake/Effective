@@ -1,7 +1,7 @@
 {
 	"schema_version": 1,
 	"quilt_loader": {
-		"group": "ladysnake",
+		"group": "org.ladysnake",
 		"id": "effective",
 		"version": "${version}",
 		"metadata": {
@@ -22,11 +22,11 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"client_init": [
-				"ladysnake.effective.Effective",
-				"ladysnake.effective.cosmetics.EffectiveCosmetics"
+				"org.ladysnake.effective.Effective",
+				"org.ladysnake.effective.cosmetics.EffectiveCosmetics"
 			],
 			"modmenu": [
-				"ladysnake.effective.compat.EffectiveModMenuCompat"
+				"org.ladysnake.effective.compat.EffectiveModMenuCompat"
 			]
 		},
 		"depends": [
