@@ -1,7 +1,7 @@
 package ladysnake.effective.particle;
 
-import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
-import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
+import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +15,7 @@ public class BubbleParticle extends GenericParticle {
 	public void tick() {
 		super.tick();
 
-		if (!world.isWater(new BlockPos(this.x, this.y, this.z))) {
+		if (!world.isWater(BlockPos.create(this.x, this.y, this.z))) {
 			this.markDead();
 		}
 	}

@@ -167,7 +167,7 @@ public class LavaSplashParticle extends Particle {
 	@Override
 	public void tick() {
 		if (this.widthMultiplier == 0f) {
-			List<Entity> closeEntities = world.getOtherEntities(null, this.getBoundingBox().expand(5.0f)).stream().filter(entity -> world.getBlockState(entity.getBlockPos().add(entity.getVelocity().x, entity.getVelocity().y, entity.getVelocity().z)).getBlock() == Blocks.LAVA).collect(Collectors.toList());
+			List<Entity> closeEntities = world.getOtherEntities(null, this.getBoundingBox().expand(5.0f)).stream().filter(entity -> world.getBlockState(entity.getBlockPos().add(MathHelper.floor(entity.getVelocity().x), MathHelper.floor(entity.getVelocity().y), MathHelper.floor(entity.getVelocity().z))).getBlock() == Blocks.LAVA).collect(Collectors.toList());
 			closeEntities.sort((o1, o2) -> (int) (o1.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z)) - o2.getPos().squaredDistanceTo(new Vec3d(this.x, this.y, this.z))));
 
 			if (!closeEntities.isEmpty()) {

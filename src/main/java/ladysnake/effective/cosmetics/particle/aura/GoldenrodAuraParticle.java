@@ -6,7 +6,7 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 
 public class GoldenrodAuraParticle extends ChorusPetalParticle {
@@ -72,7 +72,7 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
 		}
 
 		this.prevAngle = this.angle;
-		if (this.onGround || this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+		if (this.onGround || this.world.getFluidState(BlockPos.create(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
 			this.velocityX = 0;
 			this.velocityY = 0;
 			this.velocityZ = 0;

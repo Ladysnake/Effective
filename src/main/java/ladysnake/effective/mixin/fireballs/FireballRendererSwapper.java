@@ -1,7 +1,10 @@
 package ladysnake.effective.mixin.fireballs;
 
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -36,16 +39,18 @@ public class FireballRendererSwapper<T extends Entity & FlyingItemEntity> {
 			}
 
 			for (int i = 0; i < 2; i++) {
-				ParticleBuilders.create(Effective.FLAME)
-					.setSpin((float) (fireballEntity.world.random.nextGaussian() / 5f))
-					.setScale(scale, 0f)
-					.setScaleEasing(Easing.CIRC_OUT)
-					.setAlpha(1f)
-					.setColor(new Color(0xFF3C00), new Color(0xFFCB00))
-					.setColorEasing(Easing.CIRC_OUT)
+				WorldParticleBuilder.create(Effective.FLAME)
+					.setSpinData(SpinParticleData.create((float) (fireballEntity.getWorld().random.nextGaussian() / 5f)).build())
+					.setScaleData(GenericParticleData.create(scale, 0f).setEasing(Easing.CIRC_OUT).build())
+					.setTransparencyData(GenericParticleData.create(1f).build())
+					.setColorData(
+						ColorParticleData.create(new Color(0xFF3C00), new Color(0xFFCB00))
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
 					.enableNoClip()
 					.setLifetime(20)
-					.spawn(fireballEntity.world, x + fireballEntity.world.random.nextGaussian() / 20f, y + (fireballEntity.getHeight() / 2f) + fireballEntity.world.random.nextGaussian() / 20f, z + fireballEntity.world.random.nextGaussian() / 20f);
+					.spawn(fireballEntity.getWorld(), x + fireballEntity.getWorld().random.nextGaussian() / 20f, y + (fireballEntity.getHeight() / 2f) + fireballEntity.getWorld().random.nextGaussian() / 20f, z + fireballEntity.getWorld().random.nextGaussian() / 20f);
 			}
 
 			ci.cancel();

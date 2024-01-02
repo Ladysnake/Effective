@@ -14,6 +14,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.*;
 import net.minecraft.util.random.RandomGenerator;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.Optional;
 import java.util.Random;
@@ -51,24 +53,24 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
 		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
 		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternion quaternion2;
+		Quaternionf quaternion2;
 		if (this.angle == 0.0F) {
 			quaternion2 = camera.getRotation();
 		} else {
-			quaternion2 = new Quaternion(camera.getRotation());
+			quaternion2 = new Quaternionf(camera.getRotation());
 			float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
+			quaternion2.rotateZ(i);
 		}
 
-		Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+		Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
 		Vec3f.rotate(quaternion2);
-		Vec3f[] Vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+		Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 		float j = this.getSize(tickDelta);
 
 		for (int k = 0; k < 4; ++k) {
-			Vec3f Vec3f2 = Vec3fs[k];
+			Vector3f Vec3f2 = Vec3fs[k];
 			Vec3f2.rotate(quaternion2);
-			Vec3f2.scale(j);
+			Vec3f2.mul(j);
 			Vec3f2.add(f, g, h);
 		}
 
@@ -80,16 +82,16 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		float a = Math.min(1f, Math.max(0f, this.colorAlpha));
 
 		// colored layer
-		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).uv(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).uv(minU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+		vertexConsumer.vertex(Vec3fs[0].x(), Vec3fs[0].y(), Vec3fs[0].z()).uv(maxU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].x(), Vec3fs[1].y(), Vec3fs[1].z()).uv(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].x(), Vec3fs[2].y(), Vec3fs[2].z()).uv(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].x(), Vec3fs[3].y(), Vec3fs[3].z()).uv(minU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
 
 		// white center
-		vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).uv(maxU, maxV).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
-		vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).uv(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
-		vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).uv(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
-		vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).uv(minU, maxV).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[0].x(), Vec3fs[0].y(), Vec3fs[0].z()).uv(maxU, maxV).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].x(), Vec3fs[1].y(), Vec3fs[1].z()).uv(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].x(), Vec3fs[2].y(), Vec3fs[2].z()).uv(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].x(), Vec3fs[3].y(), Vec3fs[3].z()).uv(minU, maxV).color(1f, 1f, 1f, 0.5f / 100f).light(l).next();
 	}
 
 
@@ -129,8 +131,8 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 			double length = targetVector.length();
 			targetVector = targetVector.multiply(0.025 / length);
 
-
-			if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+			BlockState stateBelow = this.world.getBlockState(BlockPos.create(this.x, this.y - 0.1, this.z));
+			if (!stateBelow.getBlock().canMobSpawnInside(stateBelow)) {
 				velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
 				velocityY = 0.05;
 				velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
@@ -140,7 +142,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 				velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
 			}
 
-			if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+			if (!BlockPos.create(x, y, z).equals(this.getTargetPosition())) {
 				this.move(velocityX, velocityY, velocityZ);
 			}
 		} else {
@@ -152,8 +154,8 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		// Behaviour
 		double groundLevel = 0;
 		for (int i = 0; i < 20; i++) {
-			BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
-			if (!checkedBlock.getBlock().canMobSpawnInside()) {
+			BlockState checkedBlock = this.world.getBlockState(BlockPos.create(this.x, this.y - i, this.z));
+			if (!checkedBlock.getBlock().canMobSpawnInside(checkedBlock)) {
 				groundLevel = this.y - i;
 			}
 			if (groundLevel != 0) break;
@@ -163,7 +165,7 @@ public class TwilightLegacyFireflyParticle extends LegacyFireflyParticle {
 		this.yTarget = Math.min(Math.max(owner.getY() + random.nextGaussian(), groundLevel), groundLevel + maxHeight);
 		this.zTarget = owner.getZ() + random.nextGaussian();
 
-		BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+		BlockPos targetPos = BlockPos.create(this.xTarget, this.yTarget, this.zTarget);
 		if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)
 			&& this.world.getBlockState(targetPos).isSolidBlock(world, targetPos)) {
 			this.yTarget += 1;

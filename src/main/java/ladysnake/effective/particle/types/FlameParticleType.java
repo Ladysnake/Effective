@@ -1,7 +1,7 @@
 package ladysnake.effective.particle.types;
 
 import com.mojang.serialization.Codec;
-import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import ladysnake.effective.particle.FlameParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

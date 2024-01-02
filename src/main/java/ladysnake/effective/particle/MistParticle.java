@@ -1,7 +1,7 @@
 package ladysnake.effective.particle;
 
-import com.sammy.lodestone.systems.rendering.particle.world.GenericParticle;
-import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
+import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.client.world.ClientWorld;
 

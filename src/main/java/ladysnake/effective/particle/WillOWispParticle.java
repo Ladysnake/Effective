@@ -1,9 +1,13 @@
 package ladysnake.effective.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.sammy.lodestone.systems.rendering.particle.Easing;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
 import ladysnake.effective.Effective;
+import ladysnake.effective.LinearForcedMotionImpl;
 import ladysnake.effective.cosmetics.particle.pet.PlayerWispParticle;
 import ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
 import net.minecraft.block.Blocks;
@@ -20,15 +24,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.List;
@@ -76,7 +80,7 @@ public class WillOWispParticle extends Particle {
 
 	@Override
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-		if (this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
+		if (this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
 			this.world.addParticle(ParticleTypes.SOUL, this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
 		} else {
 			float x = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x));
@@ -84,24 +88,30 @@ public class WillOWispParticle extends Particle {
 			float z = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z));
 
 			for (int i = 0; i < 2; i++) {
-				ParticleBuilders.create(Effective.WISP)
-					.setSpin((float) (this.world.random.nextGaussian() / 5f))
-					.setScale(this instanceof PlayerWispParticle ? 0.16f : 0.25f, 0f)
-					.setScaleEasing(Easing.CIRC_OUT)
-					.setAlpha(1f)
-					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
-					.setColorEasing(Easing.CIRC_OUT)
+				WorldParticleBuilder.create(Effective.WISP)
+					.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
+					.setScaleData(
+						GenericParticleData.create(this instanceof PlayerWispParticle ? 0.16f : 0.25f, 0f)
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
+					.setTransparencyData(GenericParticleData.create(1f).build())
+					.setColorData(
+						ColorParticleData.create(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
 					.setMotion(0, 0.066f, 0)
 					.enableNoClip()
 					.setLifetime(40)
 					.spawn(this.world, x + random.nextGaussian() / 20f, y + random.nextGaussian() / 20f, z + random.nextGaussian() / 20f);
 			}
 
-			ParticleBuilders.create(Effective.WISP)
-				.setSpin((float) (this.world.random.nextGaussian() / 5f))
-				.setScale(this instanceof PlayerWispParticle ? 0.10f : 0.15f)
-				.setAlpha(0.2f, 0f)
-				.setColor(new Color(0xFFFFFF), new Color(0xFFFFFF))
+			WorldParticleBuilder.create(Effective.WISP)
+				.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
+				.setScaleData(GenericParticleData.create(this instanceof PlayerWispParticle ? 0.10f : 0.15f).build())
+				.setTransparencyData(GenericParticleData.create(0.2f, 0f).build())
+				.setColorData(ColorParticleData.create(new Color(0xFFFFFF), new Color(0xFFFFFF)).build())
 				.setMotion(0, 0.066f, 0)
 				.enableNoClip()
 				.setLifetime(3)
@@ -121,21 +131,27 @@ public class WillOWispParticle extends Particle {
 
 		if (this.age++ >= this.maxAge) {
 			for (int i = 0; i < 50; i++) {
-				ParticleBuilders.create(Effective.WISP)
-					.setSpin((float) (this.world.random.nextGaussian() / 5f))
-					.setScale(0.25f, 0f)
-					.setScaleEasing(Easing.CIRC_OUT)
-					.setAlpha(1f)
-					.setColor(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
-					.setColorEasing(Easing.CIRC_OUT)
-					.setForcedMotion(new Vec3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)), Vec3f.ZERO)
+				WorldParticleBuilder.create(Effective.WISP)
+					.setSpinData(SpinParticleData.create((float) (this.world.random.nextGaussian() / 5f)).build())
+					.setScaleData(GenericParticleData.create(0.25f, 0f).setEasing(Easing.CIRC_OUT).build())
+					.setTransparencyData(GenericParticleData.create(1f).build())
+					.setColorData(
+						ColorParticleData.create(new Color(this.colorRed, this.colorGreen, this.colorBlue), new Color(this.gotoRed, this.gotoGreen, this.gotoBlue))
+							.setEasing(Easing.CIRC_OUT)
+							.build()
+					)
+					.addActor(new LinearForcedMotionImpl(
+						new Vector3f((float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f), (float) (random.nextGaussian() / 10f)),
+						new Vector3f(),
+						1f
+					))
 					.enableNoClip()
 					.setLifetime(20)
 					.repeat(this.world, x, y, z, 3);
 				this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.SOUL_SAND.getDefaultState()), this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
 			}
-			this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
-			this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.BLOCK_SOUL_SAND_BREAK, SoundCategory.AMBIENT, 1.0f, 1.0f, true);
+			this.world.playSound(BlockPos.create(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
+			this.world.playSound(BlockPos.create(this.x, this.y, this.z), SoundEvents.BLOCK_SOUL_SAND_BREAK, SoundCategory.AMBIENT, 1.0f, 1.0f, true);
 			this.markDead();
 		}
 
@@ -160,15 +176,15 @@ public class WillOWispParticle extends Particle {
 		this.yaw = (float) (MathHelper.atan2(vec3d.x, vec3d.z) * 57.2957763671875D);
 		this.pitch = (float) (MathHelper.atan2(vec3d.y, f) * 57.2957763671875D);
 
-		if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+		if (!BlockPos.create(x, y, z).equals(this.getTargetPosition())) {
 			this.move(velocityX, velocityY, velocityZ);
 		}
 
 		if (random.nextInt(20) == 0) {
-			this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
+			this.world.playSound(BlockPos.create(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
 		}
 
-		BlockPos pos = new BlockPos(this.x, this.y, this.z);
+		BlockPos pos = BlockPos.create(this.x, this.y, this.z);
 		if (!this.world.getBlockState(pos).isAir()) {
 			if (timeInSolid > -1) {
 				timeInSolid += 1;
@@ -186,7 +202,7 @@ public class WillOWispParticle extends Particle {
 	public void move(double dx, double dy, double dz) {
 		double d = dx;
 		double e = dy;
-		if (this.collidesWithWorld && !this.world.getBlockState(new BlockPos(this.x + dx, this.y + dy, this.z + dz)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
+		if (this.collidesWithWorld && !this.world.getBlockState(BlockPos.create(this.x + dx, this.y + dy, this.z + dz)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
 			Vec3d vec3d = Entity.adjustSingleAxisMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, List.of());
 
 			dx = vec3d.x;
@@ -199,7 +215,7 @@ public class WillOWispParticle extends Particle {
 			this.repositionFromBoundingBox();
 		}
 
-		this.onGround = dy != dy && e < 0.0D && !this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
+		this.onGround = dy != dy && e < 0.0D && !this.world.getBlockState(BlockPos.create(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
 		if (d != dx) {
 			this.velocityX = 0.0D;
 		}
@@ -210,7 +226,7 @@ public class WillOWispParticle extends Particle {
 	}
 
 	public BlockPos getTargetPosition() {
-		return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+		return BlockPos.create(this.xTarget, this.yTarget + 0.5, this.zTarget);
 	}
 
 	private void selectBlockTarget() {
@@ -219,7 +235,7 @@ public class WillOWispParticle extends Particle {
 		this.yTarget = this.y + random.nextGaussian() * 10;
 		this.zTarget = this.z + random.nextGaussian() * 10;
 
-		BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+		BlockPos targetPos = BlockPos.create(this.xTarget, this.yTarget, this.zTarget);
 		if (this.world.getBlockState(targetPos).isFullCube(world, targetPos) && !this.world.getBlockState(targetPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
 			targetChangeCooldown = 0;
 			return;

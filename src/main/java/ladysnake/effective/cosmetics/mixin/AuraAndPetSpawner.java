@@ -36,7 +36,7 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 					if (EffectiveCosmetics.AURAS_DATA.containsKey(playerAura)) {
 						AuraData aura = EffectiveCosmetics.AURAS_DATA.get(playerAura);
 						if (EffectiveCosmetics.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
-							world.addParticle(aura.particle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+							getWorld().addParticle(aura.particle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
 						}
 					}
 				}
@@ -51,7 +51,7 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 					if (EffectiveCosmetics.PETS_DATA.containsKey(playerPet)) {
 						DefaultParticleType overhead = EffectiveCosmetics.PETS_DATA.get(playerPet);
 						if (this.age % 20 == 0) {
-							world.addParticle(overhead, this.getX() + Math.cos(this.bodyYaw / 50) * 0.5, this.getY() + this.getHeight() + 0.5f + Math.sin(this.age / 12f) / 12f, this.getZ() - Math.cos(this.bodyYaw / 50) * 0.5, 0, 0, 0);
+							getWorld().addParticle(overhead, this.getX() + Math.cos(this.bodyYaw / 50) * 0.5, this.getY() + this.getHeight() + 0.5f + Math.sin(this.age / 12f) / 12f, this.getZ() - Math.cos(this.bodyYaw / 50) * 0.5, 0, 0, 0);
 						}
 					}
 				}

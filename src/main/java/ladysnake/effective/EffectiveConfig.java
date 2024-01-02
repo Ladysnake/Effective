@@ -3,116 +3,110 @@ package ladysnake.effective;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 public class EffectiveConfig extends MidnightConfig {
-	@Comment(centered = true)
-	public static Comment waterEffects;
+	public static final String waterEffects = "waterEffects";
 
-	@Entry
+	@Entry(category = waterEffects)
 	public static boolean splashes = true;
 
-	@Entry(min = 0, max = 100, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
 	public static int flowingWaterSplashingDensity = 50;
 
-	@Entry
+	@Entry(category = waterEffects)
 	public static boolean cascades = true;
 
-	@Entry(min = 0, max = 5, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
 	public static float cascadeCloudDensity = 1;
 
-	@Entry(min = 0, max = 5, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
 	public static float cascadeMistDensity = 1;
 
-	@Entry(min = 0, max = 100, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
 	public static int cascadeSoundsVolumeMultiplier = 30;
 
-	@Entry(min = 0, max = 400, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 400, isSlider = true)
 	public static int cascadeSoundDistanceBlocks = 150;
 
-	@Entry
+	@Entry(category = waterEffects)
 	public static boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
 
-	@Entry(min = 0, max = 10, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 10, isSlider = true)
 	public static float lapisBlockUpdateParticleChance = 1;
 
-	@Entry(min = 0, max = 10, isSlider = true)
+	@Entry(category = waterEffects, min = 0, max = 10, isSlider = true)
 	public static int rainRippleDensity = 1;
 
-	@Entry
+	@Entry(category = waterEffects)
 	public static boolean glowingPlankton = true;
 
-	@Entry
+	@Entry(category = waterEffects)
 	public static boolean underwaterOpenChestBubbles = true;
 
-	@Entry
+	@Entry(category = waterEffects)
 	public static ChestsOpenOptions underwaterChestsOpenRandomly = ChestsOpenOptions.ON_SOUL_SAND;
 
-	@Comment(centered = true)
-	public static Comment entityEffects;
+	public static final String entityEffects = "entityEffects";
 
-	@Entry
+	@Entry(category = entityEffects)
 	public static GlowSquidHypnoOptions glowSquidHypnotize = GlowSquidHypnoOptions.ATTRACT;
 
-	@Entry
+	@Entry(category = entityEffects)
 	public static AllayTrailOptions allayTrails = AllayTrailOptions.BOTH;
 
-	@Entry
+	@Entry(category = entityEffects)
 	public static boolean goldenAllays = true;
 
-	@Comment(centered = true)
-	public static Comment screenShakeEffects;
+	public static final String screenShakeEffects = "screenShakeEffects";
 
-	@Entry
+	@Entry(category = screenShakeEffects)
 	public static boolean wardenScreenShake = true;
 
-	@Entry
+	@Entry(category = screenShakeEffects)
 	public static boolean sonicBoomScreenShake = true;
 
-	@Entry
+	@Entry(category = screenShakeEffects)
 	public static boolean ravagerScreenShake = true;
 
-	@Entry
+	@Entry(category = screenShakeEffects)
 	public static boolean dragonScreenShake = true;
 
 
-	@Comment(centered = true)
-	public static Comment illuminatedEffects;
+	public static final String illuminatedEffects = "illuminatedEffects";
 
-	@Entry(min = 0, max = 10, isSlider = true)
+	@Entry(category = illuminatedEffects, min = 0, max = 10, isSlider = true)
 	public static float fireflyDensity = 1;
 
-	@Entry(min = 0, max = 10, isSlider = true)
+	@Entry(category = illuminatedEffects, min = 0, max = 10, isSlider = true)
 	public static float chorusPetalDensity = 1;
 
-	@Entry(min = 0, max = 10, isSlider = true)
+	@Entry(category = illuminatedEffects, min = 0, max = 10, isSlider = true)
 	public static float willOWispDensity = 1;
 
-	@Entry
+	@Entry(category = illuminatedEffects)
 	public static EyesInTheDarkOptions eyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
 
-	@Comment(centered = true)
-	public static Comment improvedEffects;
+	public static final String improvedEffects = "improvedEffects";
 
-	@Entry
+	@Entry(category = improvedEffects)
 	public static boolean improvedFireballs = true;
 
-	@Entry
+	@Entry(category = improvedEffects)
 	public static boolean improvedDragonFireballsAndBreath = true;
 
-	@Entry
+	@Entry(category = improvedEffects)
 	public static boolean improvedSpectralArrows = true;
 
-	@Entry
+	@Entry(category = improvedEffects)
 	public static boolean improvedGlowSquidParticles = true;
 
-	@Comment(centered = true)
-	public static Comment miscellaneous;
+	public static final String miscellaneous = "miscellaneous";
 
-	@Entry(min = 0, max = 100, isSlider = true)
+	@Entry(category = miscellaneous, min = 0, max = 100, isSlider = true)
 	public static float sculkDustDensity = 100;
 
-	@Entry
+	@Entry(category = miscellaneous)
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
 
-	@Entry
+	@Entry(category = miscellaneous)
 	public static boolean ultrakill = false;
 
 	public static boolean shouldGlowSquidsHypnotize() {

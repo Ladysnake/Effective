@@ -1,9 +1,11 @@
 package ladysnake.effective.mixin.spectral_arrows;
 
-import com.sammy.lodestone.setup.LodestoneRenderLayers;
-import com.sammy.lodestone.systems.rendering.PositionTrackedEntity;
-import com.sammy.lodestone.systems.rendering.VFXBuilders;
-import com.sammy.lodestone.systems.rendering.particle.ParticleBuilders;
+import team.lodestar.lodestone.setup.LodestoneRenderLayers;
+import team.lodestar.lodestone.systems.rendering.PositionTrackedEntity;
+import team.lodestar.lodestone.systems.rendering.VFXBuilders;
+import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
 import ladysnake.effective.Effective;
 import ladysnake.effective.EffectiveConfig;
 import ladysnake.effective.particle.contracts.ColoredParticleInitialData;
@@ -19,7 +21,7 @@ import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vector4f;
+import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.sammy.lodestone.handlers.RenderHandler.DELAYED_RENDER;
+import static team.lodestar.lodestone.handlers.RenderHandler.DELAYED_RENDER;
 
 @Mixin(ProjectileEntityRenderer.class)
 public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileEntity> extends EntityRenderer<T> {
@@ -82,15 +84,15 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 			matrixStack.pop();
 
 			// twinkles
-			if ((spectralArrowEntity.world.getRandom().nextInt(100) + 1) <= 5 && !MinecraftClient.getInstance().isPaused()) {
+			if ((spectralArrowEntity.getWorld().getRandom().nextInt(100) + 1) <= 5 && !MinecraftClient.getInstance().isPaused()) {
 				float spreadDivider = 4f;
-				ParticleBuilders.create(Effective.ALLAY_TWINKLE)
-					.setColor(new Color(data.color), new Color(data.color))
-					.setAlpha(0.9f)
-					.setScale(0.06f)
+				WorldParticleBuilder.create(Effective.ALLAY_TWINKLE)
+					.setColorData(ColorParticleData.create(new Color(data.color), new Color(data.color)).build())
+					.setTransparencyData(GenericParticleData.create(0.9f).build())
+					.setScaleData(GenericParticleData.create(0.06f).build())
 					.setLifetime(15)
 					.setMotion(0, 0.05f, 0)
-					.spawn(spectralArrowEntity.world, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + spectralArrowEntity.world.getRandom().nextGaussian() / spreadDivider);
+					.spawn(spectralArrowEntity.getWorld(), spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider);
 			}
 		}
 	}

@@ -1,8 +1,7 @@
 package ladysnake.effective.particle;
 
-import com.sammy.lodestone.systems.rendering.particle.SimpleParticleEffect;
-import com.sammy.lodestone.systems.rendering.particle.world.FrameSetParticle;
-import com.sammy.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.systems.rendering.particle.world.FrameSetParticle;
+import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;
@@ -20,10 +19,5 @@ public class AllayTwinkleParticle extends FrameSetParticle {
 		if (age < frameSet.size() * 3) {
 			setSprite(frameSet.get(MathHelper.floor(age / 3f)));
 		}
-	}
-
-	@Override
-	public SimpleParticleEffect.Animator getAnimator() {
-		return super.getAnimator();
 	}
 }
