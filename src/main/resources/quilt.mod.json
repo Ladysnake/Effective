@@ -24,6 +24,9 @@
 			"client_init": [
 				"ladysnake.effective.Effective",
 				"ladysnake.effective.cosmetics.EffectiveCosmetics"
+			],
+			"modmenu": [
+				"ladysnake.effective.compat.EffectiveModMenuCompat"
 			]
 		},
 		"depends": [
