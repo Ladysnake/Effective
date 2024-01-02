@@ -13,6 +13,8 @@ loom {
 }
 
 repositories {
+	mavenLocal()
+
 	// publishing
 	maven {
 		name = "CurseForge"
