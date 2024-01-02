@@ -1,22 +1,27 @@
 [versions]
+chenille = "0.11.3"
 # The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
 minecraft = "1.20.1"
-quilt_mappings = "1.20.1+build.23"
-quilt_loader = "0.20.0-beta.14"
+quilt-mappings = "1.20.1+build.23"
+quilt-loader = "0.23.0-beta.1"
 
-quilted_fabric_api = "7.1.1+0.86.1-1.20.1"
+quilt-quiltedFabricApi = "7.1.1+0.86.1-1.20.1"
+
+modmenu = "7.2.2"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
-quilt_mappings = { module = "org.quiltmc:quilt-mappings", version.ref = "quilt_mappings" }
-quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
+quilt-mappings = { module = "org.quiltmc:quilt-mappings", version.ref = "quilt-mappings" }
+quilt-loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt-loader" }
 
-quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilted_fabric_api" }
-quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
+quilt-quiltedFabricApi = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilt-quiltedFabricApi" }
+quilt-quiltedFabricApi-deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilt-quiltedFabricApi" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu"}
 
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]
-quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
+quilt-quiltedFabricApi = ["quilt-quiltedFabricApi", "quilt-quiltedFabricApi-deprecated"]
 
 [plugins]
-quilt_loom = { id = "org.quiltmc.loom", version = "1.+" }
+chenille = { id = "io.github.ladysnake.chenille", version.ref = "chenille" }
+quilt-loom = { id = "org.quiltmc.loom", version = "1.+" }
