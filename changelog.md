@@ -6,6 +6,7 @@ Brought to you on 1.20.1 by the combined efforts of SzczurekYT and Motschen (big
 - Updated to 1.20.1
 - Updated config screen
 - Added Swedish localization (Thanks Dontknow09 !)
+- Fixed crash when Satin was not installed separately
 - *Dev thing: changed maven group and package to `org.ladysnake`*
 
 ------------------------------------------------------

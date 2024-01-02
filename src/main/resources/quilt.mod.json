@@ -47,6 +47,20 @@
 			{
 				"id": "lodestone",
 				"versions": "*"
+			},
+			{
+				"id": "midnightlib",
+				"versions": "*"
+			},
+			{
+				"id": "satin",
+				"versions": "*"
+			}
+		],
+		"breaks": [
+			{
+				"id": "sodium",
+				"versions": "<0.5.0"
 			}
 		]
 	},

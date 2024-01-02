@@ -7,7 +7,14 @@ quilt-loader = "0.23.0-beta.1"
 
 quilt-quiltedFabricApi = "7.1.1+0.86.1-1.20.1"
 
+# Third party dependencies
+# The latest versions should be available at https://ladysnake.org/tools/dependencies
+iris = "1.6.11+1.20.1"
+lodestoneLib = "0.0.4+1.20.1"
+midnightLib = "1.4.1-quilt"
 modmenu = "7.2.2"
+satin = "1.14.0"
+sodium = "mc1.20.1-0.5.3"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -16,7 +23,14 @@ quilt-loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt-loade
 
 quilt-quiltedFabricApi = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilt-quiltedFabricApi" }
 quilt-quiltedFabricApi-deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilt-quiltedFabricApi" }
+
+# Third party dependencies
+iris = { module = "maven.modrinth:iris", version.ref = "iris" }
+lodestoneLib = { module = "team.lodestar.lodestone:LodestoneLib-Quilt", version.ref = "lodestoneLib" }
+midnightLib = { module = "maven.modrinth:midnightlib", version.ref = "midnightLib" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu"}
+satin = { module = "org.ladysnake:satin", version.ref = "satin" }
+sodium = { module = "maven.modrinth:sodium", version.ref = "sodium"}
 
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]

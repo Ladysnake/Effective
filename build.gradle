@@ -49,6 +49,9 @@ repositories {
 	maven {
 		name "modrinth"
 		url "https://api.modrinth.com/maven"
+		content {
+			includeGroup('maven.modrinth')
+		}
 	}
 
 	maven { url 'https://masa.dy.fi/maven' }
@@ -83,22 +86,24 @@ dependencies {
 	}
 
 	// midnightlib
-	modImplementation include("maven.modrinth:midnightlib:${midnightlib_version}-quilt")
+	modImplementation(libs.midnightLib)
+	include(libs.midnightLib)
 
 	// satin
-	modImplementation include("org.ladysnake:satin:${satin_version}") {
+	modImplementation(libs.satin) {
 		exclude group: 'net.fabricmc'
 	}
+	include(libs.satin)
 
 	// lodestone lib
-	modImplementation include("team.lodestar.lodestone:LodestoneLib-Quilt:${lodestone_version}") {
+	modImplementation(libs.lodestoneLib) {
 		exclude group: 'io.github.ladysnake'
 	}
+	include(libs.lodestoneLib)
 
 	// iris and sodium
-	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
-	modRuntimeOnly("maven.modrinth:sodium:${project.sodium_version}")
-	modRuntimeOnly("maven.modrinth:iris:${project.iris_version}")
+	modLocalImplementation(libs.sodium)
+	modLocalImplementation(libs.iris)
 	runtimeOnly compileOnly("org.anarres:jcpp:1.4.14") // for iris
 }
 
