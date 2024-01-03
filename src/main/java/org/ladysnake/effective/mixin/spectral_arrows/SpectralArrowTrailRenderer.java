@@ -45,11 +45,11 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 	@Inject(method = "render(Lnet/minecraft/entity/projectile/PersistentProjectileEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
 	public void render(T entity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
 		// new render
-		if (EffectiveConfig.spectralArrowTrails != EffectiveConfig.AllayTrailOptions.NONE && entity instanceof SpectralArrowEntity spectralArrowEntity && !spectralArrowEntity.isInvisible()) {
+		if (EffectiveConfig.spectralArrowTrails != EffectiveConfig.TrailOptions.NONE && entity instanceof SpectralArrowEntity spectralArrowEntity && !spectralArrowEntity.isInvisible()) {
 			ColoredParticleInitialData data = new ColoredParticleInitialData(0xFFFF77);
 
 			// trail
-			if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.AllayTrailOptions.BOTH || EffectiveConfig.spectralArrowTrails == EffectiveConfig.AllayTrailOptions.TWINKLE) {
+			if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.BOTH || EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.TWINKLE) {
 				matrixStack.push();
 				ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) spectralArrowEntity).getPastPositions());
 				VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setPosColorTexLightmapDefaultFormat();
@@ -86,7 +86,7 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 			}
 
 			// twinkles
-			if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.AllayTrailOptions.BOTH || EffectiveConfig.spectralArrowTrails == EffectiveConfig.AllayTrailOptions.TWINKLE) {
+			if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.BOTH || EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.TWINKLE) {
 				if ((spectralArrowEntity.getWorld().getRandom().nextInt(100) + 1) <= 5 && !MinecraftClient.getInstance().isPaused()) {
 					float spreadDivider = 4f;
 					WorldParticleBuilder.create(Effective.ALLAY_TWINKLE)

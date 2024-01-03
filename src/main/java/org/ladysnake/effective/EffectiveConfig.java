@@ -53,7 +53,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static GlowSquidHypnoOptions glowSquidHypnotize = GlowSquidHypnoOptions.ATTRACT;
 
 	@Entry(category = entityEffects)
-	public static AllayTrailOptions allayTrails = AllayTrailOptions.BOTH;
+	public static TrailOptions allayTrails = TrailOptions.BOTH;
 
 	@Entry(category = entityEffects)
 	public static boolean goldenAllays = true;
@@ -102,7 +102,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static boolean improvedGlowSquidParticles = true;
 
 	@Entry(category = improvedEffects)
-	public static AllayTrailOptions spectralArrowTrails = AllayTrailOptions.BOTH;
+	public static TrailOptions spectralArrowTrails = TrailOptions.BOTH;
 
 	public static final String miscellaneous = "miscellaneous";
 
@@ -126,7 +126,7 @@ public class EffectiveConfig extends MidnightConfig {
 		return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 
-	public enum AllayTrailOptions {
+	public enum TrailOptions {
 		BOTH, TRAIL, TWINKLE, NONE
 	}
 

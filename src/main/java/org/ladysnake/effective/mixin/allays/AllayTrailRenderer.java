@@ -47,11 +47,11 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 	@Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
 	public void render(T livingEntity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
 		// new render
-		if (EffectiveConfig.allayTrails != EffectiveConfig.AllayTrailOptions.NONE && livingEntity instanceof AllayEntity allayEntity && !allayEntity.isInvisible()) {
+		if (EffectiveConfig.allayTrails != EffectiveConfig.TrailOptions.NONE && livingEntity instanceof AllayEntity allayEntity && !allayEntity.isInvisible()) {
 			ColoredParticleInitialData data = new ColoredParticleInitialData(allayEntity.getUuid().hashCode() % 2 == 0 && EffectiveConfig.goldenAllays ? 0xFFC200 : 0x22CFFF);
 
 			// trail
-			if (EffectiveConfig.allayTrails == EffectiveConfig.AllayTrailOptions.BOTH || EffectiveConfig.allayTrails == EffectiveConfig.AllayTrailOptions.TRAIL) {
+			if (EffectiveConfig.allayTrails == EffectiveConfig.TrailOptions.BOTH || EffectiveConfig.allayTrails == EffectiveConfig.TrailOptions.TRAIL) {
 				matrixStack.push();
 				ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) allayEntity).getPastPositions());
 				VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setPosColorTexLightmapDefaultFormat();
@@ -88,7 +88,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 			}
 
 			// twinkles
-			if (EffectiveConfig.allayTrails == EffectiveConfig.AllayTrailOptions.BOTH || EffectiveConfig.allayTrails == EffectiveConfig.AllayTrailOptions.TWINKLE) {
+			if (EffectiveConfig.allayTrails == EffectiveConfig.TrailOptions.BOTH || EffectiveConfig.allayTrails == EffectiveConfig.TrailOptions.TWINKLE) {
 				if ((allayEntity.getRandom().nextInt(100) + 1) <= 5 && EffectiveUtils.isGoingFast(allayEntity) && !MinecraftClient.getInstance().isPaused()) {
 					float spreadDivider = 4f;
 					WorldParticleBuilder.create(Effective.ALLAY_TWINKLE)
