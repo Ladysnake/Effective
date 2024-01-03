@@ -99,10 +99,10 @@ public class EffectiveConfig extends MidnightConfig {
 	public static boolean improvedDragonFireballsAndBreath = true;
 
 	@Entry(category = improvedEffects)
-	public static boolean improvedSpectralArrows = true;
+	public static boolean improvedGlowSquidParticles = true;
 
 	@Entry(category = improvedEffects)
-	public static boolean improvedGlowSquidParticles = true;
+	public static AllayTrailOptions spectralArrowTrails = AllayTrailOptions.BOTH;
 
 	public static final String miscellaneous = "miscellaneous";
 
@@ -114,6 +114,9 @@ public class EffectiveConfig extends MidnightConfig {
 
 	@Entry(category = miscellaneous)
 	public static boolean ultrakill = false;
+
+	@Entry(category = miscellaneous, min = 1, max = 10, isSlider = true)
+	public static int freezeFrames = 5;
 
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;
