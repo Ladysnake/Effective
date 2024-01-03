@@ -45,7 +45,7 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 	@Inject(method = "render(Lnet/minecraft/entity/projectile/PersistentProjectileEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
 	public void render(T entity, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
 		// new render
-		if (entity instanceof SpectralArrowEntity spectralArrowEntity && !spectralArrowEntity.isInvisible()) {
+		if (EffectiveConfig.spectralArrowTrails != EffectiveConfig.AllayTrailOptions.NONE && entity instanceof SpectralArrowEntity spectralArrowEntity && !spectralArrowEntity.isInvisible()) {
 			ColoredParticleInitialData data = new ColoredParticleInitialData(0xFFFF77);
 
 			// trail

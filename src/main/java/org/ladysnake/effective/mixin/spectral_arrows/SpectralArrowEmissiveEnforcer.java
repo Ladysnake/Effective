@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class SpectralArrowEmissiveEnforcer<T extends Entity> {
 	@Inject(method = "getBlockLight", at = @At("RETURN"), cancellable = true)
 	protected void getBlockLight(T entity, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-		if (EffectiveConfig.improvedSpectralArrows && entity instanceof SpectralArrowEntity spectralArrowEntity) {
+		if (EffectiveConfig.spectralArrowTrails != EffectiveConfig.AllayTrailOptions.NONE && entity instanceof SpectralArrowEntity spectralArrowEntity) {
 			cir.setReturnValue(15);
 		}
 	}
