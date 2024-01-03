@@ -23,7 +23,7 @@ public class RavagerRoarScreenshakeAdder extends HostileEntity {
 	@Inject(method = "roar", at = @At("HEAD"))
 	public void roar(CallbackInfo ci) {
 		if (EffectiveConfig.ravagerScreenShake) {
-			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(10, this.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, 1.0f, 0.0f);
+			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(10, this.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, EffectiveConfig.screenShakeIntensity, 0.0f);
 			ScreenshakeHandler.addScreenshake(roarScreenShake);
 		}
 	}

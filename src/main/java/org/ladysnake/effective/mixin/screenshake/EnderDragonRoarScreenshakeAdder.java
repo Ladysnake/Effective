@@ -22,7 +22,7 @@ public abstract class EnderDragonRoarScreenshakeAdder extends AbstractSittingPha
 	@Inject(method = "clientTick", at = @At("HEAD"))
 	public void clientTick(CallbackInfo ci) {
 		if (EffectiveConfig.dragonScreenShake) {
-			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(60, this.dragon.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, 1.0f, 0.0f);
+			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(60, this.dragon.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, EffectiveConfig.screenShakeIntensity, 0.0f);
 			ScreenshakeHandler.addScreenshake(roarScreenShake);
 		}
 	}
