@@ -1,5 +1,5 @@
 ------------------------------------------------------
-Effective 3.0.0 - 1.20.1
+Effective 2.2.0 - 1.20.1
 ------------------------------------------------------
 Brought to you on 1.20.1 by the combined efforts of SzczurekYT and Motschen (big thanks to them !)
 
