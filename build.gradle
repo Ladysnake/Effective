@@ -78,7 +78,7 @@ dependencies {
 
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
-	modImplementation libs.quilt.quiltedFabricApi
+	modImplementation libs.bundles.quilt.quiltedFabricApi
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
 
 	// mod menu
@@ -98,14 +98,15 @@ dependencies {
 
 	// lodestone lib
 	modImplementation(libs.lodestoneLib) {
-		exclude group: 'io.github.ladysnake'
+		transitive = false
 	}
 	include(libs.lodestoneLib)
 
 	// iris and sodium
 	modLocalImplementation(libs.sodium)
 	modLocalImplementation(libs.iris)
-	runtimeOnly compileOnly("org.anarres:jcpp:1.4.14") // for iris
+	runtimeOnly(libs.jcpp)
+	implementation(libs.glslTransformer)
 }
 
 chenille {

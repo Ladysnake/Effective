@@ -7,10 +7,9 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleType;
+import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.particle.AllayTwinkleParticle;
 import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
-
-import javax.annotation.Nullable;
 
 public class AllayTwinkleParticleType extends ParticleType<WorldParticleEffect> {
 	public AllayTwinkleParticleType() {

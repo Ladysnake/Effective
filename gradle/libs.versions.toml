@@ -3,9 +3,9 @@ chenille = "0.11.3"
 # The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
 minecraft = "1.20.1"
 quilt-mappings = "1.20.1+build.23"
-quilt-loader = "0.23.0-beta.1"
+quilt-loader = "0.23.0"
 
-quilt-quiltedFabricApi = "7.1.1+0.86.1-1.20.1"
+quilt-quiltedFabricApi = "7.4.0+0.90.0-1.20.1"
 
 # Third party dependencies
 # The latest versions should be available at https://ladysnake.org/tools/dependencies
@@ -15,6 +15,8 @@ midnightLib = "1.4.1-quilt"
 modmenu = "7.2.2"
 satin = "1.14.0"
 sodium = "mc1.20.1-0.5.3"
+jcpp = "1.4.14"
+glslTransformer = "2.0.0-pre13"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -26,6 +28,8 @@ quilt-quiltedFabricApi-deprecated = { module = "org.quiltmc.quilted-fabric-api:q
 
 # Third party dependencies
 iris = { module = "maven.modrinth:iris", version.ref = "iris" }
+jcpp = { module = "org.anarres:jcpp", version.ref = "jcpp" }
+glslTransformer = { module = "io.github.douira:glsl-transformer", version.ref = "glslTransformer" }
 lodestoneLib = { module = "team.lodestar.lodestone:LodestoneLib-Quilt", version.ref = "lodestoneLib" }
 midnightLib = { module = "maven.modrinth:midnightlib", version.ref = "midnightLib" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu"}
@@ -34,7 +38,7 @@ sodium = { module = "maven.modrinth:sodium", version.ref = "sodium"}
 
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]
-quilt-quiltedFabricApi = ["quilt-quiltedFabricApi", "quilt-quiltedFabricApi-deprecated"]
+quilt-quiltedFabricApi = [ "quilt-quiltedFabricApi", "quilt-quiltedFabricApi-deprecated" ]
 
 [plugins]
 chenille = { id = "io.github.ladysnake.chenille", version.ref = "chenille" }
