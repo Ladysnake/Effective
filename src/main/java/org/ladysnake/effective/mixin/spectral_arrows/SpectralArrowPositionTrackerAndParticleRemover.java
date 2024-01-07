@@ -29,7 +29,7 @@ public abstract class SpectralArrowPositionTrackerAndParticleRemover extends Per
 
 	@Inject(method = "tick", at = @At("HEAD"))
 	public void tick(CallbackInfo ci) {
-		if (EffectiveConfig.improvedSpectralArrows) {
+		if (EffectiveConfig.spectralArrowTrails != EffectiveConfig.TrailOptions.NONE) {
 			trackPastPositions();
 		}
 	}
@@ -70,7 +70,7 @@ public abstract class SpectralArrowPositionTrackerAndParticleRemover extends Per
 
 	@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"))
 	public void tick(World world, ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ, Operation<Void> voidOperation) {
-		if (!EffectiveConfig.improvedSpectralArrows) {
+		if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.NONE) {
 			voidOperation.call(world, parameters, x, y, z, velocityX, velocityY, velocityZ);
 		}
 	}

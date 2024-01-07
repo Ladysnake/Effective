@@ -11,6 +11,9 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
 	public static int flowingWaterSplashingDensity = 50;
 
+	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
+	public static float splashThreshold = 0.3f;
+
 	@Entry(category = waterEffects)
 	public static boolean cascades = true;
 
@@ -50,12 +53,15 @@ public class EffectiveConfig extends MidnightConfig {
 	public static GlowSquidHypnoOptions glowSquidHypnotize = GlowSquidHypnoOptions.ATTRACT;
 
 	@Entry(category = entityEffects)
-	public static AllayTrailOptions allayTrails = AllayTrailOptions.BOTH;
+	public static TrailOptions allayTrails = TrailOptions.BOTH;
 
 	@Entry(category = entityEffects)
 	public static boolean goldenAllays = true;
 
 	public static final String screenShakeEffects = "screenShakeEffects";
+
+	@Entry(category = screenShakeEffects, min = 0, max = 5, isSlider = true)
+	public static float screenShakeIntensity = 1;
 
 	@Entry(category = screenShakeEffects)
 	public static boolean wardenScreenShake = true;
@@ -93,10 +99,10 @@ public class EffectiveConfig extends MidnightConfig {
 	public static boolean improvedDragonFireballsAndBreath = true;
 
 	@Entry(category = improvedEffects)
-	public static boolean improvedSpectralArrows = true;
+	public static boolean improvedGlowSquidParticles = true;
 
 	@Entry(category = improvedEffects)
-	public static boolean improvedGlowSquidParticles = true;
+	public static TrailOptions spectralArrowTrails = TrailOptions.BOTH;
 
 	public static final String miscellaneous = "miscellaneous";
 
@@ -109,6 +115,9 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(category = miscellaneous)
 	public static boolean ultrakill = false;
 
+	@Entry(category = miscellaneous, min = 1, max = 10, isSlider = true)
+	public static int freezeFrames = 5;
+
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;
 	}
@@ -117,7 +126,7 @@ public class EffectiveConfig extends MidnightConfig {
 		return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
 	}
 
-	public enum AllayTrailOptions {
+	public enum TrailOptions {
 		BOTH, TRAIL, TWINKLE, NONE
 	}
 

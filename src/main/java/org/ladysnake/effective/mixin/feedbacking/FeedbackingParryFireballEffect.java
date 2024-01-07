@@ -23,7 +23,7 @@ public abstract class FeedbackingParryFireballEffect {
 		if (EffectiveConfig.ultrakill && this.isMainPlayer() && target instanceof ExplosiveProjectileEntity) {
 			MinecraftClient.getInstance().player.playSound(Effective.PARRY, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
-			Effective.freezeFrames = 5;
+			Effective.freezeFrames = EffectiveConfig.freezeFrames;
 		}
 	}
 }

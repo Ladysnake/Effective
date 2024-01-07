@@ -58,6 +58,9 @@ public abstract class SplashSpawner {
 			if (!(entity instanceof FishingBobberEntity)) {
 				float f = entity == (Object) this ? 0.2f : 0.9f;
 				Vec3d vec3d = entity.getVelocity();
+
+				if (vec3d.length() < EffectiveConfig.splashThreshold) return;
+
 				float g = Math.min(1.0f, (float) Math.sqrt(vec3d.x * vec3d.x * (double) 0.2f + vec3d.y * vec3d.y + vec3d.z * vec3d.z * (double) 0.2f) * f);
 				for (int i = -10; i < 10; i++) {
 					if (this.world.getBlockState(BlockPos.create(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().getFluid() == Fluids.WATER && this.world.getBlockState(BlockPos.create(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(BlockPos.create(this.getX(), Math.round(this.getY()) + i, this.getZ())).getFluidState().isSource() && this.world.getBlockState(BlockPos.create(this.getX(), Math.round(this.getY()) + i + 1, this.getZ())).isAir()) {

@@ -26,7 +26,7 @@ public abstract class AllayPositionTracker extends PathAwareEntity implements Po
 
 	@Inject(method = "tick", at = @At("HEAD"))
 	public void tick(CallbackInfo ci) {
-		if (EffectiveConfig.allayTrails != EffectiveConfig.AllayTrailOptions.NONE) {
+		if (EffectiveConfig.allayTrails != EffectiveConfig.TrailOptions.NONE) {
 			trackPastPositions();
 		}
 	}

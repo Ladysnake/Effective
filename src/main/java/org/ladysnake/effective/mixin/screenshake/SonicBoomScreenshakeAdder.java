@@ -25,7 +25,7 @@ public class SonicBoomScreenshakeAdder {
 				.filter(wardenEntity::isEnemy)
 				.filter(livingEntity -> wardenEntity.isInRange(livingEntity, 15.0, 20.0))
 				.ifPresent(livingEntity -> {
-					ScreenshakeInstance boomScreenShake = new PositionedScreenshakeInstance(20, wardenEntity.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(1.0f, 0.0f, 0.0f);
+					ScreenshakeInstance boomScreenShake = new PositionedScreenshakeInstance(20, wardenEntity.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(EffectiveConfig.screenShakeIntensity, 0.0f, 0.0f);
 					ScreenshakeHandler.addScreenshake(boomScreenShake);
 				});
 		}
