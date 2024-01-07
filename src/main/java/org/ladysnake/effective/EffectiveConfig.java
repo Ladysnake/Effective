@@ -8,11 +8,11 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(category = waterEffects)
 	public static boolean splashes = true;
 
-	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
-	public static int flowingWaterSplashingDensity = 50;
-
 	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
 	public static float splashThreshold = 0.3f;
+
+	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
+	public static int flowingWaterSplashingDensity = 50;
 
 	@Entry(category = waterEffects)
 	public static boolean cascades = true;
