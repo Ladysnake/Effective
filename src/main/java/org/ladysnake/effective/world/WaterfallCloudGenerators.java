@@ -154,7 +154,7 @@ public class WaterfallCloudGenerators {
 	}
 
 	public static void addWaterfallCloud(World world, Waterfall waterfall) {
-		boolean isGlowingWater = EffectiveUtils.isGlowingWater(world, Vec3d.ofCenter(waterfall.blockPos()));
+		boolean isGlowingWater = EffectiveUtils.isGlowingWater(world, waterfall.blockPos());
 		Color glowingWaterColor = EffectiveUtils.getGlowingWaterColor(world, waterfall.blockPos());
 		Color white = new Color(0xFFFFFF);
 		BlockPos blockPos = waterfall.blockPos();
@@ -168,7 +168,7 @@ public class WaterfallCloudGenerators {
 					.setScaleData(GenericParticleData.create((0.4f + waterfall.strength() * world.random.nextFloat())).build())
 					.setColorData(ColorParticleData.create(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white).build())
 					.setLifetime(10)
-					.setRenderType(EffectiveUtils.isGlowingWater(world, Vec3d.ofCenter(blockPos)) ? LodestoneWorldParticleTextureSheet.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
+					.setRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? LodestoneWorldParticleTextureSheet.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
 					.setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ))
 					.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 			}

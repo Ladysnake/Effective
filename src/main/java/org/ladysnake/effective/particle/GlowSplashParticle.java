@@ -147,9 +147,9 @@ public class GlowSplashParticle extends SplashParticle {
 		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			GlowSplashParticle instance = new GlowSplashParticle(world, x, y, z);
 			if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
-				final float width = (float) splashParameters.initialData.width * 2;
+				final float width = (float) splashParameters.initialData.width() * 2;
 				instance.widthMultiplier = width;
-				instance.heightMultiplier = (float) splashParameters.initialData.velocityY * width;
+				instance.heightMultiplier = (float) splashParameters.initialData.velocityY() * width;
 				instance.wave1End = 10 + Math.round(width * 1.2f);
 				instance.wave2Start = 6 + Math.round(width * 0.7f);
 				instance.wave2End = 20 + Math.round(width * 2.4f);
