@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Effective 2.2.1 - 1.20.1
+------------------------------------------------------
+- Added more config options for the splash effect, screen shake, and trails (thanks donkeyrat !)
+- Added a Dutch localization (thanks cph101 !)
+- Fixed a bug causing the accessibility onboard screen and the main menu fade-in to be skipped (thanks Ennui !)
+- Fixed splash being centered on the nearest block rather than the entity that jumped into the water
+
+------------------------------------------------------
 Effective 2.2.0 - 1.20.1
 ------------------------------------------------------
 Brought to you on 1.20.1 by the combined efforts of SzczurekYT and Motschen (big thanks to them !)
