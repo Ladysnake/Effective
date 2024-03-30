@@ -6,8 +6,6 @@ import ladysnake.satin.api.managed.ManagedCoreShader;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import ladysnake.satin.api.managed.uniform.Uniform1f;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -48,6 +46,7 @@ import org.ladysnake.effective.render.entity.model.SplashRimModel;
 import org.ladysnake.effective.world.RenderedHypnotizingEntities;
 import org.ladysnake.effective.world.WaterfallCloudGenerators;
 import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.lifecycle.api.client.event.ClientTickEvents;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
@@ -61,7 +60,7 @@ import team.lodestar.lodestone.systems.rendering.particle.type.LodestoneParticle
 
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
 	// rainbow shader for jeb glow squid
@@ -76,7 +75,7 @@ public class Effective implements ClientModInitializer {
 	private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
 
 	// freeze frames for feedbacking
-	public static int freezeFrames;
+	public static int freezeFrames = -1;
 
 	// particle types
 	public static SplashParticleType SPLASH;
@@ -277,12 +276,12 @@ public class Effective implements ClientModInitializer {
 					.setRenderType(LodestoneScreenParticleTextureSheet.ADDITIVE);
 				b2.spawn(0, 0);
 
-				boolean bl = MinecraftClient.getInstance().isIntegratedServerRunning() && !MinecraftClient.getInstance().getServer().isRemote();
+				boolean bl = client.isIntegratedServerRunning() && !client.getServer().isRemote();
 				if (bl) {
-					MinecraftClient.getInstance().setScreen(new ParryScreen());
+					client.setScreen(new ParryScreen());
 				}
 			} else if (freezeFrames == 0) {
-				MinecraftClient.getInstance().setScreen(null);
+				client.setScreen(null);
 				freezeFrames = -1;
 			}
 		});
