@@ -17,7 +17,7 @@ import team.lodestar.lodestone.systems.screenshake.ScreenshakeInstance;
 @Mixin(SittingAttackingPhase.class)
 public abstract class EnderDragonRoarScreenshakeAdder extends AbstractSittingPhase {
 	@Unique
-	private boolean screenShaked = false;
+	private boolean screenShook = false;
 
 	public EnderDragonRoarScreenshakeAdder(EnderDragonEntity enderDragonEntity) {
 		super(enderDragonEntity);
@@ -25,18 +25,18 @@ public abstract class EnderDragonRoarScreenshakeAdder extends AbstractSittingPha
 
 	@Inject(method = "clientTick", at = @At("HEAD"))
 	public void clientTick(CallbackInfo ci) {
-		if (!this.screenShaked) {
+		if (!this.screenShook) {
 			if (EffectiveConfig.dragonScreenShake) {
 				ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(80, this.dragon.getPos(), 30f, 0f, 35f, Easing.CIRC_IN_OUT).setIntensity(0.0f, EffectiveConfig.screenShakeIntensity, 0.0f);
 				ScreenshakeHandler.addScreenshake(roarScreenShake);
 			}
 
-			this.screenShaked = true;
+			this.screenShook = true;
 		}
 	}
 
 	@Inject(method = "beginPhase", at = @At("HEAD"))
 	private void resetScreenShaked(CallbackInfo ci) {
-		this.screenShaked = false;
+		this.screenShook = false;
 	}
 }
