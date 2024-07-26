@@ -1,139 +1,127 @@
 plugins {
-	alias libs.plugins.quilt.loom
-	alias libs.plugins.chenille
+	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'maven-publish'
 }
 
-archivesBaseName = project.archives_base_name
-version = "${project.version}+${libs.versions.minecraft.get()}"
+version = project.mod_version
 group = project.maven_group
 
-loom {
-	accessWidenerPath = file("src/main/resources/effective.accesswidener")
+base {
+	archivesName = project.archives_base_name
 }
 
 repositories {
-	mavenLocal()
+	// Modrinth
+	maven { url "https://api.modrinth.com/maven" }
 
-	// publishing
-	maven {
-		name = "CurseForge"
-		url = "https://minecraft.curseforge.com/api/maven"
-	}
+	// Veil
+	maven { url "https://maven.blamejared.com/" }
 
-	// cloth config
-	maven { url "https://maven.shedaniel.me/" }
+	// Mod Menu
+	maven { url "https://maven.terraformersmc.com/releases/" }
 
-	// satin
+	// CCA
 	maven {
 		name = 'Ladysnake Mods'
 		url = 'https://maven.ladysnake.org/releases'
-		content {
-			includeGroup 'org.ladysnake'
-			includeGroup 'io.github.ladysnake'
-			includeGroup 'team.lodestar.lodestone'
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"modid" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
 		}
 	}
-
-	// mod menu
-	maven {
-		name = 'TerraformersMC'
-		url = 'https://maven.terraformersmc.com/'
-	}
-
-	maven {
-		url 'https://jitpack.io'
-		content {
-			includeGroupByRegex('com\\.github\\..*')
-		}
-	}
-
-	maven {
-		name "modrinth"
-		url "https://api.modrinth.com/maven"
-		content {
-			includeGroup('maven.modrinth')
-		}
-	}
-
-	maven { url 'https://masa.dy.fi/maven' }
-
-	// mialee misc
-	maven { url "https://maven.willbl.dev/releases" }
 
 }
 
-// All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
-// See https://docs.gradle.org/current/userguide/platforms.html for information on how version catalogs work.
 dependencies {
-	minecraft libs.minecraft
-	mappings variantOf(libs.quilt.mappings) { classifier "intermediary-v2" }
-	// Replace the above line with the block below if you want to use Mojang mappings as your primary mappings, falling back on QM for parameters and Javadocs
-	/*
-	mappings loom.layered {
-		mappings "org.quiltmc:quilt-mappings:${libs.versions.quilt.mappings.get()}:intermediary-v2"
-		officialMojangMappings()
-	}
-	*/
-	modImplementation libs.quilt.loader
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
-	// Quilted Fabric API will automatically pull in the correct QSL version.
-	modImplementation libs.bundles.quilt.quiltedFabricApi
-	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// mod menu
-	modLocalImplementation(libs.modmenu) {
-		transitive = false
-	}
+	// Veil
+//	modImplementation include("foundry.veil:Veil-fabric-${project.minecraft_version}:${project.veil_version}") { transitive = true }
+
+	// Mod Menu
+	modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
+	modRuntimeOnly "com.terraformersmc:modmenu:${mod_menu_version}"
+
+	// CCA
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+	// Adds a dependency on a specific module
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+	// Includes Cardinal Components API as a Jar-in-Jar dependency (optional)
+	include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+	include "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}"
+	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 
 	// midnightlib
-	modImplementation(libs.midnightLib)
-	include(libs.midnightLib)
+	modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+	include "maven.modrinth:midnightlib:${project.midnightlib_version}"
 
 	// satin
-	modImplementation(libs.satin) {
-		exclude group: 'net.fabricmc'
-	}
-	include(libs.satin)
-
-	// lodestone lib
-	modImplementation(libs.lodestoneLib) {
-		transitive = false
-	}
-	include(libs.lodestoneLib)
+	modImplementation "maven.modrinth:satin-api:${project.satin_version}"
+	include "maven.modrinth:satin-api:${project.satin_version}"
 
 	// iris and sodium
-	modLocalImplementation(libs.sodium)
-	modLocalImplementation(libs.iris)
-	runtimeOnly(libs.jcpp)
-	implementation(libs.glslTransformer)
-}
-
-chenille {
-	javaVersion = 17
-	configurePublishing {
-		mainArtifact = remapJar.archiveFile
-		withLadysnakeMaven()
-		withGithubRelease()
-		withModrinthRelease()
-	}
+	modImplementation("maven.modrinth:sodium:${project.sodium_version}")
+	modImplementation("maven.modrinth:iris:${project.iris_version}")
+	runtimeOnly("org.anarres:jcpp:${project.jcpp_version}")
+	implementation("io.github.douira:glsl-transformer:${project.glslTransformer_version}")
 }
 
 processResources {
-	inputs.property 'version', version
+	inputs.property "version", project.version
 
-	filesMatching('quilt.mod.json') {
-		expand "version": version
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
 	}
 }
 
-java {
-	withSourcesJar()
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
 }
 
-// If you plan to use a different file for the license, don't forget to change the file name here!
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
 jar {
-	from('LICENSE') {
-		rename { "${it}_${archivesBaseName}" }
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
 	}
 }

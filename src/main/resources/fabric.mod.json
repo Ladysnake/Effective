@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+  "id": "effective",
+  "version": "${version}",
+  "name": "Effective",
+  "description": "Client-side mod designed to improve Minecraft's ambience through particles, visual effects and sounds",
+	"authors": [
+		"doctor4t",
+    "Pyrofab"
+	],
+  "contact": {
+    "homepage": "https://doctor4t.ladysnake.org",
+    "sources": "https://github.com/Ladysnake/Effective",
+    "issues": "https://github.com/Ladysnake/Effective/issues"
+  },
+	"license": "ARR",
+  "icon": "assets/effective/effective.png",
+	"environment": "client",
+	"entrypoints": {
+    "client": [
+      "org.ladysnake.effective.Effective",
+      "org.ladysnake.effective.cosmetics.EffectiveCosmetics"
+    ],
+    "modmenu": [
+      "org.ladysnake.effective.compat.EffectiveModMenuCompat"
+    ]
+	},
+	"mixins": [
+      "effective.mixins.json",
+      "effective_cosmetics.mixins.json"
+  ],
+  "accessWidener": "effective.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*",
+		"midnightlib": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
