@@ -10,11 +10,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 
 public class DistancedSoundInstance extends PositionedSoundInstance implements TickableSoundInstance {
-	private static final RandomGenerator RANDOM = RandomGenerator.createThreaded();
+	private static final Random RANDOM = Random.create();
 	private final float maxDistance;
 
 	public DistancedSoundInstance(SoundEvent soundEvent, SoundCategory soundCategory, float pitch, BlockPos blockPos, float maxDistance) {
-		super(soundEvent, soundCategory, 0.0f, pitch, DistancedSoundInstance.RANDOM, blockPos);
+		super(soundEvent, soundCategory, 0.0f, pitch, RANDOM, blockPos);
 		this.maxDistance = maxDistance;
 		this.repeat = false;
 	}

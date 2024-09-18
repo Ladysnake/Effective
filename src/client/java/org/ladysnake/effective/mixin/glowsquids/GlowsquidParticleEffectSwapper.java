@@ -12,10 +12,10 @@ import org.ladysnake.effective.Effective;
 import org.ladysnake.effective.EffectiveConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import team.lodestar.lodestone.systems.rendering.particle.Easing;
-import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.easing.Easing;
+import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 
 import java.awt.*;
 

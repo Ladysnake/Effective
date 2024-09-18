@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import team.lodestar.lodestone.systems.rendering.particle.Easing;
-import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
+import team.lodestar.lodestone.systems.easing.Easing;
+import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
+import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
 
 import java.awt.*;
 

@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.world.World;
 import org.ladysnake.effective.EffectiveConfig;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
@@ -49,7 +49,7 @@ public abstract class AuraAndPetSpawner extends LivingEntity {
 				//noinspection ConstantConditions
 				if (((EffectiveConfig.cosmetics == EffectiveConfig.CosmeticsOptions.FIRST_PERSON || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
 					if (EffectiveCosmetics.PETS_DATA.containsKey(playerPet)) {
-						SimpleParticleType overhead = EffectiveCosmetics.PETS_DATA.get(playerPet);
+						DefaultParticleType overhead = EffectiveCosmetics.PETS_DATA.get(playerPet);
 						if (this.age % 20 == 0) {
 							getWorld().addParticle(overhead, this.getX() + Math.cos(this.bodyYaw / 50) * 0.5, this.getY() + this.getHeight() + 0.5f + Math.sin(this.age / 12f) / 12f, this.getZ() - Math.cos(this.bodyYaw / 50) * 0.5, 0, 0, 0);
 						}

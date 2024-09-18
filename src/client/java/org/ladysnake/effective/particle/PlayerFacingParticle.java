@@ -10,25 +10,24 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import team.lodestar.lodestone.config.ClientConfig;
 import team.lodestar.lodestone.handlers.RenderHandler;
-import team.lodestar.lodestone.setup.LodestoneRenderLayers;
-import team.lodestar.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
-import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
-import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.systems.particle.render_types.LodestoneWorldParticleRenderType;
+import team.lodestar.lodestone.systems.particle.world.LodestoneWorldParticle;
+import team.lodestar.lodestone.systems.particle.world.options.WorldParticleOptions;
 
-public class PlayerFacingParticle extends GenericParticle {
-	public PlayerFacingParticle(ClientWorld world, WorldParticleEffect data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
+public class PlayerFacingParticle extends LodestoneWorldParticle {
+	public PlayerFacingParticle(ClientWorld world, WorldParticleOptions data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
 		super(world, data, spriteSet, x, y, z, xd, yd, zd);
 	}
 
 	@Override
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
 		VertexConsumer consumer = vertexConsumer;
-		if (ClientConfig.DELAYED_RENDERING) {
-			if (getType().equals(LodestoneWorldParticleTextureSheet.ADDITIVE)) {
-				consumer = RenderHandler.DELAYED_RENDER.getBuffer(LodestoneRenderLayers.ADDITIVE_PARTICLE);
+		if (ClientConfig.DELAYED_PARTICLE_RENDERING.getConfigValue()) {
+			if (getType().equals(LodestoneWorldParticleRenderType.ADDITIVE)) {
+				consumer = RenderHandler.DELAYED_RENDER.getParticleBuffers().get(LodestoneWorldParticleRenderType.ADDITIVE);
 			}
-			if (getType().equals(LodestoneWorldParticleTextureSheet.TRANSPARENT)) {
-				consumer = RenderHandler.DELAYED_RENDER.getBuffer(LodestoneRenderLayers.TRANSPARENT_PARTICLE);
+			if (getType().equals(LodestoneWorldParticleRenderType.TRANSPARENT)) {
+				consumer = RenderHandler.DELAYED_RENDER.getParticleBuffers().get(LodestoneWorldParticleRenderType.TRANSPARENT);
 			}
 		}
 

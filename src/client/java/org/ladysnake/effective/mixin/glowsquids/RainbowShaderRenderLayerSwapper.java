@@ -26,7 +26,7 @@ public abstract class RainbowShaderRenderLayerSwapper {
 		isRgb = entity instanceof GlowSquidEntity && entity.hasCustomName() && "jeb_".equals(entity.getName().getString());
 	}
 
-	@ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"))
+	@ModifyArg(method = "renderModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/render/VertexConsumer;"))
 	private static RenderLayer replaceRenderLayer(RenderLayer base) {
 		if (isRgb) {
 			return Effective.RAINBOW_SHADER.getRenderLayer(base);

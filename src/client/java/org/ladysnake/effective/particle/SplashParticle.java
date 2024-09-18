@@ -12,7 +12,7 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -158,13 +158,13 @@ public class SplashParticle extends Particle {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
+	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		public DefaultFactory(SpriteProvider spriteProvider) {
 		}
 
 		@Nullable
 		@Override
-		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			SplashParticle instance = new SplashParticle(world, x, y, z);
 			if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
 				final float width = (float) splashParameters.initialData.width() * 2;

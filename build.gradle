@@ -1,6 +1,14 @@
 plugins {
 	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
+	id("io.github.ladysnake.chenille") version "0.13.1"
+}
+
+chenille {
+	configurePublishing {
+		withGithubRelease()
+		withModrinthRelease()
+	}
 }
 
 version = project.mod_version
@@ -25,9 +33,23 @@ repositories {
 		name = 'Ladysnake Mods'
 		url = 'https://maven.ladysnake.org/releases'
 	}
+
+	// Portinglib (for Lodestone Fabric)
+	maven { url "https://mvn.devos.one/snapshots/" 	}
+	maven { url "https://mvn.devos.one/releases/" 	}
+
+	// Reach entity attributes (for Portinglib, I am going to cry)
+	maven {
+		url "https://maven.jamieswhiteshirt.com/libs-release"
+		content {
+			includeGroup "com.jamieswhiteshirt"
+		}
+	}
 }
 
 loom {
+	accessWidenerPath = file("src/client/resources/effective.accesswidener")
+
 	splitEnvironmentSourceSets()
 
 	mods {
@@ -73,6 +95,16 @@ dependencies {
 	modImplementation "maven.modrinth:satin-api:${project.satin_version}"
 	include "maven.modrinth:satin-api:${project.satin_version}"
 
+	// lodestone
+	modImplementation "maven.modrinth:lodestonelib:${project.lodestone_version}"
+	include "maven.modrinth:lodestonelib:${project.lodestone_version}"
+	for (String module in portinglib_modules.split(",")) {
+		include "io.github.fabricators_of_create.Porting-Lib:$module:${project.portinglib_version}"
+		modImplementation "io.github.fabricators_of_create.Porting-Lib:$module:${project.portinglib_version}"
+	}
+	modImplementation "maven.modrinth:trinkets:${project.trinkets_version}"
+	include "maven.modrinth:trinkets:${project.trinkets_version}"
+
 	// iris and sodium
 	modImplementation("maven.modrinth:sodium:${project.sodium_version}")
 	modImplementation("maven.modrinth:iris:${project.iris_version}")
@@ -89,7 +121,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 17
 }
 
 java {
@@ -105,23 +137,5 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
-	}
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
-			from components.java
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }

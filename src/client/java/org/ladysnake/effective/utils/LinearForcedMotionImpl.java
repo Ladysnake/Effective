@@ -1,21 +1,21 @@
-package org.ladysnake.effective;
+package org.ladysnake.effective.utils;
 
 import net.minecraft.util.math.MathHelper;
 import org.joml.Vector3f;
-import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
+import team.lodestar.lodestone.systems.particle.world.LodestoneWorldParticle;
 
 import java.util.function.Consumer;
 
 
 /**
- * Arathain removed setForcedMotion and motion coefficient.
+ * Lodestar removed setForcedMotion and motion coefficient.
  * Here is my implementation of it or rather a copy paste from LodestoneLib 1.19.2
  * It makes a particle travel from one point to another and can be applied using
  * {@link team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder#addActor(Consumer)}
  *
  * @author SzczurekYT
  */
-public class LinearForcedMotionImpl implements Consumer<GenericParticle> {
+public class LinearForcedMotionImpl implements Consumer<LodestoneWorldParticle> {
 
 	private final Vector3f start;
 	private final Vector3f end;
@@ -28,11 +28,16 @@ public class LinearForcedMotionImpl implements Consumer<GenericParticle> {
 	}
 
 	@Override
-	public void accept(GenericParticle particle) {
-		float motionAge = particle.getCurve(coefficient);
+	public void accept(LodestoneWorldParticle particle) {
+		float motionAge = getCurve(particle, coefficient);
 		float velocityX = MathHelper.lerp(motionAge, start.x(), end.x());
 		float velocityY = MathHelper.lerp(motionAge, start.y(), end.y());
 		float velocityZ = MathHelper.lerp(motionAge, start.z(), end.z());
 		particle.setVelocity(velocityX, velocityY, velocityZ);
 	}
+
+	public float getCurve(LodestoneWorldParticle particle, float multiplier) {
+		return MathHelper.clamp((particle.getAge() * multiplier) / (float) particle.getMaxAge(), 0, 1);
+	}
+
 }

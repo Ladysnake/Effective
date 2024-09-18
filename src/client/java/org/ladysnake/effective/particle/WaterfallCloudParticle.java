@@ -3,15 +3,16 @@ package org.ladysnake.effective.particle;
 import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
-import team.lodestar.lodestone.systems.rendering.particle.world.GenericParticle;
-import team.lodestar.lodestone.systems.rendering.particle.world.WorldParticleEffect;
+import team.lodestar.lodestone.systems.particle.world.FrameSetParticle;
+import team.lodestar.lodestone.systems.particle.world.options.WorldParticleOptions;
 
-public class WaterfallCloudParticle extends GenericParticle {
-	public WaterfallCloudParticle(ClientWorld world, WorldParticleEffect data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
+public class WaterfallCloudParticle extends FrameSetParticle {
+	public WaterfallCloudParticle(ClientWorld world, WorldParticleOptions data, FabricSpriteProviderImpl spriteSet, double x, double y, double z, double xd, double yd, double zd) {
 		super(world, data, spriteSet, x, y, z, xd, yd, zd);
 
-		this.setSprite(this.spriteSet.getRandom(world.random));
+		this.setSprite(this.spriteSet.getSprite(world.random));
 	}
 
 	@Override

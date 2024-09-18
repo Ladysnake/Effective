@@ -1,4 +1,10 @@
 ------------------------------------------------------
+Effective 2.2.2 - 1.20.1
+------------------------------------------------------
+- Ported to Fabric
+- Reduced glow squid hypnosis maximum distance to 7 blocks
+
+------------------------------------------------------
 Effective 2.2.1 - 1.20.1
 ------------------------------------------------------
 - Added more config options for the splash effect, screen shake, and trails (thanks donkeyrat !)

@@ -32,14 +32,14 @@ public class PrideHeartModel extends Model {
 		);
 
 		modelPartData.getChild("heart").addChild("cube1", ModelPartBuilder.create()
-				.texture(22, 0)
+				.uv(22, 0)
 				.cuboid(1.0F, -4.0F, -1.5F, 0.0F, 3.0F, 3.0F),
 			ModelTransform.rotation(0.0F, 0.0F, -0.7854F));
 
 		modelPartData.getChild("heart").addChild("cube2", ModelPartBuilder.create()
-				.texture(22, 0)
+				.uv(22, 0)
 				.cuboid(-1.0F, -4.0F, -1.5F, 0.0F, 3.0F, 3.0F)
-				.texture(0, 0)
+				.uv(0, 0)
 				.cuboid(-4.0F, -4.0F, -1.5F, 8.0F, 8.0F, 3.0F),
 			ModelTransform.rotation(0.0F, 0.0F, 0.7854F));
 

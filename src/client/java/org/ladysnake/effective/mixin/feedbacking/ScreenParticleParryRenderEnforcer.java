@@ -17,21 +17,13 @@ public abstract class ScreenParticleParryRenderEnforcer {
 	public static boolean canSpawnParticles;
 
 
-	@Shadow
-	public static void renderEarliestParticles() {
-	}
-
-	@Shadow
-	public static void renderLateParticles() {
-	}
-
-	@Inject(method = "renderParticles()V", at = @At("TAIL"), remap = false)
+	@Inject(method = "renderParticles", at = @At("TAIL"), remap = false)
 	private static void renderParticles(CallbackInfo ci) {
 		final MinecraftClient client = MinecraftClient.getInstance();
 		Screen screen = client.currentScreen;
 		if (screen instanceof ParryScreen) {
-			renderEarliestParticles();
-			renderLateParticles();
+//			renderEarliestParticles();
+//			renderLateParticles();
 		}
 		canSpawnParticles = false;
 	}

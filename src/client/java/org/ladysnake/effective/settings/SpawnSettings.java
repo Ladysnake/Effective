@@ -3,7 +3,7 @@ package org.ladysnake.effective.settings;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.BiomeKeys;
 import org.ladysnake.effective.cosmetics.data.AuraSettings;
 import org.ladysnake.effective.settings.data.FireflySpawnSetting;
 
@@ -26,21 +26,21 @@ public class SpawnSettings {
 	public static float MEDIUM = 0.05f;
 	public static float HIGH = 0.1f;
 	public static final ImmutableMap<RegistryKey<Biome>, FireflySpawnSetting> FIREFLIES = ImmutableMap.<RegistryKey<Biome>, FireflySpawnSetting>builder()
-		.put(Biomes.PLAINS, new FireflySpawnSetting(LOW, new Color(0x91BD59)))
-		.put(Biomes.SUNFLOWER_PLAINS, new FireflySpawnSetting(LOW, new Color(0x91BD59)))
-		.put(Biomes.OLD_GROWTH_PINE_TAIGA, new FireflySpawnSetting(LOW, new Color(0xBFFF00)))
-		.put(Biomes.OLD_GROWTH_SPRUCE_TAIGA, new FireflySpawnSetting(LOW, new Color(0xBFFF00)))
-		.put(Biomes.TAIGA, new FireflySpawnSetting(LOW, new Color(0xBFFF00)))
-		.put(Biomes.FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xBFFF00)))
-		.put(Biomes.FLOWER_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xFF7FED)))
-		.put(Biomes.BIRCH_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xE4FF00)))
-		.put(Biomes.DARK_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0x006900)))
-		.put(Biomes.OLD_GROWTH_BIRCH_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xE4FF00)))
-		.put(Biomes.JUNGLE, new FireflySpawnSetting(MEDIUM, new Color(0x00FF21)))
-		.put(Biomes.SPARSE_JUNGLE, new FireflySpawnSetting(MEDIUM, new Color(0x00FF21)))
-		.put(Biomes.BAMBOO_JUNGLE, new FireflySpawnSetting(MEDIUM, new Color(0x00FF21)))
-		.put(Biomes.LUSH_CAVES, new FireflySpawnSetting(MEDIUM, new Color(0xF2B646)))
-		.put(Biomes.SWAMP, new FireflySpawnSetting(HIGH, new Color(0xBFFF00)))
-		.put(Biomes.MANGROVE_SWAMP, new FireflySpawnSetting(HIGH, new Color(0xBFFF00)))
+		.put(BiomeKeys.PLAINS, new FireflySpawnSetting(LOW, new Color(0x91BD59)))
+		.put(BiomeKeys.SUNFLOWER_PLAINS, new FireflySpawnSetting(LOW, new Color(0x91BD59)))
+		.put(BiomeKeys.OLD_GROWTH_PINE_TAIGA, new FireflySpawnSetting(LOW, new Color(0xBFFF00)))
+		.put(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, new FireflySpawnSetting(LOW, new Color(0xBFFF00)))
+		.put(BiomeKeys.TAIGA, new FireflySpawnSetting(LOW, new Color(0xBFFF00)))
+		.put(BiomeKeys.FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xBFFF00)))
+		.put(BiomeKeys.FLOWER_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xFF7FED)))
+		.put(BiomeKeys.BIRCH_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xE4FF00)))
+		.put(BiomeKeys.DARK_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0x006900)))
+		.put(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, new FireflySpawnSetting(MEDIUM, new Color(0xE4FF00)))
+		.put(BiomeKeys.JUNGLE, new FireflySpawnSetting(MEDIUM, new Color(0x00FF21)))
+		.put(BiomeKeys.SPARSE_JUNGLE, new FireflySpawnSetting(MEDIUM, new Color(0x00FF21)))
+		.put(BiomeKeys.BAMBOO_JUNGLE, new FireflySpawnSetting(MEDIUM, new Color(0x00FF21)))
+		.put(BiomeKeys.LUSH_CAVES, new FireflySpawnSetting(MEDIUM, new Color(0xF2B646)))
+		.put(BiomeKeys.SWAMP, new FireflySpawnSetting(HIGH, new Color(0xBFFF00)))
+		.put(BiomeKeys.MANGROVE_SWAMP, new FireflySpawnSetting(HIGH, new Color(0xBFFF00)))
 		.build();
 }

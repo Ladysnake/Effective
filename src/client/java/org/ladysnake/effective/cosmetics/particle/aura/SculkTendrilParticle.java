@@ -2,9 +2,10 @@ package org.ladysnake.effective.cosmetics.particle.aura;
 
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -111,14 +112,14 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
 	}
 
 
-	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
+	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 
 		public DefaultFactory(SpriteProvider spriteProvider) {
 			this.spriteProvider = spriteProvider;
 		}
 
-		public Particle createParticle(SimpleParticleType SimpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+		public Particle createParticle(DefaultParticleType DefaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
 			return new SculkTendrilParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
 		}
 	}

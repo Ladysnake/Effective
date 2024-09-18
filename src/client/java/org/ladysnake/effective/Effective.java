@@ -1,15 +1,22 @@
 package org.ladysnake.effective;
 
+import ladysnake.satin.api.event.EntitiesPreRenderCallback;
+import ladysnake.satin.api.event.ShaderEffectRenderCallback;
+import ladysnake.satin.api.managed.ManagedCoreShader;
+import ladysnake.satin.api.managed.ManagedShaderEffect;
+import ladysnake.satin.api.managed.ShaderEffectManager;
+import ladysnake.satin.api.managed.uniform.Uniform1f;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -28,23 +35,17 @@ import org.ladysnake.effective.render.entity.model.SplashModel;
 import org.ladysnake.effective.render.entity.model.SplashRimModel;
 import org.ladysnake.effective.world.RenderedHypnotizingEntities;
 import org.ladysnake.effective.world.WaterfallCloudGenerators;
-import org.ladysnake.satin.api.event.EntitiesPreRenderCallback;
-import org.ladysnake.satin.api.event.ShaderEffectRenderCallback;
-import org.ladysnake.satin.api.managed.ManagedCoreShader;
-import org.ladysnake.satin.api.managed.ManagedShaderEffect;
-import org.ladysnake.satin.api.managed.ShaderEffectManager;
-import org.ladysnake.satin.api.managed.uniform.Uniform1f;
 import team.lodestar.lodestone.handlers.screenparticle.ScreenParticleHandler;
-import team.lodestar.lodestone.setup.LodestoneScreenParticles;
-import team.lodestar.lodestone.systems.rendering.particle.ScreenParticleBuilder;
-import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.screen.LodestoneScreenParticleTextureSheet;
-import team.lodestar.lodestone.systems.rendering.particle.type.LodestoneParticleType;
+import team.lodestar.lodestone.registry.common.particle.LodestoneScreenParticleRegistry;
+import team.lodestar.lodestone.systems.particle.builder.ScreenParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
+import team.lodestar.lodestone.systems.particle.render_types.LodestoneScreenParticleRenderType;
+import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
+import team.lodestar.lodestone.systems.particle.world.type.LodestoneWorldParticleType;
 
 import java.awt.*;
 
-@ClientOnly
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
 	// rainbow shader for jeb glow squid
@@ -63,19 +64,19 @@ public class Effective implements ClientModInitializer {
 
 	// particle types
 	public static SplashParticleType SPLASH;
-	public static SimpleParticleType DROPLET;
-	public static SimpleParticleType RIPPLE;
+	public static DefaultParticleType DROPLET;
+	public static DefaultParticleType RIPPLE;
 	public static SplashParticleType GLOW_SPLASH;
-	public static SimpleParticleType GLOW_DROPLET;
-	public static SimpleParticleType GLOW_RIPPLE;
+	public static DefaultParticleType GLOW_DROPLET;
+	public static DefaultParticleType GLOW_RIPPLE;
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
-	public static SimpleParticleType CHORUS_PETAL;
-	public static SimpleParticleType EYES;
-	public static SimpleParticleType WILL_O_WISP;
+	public static DefaultParticleType CHORUS_PETAL;
+	public static DefaultParticleType EYES;
+	public static DefaultParticleType WILL_O_WISP;
 
 	// lodestone particles
-	public static LodestoneParticleType PIXEL = new LodestoneParticleType();
-	public static LodestoneParticleType WISP = new LodestoneParticleType();
+	public static LodestoneWorldParticleType PIXEL = new LodestoneWorldParticleType();
+	public static LodestoneWorldParticleType WISP = new LodestoneWorldParticleType();
 	public static FlameParticleType FLAME = new FlameParticleType();
 	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
 	public static BubbleParticleType BUBBLE = new BubbleParticleType();
@@ -87,6 +88,7 @@ public class Effective implements ClientModInitializer {
 	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.of(Identifier.of(MODID, "ambience.waterfall"));
 	public static SoundEvent PARRY = SoundEvent.of(Identifier.of(MODID, "entity.parry"));
 	private static int ticksJeb;
+	private static final ScreenParticleHolder effectiveScreenParticleHolder = new ScreenParticleHolder();
 
 	public static boolean isNightTime(World world) {
 		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
@@ -138,9 +140,9 @@ public class Effective implements ClientModInitializer {
 		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, Identifier.of(MODID, "textures/entity/will_o_wisp.png"), 0.1f, 0.75f, 1.0f, 0.0f, 0.1f, 1.0f));
 
 		// lodestone particles
-		ParticleFactoryRegistry.getInstance().register(PIXEL, LodestoneParticleType.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(PIXEL, LodestoneWorldParticleType.Factory::new);
 		PIXEL = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "pixel"), PIXEL);
-		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneParticleType.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneWorldParticleType.Factory::new);
 		WISP = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "wisp"), WISP);
 		ParticleFactoryRegistry.getInstance().register(FLAME, FlameParticleType.Factory::new);
 		FLAME = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "flame"), FLAME);
@@ -175,11 +177,13 @@ public class Effective implements ClientModInitializer {
 				GlowSquidEntity bestSquid = null;
 
 				for (GlowSquidEntity glowsquid : RenderedHypnotizingEntities.GLOWSQUIDS) {
-					Vec3d toSquid = glowsquid.getPos().subtract(MinecraftClient.getInstance().player.getPos()).normalize();
-					double lookIntensity = toSquid.dotProduct(MinecraftClient.getInstance().player.getRotationVec(tickDelta)); // * 1 / Math.max(2, Math.sqrt(glowsquid.getPos().squaredDistanceTo(MinecraftClient.getInstance().player.getPos())) - 5f); // 1 = looking straight at squid
-					if (lookIntensity > bestLookIntensity && MinecraftClient.getInstance().player.canSee(glowsquid)) {
-						bestLookIntensity = lookIntensity;
-						bestSquid = glowsquid;
+					if (glowsquid.getPos().squaredDistanceTo(MinecraftClient.getInstance().player.getPos()) <= 49f) {
+						Vec3d toSquid = glowsquid.getPos().subtract(MinecraftClient.getInstance().player.getPos()).normalize();
+						double lookIntensity = toSquid.dotProduct(MinecraftClient.getInstance().player.getRotationVec(tickDelta)); // * 1 / Math.max(2, Math.sqrt(glowsquid.getPos().squaredDistanceTo(MinecraftClient.getInstance().player.getPos())) - 5f); // 1 = looking straight at squid
+						if (lookIntensity > bestLookIntensity && MinecraftClient.getInstance().player.canSee(glowsquid)) {
+							bestLookIntensity = lookIntensity;
+							bestSquid = glowsquid;
+						}
 					}
 				}
 
@@ -248,17 +252,17 @@ public class Effective implements ClientModInitializer {
 		EntitiesPreRenderCallback.EVENT.register((camera, frustum, tickDelta) -> uniformSTimeJeb.set((ticksJeb + tickDelta) * 0.05f));
 
 		// tick freeze frames for feedbacking
-		ClientTickEvents.END.register(client -> {
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (freezeFrames > 0) {
 				freezeFrames--;
-
-				ScreenParticleBuilder b2 = ScreenParticleBuilder.create(LodestoneScreenParticles.SPARKLE, ScreenParticleHandler.LATE_PARTICLES)
+				ScreenParticleBuilder b2 = ScreenParticleBuilder.create(LodestoneScreenParticleRegistry.SPARKLE, effectiveScreenParticleHolder)
 					.setTransparencyData(GenericParticleData.create(0.3f).build())
 					.setScaleData(GenericParticleData.create(100000f).build())
 					.setColorData(ColorParticleData.create(new Color(0xFFFFFF), new Color(0xFFFFFF)).build())
 					.setLifetime(1)
-					.setRenderType(LodestoneScreenParticleTextureSheet.ADDITIVE);
+					.setRenderType(LodestoneScreenParticleRenderType.ADDITIVE);
 				b2.spawn(0, 0);
+				effectiveScreenParticleHolder.tick();
 
 				boolean bl = client.isIntegratedServerRunning() && !client.getServer().isRemote();
 				if (bl) {
@@ -268,6 +272,10 @@ public class Effective implements ClientModInitializer {
 				client.setScreen(null);
 				freezeFrames = -1;
 			}
+		});
+
+		WorldRenderEvents.LAST.register(context -> {
+			ScreenParticleHandler.renderParticles(effectiveScreenParticleHolder);
 		});
 	}
 }

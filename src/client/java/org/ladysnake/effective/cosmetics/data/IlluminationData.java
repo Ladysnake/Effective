@@ -1,18 +1,18 @@
 package org.ladysnake.effective.cosmetics.data;
 
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.function.BiPredicate;
 import java.util.function.Supplier;
-import java.util.random.RandomGenerator;
 
-public record IlluminationData(SimpleParticleType illuminationType,
+public record IlluminationData(DefaultParticleType illuminationType,
 							   BiPredicate<World, BlockPos> locationSpawnPredicate,
 							   Supplier<Float> chanceSupplier) {
 
-	public boolean shouldAddParticle(RandomGenerator random) {
+	public boolean shouldAddParticle(Random random) {
 		float chance = chanceSupplier.get();
 		if (chance <= 0f) return false;
 		float density = 1f;

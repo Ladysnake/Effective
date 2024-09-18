@@ -28,11 +28,11 @@ public class LanternModel extends Model {
 		ModelPartData modelPartData = modelData.getRoot();
 
 		modelPartData.addChild("lantern", ModelPartBuilder.create()
-				.texture(0, 0)
+				.uv(0, 0)
 				.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F)
-				.texture(0, 13)
+				.uv(0, 13)
 				.cuboid(-2.0F, -5.0F, -2.0F, 4.0F, 2.0F, 4.0F)
-				.texture(16, 13)
+				.uv(16, 13)
 				.cuboid(-2.5F, -8.0F, 0.0F, 5.0F, 4.0F, 0.0F),
 			ModelTransform.pivot(0.0F, 16.0F, 0.0F)
 		);

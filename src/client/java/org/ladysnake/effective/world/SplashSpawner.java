@@ -14,13 +14,13 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.Effective;
 import org.ladysnake.effective.EffectiveConfig;
-import org.ladysnake.effective.EffectiveUtils;
+import org.ladysnake.effective.utils.EffectiveUtils;
 import org.ladysnake.effective.particle.contracts.SplashParticleInitialData;
 import org.ladysnake.effective.particle.types.SplashParticleType;
 
 public final class SplashSpawner {
 	public static void trySpawnSplash(Entity entity) {
-		Entity topMostEntity = entity.hasPassengers() && entity.getPrimaryPassenger() != null ? entity.getPrimaryPassenger() : entity;
+		Entity topMostEntity = entity.hasPassengers() && entity.getFirstPassenger() != null ? entity.getFirstPassenger() : entity;
 		if (!(topMostEntity instanceof FishingBobberEntity)) {
 			float amplifier = topMostEntity == entity ? 0.2f : 0.9f;
 			Vec3d impactVelocity = topMostEntity.getVelocity();
@@ -67,7 +67,7 @@ public final class SplashSpawner {
 	}
 
 	private static void spawnWaterEffects(Entity entity) {
-		RandomGenerator random = entity.getWorld().getRandom();
+		Random random = entity.getWorld().getRandom();
 
 		for (int j = 0; j < entity.getWidth() * 25f; j++) {
 			EffectiveUtils.spawnWaterEffect(entity.getWorld(), new Vec3d(entity.getX() + random.nextGaussian() * entity.getWidth() / 5f, entity.getY(), entity.getZ() + random.nextGaussian() * entity.getWidth()), random.nextGaussian() / 15f, random.nextFloat() / 2.5f, random.nextGaussian() / 15f, EffectiveUtils.WaterEffectType.DROPLET);

@@ -18,14 +18,14 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.ladysnake.effective.Effective;
 import org.ladysnake.effective.EffectiveConfig;
-import org.ladysnake.effective.EffectiveUtils;
+import org.ladysnake.effective.utils.EffectiveUtils;
 import org.ladysnake.effective.sound.WaterfallSoundInstance;
-import team.lodestar.lodestone.systems.rendering.particle.Easing;
-import team.lodestar.lodestone.systems.rendering.particle.LodestoneWorldParticleTextureSheet;
-import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.SpinParticleData;
+import team.lodestar.lodestone.systems.easing.Easing;
+import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
+import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
+import team.lodestar.lodestone.systems.particle.render_types.LodestoneWorldParticleRenderType;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class WaterfallCloudGenerators {
 			return NO_WATERFALL;
 		}
 		MinecraftClient client = MinecraftClient.getInstance();
-		if (Math.sqrt(pos.getSquaredDistance(client.player.getBlockPos())) > client.options.getViewDistance().get() * 32) {
+		if (Math.sqrt(pos.getSquaredDistance(client.player.getBlockPos())) > client.options.getViewDistance().getValue() * 32) {
 			return NO_WATERFALL;
 		}
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -168,7 +168,7 @@ public class WaterfallCloudGenerators {
 					.setScaleData(GenericParticleData.create((0.4f + waterfall.strength() * world.random.nextFloat())).build())
 					.setColorData(ColorParticleData.create(isGlowingWater ? glowingWaterColor : white, isGlowingWater ? glowingWaterColor : white).build())
 					.setLifetime(10)
-					.setRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? LodestoneWorldParticleTextureSheet.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
+					.setRenderType(EffectiveUtils.isGlowingWater(world, blockPos) ? LodestoneWorldParticleRenderType.TRANSPARENT : ParticleTextureSheet.PARTICLE_SHEET_OPAQUE)
 					.setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ))
 					.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 			}
@@ -189,7 +189,7 @@ public class WaterfallCloudGenerators {
 					)
 					.setLifetime(300)
 					.enableNoClip()
-					.setRenderType(LodestoneWorldParticleTextureSheet.TRANSPARENT)
+					.setRenderType(LodestoneWorldParticleRenderType.TRANSPARENT)
 					.setColorData(ColorParticleData.create(waterfall.mistColor(), waterfall.mistColor()).build())
 					.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
 					.spawn(world, blockPos.getX() + .5f, blockPos.getY() + .5f, blockPos.getZ() + .5f);

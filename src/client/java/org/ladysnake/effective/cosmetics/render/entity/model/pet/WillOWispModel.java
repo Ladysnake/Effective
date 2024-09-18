@@ -27,9 +27,9 @@ public class WillOWispModel extends Model {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
 		modelPartData.addChild("skull", ModelPartBuilder.create()
-				.texture(0, 0)
+				.uv(0, 0)
 				.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F)
-				.texture(0, 16)
+				.uv(0, 16)
 				.cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F, new Dilation(0.25F)),
 			ModelTransform.pivot(0.0F, 16.0F, 0.0F)
 		);

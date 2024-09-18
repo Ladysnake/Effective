@@ -17,7 +17,7 @@ public abstract class OverheadModel extends Model {
 	}
 
 	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
 		this.head.render(matrices, vertices, light, overlay);
 	}
 }

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import team.lodestar.lodestone.handlers.ScreenshakeHandler;
-import team.lodestar.lodestone.systems.rendering.particle.Easing;
+import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.screenshake.PositionedScreenshakeInstance;
 import team.lodestar.lodestone.systems.screenshake.ScreenshakeInstance;
 
@@ -22,7 +22,7 @@ public abstract class EnderDragonRoarScreenshakeAdder extends AbstractSittingPha
 	@Inject(method = "clientTick", at = @At("HEAD"))
 	public void clientTick(CallbackInfo ci) {
 		if (EffectiveConfig.dragonScreenShake) {
-			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(60, this.dragon.getPos(), 20f, 0f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, EffectiveConfig.screenShakeIntensity, 0.0f);
+			ScreenshakeInstance roarScreenShake = new PositionedScreenshakeInstance(60, this.dragon.getPos(), 20f, 25f, Easing.CIRC_IN_OUT).setIntensity(0.0f, EffectiveConfig.screenShakeIntensity, 0.0f);
 			ScreenshakeHandler.addScreenshake(roarScreenShake);
 		}
 	}

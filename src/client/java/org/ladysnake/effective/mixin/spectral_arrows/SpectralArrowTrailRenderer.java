@@ -11,34 +11,35 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import org.joml.Vector4f;
 import org.ladysnake.effective.Effective;
 import org.ladysnake.effective.EffectiveConfig;
+import org.ladysnake.effective.utils.PositionTrackedEntity;
 import org.ladysnake.effective.particle.contracts.ColoredParticleInitialData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import team.lodestar.lodestone.setup.LodestoneRenderLayers;
-import team.lodestar.lodestone.systems.rendering.PositionTrackedEntity;
+import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
+import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
-import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
+import team.lodestar.lodestone.systems.rendering.trail.TrailPoint;
 
 import java.awt.*;
-import java.util.ArrayList;
-
-import static team.lodestar.lodestone.handlers.RenderHandler.DELAYED_RENDER;
+import java.util.List;
 
 @Mixin(ProjectileEntityRenderer.class)
 public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileEntity> extends EntityRenderer<T> {
-	private static final Identifier LIGHT_TRAIL = Identifier.of(Effective.MODID, "textures/vfx/light_trail.png");
-	private static final RenderLayer LIGHT_TYPE = LodestoneRenderLayers.ADDITIVE_TEXTURE.apply(LIGHT_TRAIL);
+	private static final RenderLayer TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(Identifier.of(Effective.MODID, "textures/vfx/light_trail.png")));
 
 	protected SpectralArrowTrailRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
+	}
+
+	public RenderLayer getTrailRenderType() {
+		return TRAIL_TYPE;
 	}
 
 	// spectral arrow trail and twinkle
@@ -51,8 +52,8 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 			// trail
 			if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.BOTH || EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.TWINKLE) {
 				matrixStack.push();
-				ArrayList<Vec3d> positions = new ArrayList<>(((PositionTrackedEntity) spectralArrowEntity).getPastPositions());
-				VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setPosColorTexLightmapDefaultFormat();
+				List<TrailPoint> positions = ((PositionTrackedEntity) (Object) spectralArrowEntity).getPastPositions();
+				VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setRenderType(getTrailRenderType());
 
 				float size = 0.15f;
 				float alpha = 1f;
@@ -61,23 +62,16 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 				float y = (float) MathHelper.lerp(tickDelta, spectralArrowEntity.prevY, spectralArrowEntity.getY());
 				float z = (float) MathHelper.lerp(tickDelta, spectralArrowEntity.prevZ, spectralArrowEntity.getZ());
 
-				builder.setColor(new Color(data.color)).setOffset(-x, -y, -z)
+				matrixStack.translate(-x, -y, -z);
+				builder.setColor(new Color(data.color))
 					.setAlpha(alpha)
-					.renderTrail(
-						DELAYED_RENDER.getBuffer(LIGHT_TYPE),
-						matrixStack,
-						positions.stream()
-							.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
-							.toList(),
+					.renderTrail(matrixStack,
+						positions,
 						f -> MathHelper.sqrt(f) * size,
 						f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (alpha * f) - 0.1f)))
 					)
-					.renderTrail(
-						DELAYED_RENDER.getBuffer(LIGHT_TYPE),
-						matrixStack,
-						positions.stream()
-							.map(p -> new Vector4f((float) p.x, (float) p.y, (float) p.z, 1))
-							.toList(),
+					.renderTrail(matrixStack,
+						positions,
 						f -> (MathHelper.sqrt(f) * size) / 1.5f,
 						f -> builder.setAlpha((float) Math.cbrt(Math.max(0, (((alpha * f) / 1.5f) - 0.1f))))
 					);

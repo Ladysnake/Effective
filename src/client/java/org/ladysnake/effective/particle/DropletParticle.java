@@ -7,7 +7,7 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -32,7 +32,7 @@ public class DropletParticle extends SpriteBillboardParticle {
 	}
 
 	public ParticleTextureSheet getType() {
-		return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+		return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE;
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class DropletParticle extends SpriteBillboardParticle {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
+	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 
 		public DefaultFactory(SpriteProvider spriteProvider) {
@@ -116,7 +116,7 @@ public class DropletParticle extends SpriteBillboardParticle {
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			return new DropletParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
 		}
 	}

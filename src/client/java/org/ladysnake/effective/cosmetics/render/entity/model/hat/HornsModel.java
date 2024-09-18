@@ -26,11 +26,11 @@ public class HornsModel extends OverheadModel {
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().texture(0, 7).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(-4.0f)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 7).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(-4.0f)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 		ModelPartData modelPartData2 = modelPartData1.addChild("horns", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
-		modelPartData2.addChild("west_r1", ModelPartBuilder.create().texture(0, 39).cuboid(-11.0F, -9.0F, 3.0F, 16.0F, 9.0F, 0.0F), ModelTransform.pivot(6.0F, 2.0F, 3.0F));
-		modelPartData2.addChild("east_r1", ModelPartBuilder.create().texture(0, 22).cuboid(-5.0F, -9.0F, 3.0F, 16.0F, 9.0F, 0.0F), ModelTransform.pivot(-6.0F, 2.0F, 3.0F));
-		modelPartData2.addChild("south_r1", ModelPartBuilder.create().texture(7, 30).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
+		modelPartData2.addChild("west_r1", ModelPartBuilder.create().uv(0, 39).cuboid(-11.0F, -9.0F, 3.0F, 16.0F, 9.0F, 0.0F), ModelTransform.pivot(6.0F, 2.0F, 3.0F));
+		modelPartData2.addChild("east_r1", ModelPartBuilder.create().uv(0, 22).cuboid(-5.0F, -9.0F, 3.0F, 16.0F, 9.0F, 0.0F), ModelTransform.pivot(-6.0F, 2.0F, 3.0F));
+		modelPartData2.addChild("south_r1", ModelPartBuilder.create().uv(7, 30).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
 		return TexturedModelData.of(modelData, 32, 48);
 	}
 

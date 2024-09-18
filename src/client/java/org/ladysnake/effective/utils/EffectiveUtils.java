@@ -1,12 +1,14 @@
-package org.ladysnake.effective;
+package org.ladysnake.effective.utils;
 
 import net.minecraft.entity.passive.AllayEntity;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
+import org.ladysnake.effective.Effective;
+import org.ladysnake.effective.EffectiveConfig;
 
 import java.awt.*;
 
@@ -24,7 +26,7 @@ public class EffectiveUtils {
 	 * chooses between spawning a normal droplet / ripple / waterfall cloud or glow one depending on biome
 	 */
 	public static void spawnWaterEffect(World world, Vec3d pos, double velocityX, double velocityY, double velocityZ, WaterEffectType waterEffect) {
-		SimpleParticleType particle = switch (waterEffect) {
+		DefaultParticleType particle = switch (waterEffect) {
 			case DROPLET -> Effective.DROPLET;
 			case RIPPLE -> Effective.RIPPLE;
 		};
@@ -43,7 +45,7 @@ public class EffectiveUtils {
 	}
 
 	public static boolean isGlowingWater(World world, BlockPos pos) {
-		return EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).getKey().get().isOf(BiomeKeys.WARM_OCEAN.getRegistryRef());
+		return EffectiveConfig.glowingPlankton && Effective.isNightTime(world) && world.getBiome(pos).matchesKey(BiomeKeys.WARM_OCEAN);
 	}
 
 	public static Color getGlowingWaterColor(World world, BlockPos pos) {

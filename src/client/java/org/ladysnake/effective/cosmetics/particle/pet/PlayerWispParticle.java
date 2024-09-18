@@ -6,7 +6,7 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
@@ -76,7 +76,7 @@ public class PlayerWispParticle extends WillOWispParticle {
 	}
 
 
-	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
+	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 		private final float red;
 		private final float green;
@@ -97,7 +97,7 @@ public class PlayerWispParticle extends WillOWispParticle {
 
 		@Nullable
 		@Override
-		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			return new PlayerWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
 		}
 	}

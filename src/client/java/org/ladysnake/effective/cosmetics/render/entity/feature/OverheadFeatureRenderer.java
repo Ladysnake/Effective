@@ -1,6 +1,7 @@
 package org.ladysnake.effective.cosmetics.render.entity.feature;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;

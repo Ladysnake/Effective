@@ -28,12 +28,12 @@ public class TiaraModel extends OverheadModel {
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().texture(0, 7).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(-4.0f)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-		ModelPartData modelPartData2 = modelPartData1.addChild("tiara", ModelPartBuilder.create().texture(0, 4).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 4.0F, 8.0F, new Dilation(-0.5F)).texture(0, 0), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
-		modelPartData2.addChild("west_r1", ModelPartBuilder.create().texture(6, 39).cuboid(-5.1F, -6.1F, 3.03F, 10.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -6.0F, 0.0F));
-		modelPartData2.addChild("north_r1", ModelPartBuilder.create().texture(8, 17).cuboid(0.0F, -4.3F, 3.2F, 6.0F, 6.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(3.0F, -6.0F, 0.0F));
-		modelPartData2.addChild("east_r1", ModelPartBuilder.create().texture(6, 23).cuboid(-4.9F, -6.1F, 3.03F, 10.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -6.0F, 0.0F));
-		modelPartData2.addChild("south_r1", ModelPartBuilder.create().texture(7, 32).cuboid(-4.0F, -6.3F, 3.2F, 8.0F, 8.0F, 1.0F, new Dilation(-0.75f)), ModelTransform.pivot(0.0F, -6.0F, 0.0F));
+		ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 7).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(-4.0f)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData modelPartData2 = modelPartData1.addChild("tiara", ModelPartBuilder.create().uv(0, 4).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 4.0F, 8.0F, new Dilation(-0.5F)).uv(0, 0), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
+		modelPartData2.addChild("west_r1", ModelPartBuilder.create().uv(6, 39).cuboid(-5.1F, -6.1F, 3.03F, 10.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -6.0F, 0.0F));
+		modelPartData2.addChild("north_r1", ModelPartBuilder.create().uv(8, 17).cuboid(0.0F, -4.3F, 3.2F, 6.0F, 6.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(3.0F, -6.0F, 0.0F));
+		modelPartData2.addChild("east_r1", ModelPartBuilder.create().uv(6, 23).cuboid(-4.9F, -6.1F, 3.03F, 10.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -6.0F, 0.0F));
+		modelPartData2.addChild("south_r1", ModelPartBuilder.create().uv(7, 32).cuboid(-4.0F, -6.3F, 3.2F, 8.0F, 8.0F, 1.0F, new Dilation(-0.75f)), ModelTransform.pivot(0.0F, -6.0F, 0.0F));
 		return TexturedModelData.of(modelData, 32, 48);
 	}
 

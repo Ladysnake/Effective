@@ -3,8 +3,8 @@ package org.ladysnake.effective.mixin.chest_bubbles;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.LidOpenable;
 import net.minecraft.block.enums.ChestType;
-import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -12,21 +12,19 @@ import net.minecraft.world.World;
 import org.joml.Vector3f;
 import org.ladysnake.effective.Effective;
 import org.ladysnake.effective.EffectiveConfig;
-import org.ladysnake.effective.LinearForcedMotionImpl;
+import org.ladysnake.effective.utils.LinearForcedMotionImpl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import team.lodestar.lodestone.systems.rendering.particle.WorldParticleBuilder;
-import team.lodestar.lodestone.systems.rendering.particle.data.ColorParticleData;
-import team.lodestar.lodestone.systems.rendering.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 
 import java.awt.*;
 
 @Mixin(ChestBlockEntity.class)
-public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnimationProgress> {
-	public boolean justClosed = false;
-
+public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & LidOpenable> {
 	@Inject(method = "clientTick", at = @At("TAIL"))
 	private static void clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
 		boolean bl = world != null;
@@ -132,7 +130,7 @@ public class UnderwaterOpenChestBubbleSpawner<T extends BlockEntity & ChestAnima
 				.setTransparencyData(GenericParticleData.create(1f).build())
 				.enableNoClip()
 				.setLifetime(60 + world.random.nextInt(60))
-				.addActor(new LinearForcedMotionImpl(
+				.addTickActor(new LinearForcedMotionImpl(
 					new Vector3f(velX, .1f - (world.random.nextFloat() * .1f), velZ),
 					new Vector3f(0f, .1f, 0f),
 					10f

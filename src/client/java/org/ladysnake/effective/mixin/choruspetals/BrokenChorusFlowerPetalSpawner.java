@@ -22,13 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BrokenChorusFlowerPetalSpawner {
 	@Shadow
 	protected ClientWorld world;
-
-	@Shadow
-	public abstract Particle addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ);
-
 	@Shadow
 	@Final
 	private Random random;
+
+	@Shadow
+	public abstract Particle addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ);
 
 	@Inject(method = "addBlockBreakParticles", at = @At(value = "RETURN"))
 	public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {

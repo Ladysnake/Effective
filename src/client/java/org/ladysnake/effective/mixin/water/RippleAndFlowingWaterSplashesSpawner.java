@@ -10,7 +10,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import org.ladysnake.effective.EffectiveConfig;
-import org.ladysnake.effective.EffectiveUtils;
+import org.ladysnake.effective.utils.EffectiveUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,19 +45,19 @@ public class RippleAndFlowingWaterSplashesSpawner {
 	}
 
 	@Inject(method = "randomDisplayTick", at = @At("HEAD"))
-	protected void effective$splashAndRainRipples(World world, BlockPos pos, FluidState state, RandomGenerator random, CallbackInfo ci) {
+	protected void effective$splashAndRainRipples(World world, BlockPos pos, FluidState state, Random random, CallbackInfo ci) {
 		// flowing water splashes
 		if (shouldSplash(world, pos.up())) {
 			Vec3d vec3d = state.getVelocity(world, pos);
 			for (int i = 0; i <= random.nextInt(EffectiveConfig.flowingWaterSplashingDensity); i++) {
-				world.addParticle(ParticleTypes.WATER_SPLASH, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 1 + random.nextFloat(), pos.getZ() + .5 + random.nextGaussian() / 2f, vec3d.getX() * random.nextFloat(), random.nextFloat() / 10f, vec3d.getZ() * random.nextFloat());
+				world.addParticle(ParticleTypes.SPLASH, pos.getX() + .5 + random.nextGaussian() / 2f, pos.getY() + 1 + random.nextFloat(), pos.getZ() + .5 + random.nextGaussian() / 2f, vec3d.getX() * random.nextFloat(), random.nextFloat() / 10f, vec3d.getZ() * random.nextFloat());
 			}
 		}
 
 		// still water rain ripples
 		if (shouldRipple(world, pos)) {
 			for (int i = 0; i <= random.nextInt(EffectiveConfig.rainRippleDensity); i++) {
-				if (world.getBiome(pos).value().getPrecipitationAt(pos) == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
+				if (world.getBiome(pos).value().getPrecipitation(pos) == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
 					EffectiveUtils.spawnWaterEffect(world, Vec3d.ofCenter(pos).add(random.nextFloat() - random.nextFloat(), .39f, random.nextFloat() - random.nextFloat()), 0f, 0f, 0f, EffectiveUtils.WaterEffectType.RIPPLE);
 				}
 			}

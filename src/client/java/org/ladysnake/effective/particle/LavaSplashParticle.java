@@ -13,8 +13,8 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -200,7 +200,7 @@ public class LavaSplashParticle extends Particle {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
+	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
 		private final Identifier texture;
 
 		public DefaultFactory(SpriteProvider spriteProvider, Identifier texture) {
@@ -209,7 +209,7 @@ public class LavaSplashParticle extends Particle {
 
 		@Nullable
 		@Override
-		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			return new LavaSplashParticle(world, x, y, z, this.texture);
 		}
 	}

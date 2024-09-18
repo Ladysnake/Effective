@@ -21,7 +21,7 @@ public class SplashBottomModel<T extends Entity> extends EntityModel<T> {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
 
-		modelPartData.addChild("splash", ModelPartBuilder.create().texture(0, 0).cuboid(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F), ModelTransform.pivot(0.0F, 0.0f, 0.0F));
+		modelPartData.addChild("splash", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F), ModelTransform.pivot(0.0F, 0.0f, 0.0F));
 
 		return TexturedModelData.of(modelData, 48, 28);
 	}
