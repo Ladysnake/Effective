@@ -78,7 +78,7 @@ Every effect is customisable and can be toggled in the configuration.
 
 **A: Yes**. If you have installed this mod on your Minecraft client, you will  be able to connect to vanilla Minecraft servers and the ambient effects  will work as intended.
 
-#### Q: Can I port this mod to [Loader]? Can I update this mod this mod to [Newer version]?
+#### Q: Can I port this mod to [Loader]? Can I update this mod to [Newer version]?
 
 **A: If you want to make a port or update of Effective, you are welcome to ask [in the Ladysnake Discord](https://discord.com/invite/RBHY26t) to get permission or [make a pull request on GitHub](https://github.com/Ladysnake/effective).**
 
@@ -86,7 +86,7 @@ Every effect is customisable and can be toggled in the configuration.
 
 **A: No**. I mod Minecraft as a hobby with very limited time. Therefore, I will not backport this mod to older versions of Minecraft, and I will update it to future versions when I feel like it. If you want it updated to newer versions, feel free to contribute to the mod and make a pull request, it's appreciated! Otherwise, don't come begging.
 
-#### Q: Can I include this mod in a modpack?**
+#### Q: Can I include this mod in a modpack?
 
 **A: Yes you can.** Please however provide credit and a link to the Modrinth project page.
 
