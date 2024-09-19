@@ -6,8 +6,9 @@ Effective 2.2.2 - 1.20.1
 - Slightly increased ripple particle size
 - Reduced glow squid hypnosis maximum distance to 7 blocks
 - Changed the scaling up of improved glow squid particles to be slower
-- Reduced the strength of waterfall mist
+- Decreased the strength of waterfall mist
 - Increased the quantity of waterfall cloud particles in the default config
+- Decreased the distance to hear cascades in the default config
 - Changed waterfall clouds and mist to fade with depth (thanks Aidan! <3)
 
 ------------------------------------------------------
