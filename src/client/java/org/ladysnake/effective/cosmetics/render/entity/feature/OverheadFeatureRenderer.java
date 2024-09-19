@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import org.ladysnake.effective.EffectiveConfig;
+import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.data.PlayerCosmeticData;
 import org.ladysnake.effective.cosmetics.render.GlowyRenderLayer;

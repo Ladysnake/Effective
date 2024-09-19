@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.world.World;
-import org.ladysnake.effective.EffectiveConfig;
+import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.data.AuraData;
 import org.ladysnake.effective.cosmetics.data.PlayerCosmeticData;

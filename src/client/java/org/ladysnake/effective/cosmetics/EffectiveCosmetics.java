@@ -32,7 +32,7 @@ import org.ladysnake.effective.cosmetics.render.entity.model.hat.*;
 import org.ladysnake.effective.cosmetics.render.entity.model.pet.LanternModel;
 import org.ladysnake.effective.cosmetics.render.entity.model.pet.PrideHeartModel;
 import org.ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
-import org.ladysnake.effective.settings.SpawnSettings;
+import org.ladysnake.effective.core.settings.SpawnSettings;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

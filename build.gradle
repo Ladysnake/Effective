@@ -96,14 +96,12 @@ dependencies {
 	include "maven.modrinth:satin-api:${project.satin_version}"
 
 	// lodestone
-	modImplementation "maven.modrinth:lodestonelib:${project.lodestone_version}"
-	include "maven.modrinth:lodestonelib:${project.lodestone_version}"
+	modImplementation "team.lodestar.lodestone:lodestone:${project.lodestone_version}"
+	include "team.lodestar.lodestone:lodestone:${project.lodestone_version}"
 	for (String module in portinglib_modules.split(",")) {
 		include "io.github.fabricators_of_create.Porting-Lib:$module:${project.portinglib_version}"
 		modImplementation "io.github.fabricators_of_create.Porting-Lib:$module:${project.portinglib_version}"
 	}
-	modImplementation "maven.modrinth:trinkets:${project.trinkets_version}"
-	include "maven.modrinth:trinkets:${project.trinkets_version}"
 
 	// iris and sodium
 	modImplementation("maven.modrinth:sodium:${project.sodium_version}")

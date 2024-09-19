@@ -1,8 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.ladysnake.effective.mixin",
-  "plugin": "org.ladysnake.effective.EffectiveMixinPlugin",
+  "package": "org.ladysnake.effective.core.mixin",
+  "plugin": "org.ladysnake.effective.core.EffectiveMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [

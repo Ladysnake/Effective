@@ -70,10 +70,10 @@ public class PetParticle extends SpriteBillboardParticle {
 		float maxV = this.getMaxV();
 		int l = LightmapTextureManager.MAX_LIGHT_COORDINATE;
 
-		vertexConsumer.vertex(Vec3fs[0].x(), Vec3fs[0].y(), Vec3fs[0].z()).texture(maxU, maxV).color(1f, 1f, 1f, alpha).light(l);
-		vertexConsumer.vertex(Vec3fs[1].x(), Vec3fs[1].y(), Vec3fs[1].z()).texture(maxU, minV).color(1f, 1f, 1f, alpha).light(l);
-		vertexConsumer.vertex(Vec3fs[2].x(), Vec3fs[2].y(), Vec3fs[2].z()).texture(minU, minV).color(1f, 1f, 1f, alpha).light(l);
-		vertexConsumer.vertex(Vec3fs[3].x(), Vec3fs[3].y(), Vec3fs[3].z()).texture(minU, maxV).color(1f, 1f, 1f, alpha).light(l);
+		vertexConsumer.vertex(Vec3fs[0].x(), Vec3fs[0].y(), Vec3fs[0].z()).texture(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[1].x(), Vec3fs[1].y(), Vec3fs[1].z()).texture(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[2].x(), Vec3fs[2].y(), Vec3fs[2].z()).texture(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
+		vertexConsumer.vertex(Vec3fs[3].x(), Vec3fs[3].y(), Vec3fs[3].z()).texture(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
 	}
 
 	public ParticleTextureSheet getType() {

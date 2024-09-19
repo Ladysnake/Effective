@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.data.PlayerCosmeticData;
-import org.ladysnake.effective.particle.WillOWispParticle;
+import org.ladysnake.effective.core.particle.WillOWispParticle;
 
 import java.util.Objects;
 

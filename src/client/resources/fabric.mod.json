@@ -18,11 +18,11 @@
 	"environment": "client",
 	"entrypoints": {
     "client": [
-      "org.ladysnake.effective.Effective",
+      "org.ladysnake.effective.core.Effective",
       "org.ladysnake.effective.cosmetics.EffectiveCosmetics"
     ],
     "modmenu": [
-      "org.ladysnake.effective.compat.EffectiveModMenuCompat"
+      "org.ladysnake.effective.core.compat.EffectiveModMenuCompat"
     ]
 	},
 	"mixins": [
