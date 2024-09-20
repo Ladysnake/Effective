@@ -21,7 +21,7 @@ public abstract class FeedbackingParryFireballEffect {
 	@Inject(method = "attack", at = @At("HEAD"))
 	public void attack(Entity target, CallbackInfo ci) {
 		if (EffectiveConfig.ultrakill && this.isMainPlayer() && target instanceof ExplosiveProjectileEntity) {
-			MinecraftClient.getInstance().player.playSound(Effective.PARRY, SoundCategory.PLAYERS, 1.0f, 1.0f);
+			MinecraftClient.getInstance().player.playSound(Effective.PARRY);
 
 			Effective.freezeFrames = 5;
 		}

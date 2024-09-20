@@ -2,12 +2,12 @@ package org.ladysnake.effective.core.particle.types;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.particle.ParticleEffect;
 import org.ladysnake.effective.core.particle.contracts.SplashParticleInitialData;
 
 @Environment(EnvType.CLIENT)
-public class SplashParticleType extends DefaultParticleType {
+public class SplashParticleType extends SimpleParticleType {
 	public SplashParticleInitialData initialData;
 
 	public SplashParticleType(boolean alwaysShow) {

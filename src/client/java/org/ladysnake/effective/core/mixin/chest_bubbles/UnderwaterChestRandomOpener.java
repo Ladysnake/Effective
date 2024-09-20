@@ -44,7 +44,7 @@ public class UnderwaterChestRandomOpener {
 			if (world.random.nextInt(200) == 0
 				&& blockEntity.stateManager.getViewerCount() <= 0
 				&& !CHESTS_TIMERS.containsKey(pos)
-				&& blockEntity.lidAnimator.getProgress(MinecraftClient.getInstance().getTickDelta()) == 0f) {
+				&& blockEntity.lidAnimator.getProgress(MinecraftClient.getInstance().getRenderTime()) == 0f) {
 				// only trigger for single and left chests to avoid double openings and double sounds for double chests
 				ChestType chestType = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
 

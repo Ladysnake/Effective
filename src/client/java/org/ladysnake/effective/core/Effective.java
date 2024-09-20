@@ -1,11 +1,11 @@
 package org.ladysnake.effective.core;
 
-import ladysnake.satin.api.event.EntitiesPreRenderCallback;
-import ladysnake.satin.api.event.ShaderEffectRenderCallback;
-import ladysnake.satin.api.managed.ManagedCoreShader;
-import ladysnake.satin.api.managed.ManagedShaderEffect;
-import ladysnake.satin.api.managed.ShaderEffectManager;
-import ladysnake.satin.api.managed.uniform.Uniform1f;
+import org.ladysnake.satin.api.event.EntitiesPreRenderCallback;
+import org.ladysnake.satin.api.event.ShaderEffectRenderCallback;
+import org.ladysnake.satin.api.managed.ManagedCoreShader;
+import org.ladysnake.satin.api.managed.ManagedShaderEffect;
+import org.ladysnake.satin.api.managed.ShaderEffectManager;
+import org.ladysnake.satin.api.managed.uniform.Uniform1f;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -16,7 +16,7 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -65,15 +65,15 @@ public class Effective implements ClientModInitializer {
 
 	// particle types
 	public static SplashParticleType SPLASH;
-	public static DefaultParticleType DROPLET;
-	public static DefaultParticleType RIPPLE;
+	public static SimpleParticleType DROPLET;
+	public static SimpleParticleType RIPPLE;
 	public static SplashParticleType GLOW_SPLASH;
-	public static DefaultParticleType GLOW_DROPLET;
-	public static DefaultParticleType GLOW_RIPPLE;
+	public static SimpleParticleType GLOW_DROPLET;
+	public static SimpleParticleType GLOW_RIPPLE;
 	public static AllayTwinkleParticleType ALLAY_TWINKLE;
-	public static DefaultParticleType CHORUS_PETAL;
-	public static DefaultParticleType EYES;
-	public static DefaultParticleType WILL_O_WISP;
+	public static SimpleParticleType CHORUS_PETAL;
+	public static SimpleParticleType EYES;
+	public static SimpleParticleType WILL_O_WISP;
 
 	// lodestone particles
 	public static LodestoneWorldParticleType PIXEL = new LodestoneWorldParticleType();

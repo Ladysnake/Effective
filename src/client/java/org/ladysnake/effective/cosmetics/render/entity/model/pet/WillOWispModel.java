@@ -16,11 +16,11 @@ import org.ladysnake.effective.cosmetics.render.GlowyRenderLayer;
 public class WillOWispModel extends Model {
 	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(Identifier.of(EffectiveCosmetics.MODID, "will_o_wisp"), "main");
 
-	private final ModelPart skull;
+	private final ModelPart head;
 
 	public WillOWispModel(ModelPart root) {
 		super(GlowyRenderLayer::get);
-		this.skull = root.getChild("skull");
+		this.head = root.getChild("skull");
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -37,7 +37,8 @@ public class WillOWispModel extends Model {
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		skull.render(matrixStack, buffer, packedLight, packedOverlay);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		head.render(matrices, vertices, light, overlay);
 	}
+
 }

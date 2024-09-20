@@ -90,7 +90,7 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 						.setScaleData(GenericParticleData.create(0.06f).build())
 						.setLifetime(15)
 						.setMotion(0, 0.05f, 0)
-						.spawn(spectralArrowEntity.getWorld(), spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider);
+						.spawn(spectralArrowEntity.getWorld(), spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).x + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).y - 0.2f + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider, spectralArrowEntity.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).z + spectralArrowEntity.getWorld().getRandom().nextGaussian() / spreadDivider);
 				}
 			}
 		}

@@ -16,11 +16,11 @@ import org.ladysnake.effective.cosmetics.render.GlowyRenderLayer;
 public class PrideHeartModel extends Model {
 	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(Identifier.of(EffectiveCosmetics.MODID, "pride_heart"), "main");
 
-	private final ModelPart heart;
+	private final ModelPart head;
 
 	public PrideHeartModel(ModelPart root) {
 		super(GlowyRenderLayer::get);
-		this.heart = root.getChild("heart");
+		this.head = root.getChild("heart");
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -47,7 +47,7 @@ public class PrideHeartModel extends Model {
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		heart.render(matrixStack, buffer, packedLight, packedOverlay);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		head.render(matrices, vertices, light, overlay);
 	}
 }

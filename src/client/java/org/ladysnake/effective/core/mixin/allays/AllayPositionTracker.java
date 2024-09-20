@@ -18,7 +18,7 @@ import team.lodestar.lodestone.systems.rendering.trail.TrailPointBuilder;
 import java.util.List;
 
 @Mixin(AllayEntity.class)
-public class AllayPositionTracker extends PathAwareEntity implements PositionTrackedEntity {
+public abstract class AllayPositionTracker extends PathAwareEntity implements PositionTrackedEntity {
 	@Unique
 	public final TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(16);
 

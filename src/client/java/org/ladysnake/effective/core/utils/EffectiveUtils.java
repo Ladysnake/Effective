@@ -1,7 +1,7 @@
 package org.ladysnake.effective.core.utils;
 
 import net.minecraft.entity.passive.AllayEntity;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
@@ -26,7 +26,7 @@ public class EffectiveUtils {
 	 * chooses between spawning a normal droplet / ripple / waterfall cloud or glow one depending on biome
 	 */
 	public static void spawnWaterEffect(World world, Vec3d pos, double velocityX, double velocityY, double velocityZ, WaterEffectType waterEffect) {
-		DefaultParticleType particle = switch (waterEffect) {
+		SimpleParticleType particle = switch (waterEffect) {
 			case DROPLET -> Effective.DROPLET;
 			case RIPPLE -> Effective.RIPPLE;
 		};

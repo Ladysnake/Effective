@@ -1,6 +1,6 @@
 package org.ladysnake.effective.cosmetics.data;
 
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
-public record IlluminationData(DefaultParticleType illuminationType,
+public record IlluminationData(SimpleParticleType illuminationType,
 							   BiPredicate<World, BlockPos> locationSpawnPredicate,
 							   Supplier<Float> chanceSupplier) {
 

@@ -13,7 +13,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.SoundCategory;
@@ -153,7 +153,7 @@ public class WillOWispParticle extends Particle {
 				this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.SOUL_SAND.getDefaultState()), this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
 			}
 
-			this.world.playSound(bp.getX(), bp.getY(), bp.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
+			this.world.playSound(bp.getX(), bp.getY(), bp.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.AMBIENT, 1.0f, 1.5f, true);
 			this.world.playSound(bp.getX(), bp.getY(), bp.getZ(), SoundEvents.BLOCK_SOUL_SAND_BREAK, SoundCategory.AMBIENT, 1.0f, 1.0f, true);
 			this.markDead();
 		}
@@ -184,7 +184,7 @@ public class WillOWispParticle extends Particle {
 		}
 
 		if (random.nextInt(20) == 0) {
-			this.world.playSound(bp.getX(), bp.getY(), bp.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
+			this.world.playSound(bp.getX(), bp.getY(), bp.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.AMBIENT, 1.0f, 1.5f, true);
 		}
 
 		BlockPos pos = BlockPos.ofFloored(this.x, this.y, this.z);
@@ -249,7 +249,7 @@ public class WillOWispParticle extends Particle {
 	}
 
 
-	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
 		private final Identifier texture;
 		private final float red;
 		private final float green;
@@ -270,7 +270,7 @@ public class WillOWispParticle extends Particle {
 
 		@Nullable
 		@Override
-		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			return new WillOWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.toRed, this.toGreen, this.toBlue);
 		}
 	}

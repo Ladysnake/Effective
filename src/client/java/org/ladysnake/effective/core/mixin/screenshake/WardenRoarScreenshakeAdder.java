@@ -16,7 +16,7 @@ import team.lodestar.lodestone.systems.screenshake.PositionedScreenshakeInstance
 import team.lodestar.lodestone.systems.screenshake.ScreenshakeInstance;
 
 @Mixin(WardenEntity.class)
-public class WardenRoarScreenshakeAdder extends HostileEntity {
+public abstract class WardenRoarScreenshakeAdder extends HostileEntity {
 	public ScreenshakeInstance roarScreenShake;
 	public int ticksSinceAnimationStart = 0;
 

@@ -4,7 +4,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import org.ladysnake.effective.core.particle.ChorusPetalParticle;
@@ -83,14 +83,14 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
 	}
 
 
-	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
 		private final SpriteProvider spriteProvider;
 
 		public DefaultFactory(SpriteProvider spriteProvider) {
 			this.spriteProvider = spriteProvider;
 		}
 
-		public Particle createParticle(DefaultParticleType DefaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+		public Particle createParticle(SimpleParticleType SimpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
 			return new GoldenrodAuraParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
 		}
 	}

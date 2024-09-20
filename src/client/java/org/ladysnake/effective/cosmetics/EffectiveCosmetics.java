@@ -16,7 +16,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -59,43 +59,43 @@ public class EffectiveCosmetics implements ClientModInitializer {
 	// illuminations cosmetics
 	private static final String COSMETICS_URL = "https://doctor4t.ladysnake.org/illuminations-data";
 	public static ImmutableMap<String, AuraData> AURAS_DATA;
-	public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
+	public static ImmutableMap<String, SimpleParticleType> PETS_DATA;
 	public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
 
 	// auras
-	public static DefaultParticleType TWILIGHT_AURA;
-	public static DefaultParticleType GHOSTLY_AURA;
-	public static DefaultParticleType CHORUS_AURA;
-	public static DefaultParticleType AUTUMN_LEAVES_AURA;
-	public static DefaultParticleType SCULK_TENDRIL_AURA;
-	public static DefaultParticleType SHADOWBRINGER_AURA;
-	public static DefaultParticleType GOLDENROD_AURA;
-	public static DefaultParticleType CONFETTI_AURA;
-	public static DefaultParticleType PRISMATIC_CONFETTI_AURA;
-	public static DefaultParticleType PRISMARINE_AURA;
+	public static SimpleParticleType TWILIGHT_AURA;
+	public static SimpleParticleType GHOSTLY_AURA;
+	public static SimpleParticleType CHORUS_AURA;
+	public static SimpleParticleType AUTUMN_LEAVES_AURA;
+	public static SimpleParticleType SCULK_TENDRIL_AURA;
+	public static SimpleParticleType SHADOWBRINGER_AURA;
+	public static SimpleParticleType GOLDENROD_AURA;
+	public static SimpleParticleType CONFETTI_AURA;
+	public static SimpleParticleType PRISMATIC_CONFETTI_AURA;
+	public static SimpleParticleType PRISMARINE_AURA;
 
 	// pets
-	public static DefaultParticleType PRIDE_PET;
-	public static DefaultParticleType GAY_PRIDE_PET;
-	public static DefaultParticleType TRANS_PRIDE_PET;
-	public static DefaultParticleType JACKO_PET;
-	public static DefaultParticleType LESBIAN_PRIDE_PET;
-	public static DefaultParticleType BI_PRIDE_PET;
-	public static DefaultParticleType ACE_PRIDE_PET;
-	public static DefaultParticleType NB_PRIDE_PET;
-	public static DefaultParticleType INTERSEX_PRIDE_PET;
-	public static DefaultParticleType ARO_PRIDE_PET;
-	public static DefaultParticleType PAN_PRIDE_PET;
-	public static DefaultParticleType AGENDER_PRIDE_PET;
-	public static DefaultParticleType GENDERFLUID_PRIDE_PET;
-	public static DefaultParticleType WILL_O_WISP_PET;
-	public static DefaultParticleType DISSOLUTION_WISP_PET;
-	public static DefaultParticleType PUMPKIN_SPIRIT_PET;
-	public static DefaultParticleType POLTERGEIST_PET;
-	public static DefaultParticleType LANTERN_PET;
-	public static DefaultParticleType SOUL_LANTERN_PET;
-	public static DefaultParticleType CRYING_LANTERN_PET;
-	public static DefaultParticleType SOOTHING_LANTERN_PET;
+	public static SimpleParticleType PRIDE_PET;
+	public static SimpleParticleType GAY_PRIDE_PET;
+	public static SimpleParticleType TRANS_PRIDE_PET;
+	public static SimpleParticleType JACKO_PET;
+	public static SimpleParticleType LESBIAN_PRIDE_PET;
+	public static SimpleParticleType BI_PRIDE_PET;
+	public static SimpleParticleType ACE_PRIDE_PET;
+	public static SimpleParticleType NB_PRIDE_PET;
+	public static SimpleParticleType INTERSEX_PRIDE_PET;
+	public static SimpleParticleType ARO_PRIDE_PET;
+	public static SimpleParticleType PAN_PRIDE_PET;
+	public static SimpleParticleType AGENDER_PRIDE_PET;
+	public static SimpleParticleType GENDERFLUID_PRIDE_PET;
+	public static SimpleParticleType WILL_O_WISP_PET;
+	public static SimpleParticleType DISSOLUTION_WISP_PET;
+	public static SimpleParticleType PUMPKIN_SPIRIT_PET;
+	public static SimpleParticleType POLTERGEIST_PET;
+	public static SimpleParticleType LANTERN_PET;
+	public static SimpleParticleType SOUL_LANTERN_PET;
+	public static SimpleParticleType CRYING_LANTERN_PET;
+	public static SimpleParticleType SOOTHING_LANTERN_PET;
 
 	private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
 
@@ -267,7 +267,7 @@ public class EffectiveCosmetics implements ClientModInitializer {
 			.put("prismarine_crown", new OverheadData(CrownModel::new, "prismarine_crown"))
 			.build();
 
-		PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
+		PETS_DATA = ImmutableMap.<String, SimpleParticleType>builder()
 			.put("pride", PRIDE_PET)
 			.put("gay_pride", GAY_PRIDE_PET)
 			.put("trans_pride", TRANS_PRIDE_PET)

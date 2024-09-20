@@ -16,11 +16,11 @@ import org.ladysnake.effective.cosmetics.render.GlowyRenderLayer;
 public class LanternModel extends Model {
 	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(Identifier.of(EffectiveCosmetics.MODID, "lantern"), "main");
 
-	private final ModelPart lantern;
+	private final ModelPart head;
 
 	public LanternModel(ModelPart root) {
 		super(GlowyRenderLayer::get);
-		this.lantern = root.getChild("lantern");
+		this.head = root.getChild("lantern");
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -40,7 +40,7 @@ public class LanternModel extends Model {
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		lantern.render(matrixStack, buffer, packedLight, packedOverlay);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		head.render(matrices, vertices, light, overlay);
 	}
 }

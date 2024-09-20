@@ -211,6 +211,6 @@ public class WaterfallCloudGenerators {
 	}
 
 	public static boolean canSeeWaterfall(World world, BlockPos waterfallPos, PlayerEntity player) {
-		return world.raycast(new RaycastContext(new Vec3d(waterfallPos.getX(), waterfallPos.getY(), waterfallPos.getZ()), player.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player)).getBlockPos().equals(player.getBlockPos());
+		return world.raycast(new RaycastContext(new Vec3d(waterfallPos.getX(), waterfallPos.getY(), waterfallPos.getZ()), player.getCameraPosVec(MinecraftClient.getInstance().getRenderTime()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player)).getBlockPos().equals(player.getBlockPos());
 	}
 }

@@ -10,7 +10,7 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -20,6 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.particle.types.SplashParticleType;
+
+import java.awt.*;
 
 public class GlowSplashParticle extends SplashParticle {
 	public float redAndGreen = random.nextFloat() / 5f;
@@ -77,16 +79,17 @@ public class GlowSplashParticle extends SplashParticle {
 		int light = this.getBrightness(tickDelta);
 		int rimLight = LightmapTextureManager.MAX_LIGHT_COORDINATE;
 		float redAndGreenRender = Math.min(1, redAndGreen + world.getLightLevel(LightType.BLOCK, pos) / 15f);
+		int color = new Color(redAndGreenRender, redAndGreenRender, blue, 1.0f).getRGB();
 
 		VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
 
 		VertexConsumer modelConsumer = immediate.getBuffer(layer);
-		this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
-		this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
+		this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, waterColor);
+		this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, waterColor);
 
 		VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
-		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreenRender, redAndGreenRender, blue, 1.0f);
-		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, redAndGreenRender, redAndGreenRender, blue, 1.0f);
+		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, color);
+		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, rimLight, OverlayTexture.DEFAULT_UV, color);
 
 		immediate.draw();
 	}
@@ -134,13 +137,13 @@ public class GlowSplashParticle extends SplashParticle {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
 		public DefaultFactory(SpriteProvider spriteProvider) {
 		}
 
 		@Nullable
 		@Override
-		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			GlowSplashParticle instance = new GlowSplashParticle(world, x, y, z);
 			if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
 				final float width = (float) splashParameters.initialData.width() * 2;

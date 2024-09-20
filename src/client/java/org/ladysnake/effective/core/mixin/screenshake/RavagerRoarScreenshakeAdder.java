@@ -15,7 +15,7 @@ import team.lodestar.lodestone.systems.screenshake.PositionedScreenshakeInstance
 import team.lodestar.lodestone.systems.screenshake.ScreenshakeInstance;
 
 @Mixin(RavagerEntity.class)
-public class RavagerRoarScreenshakeAdder extends HostileEntity {
+public abstract class RavagerRoarScreenshakeAdder extends HostileEntity {
 	protected RavagerRoarScreenshakeAdder(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 	}

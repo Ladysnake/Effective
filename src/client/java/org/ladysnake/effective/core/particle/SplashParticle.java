@@ -12,7 +12,7 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -75,9 +75,6 @@ public class SplashParticle extends Particle {
 		if (waterColor == -1) {
 			waterColor = BiomeColors.getWaterColor(world, BlockPos.ofFloored(this.x, this.y, this.z));
 		}
-		float r = (float) (waterColor >> 16 & 0xFF) / 255.0f;
-		float g = (float) (waterColor >> 8 & 0xFF) / 255.0f;
-		float b = (float) (waterColor & 0xFF) / 255.0f;
 
 		Identifier texture = Identifier.of(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
 		RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
@@ -105,12 +102,12 @@ public class SplashParticle extends Particle {
 		VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
 
 		VertexConsumer modelConsumer = immediate.getBuffer(layer);
-		this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
-		this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 0.9f);
+		this.waveModel.render(modelMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, waterColor);
+		this.waveBottomModel.render(modelBottomMatrix, modelConsumer, light, OverlayTexture.DEFAULT_UV, waterColor);
 
 		VertexConsumer rimModelConsumer = immediate.getBuffer(rimLayer);
-		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
-		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+		this.waveRimModel.render(modelRimMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV);
+		this.waveBottomRimModel.render(modelRimBottomMatrix, rimModelConsumer, light, OverlayTexture.DEFAULT_UV);
 
 		immediate.draw();
 	}
@@ -158,13 +155,13 @@ public class SplashParticle extends Particle {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+	public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
 		public DefaultFactory(SpriteProvider spriteProvider) {
 		}
 
 		@Nullable
 		@Override
-		public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 			SplashParticle instance = new SplashParticle(world, x, y, z);
 			if (parameters instanceof SplashParticleType splashParameters && splashParameters.initialData != null) {
 				final float width = (float) splashParameters.initialData.width() * 2;

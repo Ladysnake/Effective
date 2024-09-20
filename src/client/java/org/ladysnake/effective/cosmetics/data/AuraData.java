@@ -1,11 +1,11 @@
 package org.ladysnake.effective.cosmetics.data;
 
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.random.Random;
 
 import java.util.function.Supplier;
 
-public record AuraData(DefaultParticleType particle, Supplier<AuraSettings> auraSettingsSupplier) {
+public record AuraData(SimpleParticleType particle, Supplier<AuraSettings> auraSettingsSupplier) {
 
 	public boolean shouldAddParticle(Random random, int age) {
 

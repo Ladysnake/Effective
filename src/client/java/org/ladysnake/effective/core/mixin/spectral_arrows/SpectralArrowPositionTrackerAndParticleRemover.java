@@ -34,7 +34,7 @@ public abstract class SpectralArrowPositionTrackerAndParticleRemover extends Per
 	@Inject(method = "tick", at = @At("HEAD"))
 	public void tick(CallbackInfo ci) {
 		if (EffectiveConfig.spectralArrowTrails != EffectiveConfig.TrailOptions.NONE) {
-			Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getTickDelta()).add(0, -.1f, 0f);
+			Vec3d position = this.getCameraPosVec(MinecraftClient.getInstance().getRenderTime()).add(0, -.1f, 0f);
 			trailPointBuilder.addTrailPoint(position);
 			trailPointBuilder.tickTrailPoints();
 		}

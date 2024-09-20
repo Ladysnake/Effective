@@ -16,8 +16,10 @@ public abstract class OverheadModel extends Model {
 		this.head = ctx.getPart(entityModelLayer).getChild("head");
 	}
 
+
 	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-		this.head.render(matrices, vertices, light, overlay);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		head.render(matrices, vertices, light, overlay);
 	}
+
 }

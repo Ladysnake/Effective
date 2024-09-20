@@ -36,7 +36,7 @@ public class GlowsquidParticleEffectSwapper extends SquidEntity {
 					.setColorData(ColorParticleData.create(new Color(0x00FFAA), new Color(0x51FFFF)).build())
 					.setScaleData(GenericParticleData.create(0.01f, .2f + random.nextFloat() / 10f).setEasing(Easing.SINE_OUT).build())
 					.setLifetime(40)
-					.spawn(this.getWorld(), this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + this.getRandom().nextGaussian() / spreadDivider);
+					.spawn(this.getWorld(), this.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).x + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).y - 0.2f + this.getRandom().nextGaussian() / spreadDivider, this.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).z + this.getRandom().nextGaussian() / spreadDivider);
 			}
 		} else {
 			voidOperation.call(world, particleEffect, x, y, z, velX, velY, velZ);

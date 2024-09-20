@@ -1,6 +1,6 @@
 package org.ladysnake.effective.cosmetics.render;
 
-import ladysnake.satin.mixin.client.render.RenderLayerAccessor;
+import org.ladysnake.satin.mixin.client.render.RenderLayerAccessor;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.VertexFormat;

@@ -93,7 +93,7 @@ public abstract class AllayTrailRenderer<T extends LivingEntity, M extends Entit
 						.setScaleData(GenericParticleData.create(0.12f).build())
 						.setLifetime(15)
 						.setMotion(0, 0.05f, 0)
-						.spawn(allayEntity.getWorld(), allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getTickDelta()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
+						.spawn(allayEntity.getWorld(), allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).x + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).y - 0.2f + allayEntity.getRandom().nextGaussian() / spreadDivider, allayEntity.getClientCameraPosVec(MinecraftClient.getInstance().getRenderTime()).z + allayEntity.getRandom().nextGaussian() / spreadDivider);
 				}
 			}
 		}
