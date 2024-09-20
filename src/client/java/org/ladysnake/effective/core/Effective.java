@@ -35,17 +35,8 @@ import org.ladysnake.effective.core.render.entity.model.SplashModel;
 import org.ladysnake.effective.core.render.entity.model.SplashRimModel;
 import org.ladysnake.effective.core.world.RenderedHypnotizingEntities;
 import org.ladysnake.effective.core.world.WaterfallCloudGenerators;
-import team.lodestar.lodestone.handlers.screenparticle.ScreenParticleHandler;
-import team.lodestar.lodestone.registry.common.particle.LodestoneScreenParticleRegistry;
-import team.lodestar.lodestone.systems.particle.builder.ScreenParticleBuilder;
-import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
-import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
-import team.lodestar.lodestone.systems.particle.render_types.LodestoneScreenParticleRenderType;
 import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
-import team.lodestar.lodestone.systems.particle.screen.ScreenParticleOptions;
 import team.lodestar.lodestone.systems.particle.world.type.LodestoneWorldParticleType;
-
-import java.awt.*;
 
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
@@ -59,10 +50,9 @@ public class Effective implements ClientModInitializer {
 	private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
 	private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
 	private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
-
+	private static final ScreenParticleHolder effectiveScreenParticleHolder = new ScreenParticleHolder();
 	// freeze frames for feedbacking
 	public static int freezeFrames = -1;
-
 	// particle types
 	public static SplashParticleType SPLASH;
 	public static DefaultParticleType DROPLET;
@@ -74,7 +64,6 @@ public class Effective implements ClientModInitializer {
 	public static DefaultParticleType CHORUS_PETAL;
 	public static DefaultParticleType EYES;
 	public static DefaultParticleType WILL_O_WISP;
-
 	// lodestone particles
 	public static LodestoneWorldParticleType PIXEL = new LodestoneWorldParticleType();
 	public static LodestoneWorldParticleType WISP = new LodestoneWorldParticleType();
@@ -84,12 +73,10 @@ public class Effective implements ClientModInitializer {
 	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
 	public static MistParticleType MIST = new MistParticleType();
 	public static FireflyParticleType FIREFLY = new FireflyParticleType();
-
 	// sound events
 	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.of(Identifier.of(MODID, "ambience.waterfall"));
 	public static SoundEvent PARRY = SoundEvent.of(Identifier.of(MODID, "entity.parry"));
 	private static int ticksJeb;
-	private static final ScreenParticleHolder effectiveScreenParticleHolder = new ScreenParticleHolder();
 
 	public static boolean isNightTime(World world) {
 		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;

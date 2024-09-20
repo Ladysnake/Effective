@@ -71,7 +71,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Veil
-//	modImplementation include("foundry.veil:Veil-fabric-${project.minecraft_version}:${project.veil_version}") { transitive = true }
+	modImplementation include("foundry.veil:Veil-fabric-${project.minecraft_version}:${project.veil_version}") { transitive = true }
 
 	// Mod Menu
 	modCompileOnly "com.terraformersmc:modmenu:${mod_menu_version}"
@@ -104,8 +104,8 @@ dependencies {
 	}
 
 	// iris and sodium
-	modImplementation("maven.modrinth:sodium:${project.sodium_version}")
-	modImplementation("maven.modrinth:iris:${project.iris_version}")
+	modCompileOnly("maven.modrinth:sodium:${project.sodium_version}")
+	modCompileOnly("maven.modrinth:iris:${project.iris_version}")
 	runtimeOnly("org.anarres:jcpp:${project.jcpp_version}")
 	implementation("io.github.douira:glsl-transformer:${project.glslTransformer_version}")
 }

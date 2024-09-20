@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.ladysnake.effective.lights.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "DisableLightingWhenHoldingPocketStarOrFlashlightEntityRendererDispatcherMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
