@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -31,6 +32,7 @@ public class SculkBlockDustSpawner {
 			Color color = bright ? new Color(0x29DFEB) : new Color(0x0D1217);
 			WorldParticleBuilder.create(Effective.PIXEL)
 				.enableForcedSpawn()
+				.setLightLevel(bright ? LightmapTextureManager.MAX_LIGHT_COORDINATE : -1)
 				.setScaleData(GenericParticleData.create(0.02f).build())
 				.setTransparencyData(
 					GenericParticleData.create(1f, 1f, 0f)

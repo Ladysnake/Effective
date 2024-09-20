@@ -53,7 +53,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"modid" {
+		"effective" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
