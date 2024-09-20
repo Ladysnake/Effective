@@ -1,5 +1,5 @@
 ------------------------------------------------------
-Effective 2.2.3 - 1.20.1
+Effective 2.2.2.1 - 1.20.1
 ------------------------------------------------------
 - Made dark sculk dust properly respect environment lighting
 
