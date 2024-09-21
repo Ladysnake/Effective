@@ -19,6 +19,7 @@ public class EffectiveAmbience implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		AMBIENT_CONDITIONS.add(new AmbientCondition(null, ConventionalBiomeTags.PLAINS, AmbientCondition.TimeCondition.DAY, EffectiveAmbienceSounds.AMBIENT_PLAINS_DAY)); // plains day
+		AMBIENT_CONDITIONS.add(new AmbientCondition(null, ConventionalBiomeTags.BEACH, AmbientCondition.TimeCondition.NONE, EffectiveAmbienceSounds.AMBIENT_BEACH)); // deep dark
 		AMBIENT_CONDITIONS.add(new AmbientCondition(BiomeKeys.DEEP_DARK, null, AmbientCondition.TimeCondition.NONE, EffectiveAmbienceSounds.AMBIENT_DEEP_DARK)); // deep dark
 	}
 }

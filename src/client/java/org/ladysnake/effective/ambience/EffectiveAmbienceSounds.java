@@ -13,6 +13,7 @@ public class EffectiveAmbienceSounds {
 	protected static final List<SoundEvent> SOUND_EVENTS = new LinkedList<>();
 
 	public static final SoundEvent AMBIENT_PLAINS_DAY = create("ambient.plains.day");
+	public static final SoundEvent AMBIENT_BEACH = create("ambient.beach");
 	public static final SoundEvent AMBIENT_DEEP_DARK = create("ambient.deep_dark");
 
 	protected static SoundEvent create(String name) {

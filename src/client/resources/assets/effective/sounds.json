@@ -18,6 +18,12 @@
     ],
     "subtitle": "subtitles.ambient.plains.day"
   },
+  "ambient.beach": {
+    "sounds": [
+      "effective:ambient/beach"
+    ],
+    "subtitle": "subtitles.ambient.beach"
+  },
   "ambient.deep_dark": {
     "sounds": [
       "effective:ambient/deep_dark"
