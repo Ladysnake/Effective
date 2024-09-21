@@ -1,7 +1,19 @@
 ------------------------------------------------------
 Effective 2.3 - 1.20.1
 ------------------------------------------------------
-- Added audio ambience
+- Added audio ambience!
+  - Note: This feature is still early in development and some biomes might be missing. Please don't hesitate to give feedback on missing ambience and other requests on the [GitHub issues](https://github.com/Ladysnake/Effective/issues)!
+  - Added day ambience for temperate biomes
+  - Added night ambience for temperate biomes
+  - Added beach ambience (same for day and night)
+  - Added cave ambience
+  - Added deep dark ambience
+  - Added lush caves ambience
+  - Added dripstone caves ambience
+- Rearranged the config to now be separated between "Visuals" and "Audio" categories
+  - Separated the visuals category in sub-categories (corresponding to the previous categories)
+  - Moved the cascade sound volume and distance options to the audio category
+- Added a volume option for biome ambience
 
 ------------------------------------------------------
 Effective 2.2.2.1 - 1.20.1
