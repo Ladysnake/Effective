@@ -15,19 +15,21 @@
   "ambient.plains.day": {
     "sounds": [
       "effective:ambient/plains_day"
-    ],
-    "subtitle": "subtitles.ambient.plains.day"
+    ]
   },
   "ambient.beach": {
     "sounds": [
       "effective:ambient/beach"
-    ],
-    "subtitle": "subtitles.ambient.beach"
+    ]
   },
   "ambient.deep_dark": {
     "sounds": [
       "effective:ambient/deep_dark"
-    ],
-    "subtitle": "subtitles.ambient.deep_dark"
+    ]
+  },
+  "ambient.crickets": {
+    "sounds": [
+      "effective:ambient/crickets"
+    ]
   }
 }

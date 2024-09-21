@@ -7,3 +7,5 @@ accessible field net/minecraft/block/entity/ChestBlockEntity lidAnimator Lnet/mi
 accessible field net/minecraft/block/entity/ChestBlockEntity stateManager Lnet/minecraft/block/entity/ViewerCountManager;
 accessible field net/minecraft/block/entity/EnderChestBlockEntity lidAnimator Lnet/minecraft/block/entity/ChestLidAnimator;
 accessible field net/minecraft/block/entity/EnderChestBlockEntity stateManager Lnet/minecraft/block/entity/ViewerCountManager;
+accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
+accessible field net/minecraft/client/sound/SoundSystem tickingSounds Ljava/util/List;

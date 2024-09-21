@@ -2,7 +2,6 @@ package org.ladysnake.effective.ambience;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import org.ladysnake.effective.core.Effective;
 
@@ -15,6 +14,7 @@ public class EffectiveAmbienceSounds {
 	public static final SoundEvent AMBIENT_PLAINS_DAY = create("ambient.plains.day");
 	public static final SoundEvent AMBIENT_BEACH = create("ambient.beach");
 	public static final SoundEvent AMBIENT_DEEP_DARK = create("ambient.deep_dark");
+	public static final SoundEvent CRICKETS = create("ambient.crickets");
 
 	protected static SoundEvent create(String name) {
 		SoundEvent soundEvent = SoundEvent.of(Effective.id(name));

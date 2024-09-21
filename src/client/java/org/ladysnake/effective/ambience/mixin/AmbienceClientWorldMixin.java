@@ -2,7 +2,7 @@ package org.ladysnake.effective.ambience.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.client.sound.TickableSoundInstance;
 import net.minecraft.client.world.ClientWorld;
 import org.ladysnake.effective.ambience.EffectiveAmbience;
 import org.ladysnake.effective.ambience.sound.AmbientCondition;
@@ -25,11 +25,16 @@ public class AmbienceClientWorldMixin {
 		ClientPlayerEntity clientPlayerEntity = client.player;
 		if (clientPlayerEntity != null) {
 			for (AmbientCondition ambientCondition : EffectiveAmbience.AMBIENT_CONDITIONS) {
-				if (ambientCondition.shouldPlay(clientPlayerEntity)) {
-					SoundInstance ambience = EffectiveAmbience.AMBIENCES.getOrDefault(ambientCondition, new BiomeAmbientLoop(clientPlayerEntity, ambientCondition.sound(), ambientCondition));
-					if (!client.getSoundManager().isPlaying(ambience)) {
-						client.getSoundManager().play(ambience);
-						EffectiveAmbience.AMBIENCES.put(ambientCondition, ambience);
+				if (ambientCondition.predicate().shouldPlay(client.world, client.player.getBlockPos(), client.player)) {
+					boolean allow = true;
+					for (TickableSoundInstance tickingSound : client.getSoundManager().soundSystem.tickingSounds) {
+						if (tickingSound.getId().equals(ambientCondition.event().getId())) {
+							allow = false;
+							break;
+						}
+					}
+					if (allow) {
+						client.getSoundManager().play(new BiomeAmbientLoop(clientPlayerEntity, ambientCondition.event(), ambientCondition));
 					}
 				}
 			}
