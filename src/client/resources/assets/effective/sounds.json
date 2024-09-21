@@ -31,5 +31,20 @@
     "sounds": [
       "effective:ambient/crickets"
     ]
+  },
+  "ambient.cave": {
+    "sounds": [
+      "effective:ambient/cave"
+    ]
+  },
+  "ambient.dripstone_cave": {
+    "sounds": [
+      "effective:ambient/dripstone_cave"
+    ]
+  },
+  "ambient.lush_cave": {
+    "sounds": [
+      "effective:ambient/lush_cave"
+    ]
   }
 }
