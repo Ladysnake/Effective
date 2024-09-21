@@ -87,7 +87,7 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(category = audio, min = 0, max = 100, isSlider = true)
 	public static int cascadeSoundsVolume = 30;
 	@Entry(category = audio, min = 0, max = 400, isSlider = true)
-	public static int cascadeSoundDistanceBlocks = 150;
+	public static int cascadeSoundDistanceBlocks = 50;
 	@Comment(category = audio, centered = true) public static Comment biomeAmbience;
 	@Entry(category = audio, min = 0, max = 100, isSlider = true)
 	public static int biomeAmbienceVolume = 100;
