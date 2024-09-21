@@ -67,7 +67,7 @@ public class LavaSplashParticle extends Particle {
 		if (age <= this.wave1End) {
 			int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
 
-			this.texture1 = Identifier.of(Effective.MODID, "textures/entity/splash/lava_splash_" + frame1 + ".png");
+			this.texture1 = Effective.id("textures/entity/splash/lava_splash_" + frame1 + ".png");
 			this.layer1 = RenderLayer.getEntityTranslucent(texture1);
 
 			Vec3d vec3d = camera.getPos();
@@ -90,7 +90,7 @@ public class LavaSplashParticle extends Particle {
 		if (age <= this.wave1End) {
 			int frame1 = Math.round(((float) this.age / (float) this.wave1End) * 12);
 
-			this.texture1 = Identifier.of(Effective.MODID, "textures/entity/splash/lava_splash_" + frame1 + ".png");
+			this.texture1 = Effective.id("textures/entity/splash/lava_splash_" + frame1 + ".png");
 			this.layer1 = RenderLayer.getEntityTranslucent(texture1);
 
 			Vec3d vec3d = camera.getPos();
@@ -115,7 +115,7 @@ public class LavaSplashParticle extends Particle {
 		if (age >= this.wave2Start) {
 			int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
 
-			this.texture2 = Identifier.of(Effective.MODID, "textures/entity/splash/lava_splash_" + frame2 + ".png");
+			this.texture2 = Effective.id("textures/entity/splash/lava_splash_" + frame2 + ".png");
 			this.layer2 = RenderLayer.getEntityTranslucent(texture2);
 
 			Vec3d vec3d = camera.getPos();
@@ -138,7 +138,7 @@ public class LavaSplashParticle extends Particle {
 		if (age >= this.wave2Start) {
 			int frame2 = Math.round(((float) (this.age - wave2Start) / (float) (this.wave2End - this.wave2Start)) * 12);
 
-			this.texture2 = Identifier.of(Effective.MODID, "textures/entity/splash/lava_splash_" + frame2 + ".png");
+			this.texture2 = Effective.id("textures/entity/splash/lava_splash_" + frame2 + ".png");
 			this.layer2 = RenderLayer.getEntityTranslucent(texture2);
 
 			Vec3d vec3d = camera.getPos();

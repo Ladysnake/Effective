@@ -9,9 +9,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+import org.ladysnake.effective.core.particle.WillOWispParticle;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.data.PlayerCosmeticData;
-import org.ladysnake.effective.core.particle.WillOWispParticle;
 
 import java.util.Objects;
 

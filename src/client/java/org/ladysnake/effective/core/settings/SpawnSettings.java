@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-import org.ladysnake.effective.cosmetics.data.AuraSettings;
 import org.ladysnake.effective.core.settings.data.FireflySpawnSetting;
+import org.ladysnake.effective.cosmetics.data.AuraSettings;
 
 import java.awt.*;
 

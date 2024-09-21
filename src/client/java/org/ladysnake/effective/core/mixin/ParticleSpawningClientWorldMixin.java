@@ -1,7 +1,6 @@
 package org.ladysnake.effective.core.mixin;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.DynamicRegistryManager;

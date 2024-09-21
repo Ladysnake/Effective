@@ -52,9 +52,9 @@ public class GlowSplashParticle extends SplashParticle {
 		float g = (float) (waterColor >> 8 & 0xFF) / 255.0f;
 		float b = (float) (waterColor & 0xFF) / 255.0f;
 
-		Identifier texture = Identifier.of(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+		Identifier texture = Effective.id("textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
 		RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
-		Identifier rimTexture = Identifier.of(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+		Identifier rimTexture = Effective.id("textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
 		RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
 
 		// splash matrices

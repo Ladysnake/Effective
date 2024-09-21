@@ -10,5 +10,18 @@
       "effective:entity/parry"
     ],
     "subtitle": "effective.subtitles.entity.parry"
+  },
+
+  "ambient.plains.day": {
+    "sounds": [
+      "effective:ambient/plains_day"
+    ],
+    "subtitle": "subtitles.ambient.plains.day"
+  },
+  "ambient.deep_dark": {
+    "sounds": [
+      "effective:ambient/deep_dark"
+    ],
+    "subtitle": "subtitles.ambient.deep_dark"
   }
 }

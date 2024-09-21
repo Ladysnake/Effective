@@ -6,11 +6,10 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Identifier;
 import org.ladysnake.effective.core.Effective;
 
 public class SplashModel<T extends Entity> extends EntityModel<T> {
-	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(Identifier.of(Effective.MODID, "splash"), "main");
+	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(Effective.id("splash"), "main");
 	private final ModelPart splash;
 
 	public SplashModel(ModelPart root) {
