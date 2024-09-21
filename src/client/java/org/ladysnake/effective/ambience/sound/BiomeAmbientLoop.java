@@ -7,6 +7,8 @@ import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.MathHelper;
+import org.ladysnake.effective.core.EffectiveConfig;
 
 public class BiomeAmbientLoop extends MovingSoundInstance {
 	private static final int TRANSITION_TIME = 100;
@@ -26,10 +28,12 @@ public class BiomeAmbientLoop extends MovingSoundInstance {
 
 	@Override
 	public void tick() {
+		final float volumeAdjustor = EffectiveConfig.biomeAmbienceVolume / 100f;
+
 		ClientWorld world = MinecraftClient.getInstance().world;
-		if (world != null && !this.player.isRemoved() && this.transitionTimer >= 0) {
+		if (world != null && !this.player.isRemoved() && this.transitionTimer >= 0 && volumeAdjustor > 0) {
 			this.transitionTimer = Math.min(this.transitionTimer + (this.ambientConditions.predicate().shouldPlay(this.player.getWorld(), this.player.getBlockPos(), this.player) ? 1 : -1), TRANSITION_TIME);
-			this.volume = Math.max(0.0F, Math.min((float) this.transitionTimer / (float) TRANSITION_TIME, 1.0F));
+			this.volume = MathHelper.clamp((float) this.transitionTimer / (float) TRANSITION_TIME, 0.0F, volumeAdjustor);
 		} else {
 			this.setDone();
 		}

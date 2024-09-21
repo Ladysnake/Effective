@@ -12,8 +12,6 @@
   "effective.midnightconfig.cascades": "Enable Cascades",
   "effective.midnightconfig.cascadeCloudDensity": "Cascade Cloud Density",
   "effective.midnightconfig.cascadeMistDensity": "Cascade Mist Density",
-  "effective.midnightconfig.cascadeSoundsVolumeMultiplier": "Cascade Sound Volume Multiplier",
-  "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to Hear Cascades (in blocks)",
   "effective.midnightconfig.shouldFlowingWaterSpawnParticlesOnFirstTick": "Should Flowing Water Spawn Particles on First Tick",
   "effective.midnightconfig.lapisBlockUpdateParticleChance": "Lapis Lazuli block update particle chance",
   "effective.midnightconfig.rainRippleDensity": "Rain Ripples Density",
@@ -61,5 +59,9 @@
   "effective.midnightconfig.enum.CosmeticsOptions.DISABLE": "No",
   "effective.midnightconfig.ultrakill": "ULTRAKILL",
   "effective.midnightconfig.cascadeAudio": "Cascade Audio",
+  "effective.midnightconfig.cascadeSoundsVolume": "Cascade Sound Volume",
+  "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to Hear Cascades (in blocks)",
+  "effective.midnightconfig.biomeAmbience": "Biome Ambience",
+  "effective.midnightconfig.biomeAmbienceVolume": "Biome Ambience Volume",
   "effective:modmenu.dashboard": "Dashboard"
 }

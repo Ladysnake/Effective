@@ -71,7 +71,7 @@ public class WaterfallCloudGenerators {
 				}
 				scheduleParticleTick(waterfall, 6);
 				float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(waterfall.blockPos()));
-				if (waterfall.isSilent() || distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
+				if (waterfall.isSilent() || distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolume == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
 					return;
 				}
 				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
