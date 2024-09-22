@@ -28,6 +28,9 @@ Effective 2.3.1 - 1.20.1
 - Split ambient effects into 4 categories (animals, foliage, water and wind) and added volume configuration for each
     - Allows the user to fine tune their audio ambience exactly how they want. If you don't like animal sounds in
       ambience mods for instance, you can completely disable them and keep the rest!
+- Changed cascade audio detection to make it so cascades underground can only be heard by players underground, and
+  surface cascades can only be heard by players on the surface, to reduce the amount of cascade audio coming from
+  underground sources.
 
 ------------------------------------------------------
 Effective 2.3 - 1.20.1
