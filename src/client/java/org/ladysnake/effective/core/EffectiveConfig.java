@@ -90,7 +90,13 @@ public class EffectiveConfig extends MidnightConfig {
 	public static int cascadeSoundDistanceBlocks = 50;
 	@Comment(category = audio, centered = true) public static Comment biomeAmbience;
 	@Entry(category = audio, min = 0, max = 100, isSlider = true)
-	public static int biomeAmbienceVolume = 100;
+	public static int windAmbienceVolume = 100;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int waterAmbienceVolume = 100;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int foliageAmbienceVolume = 100;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int animalAmbienceVolume = 100;
 
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;

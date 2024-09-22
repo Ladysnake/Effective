@@ -14,7 +14,7 @@ public class BiomeAmbientLoop extends MovingSoundInstance {
 	private static final int TRANSITION_TIME = 100;
 	private final ClientPlayerEntity player;
 	private int transitionTimer;
-	private AmbientCondition ambientConditions;
+	private final AmbientCondition ambientConditions;
 
 	public BiomeAmbientLoop(ClientPlayerEntity player, SoundEvent ambientSound, AmbientCondition ambientConditions) {
 		super(ambientSound, SoundCategory.AMBIENT, SoundInstance.createRandom());
@@ -28,7 +28,17 @@ public class BiomeAmbientLoop extends MovingSoundInstance {
 
 	@Override
 	public void tick() {
-		final float volumeAdjustor = EffectiveConfig.biomeAmbienceVolume / 100f;
+		final float windVolume = EffectiveConfig.windAmbienceVolume / 100f;
+		final float waterVolume = EffectiveConfig.waterAmbienceVolume / 100f;
+		final float foliageVolume = EffectiveConfig.foliageAmbienceVolume / 100f;
+		final float animalVolume = EffectiveConfig.animalAmbienceVolume / 100f;
+
+		final float volumeAdjustor = switch (this.ambientConditions.type()) {
+			case WIND -> windVolume;
+			case ANIMAL -> animalVolume;
+			case FOLIAGE -> foliageVolume;
+			case WATER -> waterVolume;
+		};
 
 		ClientWorld world = MinecraftClient.getInstance().world;
 		if (world != null && !this.player.isRemoved() && !this.player.isSubmergedInWater() && this.transitionTimer >= 0 && volumeAdjustor > 0) {

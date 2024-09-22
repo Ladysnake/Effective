@@ -61,7 +61,10 @@
   "effective.midnightconfig.cascadeAudio": "Cascade Audio",
   "effective.midnightconfig.cascadeSoundsVolume": "Cascade Sound Volume",
   "effective.midnightconfig.cascadeSoundDistanceBlocks": "Distance to Hear Cascades (in blocks)",
-  "effective.midnightconfig.biomeAmbience": "Biome Ambience",
-  "effective.midnightconfig.biomeAmbienceVolume": "Biome Ambience Volume",
+  "effective.midnightconfig.biomeAmbience": "Ambience",
+  "effective.midnightconfig.windAmbienceVolume": "Wind Volume",
+  "effective.midnightconfig.waterAmbienceVolume": "Water Volume",
+  "effective.midnightconfig.foliageAmbienceVolume": "Foliage Volume",
+  "effective.midnightconfig.animalAmbienceVolume": "Animal Volume",
   "effective:modmenu.dashboard": "Dashboard"
 }
