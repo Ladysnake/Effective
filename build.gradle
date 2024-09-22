@@ -19,17 +19,6 @@ chenille {
 	}
 }
 
-modrinth {
-	dependencies {
-		required.project "fabric-api"
-		embedded.project "cardinal-components-api"
-		embedded.project "midnightlib"
-		embedded.project "lodestonelib"
-		embedded.project "satin-api"
-	}
-	syncBodyFrom = rootProject.file("README.md").text
-}
-
 loom {
 	accessWidenerPath = file("src/client/resources/effective.accesswidener")
 
