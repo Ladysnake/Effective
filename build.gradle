@@ -1,7 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
-	id("io.github.ladysnake.chenille") version "0.13.1"
+	id("io.github.ladysnake.chenille") version "0.14.0"
 }
 
 version = project.mod_version;
@@ -13,6 +13,7 @@ base {
 
 chenille {
 	configurePublishing {
+		withLadysnakeMaven()
 		withGithubRelease()
 		withModrinthRelease()
 	}
