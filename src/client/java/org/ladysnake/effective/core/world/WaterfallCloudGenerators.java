@@ -74,7 +74,8 @@ public class WaterfallCloudGenerators {
 				if (waterfall.isSilent() || distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolume == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
 					return;
 				}
-				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
+				if ((world.isSkyVisibleAllowingSea(waterfall.blockPos()) && world.getSeaLevel() > waterfall.blockPos().getY()) == (world.isSkyVisibleAllowingSea(client.player.getBlockPos()) && world.getSeaLevel() > client.player.getBlockPos().getY())
+					&& world.random.nextInt(200) == 0) { // make it so cascades underground can only be heard by players underground, and surface cascades can only be heard by players on the surface
 					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});
