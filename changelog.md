@@ -12,7 +12,7 @@ Effective 2.3.1 - 1.20.1
     - Added frogs and crickets in swamps at night
     - Added day jungle animals in jungles during the day
     - Added night jungle animals in jungles at night
-    - Added owls in forests at
+    - Added owls in forests at night
     - Added rustling foliage in forests, floral biomes, swamps, jungles, wooded badlands and lush caves
     - Added water dripping in dripstone caves
     - Added water streams in lush caves

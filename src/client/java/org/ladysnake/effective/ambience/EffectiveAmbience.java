@@ -44,7 +44,7 @@ public class EffectiveAmbience implements ClientModInitializer {
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_JUNGLE_NIGHT, AmbientCondition.Type.ANIMAL,
 			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.JUNGLE)) && Effective.isNightTime(world)));
 
-		// owls in forests at
+		// owls in forests at night
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_OWLS, AmbientCondition.Type.ANIMAL,
 			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.FOREST)) && Effective.isNightTime(world)));
 
