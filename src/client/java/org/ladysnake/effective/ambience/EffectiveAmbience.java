@@ -92,9 +92,9 @@ public class EffectiveAmbience implements ClientModInitializer {
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.WIND_MOUNTAINS, AmbientCondition.Type.WIND,
 			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && world.getBiome(pos).isIn(ConventionalBiomeTags.MOUNTAIN_PEAK)));
 
-		// soft wind in temperate, floral, savanna, jungle and mushroom field biomes
+		// soft wind in temperate, floral, savanna, jungle, swamp and mushroom field biomes
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.WIND_TEMPERATE, AmbientCondition.Type.WIND,
-			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.CLIMATE_TEMPERATE) || world.getBiome(pos).isIn(ConventionalBiomeTags.FLORAL) || world.getBiome(pos).isIn(ConventionalBiomeTags.SAVANNA)|| world.getBiome(pos).isIn(ConventionalBiomeTags.JUNGLE) || world.getBiome(pos).isIn(ConventionalBiomeTags.MUSHROOM))));
+			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.CLIMATE_TEMPERATE) || world.getBiome(pos).isIn(ConventionalBiomeTags.FLORAL) || world.getBiome(pos).isIn(ConventionalBiomeTags.SAVANNA) || world.getBiome(pos).isIn(ConventionalBiomeTags.JUNGLE) || world.getBiome(pos).isIn(ConventionalBiomeTags.SWAMP) || world.getBiome(pos).isIn(ConventionalBiomeTags.MUSHROOM))));
 	}
 
 	public static final boolean isInCave(World world, BlockPos pos) {
