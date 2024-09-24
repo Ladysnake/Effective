@@ -2,6 +2,7 @@ package org.ladysnake.effective.ambience;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
@@ -43,6 +44,10 @@ public class EffectiveAmbience implements ClientModInitializer {
 		// night jungle animals in jungles at night
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_JUNGLE_NIGHT, AmbientCondition.Type.ANIMAL,
 			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.JUNGLE)) && Effective.isNightTime(world)));
+
+		// mangrove birds in mangroves during the day
+		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_MANGROVE_BIRDS, AmbientCondition.Type.ANIMAL,
+			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).matchesKey(BiomeKeys.MANGROVE_SWAMP)) && !Effective.isNightTime(world)));
 
 		// owls in forests at night
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_OWLS, AmbientCondition.Type.ANIMAL,
