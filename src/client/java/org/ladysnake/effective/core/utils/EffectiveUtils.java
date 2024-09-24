@@ -1,7 +1,9 @@
 package org.ladysnake.effective.core.utils;
 
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
@@ -55,5 +57,27 @@ public class EffectiveUtils {
 	public enum WaterEffectType {
 		DROPLET,
 		RIPPLE,
+	}
+
+	public static final boolean isInCave(World world, BlockPos pos) {
+		return pos.getY() < world.getSeaLevel() && EffectiveUtils.hasStoneAbove(world, pos);
+	}
+
+	public static final boolean isInOverworld(World world, BlockPos pos) {
+		return world.getBiome(pos).isIn(ConventionalBiomeTags.IN_OVERWORLD);
+	}
+
+	// method to check if the player has a stone material type block above them, more reliable to detect caves compared to isSkyVisible
+	// (okay nvm they removed materials we're using pickaxe mineable instead lmao oh god this is gonna be so unreliable)
+	public static boolean hasStoneAbove(World world, BlockPos pos) {
+		BlockPos.Mutable mutable = pos.mutableCopy();
+		int startY = mutable.getY();
+		for (int y = startY; y <= startY + 100; y++) {
+			mutable.setY(mutable.getY()+1);
+			if (world.getBlockState(mutable).isSolidBlock(world, pos) && world.getBlockState(mutable).isIn(BlockTags.PICKAXE_MINEABLE)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
