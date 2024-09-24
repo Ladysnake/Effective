@@ -2,11 +2,7 @@ package org.ladysnake.effective.ambience;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
-import net.minecraft.block.BlockState;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockRenderView;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
 import org.ladysnake.effective.ambience.sound.AmbientCondition;
 import org.ladysnake.effective.core.Effective;
@@ -66,7 +62,21 @@ public class EffectiveAmbience implements ClientModInitializer {
 
 		// water dripping in dripstone caves
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.WATER_DRIPSTONE_CAVES, AmbientCondition.Type.WATER,
-			(world, pos, player) -> EffectiveUtils.isInOverworld(world, pos) && world.getBiome(pos).matchesKey(BiomeKeys.DRIPSTONE_CAVES)));
+			(world, pos, player) -> {
+				if (EffectiveUtils.isInOverworld(world, pos)) {
+					if (EffectiveUtils.isInCave(world, pos)) {
+						BlockPos.Mutable mutable = pos.mutableCopy();
+						int startY = mutable.getY();
+						for (int y = startY; y <= startY + 20; y += 5) {
+							mutable.setY(y);
+							if (world.getBiome(mutable).matchesKey(BiomeKeys.DRIPSTONE_CAVES)) {
+								return true;
+							}
+						}
+						return false;
+					} else return world.getBiome(pos).matchesKey(BiomeKeys.DRIPSTONE_CAVES);
+				} else return false;
+			}));
 
 		// water streams in lush caves
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.WATER_LUSH_CAVES, AmbientCondition.Type.WATER,

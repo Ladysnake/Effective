@@ -73,7 +73,7 @@ public class EffectiveUtils {
 		BlockPos.Mutable mutable = pos.mutableCopy();
 		int startY = mutable.getY();
 		for (int y = startY; y <= startY + 100; y++) {
-			mutable.setY(mutable.getY()+1);
+			mutable.setY(y);
 			if (world.getBlockState(mutable).isSolidBlock(world, pos) && world.getBlockState(mutable).isIn(BlockTags.PICKAXE_MINEABLE)) {
 				return true;
 			}
