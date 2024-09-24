@@ -21,6 +21,7 @@ public class EffectiveAmbienceSounds {
 	public static final SoundEvent ANIMAL_JUNGLE_NIGHT = create("ambient.animal.jungle_night");
 	public static final SoundEvent ANIMAL_MANGROVE_BIRDS = create("ambient.animal.mangrove_birds");
 	public static final SoundEvent ANIMAL_OWLS = create("ambient.animal.owls");
+	public static final SoundEvent FOLIAGE_CAVE_LEAVES = create("ambient.foliage.cave_leaves");
 	public static final SoundEvent FOLIAGE_LEAVES = create("ambient.foliage.leaves");
 	public static final SoundEvent WATER_DRIPSTONE_CAVES = create("ambient.water.dripstone_caves");
 	public static final SoundEvent WATER_LUSH_CAVES = create("ambient.water.lush_caves");

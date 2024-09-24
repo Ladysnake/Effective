@@ -56,9 +56,13 @@ public class EffectiveAmbience implements ClientModInitializer {
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_OWLS, AmbientCondition.Type.ANIMAL,
 			(world, pos, player) -> EffectiveUtils.isInOverworld(world, pos) && !EffectiveUtils.isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.FOREST)) && Effective.isNightTime(world)));
 
+		// rustling reverbed foliage in lush caves
+		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.FOLIAGE_CAVE_LEAVES, AmbientCondition.Type.FOLIAGE,
+			(world, pos, player) -> EffectiveUtils.isInOverworld(world, pos) && world.getBiome(pos).matchesKey(BiomeKeys.LUSH_CAVES)));
+
 		// rustling foliage in forests, floral biomes, swamps, jungles, wooded badlands and lush caves
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.FOLIAGE_LEAVES, AmbientCondition.Type.FOLIAGE,
-			(world, pos, player) -> EffectiveUtils.isInOverworld(world, pos) && (!EffectiveUtils.isInCave(world, pos) || world.getBiome(pos).matchesKey(BiomeKeys.LUSH_CAVES)) && (world.getBiome(pos).isIn(ConventionalBiomeTags.FOREST) || world.getBiome(pos).isIn(ConventionalBiomeTags.FLORAL) || world.getBiome(pos).isIn(ConventionalBiomeTags.SWAMP) || world.getBiome(pos).isIn(ConventionalBiomeTags.JUNGLE) || world.getBiome(pos).matchesKey(BiomeKeys.WOODED_BADLANDS) || world.getBiome(pos).matchesKey(BiomeKeys.LUSH_CAVES))));
+			(world, pos, player) -> EffectiveUtils.isInOverworld(world, pos) && !EffectiveUtils.isInCave(world, pos) && (world.getBiome(pos).isIn(ConventionalBiomeTags.FOREST) || world.getBiome(pos).isIn(ConventionalBiomeTags.FLORAL) || world.getBiome(pos).isIn(ConventionalBiomeTags.SWAMP) || world.getBiome(pos).isIn(ConventionalBiomeTags.JUNGLE) || world.getBiome(pos).matchesKey(BiomeKeys.WOODED_BADLANDS))));
 
 		// water dripping in dripstone caves
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.WATER_DRIPSTONE_CAVES, AmbientCondition.Type.WATER,

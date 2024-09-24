@@ -57,6 +57,11 @@
       "effective:ambient/animal_owls"
     ]
   },
+  "ambient.foliage.cave_leaves": {
+    "sounds": [
+      "effective:ambient/foliage_cave_leaves"
+    ]
+  },
   "ambient.foliage.leaves": {
     "sounds": [
       "effective:ambient/foliage_leaves"
