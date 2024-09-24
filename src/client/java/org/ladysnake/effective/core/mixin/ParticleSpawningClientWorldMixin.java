@@ -52,20 +52,30 @@ public abstract class ParticleSpawningClientWorldMixin extends World {
 		at = @At(value = "INVOKE", target = "Ljava/util/Optional;ifPresent(Ljava/util/function/Consumer;)V", ordinal = 0, shift = At.Shift.AFTER))
 	private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, Block block, BlockPos.Mutable blockPos, CallbackInfo ci) {
 		BlockPos.Mutable pos = blockPos.add(MathHelper.floor(this.random.nextGaussian() * 50), MathHelper.floor(this.random.nextGaussian() * 10), MathHelper.floor(this.random.nextGaussian() * 50)).mutableCopy();
+		BlockPos.Mutable pos2 = pos.mutableCopy();
 		RegistryEntry<Biome> biome = this.getBiome(pos);
 
 		// FIREFLIES
 		if (EffectiveConfig.fireflyDensity > 0) {
 			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
-			if (fireflySpawnSetting != null && FireflyParticle.canFlyThroughBlock(this, pos, this.getBlockState(pos))) {
+			if (fireflySpawnSetting != null) {
 				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity && pos.getY() > this.getSeaLevel()) {
-					WorldParticleBuilder.create(Effective.FIREFLY)
-						.enableForcedSpawn()
-						.setColorData(ColorParticleData.create(fireflySpawnSetting.color(), fireflySpawnSetting.color()).build())
-						.setScaleData(GenericParticleData.create(0.05f + random.nextFloat() * 0.10f).build())
-						.setLifetime(ThreadLocalRandom.current().nextInt(40, 120))
-						.setRenderType(LodestoneWorldParticleRenderType.ADDITIVE)
-						.spawn(this, pos.getX() + random.nextFloat(), pos.getY() + random.nextFloat(), pos.getZ() + random.nextFloat());
+					for (int y = this.getSeaLevel(); y <= this.getSeaLevel() * 2; y++) {
+						pos.setY(y);
+						pos2.setY(y-1);
+						boolean canSpawnFirefly = FireflyParticle.canFlyThroughBlock(this, pos, this.getBlockState(pos)) && !FireflyParticle.canFlyThroughBlock(this, pos2, this.getBlockState(pos2));
+
+						if (canSpawnFirefly) {
+							WorldParticleBuilder.create(Effective.FIREFLY)
+								.enableForcedSpawn()
+								.setColorData(ColorParticleData.create(fireflySpawnSetting.color(), fireflySpawnSetting.color()).build())
+								.setScaleData(GenericParticleData.create(0.05f + random.nextFloat() * 0.10f).build())
+								.setLifetime(ThreadLocalRandom.current().nextInt(40, 120))
+								.setRenderType(LodestoneWorldParticleRenderType.ADDITIVE)
+								.spawn(this, pos.getX() + random.nextFloat(), pos.getY() + random.nextFloat() * 5f, pos.getZ() + random.nextFloat());
+							break;
+						}
+					}
 				}
 			}
 		}
