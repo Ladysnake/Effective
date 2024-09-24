@@ -1,4 +1,24 @@
 ------------------------------------------------------
+Effective 2.3.2 - 1.20.1
+------------------------------------------------------
+
+- Adjusted firefly spawning to be within 5 blocks off to the ground (instead of mostly in the sky like before)
+- Added a soft wind ambience to swamp biomes (eg. mangroves being hot made them have no background wind)
+- Added a unique mangrove bird ambience during the day
+- Changed the cave ambience detection to use solid stone-like blocks above the player instead of light level
+    - This fixes some issues that would happen for instance in swamps, where being under a tree and lower than the sea
+      level would start playing the cave ambience
+- Added a new reverbed foliage rustling sound for lush caves instead of the regular forest one
+- Added a check for dripstone cave biomes up to 20 blocks above the player for its ambience
+    - This should fix the unreliability of the biome's layout often not reaching the ground where there are no
+      stalagmites
+- Fixed the ULTRAKILL parry effect missing the white flash
+    - The parry effect now uses a direct overlay render instead of Lodestone screen particles
+- Reduced the ripple quantity when it rains
+- Increased the rain ripple density default config value
+- Increased the cascade sound distance default config value
+
+------------------------------------------------------
 Effective 2.3.1 - 1.20.1
 ------------------------------------------------------
 
