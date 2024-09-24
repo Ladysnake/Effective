@@ -47,6 +47,11 @@
       "effective:ambient/animal_jungle_night"
     ]
   },
+  "ambient.animal.mangrove_birds": {
+    "sounds": [
+      "effective:ambient/animal_mangrove_birds"
+    ]
+  },
   "ambient.animal.owls": {
     "sounds": [
       "effective:ambient/animal_owls"

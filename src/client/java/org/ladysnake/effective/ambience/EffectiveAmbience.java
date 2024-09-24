@@ -47,7 +47,7 @@ public class EffectiveAmbience implements ClientModInitializer {
 
 		// mangrove birds in mangroves during the day
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_MANGROVE_BIRDS, AmbientCondition.Type.ANIMAL,
-			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && (world.getBiome(pos).matchesKey(BiomeKeys.MANGROVE_SWAMP)) && !Effective.isNightTime(world)));
+			(world, pos, player) -> isInOverworld(world, pos) && !isInCave(world, pos) && world.getBiome(pos).matchesKey(BiomeKeys.MANGROVE_SWAMP) && !Effective.isNightTime(world)));
 
 		// owls in forests at night
 		AMBIENT_CONDITIONS.add(new AmbientCondition(EffectiveAmbienceSounds.ANIMAL_OWLS, AmbientCondition.Type.ANIMAL,
