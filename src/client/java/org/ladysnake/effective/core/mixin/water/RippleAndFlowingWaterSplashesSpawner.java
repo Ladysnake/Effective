@@ -56,7 +56,7 @@ public class RippleAndFlowingWaterSplashesSpawner {
 
 		// still water rain ripples
 		if (shouldRipple(world, pos)) {
-			for (int i = 0; i <= random.nextInt(EffectiveConfig.rainRippleDensity); i++) {
+			if (random.nextInt(10) <= EffectiveConfig.rainRippleDensity) {
 				if (world.getBiome(pos).value().getPrecipitation(pos) == Biome.Precipitation.RAIN && world.isSkyVisibleAllowingSea(pos)) {
 					EffectiveUtils.spawnWaterEffect(world, Vec3d.ofCenter(pos).add(random.nextFloat() - random.nextFloat(), .39f, random.nextFloat() - random.nextFloat()), 0f, 0f, 0f, EffectiveUtils.WaterEffectType.RIPPLE);
 				}

@@ -24,7 +24,7 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
 	public static float lapisBlockUpdateParticleChance = 1;
 	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
-	public static int rainRippleDensity = 1;
+	public static int rainRippleDensity = 5;
 	@Entry(category = visuals)
 	public static boolean glowingPlankton = true;
 	@Entry(category = visuals)
