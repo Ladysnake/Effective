@@ -257,23 +257,5 @@ public class Effective implements ClientModInitializer {
 				freezeFrames = -1;
 			}
 		});
-
-		WorldRenderEvents.LAST.register(context -> {
-			// ULTRAKILL Parry effect; doesn't work but I'm too lazy to fix it now
-//			ScreenParticleBuilder b2 = ScreenParticleBuilder.create(LodestoneScreenParticleRegistry.SPARKLE, effectiveScreenParticleHolder)
-//				.setTransparencyData(GenericParticleData.create(1000f).build())
-//				.setScaleData(GenericParticleData.create(1000000f).build())
-//				.setColorData(ColorParticleData.create(new Color(0xFFFFFF), new Color(0xFFFFFF)).build())
-//				.setLifetime(10)
-//				.setRenderType(LodestoneScreenParticleRenderType.ADDITIVE);
-//			b2.spawn(-50, 50);
-//
-//			effectiveScreenParticleHolder.particles.forEach((lodestoneScreenParticleRenderType, screenParticles) -> {
-//				System.out.println(lodestoneScreenParticleRenderType);
-//			});
-//			ScreenParticleHandler.addParticle(effectiveScreenParticleHolder, b2.getParticleOptions(), 0.5, 0.5, 1, 1);
-//			ScreenParticleHandler.renderParticles(effectiveScreenParticleHolder);
-//			effectiveScreenParticleHolder.tick();
-		});
 	}
 }
