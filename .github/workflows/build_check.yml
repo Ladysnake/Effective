@@ -11,7 +11,7 @@ jobs:
                         17    # Minimum supported by Minecraft
                 ]
                 # and run on both Linux and Windows
-                os: [ubuntu-20.04, windows-latest]
+                os: [ubuntu-latest, windows-latest]
         runs-on: ${{ matrix.os }}
         steps:
             - name: checkout repository
@@ -20,19 +20,22 @@ jobs:
                 fetch-depth: 0
                 filter: tree:0
             - name: validate gradle wrapper
-              uses: gradle/wrapper-validation-action@v1
+              uses: gradle/actions/wrapper-validation@v3
             - name: setup jdk ${{ matrix.java }}
-              uses: actions/setup-java@v1
+              uses: actions/setup-java@v4
               with:
+                  distribution: 'temurin'
                   java-version: ${{ matrix.java }}
+                  cache: 'gradle'
             - name: make gradle wrapper executable
               if: ${{ runner.os != 'Windows' }}
               run: chmod +x ./gradlew
             - name: build
-              run: ./gradlew build
+              # For the reason on `--no-daemon` see https://github.com/actions/cache/issues/454
+              run: ./gradlew build --no-daemon
             - name: capture build artifacts
               if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from latest java on one OS
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                   name: Artifacts
                   path: build/libs/
