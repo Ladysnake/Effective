@@ -19,6 +19,7 @@
 	"entrypoints": {
     "client": [
       "org.ladysnake.effective.core.Effective",
+      "org.ladysnake.effective.ambience.EffectiveAmbience",
       "org.ladysnake.effective.cosmetics.EffectiveCosmetics"
     ],
     "modmenu": [
@@ -26,7 +27,8 @@
     ]
 	},
 	"mixins": [
-      "effective.mixins.json",
+      "effective_core.mixins.json",
+      "effective_ambience.mixins.json",
       "effective_cosmetics.mixins.json"
   ],
   "accessWidener": "effective.accesswidener",

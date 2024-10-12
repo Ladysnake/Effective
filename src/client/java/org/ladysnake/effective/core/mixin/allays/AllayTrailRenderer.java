@@ -10,13 +10,12 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AllayEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
+import org.ladysnake.effective.core.particle.contracts.ColoredParticleInitialData;
 import org.ladysnake.effective.core.utils.EffectiveUtils;
 import org.ladysnake.effective.core.utils.PositionTrackedEntity;
-import org.ladysnake.effective.core.particle.contracts.ColoredParticleInitialData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,7 +33,7 @@ import java.util.List;
 
 @Mixin(LivingEntityRenderer.class)
 public abstract class AllayTrailRenderer<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
-	private static final RenderLayer TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(Identifier.of(Effective.MODID, "textures/vfx/light_trail.png")));
+	private static final RenderLayer TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(Effective.id("textures/vfx/light_trail.png")));
 
 	protected AllayTrailRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);

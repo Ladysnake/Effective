@@ -3,83 +3,100 @@ package org.ladysnake.effective.core;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 public class EffectiveConfig extends MidnightConfig {
-	public static final String waterEffects = "waterEffects";
-	public static final String entityEffects = "entityEffects";
-	public static final String screenShakeEffects = "screenShakeEffects";
-	public static final String illuminatedEffects = "illuminatedEffects";
-	public static final String improvedEffects = "improvedEffects";
-	public static final String miscellaneous = "miscellaneous";
-	@Entry(category = waterEffects)
+	/* VISUALS CATEGORY */
+	public static final String visuals = "visuals";
+
+	@Comment(category = visuals, centered = true) public static Comment waterEffects;
+	@Entry(category = visuals)
 	public static boolean splashes = true;
-	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 5, isSlider = true)
 	public static float splashThreshold = 0.3f;
-	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 100, isSlider = true)
 	public static int flowingWaterSplashingDensity = 50;
-	@Entry(category = waterEffects)
+	@Entry(category = visuals)
 	public static boolean cascades = true;
-	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 5, isSlider = true)
 	public static float cascadeCloudDensity = 2.5f;
-	@Entry(category = waterEffects, min = 0, max = 5, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 5, isSlider = true)
 	public static float cascadeMistDensity = 1;
-	@Entry(category = waterEffects, min = 0, max = 100, isSlider = true)
-	public static int cascadeSoundsVolumeMultiplier = 30;
-	@Entry(category = waterEffects, min = 0, max = 400, isSlider = true)
-	public static int cascadeSoundDistanceBlocks = 150;
-	@Entry(category = waterEffects)
+	@Entry(category = visuals)
 	public static boolean shouldFlowingWaterSpawnParticlesOnFirstTick = true;
-	@Entry(category = waterEffects, min = 0, max = 10, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
 	public static float lapisBlockUpdateParticleChance = 1;
-	@Entry(category = waterEffects, min = 0, max = 10, isSlider = true)
-	public static int rainRippleDensity = 1;
-	@Entry(category = waterEffects)
+	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
+	public static int rainRippleDensity = 5;
+	@Entry(category = visuals)
 	public static boolean glowingPlankton = true;
-	@Entry(category = waterEffects)
+	@Entry(category = visuals)
 	public static boolean underwaterOpenChestBubbles = true;
-	@Entry(category = waterEffects)
+	@Entry(category = visuals)
 	public static ChestsOpenOptions underwaterChestsOpenRandomly = ChestsOpenOptions.ON_SOUL_SAND;
-	@Entry(category = entityEffects)
+
+	@Comment(category = visuals, centered = true) public static Comment entityEffects;
+	@Entry(category = visuals)
 	public static GlowSquidHypnoOptions glowSquidHypnotize = GlowSquidHypnoOptions.ATTRACT;
-	@Entry(category = entityEffects)
+	@Entry(category = visuals)
 	public static TrailOptions allayTrails = TrailOptions.BOTH;
-	@Entry(category = entityEffects)
+	@Entry(category = visuals)
 	public static boolean goldenAllays = true;
-	@Entry(category = screenShakeEffects, min = 0, max = 5, isSlider = true)
+
+	@Comment(category = visuals, centered = true) public static Comment screenShakeEffects;
+	@Entry(category = visuals, min = 0, max = 5, isSlider = true)
 	public static float screenShakeIntensity = 1;
-	@Entry(category = screenShakeEffects)
+	@Entry(category = visuals)
 	public static boolean wardenScreenShake = true;
-	@Entry(category = screenShakeEffects)
+	@Entry(category = visuals)
 	public static boolean sonicBoomScreenShake = true;
-	@Entry(category = screenShakeEffects)
+	@Entry(category = visuals)
 	public static boolean ravagerScreenShake = true;
-	@Entry(category = screenShakeEffects)
+	@Entry(category = visuals)
 	public static boolean dragonScreenShake = true;
-	@Entry(category = illuminatedEffects, min = 0, max = 10, isSlider = true)
+
+	@Comment(category = visuals, centered = true) public static Comment illuminatedEffects;
+	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
 	public static float fireflyDensity = 1;
-	@Entry(category = illuminatedEffects, min = 0, max = 10, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
 	public static float chorusPetalDensity = 1;
-	@Entry(category = illuminatedEffects, min = 0, max = 10, isSlider = true)
+	@Entry(category = visuals, min = 0, max = 10, isSlider = true)
 	public static float willOWispDensity = 1;
-	@Entry(category = illuminatedEffects)
+	@Entry(category = visuals)
 	public static EyesInTheDarkOptions eyesInTheDark = EyesInTheDarkOptions.HALLOWEEN;
-	@Entry(category = improvedEffects)
+
+	@Comment(category = visuals, centered = true) public static Comment improvedEffects;
+	@Entry(category = visuals)
 	public static boolean improvedFireballs = true;
-	@Entry(category = improvedEffects)
+	@Entry(category = visuals)
 	public static boolean improvedDragonFireballsAndBreath = true;
-	@Entry(category = improvedEffects)
+	@Entry(category = visuals)
 	public static boolean improvedGlowSquidParticles = true;
-	@Entry(category = improvedEffects)
+	@Entry(category = visuals)
 	public static TrailOptions spectralArrowTrails = TrailOptions.BOTH;
-	@Entry(category = miscellaneous, min = 0, max = 100, isSlider = true)
+
+	@Comment(category = visuals, centered = true) public static Comment miscellaneous;
+	@Entry(category = visuals, min = 0, max = 100, isSlider = true)
 	public static float sculkDustDensity = 100;
-
-	@Entry(category = miscellaneous)
+	@Entry(category = visuals)
 	public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
-
-	@Entry(category = miscellaneous)
+	@Entry(category = visuals)
 	public static boolean ultrakill = false;
 
-//	@Entry(category = miscellaneous, min = 1, max = 10, isSlider = true)
-//	public static int freezeFrames = 5;
+	/* AUDIO CATEGORY */
+	public static final String audio = "audio";
+
+	@Comment(category = audio, centered = true) public static Comment cascadeAudio;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int cascadeSoundsVolume = 30;
+	@Entry(category = audio, min = 0, max = 400, isSlider = true)
+	public static int cascadeSoundDistanceBlocks = 100;
+	@Comment(category = audio, centered = true) public static Comment biomeAmbience;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int windAmbienceVolume = 100;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int waterAmbienceVolume = 100;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int foliageAmbienceVolume = 100;
+	@Entry(category = audio, min = 0, max = 100, isSlider = true)
+	public static int animalAmbienceVolume = 100;
 
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;

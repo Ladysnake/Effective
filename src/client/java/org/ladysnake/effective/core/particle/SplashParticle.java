@@ -76,9 +76,9 @@ public class SplashParticle extends Particle {
 			waterColor = BiomeColors.getWaterColor(world, BlockPos.ofFloored(this.x, this.y, this.z));
 		}
 
-		Identifier texture = Identifier.of(Effective.MODID, "textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+		Identifier texture = Effective.id("textures/entity/splash/splash_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
 		RenderLayer layer = RenderLayer.getEntityTranslucent(texture);
-		Identifier rimTexture = Identifier.of(Effective.MODID, "textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
+		Identifier rimTexture = Effective.id("textures/entity/splash/splash_rim_" + MathHelper.clamp(frame, 0, MAX_FRAME) + ".png");
 		RenderLayer rimLayer = RenderLayer.getEntityTranslucent(rimTexture);
 
 		// splash matrices

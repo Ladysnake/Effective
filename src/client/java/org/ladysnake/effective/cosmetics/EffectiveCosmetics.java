@@ -22,6 +22,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.ladysnake.effective.core.settings.SpawnSettings;
 import org.ladysnake.effective.cosmetics.data.AuraData;
 import org.ladysnake.effective.cosmetics.data.OverheadData;
 import org.ladysnake.effective.cosmetics.data.PlayerCosmeticData;
@@ -32,7 +33,6 @@ import org.ladysnake.effective.cosmetics.render.entity.model.hat.*;
 import org.ladysnake.effective.cosmetics.render.entity.model.pet.LanternModel;
 import org.ladysnake.effective.cosmetics.render.entity.model.pet.PrideHeartModel;
 import org.ladysnake.effective.cosmetics.render.entity.model.pet.WillOWispModel;
-import org.ladysnake.effective.core.settings.SpawnSettings;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

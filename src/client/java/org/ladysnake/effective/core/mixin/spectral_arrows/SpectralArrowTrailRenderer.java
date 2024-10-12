@@ -9,12 +9,11 @@ import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.SpectralArrowEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
-import org.ladysnake.effective.core.utils.PositionTrackedEntity;
 import org.ladysnake.effective.core.particle.contracts.ColoredParticleInitialData;
+import org.ladysnake.effective.core.utils.PositionTrackedEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,7 +31,7 @@ import java.util.List;
 
 @Mixin(ProjectileEntityRenderer.class)
 public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileEntity> extends EntityRenderer<T> {
-	private static final RenderLayer TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(Identifier.of(Effective.MODID, "textures/vfx/light_trail.png")));
+	private static final RenderLayer TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(Effective.id("textures/vfx/light_trail.png")));
 
 	protected SpectralArrowTrailRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
@@ -52,7 +51,7 @@ public abstract class SpectralArrowTrailRenderer<T extends PersistentProjectileE
 			// trail
 			if (EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.BOTH || EffectiveConfig.spectralArrowTrails == EffectiveConfig.TrailOptions.TWINKLE) {
 				matrixStack.push();
-				List<TrailPoint> positions = ((PositionTrackedEntity) (Object) spectralArrowEntity).getPastPositions();
+				List<TrailPoint> positions = ((PositionTrackedEntity) spectralArrowEntity).getPastPositions();
 				VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setRenderType(getTrailRenderType());
 
 				float size = 0.15f;

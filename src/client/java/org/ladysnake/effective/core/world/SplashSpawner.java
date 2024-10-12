@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
-import org.ladysnake.effective.core.utils.EffectiveUtils;
 import org.ladysnake.effective.core.particle.contracts.SplashParticleInitialData;
 import org.ladysnake.effective.core.particle.types.SplashParticleType;
+import org.ladysnake.effective.core.utils.EffectiveUtils;
 
 public final class SplashSpawner {
 	public static void trySpawnSplash(Entity entity) {

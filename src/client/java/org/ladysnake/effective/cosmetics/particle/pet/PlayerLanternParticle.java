@@ -71,7 +71,7 @@ public class PlayerLanternParticle extends Particle {
 		VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
 		VertexConsumer vertexConsumer2 = immediate.getBuffer(GlowyRenderLayer.get(texture));
 		if (this.alpha > 0) {
-			this.model.render(matrixStack, vertexConsumer2, LightmapTextureManager.MAX_LIGHT_COORDINATE, OverlayTexture.DEFAULT_UV);
+			this.model.render(matrixStack, vertexConsumer2, LightmapTextureManager.MAX_LIGHT_COORDINATE, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
 		}
 		immediate.draw();
 	}

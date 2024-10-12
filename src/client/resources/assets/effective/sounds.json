@@ -10,5 +10,116 @@
       "effective:entity/parry"
     ],
     "subtitle": "effective.subtitles.entity.parry"
+  },
+
+  "ambient.animal.bees": {
+    "sounds": [
+      "effective:ambient/animal_bees"
+    ]
+  },
+  "ambient.animal.birds": {
+    "sounds": [
+      "effective:ambient/animal_birds"
+    ]
+  },
+  "ambient.animal.cicadas": {
+    "sounds": [
+      "effective:ambient/animal_cicadas"
+    ]
+  },
+  "ambient.animal.crickets": {
+    "sounds": [
+      "effective:ambient/animal_crickets"
+    ]
+  },
+  "ambient.animal.frogs_and_crickets": {
+    "sounds": [
+      "effective:ambient/animal_frogs_and_crickets"
+    ]
+  },
+  "ambient.animal.jungle_day": {
+    "sounds": [
+      "effective:ambient/animal_jungle_day"
+    ]
+  },
+  "ambient.animal.jungle_night": {
+    "sounds": [
+      "effective:ambient/animal_jungle_night"
+    ]
+  },
+  "ambient.animal.mangrove_birds": {
+    "sounds": [
+      "effective:ambient/animal_mangrove_birds"
+    ]
+  },
+  "ambient.animal.owls": {
+    "sounds": [
+      "effective:ambient/animal_owls"
+    ]
+  },
+  "ambient.foliage.cave_leaves": {
+    "sounds": [
+      "effective:ambient/foliage_cave_leaves"
+    ]
+  },
+  "ambient.foliage.leaves": {
+    "sounds": [
+      "effective:ambient/foliage_leaves"
+    ]
+  },
+  "ambient.water.dripstone_caves": {
+    "sounds": [
+      "effective:ambient/water_dripstone_caves"
+    ]
+  },
+  "ambient.water.lush_caves": {
+    "sounds": [
+      "effective:ambient/water_lush_caves"
+    ]
+  },
+  "ambient.water.river": {
+    "sounds": [
+      "effective:ambient/water_river"
+    ]
+  },
+  "ambient.water.waves": {
+    "sounds": [
+      "effective:ambient/water_waves"
+    ]
+  },
+  "ambient.wind.arid": {
+    "sounds": [
+      "effective:ambient/wind_arid"
+    ]
+  },
+  "ambient.wind.cave": {
+    "sounds": [
+      "effective:ambient/wind_cave"
+    ]
+  },
+  "ambient.wind.cold": {
+    "sounds": [
+      "effective:ambient/wind_cold"
+    ]
+  },
+  "ambient.wind.deep_dark": {
+    "sounds": [
+      "effective:ambient/wind_deep_dark"
+    ]
+  },
+  "ambient.wind.end": {
+    "sounds": [
+      "effective:ambient/wind_end"
+    ]
+  },
+  "ambient.wind.mountains": {
+    "sounds": [
+      "effective:ambient/wind_mountains"
+    ]
+  },
+  "ambient.wind.temperate": {
+    "sounds": [
+      "effective:ambient/wind_temperate"
+    ]
   }
 }

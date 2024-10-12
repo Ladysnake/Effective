@@ -35,34 +35,24 @@ import org.ladysnake.effective.core.render.entity.model.SplashModel;
 import org.ladysnake.effective.core.render.entity.model.SplashRimModel;
 import org.ladysnake.effective.core.world.RenderedHypnotizingEntities;
 import org.ladysnake.effective.core.world.WaterfallCloudGenerators;
-import team.lodestar.lodestone.handlers.screenparticle.ScreenParticleHandler;
-import team.lodestar.lodestone.registry.common.particle.LodestoneScreenParticleRegistry;
-import team.lodestar.lodestone.systems.particle.builder.ScreenParticleBuilder;
-import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
-import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
-import team.lodestar.lodestone.systems.particle.render_types.LodestoneScreenParticleRenderType;
 import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
-import team.lodestar.lodestone.systems.particle.screen.ScreenParticleOptions;
 import team.lodestar.lodestone.systems.particle.world.type.LodestoneWorldParticleType;
-
-import java.awt.*;
 
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
 	// rainbow shader for jeb glow squid
-	public static final ManagedCoreShader RAINBOW_SHADER = ShaderEffectManager.getInstance().manageCoreShader(Identifier.of(MODID, "jeb"));
+	public static final ManagedCoreShader RAINBOW_SHADER = ShaderEffectManager.getInstance().manageCoreShader(Effective.id("jeb"));
 	private static final Uniform1f uniformSTimeJeb = RAINBOW_SHADER.findUniform1f("Time");
 
 	// squid hypno shader
 	private static final ManagedShaderEffect HYPNO_SHADER = ShaderEffectManager.getInstance()
-		.manage(Identifier.of(MODID, "shaders/post/hypnotize.json"));
+		.manage(Effective.id("shaders/post/hypnotize.json"));
 	private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
 	private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
 	private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
-
+	private static final ScreenParticleHolder effectiveScreenParticleHolder = new ScreenParticleHolder();
 	// freeze frames for feedbacking
 	public static int freezeFrames = -1;
-
 	// particle types
 	public static SplashParticleType SPLASH;
 	public static SimpleParticleType DROPLET;
@@ -84,12 +74,10 @@ public class Effective implements ClientModInitializer {
 	public static WaterfallCloudParticleType WATERFALL_CLOUD = new WaterfallCloudParticleType();
 	public static MistParticleType MIST = new MistParticleType();
 	public static FireflyParticleType FIREFLY = new FireflyParticleType();
-
 	// sound events
-	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.of(Identifier.of(MODID, "ambience.waterfall"));
-	public static SoundEvent PARRY = SoundEvent.of(Identifier.of(MODID, "entity.parry"));
+	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.of(Effective.id("ambience.waterfall"));
+	public static SoundEvent PARRY = SoundEvent.of(Effective.id("entity.parry"));
 	private static int ticksJeb;
-	private static final ScreenParticleHolder effectiveScreenParticleHolder = new ScreenParticleHolder();
 
 	public static boolean isNightTime(World world) {
 		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
@@ -107,6 +95,10 @@ public class Effective implements ClientModInitializer {
 //		one.set(i * j + f * m + g * l - h * k, i * k - f * l + g * m + h * j, i * l + f * k - g * j + h * m, i * m - f * j - g * k - h * l);
 //	}
 
+	public static Identifier id(String string) {
+		return new Identifier(MODID, string);
+	}
+
 	@Override
 	public void onInitializeClient() {
 		// load config
@@ -119,44 +111,44 @@ public class Effective implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
 		// particles
-		SPLASH = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "splash"), new SplashParticleType(true));
+		SPLASH = Registry.register(Registries.PARTICLE_TYPE, Effective.id("splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(SPLASH, SplashParticle.DefaultFactory::new);
-		DROPLET = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "droplet"), FabricParticleTypes.simple(true));
+		DROPLET = Registry.register(Registries.PARTICLE_TYPE, Effective.id("droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(DROPLET, DropletParticle.DefaultFactory::new);
-		RIPPLE = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "ripple"), FabricParticleTypes.simple(true));
+		RIPPLE = Registry.register(Registries.PARTICLE_TYPE, Effective.id("ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(RIPPLE, RippleParticle.DefaultFactory::new);
-		GLOW_SPLASH = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "glow_splash"), new SplashParticleType(true));
+		GLOW_SPLASH = Registry.register(Registries.PARTICLE_TYPE, Effective.id("glow_splash"), new SplashParticleType(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_SPLASH, GlowSplashParticle.DefaultFactory::new);
-		GLOW_DROPLET = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "glow_droplet"), FabricParticleTypes.simple(true));
+		GLOW_DROPLET = Registry.register(Registries.PARTICLE_TYPE, Effective.id("glow_droplet"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_DROPLET, GlowDropletParticle.DefaultFactory::new);
-		GLOW_RIPPLE = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "glow_ripple"), FabricParticleTypes.simple(true));
+		GLOW_RIPPLE = Registry.register(Registries.PARTICLE_TYPE, Effective.id("glow_ripple"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(GLOW_RIPPLE, GlowRippleParticle.DefaultFactory::new);
-		ALLAY_TWINKLE = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "allay_twinkle"), new AllayTwinkleParticleType());
+		ALLAY_TWINKLE = Registry.register(Registries.PARTICLE_TYPE, Effective.id("allay_twinkle"), new AllayTwinkleParticleType());
 		ParticleFactoryRegistry.getInstance().register(ALLAY_TWINKLE, AllayTwinkleParticleType.Factory::new);
-		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "chorus_petal"), FabricParticleTypes.simple(true));
+		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, Effective.id("chorus_petal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
-		EYES = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "eyes"), FabricParticleTypes.simple(true));
+		EYES = Registry.register(Registries.PARTICLE_TYPE, Effective.id("eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.DefaultFactory::new);
-		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "will_o_wisp"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, Identifier.of(MODID, "textures/entity/will_o_wisp.png"), 0.1f, 0.75f, 1.0f, 0.0f, 0.1f, 1.0f));
+		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, Effective.id("will_o_wisp"), FabricParticleTypes.simple(true));
+		ParticleFactoryRegistry.getInstance().register(WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, Effective.id("textures/entity/will_o_wisp.png"), 0.1f, 0.75f, 1.0f, 0.0f, 0.1f, 1.0f));
 
 		// lodestone particles
 		ParticleFactoryRegistry.getInstance().register(PIXEL, LodestoneWorldParticleType.Factory::new);
-		PIXEL = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "pixel"), PIXEL);
+		PIXEL = Registry.register(Registries.PARTICLE_TYPE, Effective.id("pixel"), PIXEL);
 		ParticleFactoryRegistry.getInstance().register(WISP, LodestoneWorldParticleType.Factory::new);
-		WISP = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "wisp"), WISP);
+		WISP = Registry.register(Registries.PARTICLE_TYPE, Effective.id("wisp"), WISP);
 		ParticleFactoryRegistry.getInstance().register(FLAME, FlameParticleType.Factory::new);
-		FLAME = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "flame"), FLAME);
+		FLAME = Registry.register(Registries.PARTICLE_TYPE, Effective.id("flame"), FLAME);
 		ParticleFactoryRegistry.getInstance().register(DRAGON_BREATH, FlameParticleType.Factory::new);
-		DRAGON_BREATH = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "dragon_breath"), DRAGON_BREATH);
+		DRAGON_BREATH = Registry.register(Registries.PARTICLE_TYPE, Effective.id("dragon_breath"), DRAGON_BREATH);
 		ParticleFactoryRegistry.getInstance().register(BUBBLE, BubbleParticleType.Factory::new);
-		BUBBLE = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "bubble"), BUBBLE);
+		BUBBLE = Registry.register(Registries.PARTICLE_TYPE, Effective.id("bubble"), BUBBLE);
 		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticleType.Factory::new);
-		WATERFALL_CLOUD = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "waterfall_cloud"), WATERFALL_CLOUD);
+		WATERFALL_CLOUD = Registry.register(Registries.PARTICLE_TYPE, Effective.id("waterfall_cloud"), WATERFALL_CLOUD);
 		ParticleFactoryRegistry.getInstance().register(MIST, MistParticleType.Factory::new);
-		MIST = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "mist"), MIST);
+		MIST = Registry.register(Registries.PARTICLE_TYPE, Effective.id("mist"), MIST);
 		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticleType.Factory::new);
-		FIREFLY = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MODID, "firefly"), FIREFLY);
+		FIREFLY = Registry.register(Registries.PARTICLE_TYPE, Effective.id("firefly"), FIREFLY);
 
 		// sound events
 		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
@@ -265,24 +257,6 @@ public class Effective implements ClientModInitializer {
 				client.setScreen(null);
 				freezeFrames = -1;
 			}
-		});
-
-		WorldRenderEvents.LAST.register(context -> {
-			// ULTRAKILL Parry effect; doesn't work but I'm too lazy to fix it now
-//			ScreenParticleBuilder b2 = ScreenParticleBuilder.create(LodestoneScreenParticleRegistry.SPARKLE, effectiveScreenParticleHolder)
-//				.setTransparencyData(GenericParticleData.create(1000f).build())
-//				.setScaleData(GenericParticleData.create(1000000f).build())
-//				.setColorData(ColorParticleData.create(new Color(0xFFFFFF), new Color(0xFFFFFF)).build())
-//				.setLifetime(10)
-//				.setRenderType(LodestoneScreenParticleRenderType.ADDITIVE);
-//			b2.spawn(-50, 50);
-//
-//			effectiveScreenParticleHolder.particles.forEach((lodestoneScreenParticleRenderType, screenParticles) -> {
-//				System.out.println(lodestoneScreenParticleRenderType);
-//			});
-//			ScreenParticleHandler.addParticle(effectiveScreenParticleHolder, b2.getParticleOptions(), 0.5, 0.5, 1, 1);
-//			ScreenParticleHandler.renderParticles(effectiveScreenParticleHolder);
-//			effectiveScreenParticleHolder.tick();
 		});
 	}
 }

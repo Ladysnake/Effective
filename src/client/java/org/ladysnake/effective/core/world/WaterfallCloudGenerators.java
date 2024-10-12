@@ -4,7 +4,6 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -19,8 +18,8 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
-import org.ladysnake.effective.core.utils.EffectiveUtils;
 import org.ladysnake.effective.core.sound.WaterfallSoundInstance;
+import org.ladysnake.effective.core.utils.EffectiveUtils;
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
 import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
@@ -72,10 +71,11 @@ public class WaterfallCloudGenerators {
 				}
 				scheduleParticleTick(waterfall, 6);
 				float distance = MathHelper.sqrt((float) client.player.getBlockPos().getSquaredDistance(waterfall.blockPos()));
-				if (waterfall.isSilent() || distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolumeMultiplier == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
+				if (waterfall.isSilent() || distance > EffectiveConfig.cascadeSoundDistanceBlocks || EffectiveConfig.cascadeSoundsVolume == 0 || EffectiveConfig.cascadeSoundDistanceBlocks == 0) {
 					return;
 				}
-				if (world.random.nextInt(200) == 0) { // check for player visibility to avoid underground cascades being heard on the surface, but that shit don't work: && canSeeWaterfall(world, blockPos, MinecraftClient.getInstance().player)) {
+				if (EffectiveUtils.isInCave(world, waterfall.blockPos()) == EffectiveUtils.isInCave(world, client.player.getBlockPos())
+					&& world.random.nextInt(200) == 0) { // make it so cascades underground can only be heard by players underground, and surface cascades can only be heard by players on the surface
 					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});
