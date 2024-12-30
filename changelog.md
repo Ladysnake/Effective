@@ -3,6 +3,12 @@ Effective 2.4.1 (Alpha) - 1.21.1
 ------------------------------------------------------
 - Rewrote underwater chest bubbles and ender chest bubbles
   - Added a new particle type for ender chest bubbles instead of changing the regular bubbles' rendering
+- Added config options to customize random block display ticks
+  - Some Minecraft blocks have visual effects that tick randomly. These options override the Vanilla ticker values to allow these effects to play from further or more frequently, e.g. cherry leaves, rain ripples on water, sculk dust spawning, etc...
+  - Added an option to customize the frequency of random block display ticks
+  - Added an option to customize the distance of close random block display ticks
+  - Added an option to customize the distance of far random block display ticks
+- Added a new tab to the config: Technical
 - Cleaned up particle registration code
 
 ------------------------------------------------------
