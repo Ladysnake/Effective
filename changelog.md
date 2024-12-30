@@ -1,4 +1,11 @@
 ------------------------------------------------------
+Effective 2.4.1 (Alpha) - 1.21.1
+------------------------------------------------------
+- Rewrote underwater chest bubbles and ender chest bubbles
+  - Added a new particle type for ender chest bubbles instead of changing the regular bubbles' rendering
+- Cleaned up particle registration code
+
+------------------------------------------------------
 Effective 2.4 (Alpha) - 1.21.1
 ------------------------------------------------------
 As Effective is getting updated to 1.21 and beyond, the mod will move away from Lodestone to instead use Veil.

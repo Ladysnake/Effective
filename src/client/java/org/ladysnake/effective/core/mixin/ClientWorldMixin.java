@@ -1,7 +1,7 @@
 package org.ladysnake.effective.core.mixin;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.block.Block;
-import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
@@ -16,15 +16,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.dimension.DimensionType;
+import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.core.utils.EffectiveUtils;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.time.LocalDate;
@@ -32,18 +30,46 @@ import java.time.Month;
 import java.util.function.Supplier;
 
 @Mixin(ClientWorld.class)
-public abstract class ParticleSpawningClientWorldMixin extends World {
+public abstract class ClientWorldMixin extends World {
 	@Shadow
-	@Final
-	private WorldRenderer worldRenderer;
+	@Nullable
+	protected abstract Block getBlockParticle();
 
-	protected ParticleSpawningClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, DynamicRegistryManager registryManager, RegistryEntry<DimensionType> dimensionEntry, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long biomeAccess, int maxChainedNeighborUpdates) {
+	@Shadow
+	public abstract void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, @Nullable Block block, BlockPos.Mutable pos);
+
+	protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, DynamicRegistryManager registryManager, RegistryEntry<DimensionType> dimensionEntry, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long biomeAccess, int maxChainedNeighborUpdates) {
 		super(properties, registryRef, registryManager, dimensionEntry, profiler, isClient, debugWorld, biomeAccess, maxChainedNeighborUpdates);
+	}
+
+	@ModifyConstant(method = "doRandomBlockDisplayTicks", constant = @Constant(intValue = 667))
+	public int effective$multiplyRandomBlockDisplayTicksFrequency(int constant) {
+		return Math.round(667 * EffectiveConfig.randomBlockDisplayTicksFrequencyMultiplier);
+	}
+
+	@ModifyConstant(method = "doRandomBlockDisplayTicks", constant = @Constant(intValue = 16))
+	public int effective$overwriteRandomBlockDisplayTicksDistanceClose(int constant) {
+		return EffectiveConfig.randomBlockDisplayTicksDistanceClose;
+	}
+
+	@ModifyConstant(method = "doRandomBlockDisplayTicks", constant = @Constant(intValue = 32))
+	public int effective$overwriteRandomBlockDisplayTicksDistanceFar(int constant) {
+		return EffectiveConfig.randomBlockDisplayTicksDistanceFar;
+	}
+
+	@WrapWithCondition(method = "doRandomBlockDisplayTicks", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;randomBlockDisplayTick(IIIILnet/minecraft/util/math/random/Random;Lnet/minecraft/block/Block;Lnet/minecraft/util/math/BlockPos$Mutable;)V", ordinal = 0))
+	public boolean effective$cancelRandomBlockDisplayTicksClose(ClientWorld instance, int centerX, int centerY, int centerZ, int radius, Random random, Block block, BlockPos.Mutable pos) {
+		return EffectiveConfig.randomBlockDisplayTicksDistanceClose > 0;
+	}
+
+	@WrapWithCondition(method = "doRandomBlockDisplayTicks", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;randomBlockDisplayTick(IIIILnet/minecraft/util/math/random/Random;Lnet/minecraft/block/Block;Lnet/minecraft/util/math/BlockPos$Mutable;)V", ordinal = 1))
+	public boolean effective$cancelRandomBlockDisplayTicksFar(ClientWorld instance, int centerX, int centerY, int centerZ, int radius, Random random, Block block, BlockPos.Mutable pos) {
+		return EffectiveConfig.randomBlockDisplayTicksDistanceFar > 0;
 	}
 
 	@Inject(method = "randomBlockDisplayTick", slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;")),
 		at = @At(value = "INVOKE", target = "Ljava/util/Optional;ifPresent(Ljava/util/function/Consumer;)V", ordinal = 0, shift = At.Shift.AFTER))
-	private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, Block block, BlockPos.Mutable blockPos, CallbackInfo ci) {
+	private void effective$spawnEffectsFromRandomBlockDisplayTicks(int centerX, int centerY, int centerZ, int radius, Random random, Block block, BlockPos.Mutable blockPos, CallbackInfo ci) {
 		BlockPos.Mutable pos = blockPos.add(MathHelper.floor(EffectiveUtils.getRandomFloatOrNegative(this.random) * 50), MathHelper.floor(EffectiveUtils.getRandomFloatOrNegative(this.random) * 10), MathHelper.floor(EffectiveUtils.getRandomFloatOrNegative(this.random) * 50)).mutableCopy();
 		BlockPos.Mutable pos2 = pos.mutableCopy();
 		RegistryEntry<Biome> biome = this.getBiome(pos);

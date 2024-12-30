@@ -95,6 +95,7 @@ public class EffectiveConfig extends MidnightConfig {
 	public static int cascadeSoundsVolume = 30;
 	@Entry(category = audio, min = 0, max = 400, isSlider = true)
 	public static int cascadeSoundDistanceBlocks = 100;
+
 	@Comment(category = audio, centered = true)
 	public static Comment biomeAmbience;
 	@Entry(category = audio, min = 0, max = 100, isSlider = true)
@@ -105,6 +106,22 @@ public class EffectiveConfig extends MidnightConfig {
 	public static int foliageAmbienceVolume = 100;
 	@Entry(category = audio, min = 0, max = 100, isSlider = true)
 	public static int animalAmbienceVolume = 100;
+
+	/* TECHNICAL CATEGORY */
+	public static final String technical = "technical";
+
+	@Comment(category = technical, centered = true)
+	public static Comment randomBlockDisplayTicks;
+	@Comment(category = technical, centered = false)
+	public static Comment randomBlockDisplayTicksTooltip;
+	@Comment(category = technical, centered = false)
+	public static Comment emptyComment1;
+	@Entry(category = technical, min = 0, max = 25, isSlider = true)
+	public static float randomBlockDisplayTicksFrequencyMultiplier = 1f;
+	@Entry(category = technical, min = 0, max = 160, isSlider = true)
+	public static int randomBlockDisplayTicksDistanceClose = 16;
+	@Entry(category = technical, min = 0, max = 320, isSlider = true)
+	public static int randomBlockDisplayTicksDistanceFar = 32;
 
 	public static boolean shouldGlowSquidsHypnotize() {
 		return glowSquidHypnotize == GlowSquidHypnoOptions.ATTRACT || glowSquidHypnotize == GlowSquidHypnoOptions.VISUAL;

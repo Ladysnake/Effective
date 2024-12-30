@@ -6,8 +6,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
-    "ParticleSpawningClientWorldMixin",
-    "RandomDisplayTickBlockMixin",
+    "ClientWorldMixin",
+    "BlockMixin",
     "allays.GoldenAllayTextureSwapper",
     "chest_bubbles.UnderwaterChestRandomOpener",
     "chest_bubbles.UnderwaterEnderChestRandomOpener",
