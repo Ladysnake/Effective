@@ -7,7 +7,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.BlockPos;
-import org.ladysnake.effective.core.Effective;
 
 public class CascadeParticle extends SpriteBillboardParticle {
 	private final SpriteProvider spriteProvider;
@@ -21,15 +20,9 @@ public class CascadeParticle extends SpriteBillboardParticle {
 
 		this.spriteProvider = spriteProvider;
 		this.maxAge = 10;
-		this.scale = .5f;
+		this.scale = 1f;
 
 		this.setSpriteForAge(spriteProvider);
-
-//		WorldParticleBuilder.create(Effective.WATERFALL_CLOUD)
-//			.enableForcedSpawn()
-//			.enableNoClip()
-//			.setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ))
-//			.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 	}
 
 	public ParticleTextureSheet getType() {

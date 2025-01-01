@@ -13,8 +13,8 @@ import org.ladysnake.effective.core.utils.EffectiveUtils;
 
 import java.awt.*;
 
-public class GlowRippleParticle extends RippleParticle {
-	private GlowRippleParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+public class GlowCascadeParticle extends CascadeParticle {
+	private GlowCascadeParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
 		Color glowingWaterColor = EffectiveUtils.getGlowingWaterColor(world, BlockPos.ofFloored(x, y, z));
@@ -38,7 +38,7 @@ public class GlowRippleParticle extends RippleParticle {
 
 		@Override
 		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-			return new GlowRippleParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+			return new GlowCascadeParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
 		}
 	}
 }

@@ -21,7 +21,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.ladysnake.effective.core.gui.ParryScreen;
 import org.ladysnake.effective.core.index.EffectiveParticles;
-import org.ladysnake.effective.core.particle.*;
+import org.ladysnake.effective.core.particle.ChorusPetalParticle;
+import org.ladysnake.effective.core.particle.EyesParticle;
+import org.ladysnake.effective.core.particle.WillOWispParticle;
 import org.ladysnake.effective.core.render.entity.model.SplashBottomModel;
 import org.ladysnake.effective.core.render.entity.model.SplashBottomRimModel;
 import org.ladysnake.effective.core.render.entity.model.SplashModel;
@@ -54,7 +56,7 @@ public class Effective implements ClientModInitializer {
 
 	// particle types
 	public static SimpleParticleType BUBBLE;
-	public static SimpleParticleType WATERFALL_CLOUD;
+	public static SimpleParticleType CASCADE;
 	public static SimpleParticleType MIST;
 	public static SimpleParticleType EYES;
 	public static SimpleParticleType WILL_O_WISP;

@@ -2,6 +2,9 @@
 Effective 2.4.2 (Alpha) - 1.21.1
 ------------------------------------------------------
 - Rewrote ripples and glow ripples
+- Rewrote waterfall clouds
+  - Renamed to "cascade"
+  - Added a new particle type for glow cascades instead of changing the regular cascades' rendering
 
 ------------------------------------------------------
 Effective 2.4.1 (Alpha) - 1.21.1

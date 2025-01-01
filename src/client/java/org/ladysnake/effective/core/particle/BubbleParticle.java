@@ -39,8 +39,8 @@ public class BubbleParticle extends SpriteBillboardParticle {
 				this.velocityZ *= 1.1;
 			}
 
-			this.velocityX = this.velocityX * (double)this.velocityMultiplier;
-			this.velocityZ = this.velocityZ * (double)this.velocityMultiplier;
+			this.velocityX = this.velocityX * (double) this.velocityMultiplier;
+			this.velocityZ = this.velocityZ * (double) this.velocityMultiplier;
 			if (this.onGround) {
 				this.velocityX *= 0.7F;
 				this.velocityZ *= 0.7F;
