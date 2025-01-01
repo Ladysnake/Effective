@@ -1,17 +1,13 @@
 package org.ladysnake.effective.core.render.transformer;
 
 import foundry.veil.api.client.render.shader.processor.ShaderPreProcessor;
-import foundry.veil.api.glsl.GlslSyntaxException;
 import foundry.veil.api.glsl.node.GlslNode;
 import foundry.veil.api.glsl.node.GlslNodeList;
 import foundry.veil.api.glsl.node.GlslTree;
 import foundry.veil.api.glsl.node.branch.GlslSelectionNode;
 import foundry.veil.api.glsl.node.expression.GlslCompareNode;
 import foundry.veil.api.glsl.node.primary.GlslFloatConstantNode;
-import foundry.veil.lib.anarres.cpp.LexerException;
 import net.minecraft.util.Identifier;
-
-import java.io.IOException;
 
 /**
  * A pre-processor intended to verify the Minecraft particle transparency check isn't active.
@@ -28,8 +24,11 @@ import java.io.IOException;
  * if (color.a < 0.0000001) {
  * 	discard;
  * }
+ * }
  *
  * Inside of any fragment shader named <code>particle</code>.
+ *
+ * @author RyanHCode
  */
 public class EffectiveTransparencyFixPreProcessor implements ShaderPreProcessor {
 
@@ -47,9 +46,7 @@ public class EffectiveTransparencyFixPreProcessor implements ShaderPreProcessor 
 		assert mainFunctionBody != null : "Main function body is null";
 
 		for (final GlslNode node : mainFunctionBody) {
-
 			if (node instanceof GlslSelectionNode selectionNode && selectionNode.getExpression() instanceof GlslCompareNode compareNode) {
-
 				// We know there's an if statement (selectionNode) with a comparison inside it
 				// If the second part of the comparison is 0.1, and the comparison type is "less than", we can assume it's the transparency check
 
