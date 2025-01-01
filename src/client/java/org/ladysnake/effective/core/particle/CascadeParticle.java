@@ -7,11 +7,12 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.BlockPos;
+import org.ladysnake.effective.core.Effective;
 
-public class WaterfallCloudParticle extends SpriteBillboardParticle {
+public class CascadeParticle extends SpriteBillboardParticle {
 	private final SpriteProvider spriteProvider;
 
-	public WaterfallCloudParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+	public CascadeParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
 
 		this.velocityX = velocityX;
@@ -19,10 +20,16 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 		this.velocityZ = velocityZ;
 
 		this.spriteProvider = spriteProvider;
-		this.maxAge = 500;
-		this.scale = .05f;
+		this.maxAge = 10;
+		this.scale = .5f;
 
 		this.setSpriteForAge(spriteProvider);
+
+//		WorldParticleBuilder.create(Effective.WATERFALL_CLOUD)
+//			.enableForcedSpawn()
+//			.enableNoClip()
+//			.setMotion((world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ))
+//			.spawn(world, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ);
 	}
 
 	public ParticleTextureSheet getType() {
@@ -68,7 +75,7 @@ public class WaterfallCloudParticle extends SpriteBillboardParticle {
 
 		@Override
 		public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-			return new WaterfallCloudParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+			return new CascadeParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
 		}
 	}
 }

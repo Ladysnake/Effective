@@ -107,11 +107,6 @@ public class Effective implements ClientModInitializer {
 		EffectiveParticles.initialize();
 
 		// Particles
-//		WATERFALL_CLOUD = Registry.register(Registries.PARTICLE_TYPE, Effective.id("waterfall_cloud"), WATERFALL_CLOUD);
-//		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, WaterfallCloudParticle.Factory::new);
-//		MIST = Registry.register(Registries.PARTICLE_TYPE, Effective.id("mist"), MIST);
-//		ParticleFactoryRegistry.getInstance().register(MIST, MistParticleType.Factory::new);
-
 		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, Effective.id("chorus_petal"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.Factory::new);
 		EYES = Registry.register(Registries.PARTICLE_TYPE, Effective.id("eyes"), FabricParticleTypes.simple(true));

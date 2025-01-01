@@ -26,6 +26,8 @@ public interface EffectiveParticles {
 	SimpleParticleType GLOW_RIPPLE = create("glow_ripple", FabricParticleTypes.simple(true));
 	SimpleParticleType BUBBLE = create("bubble", FabricParticleTypes.simple(true));
 	SimpleParticleType END_BUBBLE = create("end_bubble", FabricParticleTypes.simple(true));
+	SimpleParticleType WATERFALL_CLOUD = create("waterfall_cloud", FabricParticleTypes.simple(true));
+	SimpleParticleType MIST = create("mist", FabricParticleTypes.simple(true));
 
 	static void initialize() {
 		PARTICLES.keySet().forEach(particle -> Registry.register(Registries.PARTICLE_TYPE, PARTICLES.get(particle), particle));
@@ -47,5 +49,7 @@ public interface EffectiveParticles {
 		ParticleFactoryRegistry.getInstance().register(GLOW_RIPPLE, GlowRippleParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(BUBBLE, BubbleParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(END_BUBBLE, EndBubbleParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(WATERFALL_CLOUD, CascadeParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(MIST, MistParticle.Factory::new);
 	}
 }

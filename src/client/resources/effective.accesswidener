@@ -9,3 +9,4 @@ accessible field net/minecraft/block/entity/EnderChestBlockEntity lidAnimator Ln
 accessible field net/minecraft/block/entity/EnderChestBlockEntity stateManager Lnet/minecraft/block/entity/ViewerCountManager;
 accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
 accessible field net/minecraft/client/sound/SoundSystem tickingSounds Ljava/util/List;
+accessible field net/minecraft/client/render/GameRenderer programs Ljava/util/Map;
