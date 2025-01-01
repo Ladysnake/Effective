@@ -158,7 +158,6 @@ public class WaterfallCloudGenerators {
 			world.addParticle(EffectiveUtils.isGlowingWater(world, waterfall.blockPos()) ? EffectiveParticles.GLOW_CASCADE : EffectiveParticles.CASCADE, blockPos.getX() + .5 + offsetX, blockPos.getY() + world.getRandom().nextFloat(), blockPos.getZ() + .5 + offsetZ, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetX), (world.getRandom().nextFloat() * waterfall.strength()) / 10f, (world.getRandom().nextFloat() * waterfall.strength()) / 10f * Math.signum(offsetZ));
 		}
 
-		/*
 		if (EffectiveConfig.cascadeMistDensity > 0f && waterfall.strength() >= 1.6f) {
 			if ((world.random.nextFloat() * 100f) <= EffectiveConfig.cascadeMistDensity) {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
@@ -167,7 +166,6 @@ public class WaterfallCloudGenerators {
 				world.addParticle(EffectiveParticles.MIST, blockPos.getX() + .5f, blockPos.getY() + .5f, blockPos.getZ() + .5f, world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ));
 			}
 		}
-		 */
 	}
 
 	public static void scheduleParticleTick(Waterfall waterfall, int ticks) {
