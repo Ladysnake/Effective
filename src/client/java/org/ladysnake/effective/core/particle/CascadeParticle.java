@@ -7,6 +7,7 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.BlockPos;
+import org.ladysnake.effective.core.render.particle.SoftParticleRenderType;
 
 public class CascadeParticle extends SpriteBillboardParticle {
 	private final SpriteProvider spriteProvider;
@@ -26,7 +27,7 @@ public class CascadeParticle extends SpriteBillboardParticle {
 	}
 
 	public ParticleTextureSheet getType() {
-		return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+		return SoftParticleRenderType.SOFT_PARTICLE;
 	}
 
 	@Override

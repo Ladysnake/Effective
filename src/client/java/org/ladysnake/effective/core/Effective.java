@@ -4,10 +4,13 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
@@ -28,6 +31,7 @@ import org.ladysnake.effective.core.render.entity.model.SplashBottomModel;
 import org.ladysnake.effective.core.render.entity.model.SplashBottomRimModel;
 import org.ladysnake.effective.core.render.entity.model.SplashModel;
 import org.ladysnake.effective.core.render.entity.model.SplashRimModel;
+import org.ladysnake.effective.core.render.particle.SoftParticleRenderType;
 import org.ladysnake.effective.core.world.RenderedHypnotizingEntities;
 import org.ladysnake.effective.core.world.WaterfallCloudGenerators;
 import org.ladysnake.satin.api.event.EntitiesPreRenderCallback;
@@ -218,6 +222,11 @@ public class Effective implements ClientModInitializer {
 
 				RenderedHypnotizingEntities.GLOWSQUIDS.clear();
 			}
+		});
+
+		// register soft particle shader
+		CoreShaderRegistrationCallback.EVENT.register(registrationContext -> {
+			registrationContext.register(Effective.id("soft_particle"), VertexFormats.POSITION_TEXTURE_COLOR_LIGHT, SoftParticleRenderType::loadShader);
 		});
 
 		// jeb rainbow glow squids
