@@ -1,5 +1,6 @@
 package org.ladysnake.effective.core;
 
+import foundry.veil.platform.VeilEventPlatform;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -32,6 +33,7 @@ import org.ladysnake.effective.core.render.entity.model.SplashBottomRimModel;
 import org.ladysnake.effective.core.render.entity.model.SplashModel;
 import org.ladysnake.effective.core.render.entity.model.SplashRimModel;
 import org.ladysnake.effective.core.render.particle.SoftParticleRenderType;
+import org.ladysnake.effective.core.render.transformer.EffectiveTransparencyFixPreProcessor;
 import org.ladysnake.effective.core.world.RenderedHypnotizingEntities;
 import org.ladysnake.effective.core.world.WaterfallCloudGenerators;
 import org.ladysnake.satin.api.event.EntitiesPreRenderCallback;
@@ -246,6 +248,11 @@ public class Effective implements ClientModInitializer {
 				client.setScreen(null);
 				freezeFrames = -1;
 			}
+		});
+
+
+		VeilEventPlatform.INSTANCE.onVeilAddShaderProcessors((provider, registry) -> {
+			registry.addPreprocessor(new EffectiveTransparencyFixPreProcessor(), false);
 		});
 	}
 }
