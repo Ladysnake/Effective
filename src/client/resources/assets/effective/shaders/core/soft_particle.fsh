@@ -27,20 +27,20 @@ float linearizeDepth(float depthSample) {
 }
 
 void main() {
-    fragColor = vec4(1.0);
-//    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
-//    if (color.a < 0.001) {
-//        discard;
-//    }
-//
-//    // Depth only occupies the red channel, we don't care about the other two
-//    float depthSample = texture(DiffuseDepthSampler, gl_FragCoord.xy / ScreenSize).r;
-//
-//    float depth = linearizeDepth(depthSample);
-//    float particleDepth = linearizeDepth(gl_FragCoord.z);
-//
-//    // Linearly blends from 1x to 0x opacity at 1+ meter depth difference to 0 depth difference
-//    float opacity = color.a * min(depth - particleDepth, 1.0);
-//
-//    fragColor = linear_fog(vec4(color.rgb, opacity), vertexDistance, FogStart, FogEnd, FogColor);
+    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
+    if (color.a < 0.001) {
+        discard;
+    }
+
+    // Depth only occupies the red channel, we don't care about the other two
+    float depthSample = texture(DiffuseDepthSampler, gl_FragCoord.xy / ScreenSize).r;
+
+    float depth = linearizeDepth(depthSample);
+    float particleDepth = linearizeDepth(gl_FragCoord.z);
+
+    // Linearly blends from 1x to 0x opacity at 1+ meter depth difference to 0 depth difference
+    float opacity = color.a * min(depth - particleDepth, 1.0);
+    opacity = smoothstep(0.0, 1.0, opacity);
+
+    fragColor = linear_fog(vec4(color.rgb, opacity), vertexDistance, FogStart, FogEnd, FogColor);
 }

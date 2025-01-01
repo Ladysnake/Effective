@@ -6,8 +6,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
-    "ClientWorldMixin",
     "BlockMixin",
+    "ClientWorldMixin",
     "allays.GoldenAllayTextureSwapper",
     "chest_bubbles.UnderwaterChestRandomOpener",
     "chest_bubbles.UnderwaterEnderChestRandomOpener",
@@ -32,6 +32,8 @@
     "screenshake.SonicBoomScreenshakeAdder",
     "screenshake.WardenRoarScreenshakeAdder",
     "sculk.SculkBlockDustSpawner",
+    "soft_particles.ParticleManagerMixin",
+    "soft_particles.WorldRendererMixin",
     "spectral_arrows.SpectralArrowEmissiveEnforcer",
     "spectral_arrows.SpectralArrowPositionTrackerAndParticleRemover",
     "spectral_arrows.SpectralArrowTrailRenderer",
