@@ -163,7 +163,7 @@ public class WaterfallCloudGenerators {
 				double offsetX = world.getRandom().nextGaussian() / 5f;
 				double offsetZ = world.getRandom().nextGaussian() / 5f;
 
-				world.addParticle(EffectiveParticles.MIST, blockPos.getX() + .5f, blockPos.getY() + .5f, blockPos.getZ() + .5f, world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ));
+				world.addParticle(EffectiveParticles.MIST, blockPos.getX() + .5f, blockPos.getY() + .5f, blockPos.getZ() + .5f, EffectiveUtils.getRandomFloatOrNegative(world.random) / 15f, EffectiveUtils.getRandomFloatOrNegative(world.random) / 30f, EffectiveUtils.getRandomFloatOrNegative(world.random) / 15f);
 			}
 		}
 	}

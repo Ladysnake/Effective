@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.util.math.MathHelper;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.render.particle.SoftParticleRenderType;
 
@@ -19,30 +20,26 @@ public class MistParticle extends SpriteBillboardParticle {
 		this.setSpriteForAge(spriteProvider);
 
 		this.scale = 10f + world.random.nextFloat() * 5f;
-		this.maxAge = 100;
-		this.alpha = 0.1f;
+		this.maxAge = 300;
+		this.alpha = 0.0001f;
 
-//		WorldParticleBuilder.create(Effective.MIST)
-//			.enableForcedSpawn()
-//			.setSpinData(SpinParticleData.create((world.random.nextFloat() - world.random.nextFloat()) / 20f).build())
-//			.setScaleData(GenericParticleData.create(10f + world.random.nextFloat() * 5f).build())
-//			.setTransparencyData(
-//				GenericParticleData.create(0.001f, 0.1f, 0f)
-//					.setEasing(Easing.EXPO_OUT, Easing.SINE_OUT)
-//					.build()
-//			)
-//			.setLifetime(300)
-//			.enableNoClip()
-//			.setNaturalLighting()
-//			.setRenderType(LodestoneWorldParticleRenderType.TRANSPARENT.withDepthFade())
-//			.setColorData(ColorParticleData.create(waterfall.mistColor(), waterfall.mistColor()).build())
-//			.setMotion(world.getRandom().nextFloat() / 15f * Math.signum(offsetX), world.getRandom().nextGaussian() / 25f, world.getRandom().nextFloat() / 15f * Math.signum(offsetZ))
-//			.spawn(world, blockPos.getX() + .5f, blockPos.getY() + .5f, blockPos.getZ() + .5f);
+		this.velocityMultiplier = 0.999f;
 	}
 
 	@Override
 	public ParticleTextureSheet getType() {
 		return SoftParticleRenderType.SOFT_PARTICLE;
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (this.age <= 20) {
+			this.alpha = MathHelper.lerp(this.age / 20f, 0.0f, 0.2f);
+		} else {
+			this.alpha = MathHelper.lerp((this.age - 20f) / this.maxAge, 0.2f, 0.0f);
+		}
 	}
 
 	@Environment(EnvType.CLIENT)
