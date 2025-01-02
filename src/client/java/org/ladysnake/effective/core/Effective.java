@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.SimpleParticleType;

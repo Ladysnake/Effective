@@ -6,7 +6,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.MathHelper;
-import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.render.particle.SoftParticleRenderType;
 
 public class MistParticle extends SpriteBillboardParticle {

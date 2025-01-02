@@ -1,6 +1,10 @@
 ------------------------------------------------------
 Effective 2.4.3 (Alpha) - 1.21.1
 ------------------------------------------------------
+- Rewrote cascade mist
+  - Reduced the cascade mist sprite to give the fog a pixelated look
+- Added back soft particle rendering (no clear intersection with blocks and water) to cascades and mist, thanks to ryanhcode
+- Removed the Vanilla particle shader code override (for particles with an alpha lower to 0.1, as Vanilla culls these) to instead now use the Veil GLSL shader transformer, thanks to ryanhcode
 - Added a Chilean Spanish translation thanks to Ganbare-Lucifer
 
 ------------------------------------------------------
