@@ -29,6 +29,7 @@
     "glowsquids.HypnotizingGlowSquidsAdder",
     "glowsquids.JebGlowSquidRainbowRenderer",
     "glowsquids.RainbowShaderRenderLayerSwapper",
+    "lights.ParticleManagerMixin",
     "screenshake.EnderDragonRoarScreenshakeAdder",
     "screenshake.RavagerRoarScreenshakeAdder",
     "screenshake.SonicBoomScreenshakeAdder",

@@ -1,5 +1,6 @@
 package org.ladysnake.effective.core;
 
+import foundry.veil.api.client.render.light.Light;
 import foundry.veil.platform.VeilEventPlatform;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -15,7 +16,6 @@ import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -24,7 +24,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.ladysnake.effective.core.gui.ParryScreen;
 import org.ladysnake.effective.core.index.EffectiveParticles;
-import org.ladysnake.effective.core.particle.ChorusPetalParticle;
 import org.ladysnake.effective.core.particle.EyesParticle;
 import org.ladysnake.effective.core.particle.WillOWispParticle;
 import org.ladysnake.effective.core.render.entity.model.SplashBottomModel;
@@ -41,6 +40,9 @@ import org.ladysnake.satin.api.managed.ManagedCoreShader;
 import org.ladysnake.satin.api.managed.ManagedShaderEffect;
 import org.ladysnake.satin.api.managed.ShaderEffectManager;
 import org.ladysnake.satin.api.managed.uniform.Uniform1f;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
@@ -59,6 +61,9 @@ public class Effective implements ClientModInitializer {
 
 	// freeze frames for feedbacking
 	public static int freezeFrames = -1;
+
+	// particle lights cache
+	public static final ArrayList<Light> PARTICLE_LIGHTS = new ArrayList<>();
 
 	// particle types
 	public static SimpleParticleType EYES;
@@ -236,7 +241,7 @@ public class Effective implements ClientModInitializer {
 			}
 		});
 
-
+		// Inject into the Vanilla particle shader to lower the transparency discard threshold
 		VeilEventPlatform.INSTANCE.onVeilAddShaderProcessors((provider, registry) -> {
 			registry.addPreprocessor(new EffectiveTransparencyFixPreProcessor(), false);
 		});

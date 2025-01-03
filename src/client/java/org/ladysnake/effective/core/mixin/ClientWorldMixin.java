@@ -19,6 +19,10 @@ import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
+import org.ladysnake.effective.core.index.EffectiveParticles;
+import org.ladysnake.effective.core.particle.FireflyParticle;
+import org.ladysnake.effective.core.settings.SpawnSettings;
+import org.ladysnake.effective.core.settings.data.FireflySpawnSetting;
 import org.ladysnake.effective.core.utils.EffectiveUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -76,27 +80,21 @@ public abstract class ClientWorldMixin extends World {
 
 		// FIREFLIES
 		if (EffectiveConfig.fireflyDensity > 0) {
-//			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
-//			if (fireflySpawnSetting != null) {
-//				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity && pos.getY() > this.getSeaLevel()) {
-//					for (int y = this.getSeaLevel(); y <= this.getSeaLevel() * 2; y++) {
-//						pos.setY(y);
-//						pos2.setY(y-1);
-//						boolean canSpawnFirefly = FireflyParticle.canFlyThroughBlock(this, pos, this.getBlockState(pos)) && !FireflyParticle.canFlyThroughBlock(this, pos2, this.getBlockState(pos2));
-//
-//						if (canSpawnFirefly) {
-//							WorldParticleBuilder.create(Effective.FIREFLY)
-//								.enableForcedSpawn()
-//								.setColorData(ColorParticleData.create(fireflySpawnSetting.color(), fireflySpawnSetting.color()).build())
-//								.setScaleData(GenericParticleData.create(0.05f + random.nextFloat() * 0.10f).build())
-//								.setLifetime(ThreadLocalRandom.current().nextInt(40, 120))
-//								.setRenderType(LodestoneWorldParticleRenderType.ADDITIVE)
-//								.spawn(this, pos.getX() + random.nextFloat(), pos.getY() + random.nextFloat() * 5f, pos.getZ() + random.nextFloat());
-//							break;
-//						}
-//					}
-//				}
-//			}
+			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
+			if (fireflySpawnSetting != null) {
+				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity && pos.getY() > this.getSeaLevel()) {
+					for (int y = this.getSeaLevel(); y <= this.getSeaLevel() * 2; y++) {
+						pos.setY(y);
+						pos2.setY(y - 1);
+						boolean canSpawnFirefly = FireflyParticle.canFlyThroughBlock(this, pos, this.getBlockState(pos)) && !FireflyParticle.canFlyThroughBlock(this, pos2, this.getBlockState(pos2));
+
+						if (canSpawnFirefly) {
+							this.addParticle(EffectiveParticles.FIREFLY, pos.getX() + random.nextFloat(), pos.getY() + random.nextFloat() * 5f, pos.getZ() + random.nextFloat(), 0, 0, 0);
+							break;
+						}
+					}
+				}
+			}
 		}
 
 		pos = blockPos.add(MathHelper.floor(EffectiveUtils.getRandomFloatOrNegative(this.random) * 50), MathHelper.floor(EffectiveUtils.getRandomFloatOrNegative(this.random) * 25), MathHelper.floor(EffectiveUtils.getRandomFloatOrNegative(this.random) * 50)).mutableCopy();

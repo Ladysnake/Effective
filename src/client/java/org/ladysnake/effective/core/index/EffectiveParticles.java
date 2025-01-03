@@ -30,6 +30,7 @@ public interface EffectiveParticles {
 	SimpleParticleType GLOW_CASCADE = create("glow_cascade", FabricParticleTypes.simple(true));
 	SimpleParticleType MIST = create("mist", FabricParticleTypes.simple(true));
 	SimpleParticleType CHORUS_PETAL = create("chorus_petal", FabricParticleTypes.simple(true));
+	SimpleParticleType FIREFLY = create("firefly", FabricParticleTypes.simple(true));
 
 	static void initialize() {
 		PARTICLES.keySet().forEach(particle -> Registry.register(Registries.PARTICLE_TYPE, PARTICLES.get(particle), particle));
@@ -55,5 +56,6 @@ public interface EffectiveParticles {
 		ParticleFactoryRegistry.getInstance().register(GLOW_CASCADE, GlowCascadeParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(MIST, MistParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticle.Factory::new);
 	}
 }
