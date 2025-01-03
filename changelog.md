@@ -5,6 +5,7 @@ Effective 2.4.4 (Alpha) - 1.21.1
 - Fixed the game crashing when loading in a world with Sodium
 - Tweaked the splash droplet spawn radius
 - Fixed ripple and cascade particles not using the last sprite in the animation
+- Cleaned up sound effect registration code
 
 ------------------------------------------------------
 Effective 2.4.3 (Alpha) - 1.21.1

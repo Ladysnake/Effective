@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
+import org.ladysnake.effective.core.index.EffectiveParticles;
 import org.ladysnake.effective.core.utils.EffectiveUtils;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +35,7 @@ public abstract class BrokenChorusFlowerPetalSpawner {
 	public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {
 		if (state.getBlock() == Blocks.CHORUS_FLOWER) {
 			for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * (EffectiveConfig.chorusPetalDensity * 10f); i++) {
-				this.addParticle(Effective.CHORUS_PETAL, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f);
+				this.addParticle(EffectiveParticles.CHORUS_PETAL, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f);
 			}
 		}
 	}

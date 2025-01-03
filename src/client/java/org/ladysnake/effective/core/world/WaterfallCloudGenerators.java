@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.core.index.EffectiveParticles;
+import org.ladysnake.effective.core.index.EffectiveSounds;
 import org.ladysnake.effective.core.sound.WaterfallSoundInstance;
 import org.ladysnake.effective.core.utils.EffectiveUtils;
 
@@ -70,7 +71,7 @@ public class WaterfallCloudGenerators {
 				}
 				if (EffectiveUtils.isInCave(world, waterfall.blockPos()) == EffectiveUtils.isInCave(world, client.player.getBlockPos())
 					&& world.random.nextInt(200) == 0) { // make it so cascades underground can only be heard by players underground, and surface cascades can only be heard by players on the surface
-					client.getSoundManager().play(WaterfallSoundInstance.ambient(Effective.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
+					client.getSoundManager().play(WaterfallSoundInstance.ambient(EffectiveSounds.AMBIENCE_WATERFALL, 1.2f + world.random.nextFloat() / 10f, waterfall.blockPos(), EffectiveConfig.cascadeSoundDistanceBlocks), (int) (distance / 2));
 				}
 			});
 			generators.removeIf(waterfall -> waterfall == null || getWaterfallAt(world, waterfall.blockPos(), world.getFluidState(waterfall.blockPos())).strength() <= 0);

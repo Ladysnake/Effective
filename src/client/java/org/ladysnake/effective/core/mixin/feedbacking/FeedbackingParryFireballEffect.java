@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
+import org.ladysnake.effective.core.index.EffectiveSounds;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,7 +21,7 @@ public abstract class FeedbackingParryFireballEffect {
 	@Inject(method = "attack", at = @At("HEAD"))
 	public void attack(Entity target, CallbackInfo ci) {
 		if (EffectiveConfig.ultrakill && this.isMainPlayer() && target instanceof ExplosiveProjectileEntity) {
-			MinecraftClient.getInstance().player.playSound(Effective.PARRY);
+			MinecraftClient.getInstance().player.playSound(EffectiveSounds.PARRY);
 
 			Effective.freezeFrames = 5;
 		}

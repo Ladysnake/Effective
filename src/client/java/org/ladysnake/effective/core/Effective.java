@@ -55,17 +55,14 @@ public class Effective implements ClientModInitializer {
 	private static final Uniform1f intensityHypno = HYPNO_SHADER.findUniform1f("Intensity");
 	private static final Uniform1f sTimeHypno = HYPNO_SHADER.findUniform1f("STime");
 	private static final Uniform1f rainbowHypno = HYPNO_SHADER.findUniform1f("Rainbow");
+	private static int ticksJeb;
 
 	// freeze frames for feedbacking
 	public static int freezeFrames = -1;
 
 	// particle types
-	public static SimpleParticleType BUBBLE;
-	public static SimpleParticleType CASCADE;
-	public static SimpleParticleType MIST;
 	public static SimpleParticleType EYES;
 	public static SimpleParticleType WILL_O_WISP;
-	public static SimpleParticleType CHORUS_PETAL;
 
 	//	public static AllayTwinkleParticleType ALLAY_TWINKLE;
 	// lodestone particles
@@ -74,10 +71,6 @@ public class Effective implements ClientModInitializer {
 //	public static FlameParticleType FLAME = new FlameParticleType();
 //	public static FlameParticleType DRAGON_BREATH = new FlameParticleType();
 //	public static FireflyParticleType FIREFLY = new FireflyParticleType();
-	// sound events
-	public static SoundEvent AMBIENCE_WATERFALL = SoundEvent.of(Effective.id("ambience.waterfall"));
-	public static SoundEvent PARRY = SoundEvent.of(Effective.id("entity.parry"));
-	private static int ticksJeb;
 
 	public static boolean isNightTime(World world) {
 		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
@@ -114,8 +107,6 @@ public class Effective implements ClientModInitializer {
 		EffectiveParticles.initialize();
 
 		// Particles
-		CHORUS_PETAL = Registry.register(Registries.PARTICLE_TYPE, Effective.id("chorus_petal"), FabricParticleTypes.simple(true));
-		ParticleFactoryRegistry.getInstance().register(CHORUS_PETAL, ChorusPetalParticle.Factory::new);
 		EYES = Registry.register(Registries.PARTICLE_TYPE, Effective.id("eyes"), FabricParticleTypes.simple(true));
 		ParticleFactoryRegistry.getInstance().register(EYES, EyesParticle.Factory::new);
 		WILL_O_WISP = Registry.register(Registries.PARTICLE_TYPE, Effective.id("will_o_wisp"), FabricParticleTypes.simple(true));
@@ -134,10 +125,6 @@ public class Effective implements ClientModInitializer {
 //		DRAGON_BREATH = Registry.register(Registries.PARTICLE_TYPE, Effective.id("dragon_breath"), DRAGON_BREATH);
 //		ParticleFactoryRegistry.getInstance().register(FIREFLY, FireflyParticleType.Factory::new);
 //		FIREFLY = Registry.register(Registries.PARTICLE_TYPE, Effective.id("firefly"), FIREFLY);
-
-		// sound events
-		AMBIENCE_WATERFALL = Registry.register(Registries.SOUND_EVENT, AMBIENCE_WATERFALL.getId(), AMBIENCE_WATERFALL);
-		PARRY = Registry.register(Registries.SOUND_EVENT, PARRY.getId(), PARRY);
 
 		// events
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
