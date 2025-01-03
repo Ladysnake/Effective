@@ -158,11 +158,11 @@ public class SplashParticle extends Particle {
 
 		if (this.age == 1) {
 			for (int i = 0; i < this.widthMultiplier * 10f; i++) {
-				this.world.addParticle(this.getDropletParticle(), this.x + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 10f), this.y, this.z + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 10f), EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 2.5f, random.nextFloat() / 10f + this.heightMultiplier / 2.8f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 2.5f);
+				this.world.addParticle(this.getDropletParticle(), this.x + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 5f), this.y, this.z + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 5f), EffectiveUtils.getRandomFloatOrNegative(this.random) / 5f * this.widthMultiplier / 2.5f, random.nextFloat() / 10f + this.heightMultiplier / 2.8f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 2.5f);
 			}
 		} else if (this.age == wave2Start) {
 			for (int i = 0; i < this.widthMultiplier * 5f; i++) {
-				this.world.addParticle(this.getDropletParticle(), this.x + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 10f * .5f), this.y, this.z + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 10f * .5f), EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 5f, random.nextFloat() / 10f + this.heightMultiplier / 2.2f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 5f);
+				this.world.addParticle(this.getDropletParticle(), this.x + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 5f * .5f), this.y, this.z + (EffectiveUtils.getRandomFloatOrNegative(this.random) * this.widthMultiplier / 5f * .5f), EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 5f, random.nextFloat() / 10f + this.heightMultiplier / 2.2f, EffectiveUtils.getRandomFloatOrNegative(this.random) / 10f * this.widthMultiplier / 5f);
 			}
 		}
 	}

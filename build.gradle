@@ -70,8 +70,10 @@ dependencies {
 	modLocalImplementation "com.terraformersmc:modmenu:${mod_menu_version}"
 
 	// iris and sodium
-	modImplementation("maven.modrinth:sodium:${project.sodium_version}") { transitive = true }
-	modImplementation("maven.modrinth:iris:${project.iris_version}") { transitive = true }
+	modImplementation("maven.modrinth:sodium:${project.sodium_version}")
+	modImplementation("maven.modrinth:iris:${project.iris_version}")
+	runtimeOnly("org.anarres:jcpp:${project.jcpp_version}")
+	implementation("io.github.douira:glsl-transformer:${project.glslTransformer_version}")
 }
 
 processClientResources {
