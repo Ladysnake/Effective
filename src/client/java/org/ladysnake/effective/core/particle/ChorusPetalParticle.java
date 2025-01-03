@@ -12,8 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Quaternionf;
-import org.joml.Vector3f;
 import org.ladysnake.effective.core.index.EffectiveParticles;
+import org.ladysnake.effective.core.utils.EffectiveUtils;
 
 import java.util.Random;
 
@@ -40,62 +40,35 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		this.velocityX = velocityX - 0.05D - random.nextFloat() / 10;
 		this.velocityZ = velocityZ - 0.05D - random.nextFloat() / 10;
 
-		this.rotationFactor = ((float) Math.random() - 0.5F) * 0.01F;
+		this.rotationFactor = EffectiveUtils.getRandomFloatOrNegative(world.random) * 0.1F;
 		this.angle = random.nextFloat() * 360f;
 
-		this.groundOffset = RANDOM.nextFloat() / 100f + 0.001f;
+		this.groundOffset = RANDOM.nextFloat() / 100f + 0.01f;
 	}
 
 	@Override
 	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-		this.red = Math.max(this.green, 0.3f);
+		if (this.isInAir) {
+			super.buildGeometry(vertexConsumer, camera, tickDelta);
+		} else {
+			Quaternionf quaternionf = new Quaternionf();
+			quaternionf.rotationYXZ(0f, (float) Math.toRadians(-90f), this.angle);
+			this.method_60373(vertexConsumer, camera, quaternionf, tickDelta);
+		}
+	}
 
+	@Override
+	protected void method_60373(VertexConsumer vertexConsumer, Camera camera, Quaternionf quaternionf, float f) {
 		Vec3d vec3d = camera.getPos();
-		float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
-		float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
-		float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-		Quaternionf quaternion2;
+		float g = (float) (MathHelper.lerp(f, this.prevPosX, this.x) - vec3d.getX());
+		float h = (float) (MathHelper.lerp(f, this.prevPosY, this.y) - vec3d.getY()) + groundOffset;
+		float i = (float) (MathHelper.lerp(f, this.prevPosZ, this.z) - vec3d.getZ());
+		this.method_60374(vertexConsumer, quaternionf, g, h, i, f);
+	}
 
-		float i = 0f;
-		if (this.angle == 0.0F) {
-			quaternion2 = camera.getRotation();
-		} else {
-			quaternion2 = new Quaternionf(camera.getRotation());
-			i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-			quaternion2.rotateZ(i);
-		}
-
-		Vector3f vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-		vec3f.rotate(quaternion2);
-		Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-		float j = this.getSize(tickDelta);
-
-		if (isInAir) {
-			for (int k = 0; k < 4; ++k) {
-				Vector3f Vec3f2 = vector3fs[k];
-				Vec3f2.rotate(quaternion2);
-				Vec3f2.mul(j);
-				Vec3f2.add(f, g, h);
-			}
-		} else {
-			for (int k = 0; k < 4; ++k) {
-				Vector3f Vec3f2 = vector3fs[k];
-				Vec3f2.rotate(new Quaternionf().rotateXYZ((float) Math.toRadians(90f), 0f, (float) Math.toRadians(this.angle)));
-				Vec3f2.mul(j);
-				Vec3f2.add(f, g + this.groundOffset, h);
-			}
-		}
-
-		float minU = this.getMinU();
-		float maxU = this.getMaxU();
-		float minV = this.getMinV();
-		float maxV = this.getMaxV();
-		int l = LightmapTextureManager.MAX_LIGHT_COORDINATE;
-
-		vertexConsumer.vertex(vector3fs[0].x(), vector3fs[0].y(), vector3fs[0].z()).texture(maxU, maxV).color(red, green, blue, alpha).light(l);
-		vertexConsumer.vertex(vector3fs[1].x(), vector3fs[1].y(), vector3fs[1].z()).texture(maxU, minV).color(red, green, blue, alpha).light(l);
-		vertexConsumer.vertex(vector3fs[2].x(), vector3fs[2].y(), vector3fs[2].z()).texture(minU, minV).color(red, green, blue, alpha).light(l);
-		vertexConsumer.vertex(vector3fs[3].x(), vector3fs[3].y(), vector3fs[3].z()).texture(minU, maxV).color(red, green, blue, alpha).light(l);
+	@Override
+	protected int getBrightness(float tint) {
+		return LightmapTextureManager.MAX_LIGHT_COORDINATE;
 	}
 
 	public ParticleTextureSheet getType() {
@@ -116,8 +89,8 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		this.velocityY *= 0.99D;
 		this.velocityZ *= 0.99D;
 
-		this.red /= 1.001;
-		this.green /= 1.002;
+		this.green /= 1.002f;
+		this.red = Math.max(this.green / 1.001f, 0.3f);
 
 		if (this.age >= this.maxAge) {
 			this.alpha = Math.max(0f, this.alpha - 0.1f);
@@ -148,10 +121,9 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 		}
 
 		if (this.velocityY != 0) {
-			this.angle += Math.PI * Math.sin(rotationFactor * this.age) / 2;
+			this.angle = (float) (Math.PI * rotationFactor * this.age);
 		}
 	}
-
 
 	public static class Factory implements ParticleFactory<SimpleParticleType> {
 		private final SpriteProvider spriteProvider;
