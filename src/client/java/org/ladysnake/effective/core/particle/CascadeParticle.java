@@ -34,8 +34,6 @@ public class CascadeParticle extends SpriteBillboardParticle {
 	public void tick() {
 		super.tick();
 
-		this.setSpriteForAge(this.spriteProvider);
-
 		this.prevPosX = this.x;
 		this.prevPosY = this.y;
 		this.prevPosZ = this.z;
@@ -57,6 +55,8 @@ public class CascadeParticle extends SpriteBillboardParticle {
 		this.velocityZ *= 0.95f;
 
 		this.move(velocityX, velocityY, velocityZ);
+
+		this.setSpriteForAge(this.spriteProvider);
 	}
 
 	@Environment(EnvType.CLIENT)
