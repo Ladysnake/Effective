@@ -116,6 +116,8 @@ public class EffectiveConfig extends MidnightConfig {
 	public static Comment entitiesDynamicLights;
 	@Entry(category = dynamicLights)
 	public static boolean glowSquidDynamicLights = true;
+	@Entry(category = dynamicLights)
+	public static boolean allayDynamicLights = true;
 	@Comment(category = dynamicLights, centered = true)
 	public static Comment particlesDynamicLights;
 	@Entry(category = dynamicLights)

@@ -185,4 +185,8 @@ public class EffectiveUtils {
 			world.addParticle(endChest ? EffectiveParticles.END_BUBBLE : EffectiveParticles.BUBBLE, x, y, z, velX, .1f - (world.random.nextFloat() * .1f), velZ);
 		}
 	}
+
+	public static int getAllayColor(AllayEntity allayEntity) {
+		return allayEntity.getUuid().hashCode() % 2 == 0 && EffectiveConfig.goldenAllays ? 0xFFC200 : 0x22CFFF;
+	}
 }
