@@ -107,6 +107,20 @@ public class EffectiveConfig extends MidnightConfig {
 	@Entry(category = audio, min = 0, max = 100, isSlider = true)
 	public static int animalAmbienceVolume = 100;
 
+	/* DYNAMIC LIGHTS CATEGORY */
+	public static final String dynamicLights = "dynamicLights";
+
+	@Comment(category = dynamicLights)
+	public static Comment dynamicLightsReloadWorld;
+	@Comment(category = dynamicLights, centered = true)
+	public static Comment entitiesDynamicLights;
+	@Entry(category = dynamicLights)
+	public static boolean glowSquidDynamicLights = true;
+	@Comment(category = dynamicLights, centered = true)
+	public static Comment particlesDynamicLights;
+	@Entry(category = dynamicLights)
+	public static boolean fireflyDynamicLights = true;
+
 	/* TECHNICAL CATEGORY */
 	public static final String technical = "technical";
 

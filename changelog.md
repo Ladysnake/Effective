@@ -1,4 +1,14 @@
 ------------------------------------------------------
+Effective 2.4.5 (Alpha) - 1.21.1
+------------------------------------------------------
+- Rewrote fireflies
+- Added dynamic lighting for fireflies
+- Added dynamic lighting for glow squids
+- Added a new "Dynamic Lights" config category
+- Added a config option to enable firefly dynamic lights
+- Added a config option to enable glow squid dynamic lights
+
+------------------------------------------------------
 Effective 2.4.4 (Alpha) - 1.21.1
 ------------------------------------------------------
 - Rewrote chorus petals

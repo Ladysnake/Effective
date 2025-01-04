@@ -5,6 +5,7 @@
   "effective.midnightconfig.title": "Effective Config",
   "effective.midnightconfig.category.visuals": "Visuals",
   "effective.midnightconfig.category.audio": "Audio",
+  "effective.midnightconfig.category.dynamicLights": "Dynamic Lights",
   "effective.midnightconfig.category.technical": "Technical",
 
   "effective.midnightconfig.waterEffects": "Water",
@@ -75,6 +76,12 @@
   "effective.midnightconfig.waterAmbienceVolume": "Water Volume",
   "effective.midnightconfig.foliageAmbienceVolume": "Foliage Volume",
   "effective.midnightconfig.animalAmbienceVolume": "Animal Volume",
+
+  "effective.midnightconfig.dynamicLightsReloadWorld": "Note: Changing these parameters will only affect new particles / mobs and might need a world reload to properly apply.",
+  "effective.midnightconfig.entitiesDynamicLights": "Entities",
+  "effective.midnightconfig.glowSquidDynamicLights": "Glow Squids Emit Light",
+  "effective.midnightconfig.particlesDynamicLights": "Particles",
+  "effective.midnightconfig.fireflyDynamicLights": "Fireflies Emit Light",
 
   "effective.midnightconfig.randomBlockDisplayTicks": "Random Block Display Ticks",
   "effective.midnightconfig.randomBlockDisplayTicksTooltip": "Some Minecraft blocks have visual effects that tick randomly. These options override the Vanilla ticker values to allow these effects to play from further or more frequently, e.g. cherry leaves, rain ripples on water, sculk dust spawning, etc...",

@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import org.ladysnake.effective.core.Effective;
+import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.core.index.EffectiveLights;
 import org.ladysnake.effective.core.settings.SpawnSettings;
 import org.ladysnake.effective.core.settings.data.FireflySpawnSetting;
@@ -65,8 +65,10 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		this.light.setColor(color.getRGB());
 		this.light.setRadius(25f * this.scale);
 		this.light.setPosition(x, y, z);
-		EffectiveLights.PARTICLE_LIGHTS.add(this.light);
-		VeilRenderSystem.renderer().getLightRenderer().addLight(light);
+		if (EffectiveConfig.fireflyDynamicLights) {
+			EffectiveLights.PARTICLE_LIGHTS.add(this.light);
+			VeilRenderSystem.renderer().getLightRenderer().addLight(light);
+		}
 	}
 
 	@Override
