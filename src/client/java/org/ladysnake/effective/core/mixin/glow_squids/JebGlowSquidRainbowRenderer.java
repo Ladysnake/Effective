@@ -1,4 +1,4 @@
-package org.ladysnake.effective.core.mixin.glowsquids;
+package org.ladysnake.effective.core.mixin.glow_squids;
 
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.LivingEntityRenderer;

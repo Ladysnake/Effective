@@ -1,4 +1,4 @@
-package org.ladysnake.effective.core.mixin.choruspetals;
+package org.ladysnake.effective.core.mixin.chorus_petals;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -9,7 +9,6 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.core.index.EffectiveParticles;
 import org.ladysnake.effective.core.utils.EffectiveUtils;

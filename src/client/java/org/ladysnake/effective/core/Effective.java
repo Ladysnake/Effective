@@ -1,5 +1,6 @@
 package org.ladysnake.effective.core;
 
+import foundry.veil.api.client.render.VeilRenderSystem;
 import foundry.veil.api.client.render.light.Light;
 import foundry.veil.platform.VeilEventPlatform;
 import net.fabricmc.api.ClientModInitializer;
@@ -23,7 +24,9 @@ import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.ladysnake.effective.core.gui.ParryScreen;
+import org.ladysnake.effective.core.index.EffectiveLights;
 import org.ladysnake.effective.core.index.EffectiveParticles;
+import org.ladysnake.effective.core.index.EffectiveSounds;
 import org.ladysnake.effective.core.particle.EyesParticle;
 import org.ladysnake.effective.core.particle.WillOWispParticle;
 import org.ladysnake.effective.core.render.entity.model.SplashBottomModel;
@@ -43,6 +46,7 @@ import org.ladysnake.satin.api.managed.uniform.Uniform1f;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Effective implements ClientModInitializer {
 	public static final String MODID = "effective";
@@ -61,9 +65,6 @@ public class Effective implements ClientModInitializer {
 
 	// freeze frames for feedbacking
 	public static int freezeFrames = -1;
-
-	// particle lights cache
-	public static final ArrayList<Light> PARTICLE_LIGHTS = new ArrayList<>();
 
 	// particle types
 	public static SimpleParticleType EYES;
@@ -85,12 +86,12 @@ public class Effective implements ClientModInitializer {
 //		float f = one.x;
 //		float g = one.y;
 //		float h = one.z;
-//		float i = one.w;
+//		float id = one.w;
 //		float j = two.x;
 //		float k = two.y;
 //		float l = two.z;
 //		float m = two.w;
-//		one.set(i * j + f * m + g * l - h * k, i * k - f * l + g * m + h * j, i * l + f * k - g * j + h * m, i * m - f * j - g * k - h * l);
+//		one.set(id * j + f * m + g * l - h * k, id * k - f * l + g * m + h * j, id * l + f * k - g * j + h * m, id * m - f * j - g * k - h * l);
 //	}
 
 	public static Identifier id(String string) {
@@ -108,8 +109,10 @@ public class Effective implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(SplashRimModel.MODEL_LAYER, SplashRimModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(SplashBottomRimModel.MODEL_LAYER, SplashBottomRimModel::getTexturedModelData);
 
-		// Initialize particles
+		// Initialize particles and systems
 		EffectiveParticles.initialize();
+		EffectiveLights.initialize();
+		EffectiveSounds.initialize();
 
 		// Particles
 		EYES = Registry.register(Registries.PARTICLE_TYPE, Effective.id("eyes"), FabricParticleTypes.simple(true));

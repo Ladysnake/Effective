@@ -1,4 +1,4 @@
-package org.ladysnake.effective.core.mixin.glowsquids;
+package org.ladysnake.effective.core.mixin.glow_squids;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;

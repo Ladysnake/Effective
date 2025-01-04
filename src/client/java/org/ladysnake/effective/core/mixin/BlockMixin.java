@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
-	@Inject(method = "randomDisplayTick", at = @At("RETURN"))
-	protected void effective$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
-
+	@Inject(method = "randomDisplayTick", at = @At("TAIL"))
+	protected void effective$injectIntoRandomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
 	}
 }
