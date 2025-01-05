@@ -63,7 +63,7 @@ public class EffectiveLights {
 			light = new PointLight();
 			light.setBrightness(0f);
 			light.setColor(0x69E2D0);
-			light.setRadius(5f);
+			light.setRadius(10f);
 			light.setPosition(renderPosition.getX(), renderPosition.getY(), renderPosition.getZ());
 
 			ENTITY_LIGHTS.put(glowSquidEntity.getId(), light);
@@ -71,7 +71,7 @@ public class EffectiveLights {
 		}
 
 		light.setPosition(renderPosition.getX(), renderPosition.getY(), renderPosition.getZ());
-		light.setBrightness(MathHelper.clampedLerp(0.0F, 2.0F, 1.0F - (float) glowSquidEntity.getDarkTicksRemaining() / 10.0F));
+		light.setBrightness(MathHelper.clampedLerp(0.0F, 1.0F, 1.0F - (float) glowSquidEntity.getDarkTicksRemaining() / 10.0F));
 	}
 
 	private static void tickAllayLight(AllayEntity allayEntity, RenderTickCounter deltaTracker) {
