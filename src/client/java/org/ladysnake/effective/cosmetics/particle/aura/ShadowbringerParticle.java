@@ -7,8 +7,8 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.BlockPos;
-import org.ladysnake.effective.core.particle.ChorusPetalParticle;
-import org.ladysnake.effective.core.utils.EffectiveUtils;
+import org.ladysnake.effective.particle.ChorusPetalParticle;
+import org.ladysnake.effective.utils.EffectiveUtils;
 
 public class ShadowbringerParticle extends ChorusPetalParticle {
 

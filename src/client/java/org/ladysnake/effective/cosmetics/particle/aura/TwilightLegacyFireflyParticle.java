@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.ladysnake.effective.core.utils.EffectiveUtils;
+import org.ladysnake.effective.utils.EffectiveUtils;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.particle.LegacyFireflyParticle;
 

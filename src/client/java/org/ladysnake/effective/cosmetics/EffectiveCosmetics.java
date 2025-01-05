@@ -22,7 +22,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.ladysnake.effective.core.settings.SpawnSettings;
+import org.ladysnake.effective.settings.SpawnSettings;
 import org.ladysnake.effective.cosmetics.data.AuraData;
 import org.ladysnake.effective.cosmetics.data.OverheadData;
 import org.ladysnake.effective.cosmetics.data.PlayerCosmeticData;

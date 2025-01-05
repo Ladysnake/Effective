@@ -7,8 +7,8 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import org.ladysnake.effective.core.particle.ChorusPetalParticle;
-import org.ladysnake.effective.core.utils.EffectiveUtils;
+import org.ladysnake.effective.particle.ChorusPetalParticle;
+import org.ladysnake.effective.utils.EffectiveUtils;
 
 public class ChorusAuraParticle extends ChorusPetalParticle {
 	public ChorusAuraParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {

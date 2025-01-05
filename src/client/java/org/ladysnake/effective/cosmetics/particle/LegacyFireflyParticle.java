@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.ladysnake.effective.core.utils.EffectiveUtils;
+import org.ladysnake.effective.utils.EffectiveUtils;
 import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.particle.type.LegacyFireflyParticleType;
 

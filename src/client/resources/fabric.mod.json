@@ -18,15 +18,15 @@
 	"environment": "client",
 	"entrypoints": {
     "client": [
-      "org.ladysnake.effective.core.Effective",
+      "org.ladysnake.effective.Effective",
       "org.ladysnake.effective.cosmetics.EffectiveCosmetics"
     ],
     "modmenu": [
-      "org.ladysnake.effective.core.compat.EffectiveModMenuCompat"
+      "org.ladysnake.effective.compat.EffectiveModMenuCompat"
     ]
 	},
 	"mixins": [
-      "effective_core.mixins.json",
+      "effective.mixins.json",
       "effective_cosmetics.mixins.json"
   ],
   "accessWidener": "effective.accesswidener",
