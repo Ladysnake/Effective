@@ -10,7 +10,6 @@
   "client": [
     "BlockMixin",
     "ClientWorldMixin",
-    "GlDebugMixin",
     "allays.GoldenAllayTextureSwapper",
     "chest_bubbles.UnderwaterChestRandomOpener",
     "chest_bubbles.UnderwaterEnderChestRandomOpener",

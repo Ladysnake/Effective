@@ -1,9 +1,9 @@
 {
-  "ambience.waterfall": {
+  "ambient.waterfall": {
     "sounds": [
       "effective:ambient/waterfall"
     ],
-    "subtitle": "effective.subtitles.ambience.waterfall"
+    "subtitle": "effective.subtitles.ambient.waterfall"
   },
   "entity.parry": {
     "sounds": [

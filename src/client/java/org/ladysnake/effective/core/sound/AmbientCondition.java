@@ -1,4 +1,4 @@
-package org.ladysnake.effective.ambience.sound;
+package org.ladysnake.effective.core.sound;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;

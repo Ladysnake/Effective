@@ -13,8 +13,30 @@ public interface EffectiveSounds {
 
 	List<SoundEvent> SOUND_EVENTS = new LinkedList<>();
 
-	SoundEvent AMBIENCE_WATERFALL = create("ambience.waterfall");
-	SoundEvent PARRY = create("entity.parry");
+	SoundEvent ENTITY_PARRY = create("entity.parry");
+	SoundEvent AMBIENT_WATERFALL = create("ambient.waterfall");
+	SoundEvent AMBIENT_ANIMAL_BEES = create("ambient.animal.bees");
+	SoundEvent AMBIENT_ANIMAL_BIRDS = create("ambient.animal.birds");
+	SoundEvent AMBIENT_ANIMAL_CICADAS = create("ambient.animal.cicadas");
+	SoundEvent AMBIENT_ANIMAL_CRICKETS = create("ambient.animal.crickets");
+	SoundEvent AMBIENT_ANIMAL_FROGS_AND_CRICKETS = create("ambient.animal.frogs_and_crickets");
+	SoundEvent AMBIENT_ANIMAL_JUNGLE_DAY = create("ambient.animal.jungle_day");
+	SoundEvent AMBIENT_ANIMAL_JUNGLE_NIGHT = create("ambient.animal.jungle_night");
+	SoundEvent AMBIENT_ANIMAL_MANGROVE_BIRDS = create("ambient.animal.mangrove_birds");
+	SoundEvent AMBIENT_ANIMAL_OWLS = create("ambient.animal.owls");
+	SoundEvent AMBIENT_FOLIAGE_CAVE_LEAVES = create("ambient.foliage.cave_leaves");
+	SoundEvent AMBIENT_FOLIAGE_LEAVES = create("ambient.foliage.leaves");
+	SoundEvent AMBIENT_WATER_DRIPSTONE_CAVES = create("ambient.water.dripstone_caves");
+	SoundEvent AMBIENT_WATER_LUSH_CAVES = create("ambient.water.lush_caves");
+	SoundEvent AMBIENT_WATER_RIVER = create("ambient.water.river");
+	SoundEvent AMBIENT_WATER_WAVES = create("ambient.water.waves");
+	SoundEvent AMBIENT_WIND_ARID = create("ambient.wind.arid");
+	SoundEvent AMBIENT_WIND_CAVE = create("ambient.wind.cave");
+	SoundEvent AMBIENT_WIND_COLD = create("ambient.wind.cold");
+	SoundEvent AMBIENT_WIND_DEEP_DARK = create("ambient.wind.deep_dark");
+	SoundEvent AMBIENT_WIND_END = create("ambient.wind.end");
+	SoundEvent AMBIENT_WIND_MOUNTAINS = create("ambient.wind.mountains");
+	SoundEvent AMBIENT_WIND_TEMPERATE = create("ambient.wind.temperate");
 
 	static SoundEvent create(String name) {
 		SoundEvent soundEvent = SoundEvent.of(Effective.id(name));

@@ -2,6 +2,9 @@ package org.ladysnake.effective.core.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.block.Block;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.sound.TickableSoundInstance;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
@@ -16,7 +19,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.dimension.DimensionType;
-import org.jetbrains.annotations.Nullable;
+import org.ladysnake.effective.core.index.EffectiveAmbientConditions;
+import org.ladysnake.effective.core.sound.AmbientCondition;
+import org.ladysnake.effective.core.sound.BiomeAmbientLoop;
 import org.ladysnake.effective.core.Effective;
 import org.ladysnake.effective.core.EffectiveConfig;
 import org.ladysnake.effective.core.index.EffectiveParticles;
@@ -24,6 +29,7 @@ import org.ladysnake.effective.core.particle.FireflyParticle;
 import org.ladysnake.effective.core.settings.SpawnSettings;
 import org.ladysnake.effective.core.settings.data.FireflySpawnSetting;
 import org.ladysnake.effective.core.utils.EffectiveUtils;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
@@ -36,11 +42,8 @@ import java.util.function.Supplier;
 @Mixin(ClientWorld.class)
 public abstract class ClientWorldMixin extends World {
 	@Shadow
-	@Nullable
-	protected abstract Block getBlockParticle();
-
-	@Shadow
-	public abstract void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, @Nullable Block block, BlockPos.Mutable pos);
+	@Final
+	private MinecraftClient client;
 
 	protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, DynamicRegistryManager registryManager, RegistryEntry<DimensionType> dimensionEntry, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long biomeAccess, int maxChainedNeighborUpdates) {
 		super(properties, registryRef, registryManager, dimensionEntry, profiler, isClient, debugWorld, biomeAccess, maxChainedNeighborUpdates);
@@ -114,6 +117,27 @@ public abstract class ClientWorldMixin extends World {
 		if ((EffectiveConfig.eyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.ALWAYS || (EffectiveConfig.eyesInTheDark == EffectiveConfig.EyesInTheDarkOptions.HALLOWEEN && LocalDate.now().getMonth() == Month.OCTOBER))
 			&& random.nextFloat() <= 0.00002f) {
 			this.addParticle(Effective.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
+		}
+	}
+
+	@Inject(method = "tick", at = @At(value = "HEAD"))
+	private void effective$playAmbience(CallbackInfo ci) {
+		ClientPlayerEntity clientPlayerEntity = client.player;
+		if (clientPlayerEntity != null) {
+			for (AmbientCondition ambientCondition : EffectiveAmbientConditions.INSTANCE) {
+				if (ambientCondition.predicate().shouldPlay(client.world, client.player.getBlockPos(), client.player)) {
+					boolean allow = true;
+					for (TickableSoundInstance tickingSound : client.getSoundManager().soundSystem.tickingSounds) {
+						if (tickingSound != null && tickingSound.getId().equals(ambientCondition.event().getId())) {
+							allow = false;
+							break;
+						}
+					}
+					if (allow) {
+						client.getSoundManager().play(new BiomeAmbientLoop(clientPlayerEntity, ambientCondition.event(), ambientCondition));
+					}
+				}
+			}
 		}
 	}
 }
