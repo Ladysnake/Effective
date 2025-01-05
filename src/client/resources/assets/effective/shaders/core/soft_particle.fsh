@@ -19,6 +19,7 @@ in vec4 vertexColor;
 
 out vec4 fragColor;
 
+// #veil:normal
 const vec3 normal = vec3(0.0, 0.0, 1.0);
 
 float linearizeDepth(float depthSample) {
@@ -42,5 +43,7 @@ void main() {
     float opacity = color.a * min(depth - particleDepth, 1.0);
     opacity = smoothstep(0.0, 1.0, opacity);
 
-    fragColor = linear_fog(vec4(color.rgb, opacity), vertexDistance, FogStart, FogEnd, FogColor);
+    // #veil:albedo
+    vec4 finalColor = vec4(color.rgb, opacity);
+    fragColor = linear_fog(finalColor, vertexDistance, FogStart, FogEnd, FogColor);
 }

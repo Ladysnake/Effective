@@ -80,6 +80,7 @@
   "effective.midnightconfig.dynamicLightsReloadWorld": "Note: Changing these parameters will only affect new particles / mobs and might need a world reload to properly apply.",
   "effective.midnightconfig.entitiesDynamicLights": "Entities",
   "effective.midnightconfig.glowSquidDynamicLights": "Glow Squids Emit Light",
+  "effective.midnightconfig.allayDynamicLights": "Allays Emit Light",
   "effective.midnightconfig.particlesDynamicLights": "Particles",
   "effective.midnightconfig.fireflyDynamicLights": "Fireflies Emit Light",
 
