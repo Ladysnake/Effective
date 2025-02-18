@@ -20,7 +20,6 @@ import org.ladysnake.effective.index.EffectiveLights;
 import org.ladysnake.effective.settings.SpawnSettings;
 import org.ladysnake.effective.settings.data.FireflySpawnSetting;
 import org.ladysnake.effective.utils.EffectiveUtils;
-import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -94,7 +93,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		this.light.setPosition(this.x, this.y, this.z);
 
 		// fade and die on daytime or if old enough unless fireflies can spawn any time of day
-		if ((!world.getDimension().hasFixedTime() && !EffectiveCosmetics.isNightTime(world)) || this.age++ >= this.maxAge) {
+		if (!EffectiveUtils.isNightTime(world) || this.age++ >= this.maxAge) {
 			nextAlphaGoal = 0;
 			if (this.alpha <= 0.01f) {
 				this.markDead();

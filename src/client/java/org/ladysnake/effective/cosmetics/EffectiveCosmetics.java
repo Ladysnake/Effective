@@ -20,7 +20,6 @@ import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.effective.settings.SpawnSettings;
 import org.ladysnake.effective.cosmetics.data.AuraData;
@@ -123,10 +122,6 @@ public class EffectiveCosmetics implements ClientModInitializer {
 				PLAYER_COSMETICS = Collections.emptyMap();
 			}
 		}, MinecraftClient.getInstance());
-	}
-
-	public static boolean isNightTime(World world) {
-		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
 	}
 
 	@Override

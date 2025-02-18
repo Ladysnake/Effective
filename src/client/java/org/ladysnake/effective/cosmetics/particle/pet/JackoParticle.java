@@ -13,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
+import org.ladysnake.effective.utils.EffectiveUtils;
 
 public class JackoParticle extends PetParticle {
 	private float glow;
@@ -79,7 +79,7 @@ public class JackoParticle extends PetParticle {
 
 		if (owner != null) {
 			// if night or dark enough
-			if (EffectiveCosmetics.isNightTime(world) || (this.world.getLightLevel(BlockPos.ofFloored(this.x, this.y, this.z)) < 10)) {
+			if (EffectiveUtils.isNightTime(world) || (this.world.getLightLevel(BlockPos.ofFloored(this.x, this.y, this.z)) < 10)) {
 				glow = 1;
 			} else {
 				glow = 0;

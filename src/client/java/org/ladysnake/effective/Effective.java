@@ -1,5 +1,7 @@
 package org.ladysnake.effective;
 
+import foundry.veil.api.client.render.VeilRenderSystem;
+import foundry.veil.api.client.render.dynamicbuffer.DynamicBufferType;
 import foundry.veil.platform.VeilEventPlatform;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -94,6 +96,11 @@ public class Effective implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		// Enable Veil albedo buffer
+		VeilEventPlatform.INSTANCE.onVeilRendererAvailable(veilRenderer -> {
+			VeilRenderSystem.renderer().enableBuffers(Effective.id("albedo"), DynamicBufferType.ALBEDO);
+		});
+
 		// Load config
 		EffectiveConfig.init(MODID, EffectiveConfig.class);
 

@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LidOpenable;
 import net.minecraft.block.enums.ChestType;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.tag.BlockTags;
@@ -61,6 +62,10 @@ public class EffectiveUtils {
 	public static Color getGlowingWaterColor(World world, BlockPos pos) {
 		return new Color(Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f), Math.min(1, world.random.nextFloat() / 5f + world.getLightLevel(LightType.BLOCK, pos) / 15f), 1f);
 	}
+
+    public static boolean isNightTime(ClientWorld world) {
+		return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
+    }
 
 	public enum WaterEffectType {
 		DROPLET,

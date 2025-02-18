@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.sound.TickableSoundInstance;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.DynamicRegistryManager;
@@ -45,6 +46,10 @@ public abstract class ClientWorldMixin extends World {
 	@Final
 	private MinecraftClient client;
 
+	@Shadow
+	@Final
+	private WorldRenderer worldRenderer;
+
 	protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, DynamicRegistryManager registryManager, RegistryEntry<DimensionType> dimensionEntry, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long biomeAccess, int maxChainedNeighborUpdates) {
 		super(properties, registryRef, registryManager, dimensionEntry, profiler, isClient, debugWorld, biomeAccess, maxChainedNeighborUpdates);
 	}
@@ -82,7 +87,7 @@ public abstract class ClientWorldMixin extends World {
 		RegistryEntry<Biome> biome = this.getBiome(pos);
 
 		// FIREFLIES
-		if (EffectiveConfig.fireflyDensity > 0) {
+		if (EffectiveConfig.fireflyDensity > 0 && EffectiveUtils.isNightTime((ClientWorld) (Object) this)) {
 			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
 			if (fireflySpawnSetting != null) {
 				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity && pos.getY() > this.getSeaLevel()) {

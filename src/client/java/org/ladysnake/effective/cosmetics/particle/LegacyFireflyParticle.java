@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.ladysnake.effective.utils.EffectiveUtils;
-import org.ladysnake.effective.cosmetics.EffectiveCosmetics;
 import org.ladysnake.effective.cosmetics.particle.type.LegacyFireflyParticleType;
 
 import java.util.HashMap;
@@ -110,7 +109,7 @@ public class LegacyFireflyParticle extends SpriteBillboardParticle {
 		this.prevPosZ = this.z;
 
 		// fade and die on daytime or if old enough unless fireflies can spawn any time of day
-		if ((!world.getDimension().hasFixedTime() && !EffectiveCosmetics.isNightTime(world)) || this.age++ >= this.maxAge) {
+		if (!EffectiveUtils.isNightTime(world) || this.age++ >= this.maxAge) {
 			nextAlphaGoal = 0;
 			if (this.alpha <= 0.01f) {
 				this.markDead();
