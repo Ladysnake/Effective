@@ -1,7 +1,6 @@
 plugins {
 	id 'fabric-loom' version '1.9-SNAPSHOT'
-	id 'maven-publish'
-	id("io.github.ladysnake.chenille") version "0.14.0"
+	id "io.github.ladysnake.chenille" version "0.14.0"
 }
 
 version = project.mod_version;
