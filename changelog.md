@@ -3,6 +3,7 @@ Effective 2.4.6 (Alpha) - 1.21.1
 ------------------------------------------------------
 - Fixed firefly dynamic lights causing framedrops
 - Reduced rain ripple default density to 1
+- Reduced firefly spawning density in half
 
 ------------------------------------------------------
 Effective 2.4.5 (Alpha) - 1.21.1
