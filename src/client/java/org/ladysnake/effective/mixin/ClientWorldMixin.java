@@ -90,7 +90,7 @@ public abstract class ClientWorldMixin extends World {
 		if (EffectiveConfig.fireflyDensity > 0 && EffectiveUtils.isNightTime((ClientWorld) (Object) this)) {
 			FireflySpawnSetting fireflySpawnSetting = SpawnSettings.FIREFLIES.get(biome.getKey().get());
 			if (fireflySpawnSetting != null) {
-				if (random.nextFloat() * 250f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity && pos.getY() > this.getSeaLevel()) {
+				if (random.nextFloat() * 500f <= fireflySpawnSetting.spawnChance() * EffectiveConfig.fireflyDensity && pos.getY() > this.getSeaLevel()) {
 					for (int y = this.getSeaLevel(); y <= this.getSeaLevel() * 2; y++) {
 						pos.setY(y);
 						pos2.setY(y - 1);
