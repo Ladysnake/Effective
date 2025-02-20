@@ -1,4 +1,9 @@
 ------------------------------------------------------
+Effective 2.4.8 (Alpha) - 1.21.1
+------------------------------------------------------
+- Added firefly spawn support for Mariposa's redwood forests (https://modrinth.com/mod/mariposa)
+
+------------------------------------------------------
 Effective 2.4.7 (Alpha) - 1.21.1
 ------------------------------------------------------
 - Fixed ambience never playing

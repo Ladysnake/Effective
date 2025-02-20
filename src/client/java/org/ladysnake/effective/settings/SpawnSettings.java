@@ -2,6 +2,8 @@ package org.ladysnake.effective.settings;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import org.ladysnake.effective.settings.data.FireflySpawnSetting;
@@ -42,5 +44,6 @@ public class SpawnSettings {
 		.put(BiomeKeys.LUSH_CAVES, new FireflySpawnSetting(MEDIUM, new Color(0xF2B646)))
 		.put(BiomeKeys.SWAMP, new FireflySpawnSetting(HIGH, new Color(0xBFFF00)))
 		.put(BiomeKeys.MANGROVE_SWAMP, new FireflySpawnSetting(HIGH, new Color(0xBFFF00)))
+		.put(RegistryKey.of(RegistryKeys.BIOME, Identifier.of("mariposa", "redwood_forest")), new FireflySpawnSetting(MEDIUM, new Color(0xBFFF00)))
 		.build();
 }
