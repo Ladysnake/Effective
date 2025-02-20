@@ -13,7 +13,7 @@ import java.util.Set;
 public class EffectiveAmbientConditions {
 	public static final Set<AmbientCondition> INSTANCE = new HashSet<>();
 
-	public void initialize() {
+	public static void initialize() {
 		// bees in floral biomes during the day
 		INSTANCE.add(new AmbientCondition(EffectiveSounds.AMBIENT_ANIMAL_BEES, AmbientCondition.Type.ANIMAL,
 			(world, pos, player) -> EffectiveUtils.isInOverworld(world, pos) && !EffectiveUtils.isInCave(world, pos) && world.getBiome(pos).isIn(ConventionalBiomeTags.IS_FLORAL) && !Effective.isNightTime(world)));

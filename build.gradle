@@ -1,6 +1,6 @@
 plugins {
 	id 'fabric-loom' version '1.9-SNAPSHOT'
-	id "io.github.ladysnake.chenille" version "0.14.0"
+	id "io.github.ladysnake.chenille" version "0.15.0"
 }
 
 version = project.mod_version;
@@ -33,7 +33,17 @@ loom {
 
 repositories {
 	// Modrinth
-	maven { url "https://api.modrinth.com/maven" }
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 
 	// Veil
 	maven { url "https://maven.blamejared.com/" }

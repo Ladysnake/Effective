@@ -24,6 +24,7 @@ import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.ladysnake.effective.gui.ParryScreen;
+import org.ladysnake.effective.index.EffectiveAmbientConditions;
 import org.ladysnake.effective.index.EffectiveLights;
 import org.ladysnake.effective.index.EffectiveParticles;
 import org.ladysnake.effective.index.EffectiveSounds;
@@ -96,6 +97,8 @@ public class Effective implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		EffectiveAmbientConditions.initialize();
+
 		// Enable Veil albedo buffer
 		VeilEventPlatform.INSTANCE.onVeilRendererAvailable(veilRenderer -> {
 			VeilRenderSystem.renderer().enableBuffers(Effective.id("albedo"), DynamicBufferType.ALBEDO);
