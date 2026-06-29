@@ -1,7 +1,8 @@
 package org.ladysnake.effective.particle;
 
 import foundry.veil.api.client.render.VeilRenderSystem;
-import foundry.veil.api.client.render.light.PointLight;
+import foundry.veil.api.client.render.light.data.PointLightData;
+import foundry.veil.api.client.render.light.renderer.LightRenderHandle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -34,7 +35,8 @@ public class FireflyParticle extends SpriteBillboardParticle {
 	protected int maxHeight;
 	private BlockPos lightTarget;
 
-	PointLight light;
+	PointLightData light;
+	LightRenderHandle<PointLightData> lightHandle = null;
 
 	public FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -59,14 +61,14 @@ public class FireflyParticle extends SpriteBillboardParticle {
 		this.green = color.getGreen() / 255f;
 		this.blue = color.getBlue() / 255f;
 
-		this.light = new PointLight();
+		this.light = new PointLightData();
 		this.light.setBrightness(0f);
 		this.light.setColor(color.getRGB());
 		this.light.setRadius(25f * this.scale);
 		this.light.setPosition(x, y, z);
 		if (EffectiveConfig.fireflyDynamicLights) {
 			EffectiveLights.PARTICLE_LIGHTS.add(this.light);
-			VeilRenderSystem.renderer().getLightRenderer().addLight(light);
+			lightHandle = VeilRenderSystem.renderer().getLightRenderer().addLight(light);
 		}
 	}
 
@@ -78,7 +80,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 	@Override
 	public void markDead() {
 		super.markDead();
-		VeilRenderSystem.renderer().getLightRenderer().removeLight(this.light);
+		if (lightHandle != null) lightHandle.free();
 	}
 
 	public static boolean canFlyThroughBlock(World world, BlockPos blockPos, BlockState blockState) {

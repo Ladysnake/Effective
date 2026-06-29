@@ -1,12 +1,12 @@
 package org.ladysnake.effective.render.transformer;
 
 import foundry.veil.api.client.render.shader.processor.ShaderPreProcessor;
-import foundry.veil.api.glsl.node.GlslNode;
-import foundry.veil.api.glsl.node.GlslNodeList;
-import foundry.veil.api.glsl.node.GlslTree;
-import foundry.veil.api.glsl.node.branch.GlslSelectionNode;
-import foundry.veil.api.glsl.node.expression.GlslCompareNode;
-import foundry.veil.api.glsl.node.primary.GlslFloatConstantNode;
+import io.github.ocelot.glslprocessor.api.node.GlslNode;
+import io.github.ocelot.glslprocessor.api.node.GlslNodeList;
+import io.github.ocelot.glslprocessor.api.node.GlslTree;
+import io.github.ocelot.glslprocessor.api.node.constant.GlslFloatConstantNode;
+import io.github.ocelot.glslprocessor.api.node.expression.GlslCompareNode;
+import io.github.ocelot.glslprocessor.api.node.variable.GlslGetFieldNode;
 import net.minecraft.util.Identifier;
 
 /**
@@ -46,7 +46,7 @@ public class EffectiveTransparencyFixPreProcessor implements ShaderPreProcessor 
 		assert mainFunctionBody != null : "Main function body is null";
 
 		for (final GlslNode node : mainFunctionBody) {
-			if (node instanceof GlslSelectionNode selectionNode && selectionNode.getExpression() instanceof GlslCompareNode compareNode) {
+			if (node instanceof GlslGetFieldNode selectionNode && selectionNode.getExpression() instanceof GlslCompareNode compareNode) {
 				// We know there's an if statement (selectionNode) with a comparison inside it
 				// If the second part of the comparison is 0.1, and the comparison type is "less than", we can assume it's the transparency check
 
