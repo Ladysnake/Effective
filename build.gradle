@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'fabric-loom' version '1.17-SNAPSHOT'
 	id "io.github.ladysnake.chenille" version "0.15.0"
 }
 

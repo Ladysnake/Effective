@@ -1,8 +1,9 @@
 package org.ladysnake.effective.index;
 
 import foundry.veil.api.client.render.VeilRenderSystem;
-import foundry.veil.api.client.render.light.Light;
-import foundry.veil.api.client.render.light.PointLight;
+import foundry.veil.api.client.render.light.data.LightData;
+import foundry.veil.api.client.render.light.data.PointLightData;
+import foundry.veil.api.client.render.light.renderer.LightRenderHandle;
 import foundry.veil.platform.VeilEventPlatform;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -21,8 +22,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class EffectiveLights {
-	public static final ArrayList<Light> PARTICLE_LIGHTS = new ArrayList<>();
-	public static final Map<Integer, PointLight> ENTITY_LIGHTS = new Object2ObjectOpenHashMap<>();
+	public static final ArrayList<LightData> PARTICLE_LIGHTS = new ArrayList<>();
+	public static final Map<Integer, PointLightData> ENTITY_LIGHTS = new Object2ObjectOpenHashMap<>();
+	public static final Map<Integer, LightRenderHandle<PointLightData>> ENTITY_LIGHT_HANDLES = new Object2ObjectOpenHashMap<>();
 
 	public static void initialize() {
 		VeilEventPlatform.INSTANCE.onVeilRenderLevelStage((stage, levelRenderer, bufferSource, matrixStack, frustumMatrix, projectionMatrix, renderTick, deltaTracker, camera, frustum) -> {
@@ -43,32 +45,32 @@ public class EffectiveLights {
 				}
 			}
 			for (Integer uuid : lightsToRemove) {
-				VeilRenderSystem.renderer().getLightRenderer().removeLight(ENTITY_LIGHTS.get(uuid));
+				ENTITY_LIGHT_HANDLES.get(uuid).free();
 				ENTITY_LIGHTS.remove(uuid);
 			}
 		});
 
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-			ENTITY_LIGHTS.forEach((integer, pointLight) -> VeilRenderSystem.renderer().getLightRenderer().removeLight(pointLight));
+			ENTITY_LIGHT_HANDLES.forEach((integer, handle) -> handle.free());
 			client.execute(ENTITY_LIGHTS::clear);
 		});
 	}
 
 	private static void tickGlowSquidLight(GlowSquidEntity glowSquidEntity, RenderTickCounter deltaTracker) {
-		PointLight light;
+		PointLightData light;
 		Vec3d renderPosition = glowSquidEntity.getLerpedPos(deltaTracker.getTickDelta(false));
 
 		if (ENTITY_LIGHTS.containsKey(glowSquidEntity.getId())) {
 			light = ENTITY_LIGHTS.get(glowSquidEntity.getId());
 		} else {
-			light = new PointLight();
+			light = new PointLightData();
 			light.setBrightness(0f);
 			light.setColor(0x69E2D0);
 			light.setRadius(10f);
 			light.setPosition(renderPosition.getX(), renderPosition.getY(), renderPosition.getZ());
 
 			ENTITY_LIGHTS.put(glowSquidEntity.getId(), light);
-			VeilRenderSystem.renderer().getLightRenderer().addLight(light);
+			ENTITY_LIGHT_HANDLES.put(glowSquidEntity.getId(), VeilRenderSystem.renderer().getLightRenderer().addLight(light));
 		}
 
 		light.setPosition(renderPosition.getX(), renderPosition.getY(), renderPosition.getZ());
@@ -76,20 +78,20 @@ public class EffectiveLights {
 	}
 
 	private static void tickAllayLight(AllayEntity allayEntity, RenderTickCounter deltaTracker) {
-		PointLight light;
+		PointLightData light;
 		Vec3d renderPosition = allayEntity.getLerpedPos(deltaTracker.getTickDelta(false));
 
 		if (ENTITY_LIGHTS.containsKey(allayEntity.getId())) {
 			light = ENTITY_LIGHTS.get(allayEntity.getId());
 		} else {
-			light = new PointLight();
+			light = new PointLightData();
 			light.setBrightness(0.5f);
 			light.setColor(EffectiveUtils.getAllayColor(allayEntity));
 			light.setRadius(3f);
 			light.setPosition(renderPosition.getX(), renderPosition.getY(), renderPosition.getZ());
 
 			ENTITY_LIGHTS.put(allayEntity.getId(), light);
-			VeilRenderSystem.renderer().getLightRenderer().addLight(light);
+			ENTITY_LIGHT_HANDLES.put(allayEntity.getId(), VeilRenderSystem.renderer().getLightRenderer().addLight(light));
 		}
 
 		light.setPosition(renderPosition.getX(), renderPosition.getY(), renderPosition.getZ());
